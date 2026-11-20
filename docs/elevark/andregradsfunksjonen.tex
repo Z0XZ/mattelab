@@ -1,0 +1,86 @@
+%% Elevark fra mattelab.no – laget automatisk av bygg.py. Rediger gjerne til eget bruk.
+%% Kompiler med lualatex.
+\documentclass[11pt,a4paper]{article}
+\usepackage[norsk]{babel}
+\usepackage[a4paper,margin=2.2cm,top=2cm,bottom=2.4cm]{geometry}
+\usepackage{fontspec}
+\usepackage{unicode-math}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{TeX Gyre Heros}[Scale=MatchLowercase]
+\setmathfont{TeX Gyre Pagella Math}
+\usepackage{xcolor}
+\definecolor{blekk}{HTML}{16213A}
+\definecolor{dempet}{HTML}{566077}
+\definecolor{rute}{HTML}{CFC9B8}
+\definecolor{m1}{HTML}{2F4AB0}
+\definecolor{m2}{HTML}{99266D}
+\usepackage[most]{tcolorbox}
+\usepackage{qrcode}
+\usepackage{needspace}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+\pdfvariable suppressoptionalinfo \numexpr 1+2+4+8+16+32+64+128+256+512\relax
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.4em}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[L]{\sffamily\footnotesize\color{dempet}mattelab.no · Andregradsfunksjonen · elevark uten fasit}
+\fancyfoot[R]{\sffamily\footnotesize\color{dempet}Side \thepage}
+
+\newcommand{\fase}[2]{\tcbox[on line, colframe=#2, colback=white, coltext=#2, boxrule=0.6pt, arc=2pt,
+  boxsep=0pt, left=3pt, right=3pt, top=1.5pt, bottom=1.5pt, fontupper=\sffamily\bfseries\footnotesize]{#1}}
+\newcommand{\steg}[4]{%
+  \par\noindent{\color{rute}\rule{\linewidth}{0.4pt}}\par\nopagebreak
+  \noindent\begin{minipage}[t]{2.1cm}\vspace{0pt}\fase{#1}{#2}\end{minipage}%
+  \begin{minipage}[t]{\dimexpr\linewidth-2.1cm\relax}\vspace{0pt}#3\end{minipage}\par
+  \vspace{#4}}
+\newcommand{\oppgave}[2]{\par\Needspace{12\baselineskip}\vspace{0.6em}%
+  {\fontsize{14}{17}\selectfont\bfseries{\color{m1}#1}\enspace #2}\par\vspace{0.2em}}
+
+\begin{document}
+\begin{minipage}[t]{0.72\linewidth}\vspace{0pt}
+{\sffamily\small\color{dempet}Elevark · 1T · mattelab.no}\par\vspace{0.3em}
+{\fontsize{24}{28}\selectfont\bfseries Andregradsfunksjonen}\par\vspace{1em}
+{\sffamily\small Navn: \rule{4.6cm}{0.4pt}\quad Klasse: \rule{1.5cm}{0.4pt}\quad Dato: \rule{1.9cm}{0.4pt}}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.22\linewidth}\vspace{0pt}\raggedleft
+\qrcode[height=2.3cm]{https://mattelab.no/utforskere/andregradsfunksjonen.html}\par\vspace{0.2em}
+{\sffamily\scriptsize\color{dempet}Utforskeren}
+\end{minipage}
+
+\vspace{1em}
+{\sffamily\small\color{dempet}Utforskeren ligger på \url{https://mattelab.no/utforskere/andregradsfunksjonen.html}}\par
+Hver oppgave har tre steg. \textbf{Gjett} først, uten å bruke utforskeren. \textbf{Test} så i utforskeren. \textbf{Forklar} til slutt med egne ord hvorfor det blir slik.
+
+\oppgave{1}{Hva gjør $c$?}
+\steg{Gjett}{m1}{Se på $f(x) = x^2 + c$. Hva tror du skjer med grafen når $c$ blir større?}{2.2cm}
+\steg{Test}{m2}{Sett $a = 1$, $b = 0$ og $c = -4$. Dra $c$ sakte fra $-4$ til $4$. Følg med på bunnpunktet og antall nullpunkter.}{2.6cm}
+\steg{Forklar}{blekk}{Hvorfor flytter $c$ hele grafen rett opp eller ned? Hvorfor har grafen noen ganger to, ett eller ingen nullpunkter?}{3.4cm}
+
+\oppgave{2}{Fortegnet og størrelsen til $a$}
+\steg{Gjett}{m1}{Se på $f(x) = ax^2$. Hvordan tror du grafen ser ut når $a = 3$? Når $a = 0{,}5$? Når $a = -1$?}{2.2cm}
+\steg{Test}{m2}{Sett $a = 1$, $b = 0$ og $c = 0$. Prøv de tre verdiene av $a$. Les av $f(2)$ i grafen for hver av dem.}{2.6cm}
+\steg{Forklar}{blekk}{Hvorfor blir grafen smalere når $|a|$ blir større? Hvorfor snur den når $a$ blir negativ?}{3.4cm}
+
+\oppgave{3}{Symmetri og ulikhet}
+\steg{Gjett}{m1}{Grafen til $f(x) = 2x^2 - 8x + 6$ har nullpunktene $x = 1$ og $x = 3$. Hvor tror du symmetrilinja og bunnpunktet ligger? For hvilke $x$ er $f(x) < 0$?}{2.2cm}
+\steg{Test}{m2}{Sett $a = 2$, $b = -8$ og $c = 6$. Slå på «Fortegn på x-aksen».}{2.6cm}
+\steg{Forklar}{blekk}{Hvorfor ligger symmetrilinja midt mellom nullpunktene? Vis ved regning at $2(x - 1)(x - 3)$ og $2(x - 2)^2 - 2$ begge er lik $2x^2 - 8x + 6$.}{3.4cm}
+
+\oppgave{4}{To, ett eller ingen nullpunkter?}
+\steg{Gjett}{m1}{Se på $f(x) = x^2 - 4x + c$. For hvilke verdier av $c$ tror du grafen har to nullpunkter? Ett? Ingen?}{2.2cm}
+\steg{Test}{m2}{Sett $a = 1$, $b = -4$ og $c = 0$. Dra $c$ sakte oppover. Følg med på diskriminanten $D$.}{2.6cm}
+\steg{Forklar}{blekk}{Bruk $D = b^2 - 4ac$ til å forklare nøyaktig hvor grensen går.}{3.4cm}
+
+\oppgave{5}{Bunnpunktets vei}
+\steg{Gjett}{m1}{Se på $f(x) = x^2 + bx + 1$. Når du endrer $b$, flytter bunnpunktet seg. Hvilken kurve tror du bunnpunktet følger?}{2.2cm}
+\steg{Test}{m2}{Sett $a = 1$, $b = 0$ og $c = 1$. Skriv ned bunnpunktet for $b = -4$, $-2$, $0$, $2$ og $4$. Tegn punktene i et koordinatsystem.}{2.6cm}
+\steg{Forklar}{blekk}{Vis at bunnpunktet alltid ligger på grafen til $y = 1 - x^2$.}{3.4cm}
+
+\oppgave{6}{Når $a$ nærmer seg null}
+\steg{Gjett}{m1}{Se på $f(x) = ax^2 + 2x + 1$. Hva tror du skjer med grafen og nullpunktene når $a$ blir mindre og mindre, men fortsatt positiv? Hva skjer når $a = 0$?}{2.2cm}
+\steg{Test}{m2}{Sett $a = 1$, $b = 2$ og $c = 1$. Skriv inn $a = 0{,}5$, så $a = 0{,}1$ og til slutt $a = 0{,}01$ i tallfeltet. Trykk «Vis hele grafen» hver gang. Sett så $a = 0$.}{2.6cm}
+\steg{Forklar}{blekk}{Hvorfor forsvinner det ene nullpunktet langt ut til venstre, mens det andre nærmer seg $x = -\frac{1}{2}$?}{3.4cm}
+
+\end{document}

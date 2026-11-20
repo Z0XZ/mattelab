@@ -1,0 +1,52 @@
+{
+  "hentet": "2026-11-20",
+  "merknad": "Sitert ordrett fra Utdanningsdirektoratets læreplaner (data.udir.no). Teksten er hentet maskinelt fra PDF-utgaven og skal ikke redigeres for hånd.",
+  "fag": {
+    "1T": {
+      "laereplan": "Læreplan i matematikk fellesfag vg1 teoretisk (matematikk T)",
+      "kode": "MAT09-02",
+      "overskrift": "Kompetansemål etter matematikk 1T",
+      "gjelder_fra": "2026-08-01",
+      "url": "https://www.udir.no/lk20/mat09-02/kompetansemaal-og-vurdering/",
+      "kilde": "https://data.udir.no/kl06/v201906/laereplaner-lk20/MAT09-02.pdf?lang=nob",
+      "maal": [
+        "formulere og løse problemer ved hjelp av algoritmisk tenkning, ulike problemløsingsstrategier, digitale verktøy og programmering",
+        "lese og forstå matematiske bevis og utforske og utvikle bevis i relevante matematiske emner",
+        "identifisere variable størrelser i ulike situasjoner, sette opp formler og utforske disse ved hjelp av digitale verktøy",
+        "utforske strategier for å løse ligninger, ligningssystemer og ulikheter og argumentere for tenkemåtene sine",
+        "forklare forskjellen mellom en identitet, en ligning, et algebraisk uttrykk og en funksjon",
+        "utforske sammenhenger mellom andregradsligninger og andregradsulikheter, andregradsfunksjoner og kvadratsetningene og bruke sammenhengene i problemløsing",
+        "modellere situasjoner knyttet til ulike temaer, drøfte, presentere og forklare resultatene og argumentere for om modellene er gyldige",
+        "lese, hente ut og vurdere matematikk i relevante tekster om ulike temaer og presentere relevante beregninger og analyser av resultatene",
+        "utforske og beskrive egenskapene ved polynomfunksjoner, rasjonale funksjoner, eksponentialfunksjoner og potensfunksjoner",
+        "bruke gjennomsnittlig og momentan vekstfart i konkrete eksempler og gjøre rede for den deriverte",
+        "forklare polynomdivisjon og bruke det til å omskrive algebraiske uttrykk, drøfte funksjoner og løse ligninger og ulikheter",
+        "gjøre rede for definisjonene av sinus, cosinus og tangens og bruke trigonometri til å beregne lengder, vinkler og arealer i vilkårlige trekanter",
+        "begrunne sinus-, cosinus- og arealsetningen",
+        "bruke trigonometri til å analysere og løse sammensatte teoretiske og praktiske problemer med lengder, vinkler og arealer"
+      ]
+    },
+    "R1": {
+      "laereplan": "Læreplan i matematikk for realfag (matematikk R)",
+      "kode": "MAT03-02",
+      "overskrift": "Kompetansemål etter matematikk R1",
+      "gjelder_fra": "2021-08-01",
+      "url": "https://www.udir.no/lk20/mat03-02/kompetansemaal-og-vurdering/kv293",
+      "kilde": "https://data.udir.no/kl06/v201906/laereplaner-lk20/MAT03-02.pdf?lang=nob",
+      "maal": [
+        "planlegge og gjennomføre et selvstendig arbeid med reelle datasett knyttet til naturvitenskapelige temaer og forhold, og analysere og presentere funn",
+        "forstå begrepene vekstfart, grenseverdi, derivasjon og kontinuitet, og bruke disse for å løse praktiske problemer",
+        "bruke ulike strategier for å utforske og bestemme grenseverdier til funksjoner, og utforske og argumentere for anvendelser av grenseverdier",
+        "bestemme den deriverte i et punkt geometrisk, algebraisk og ved numeriske metoder, og gi eksempler på funksjoner som ikke er deriverbare i gitte punkter",
+        "analysere og tolke ulike funksjoner ved å bruke derivasjon",
+        "anvende derivasjon til å analysere og tolke egne matematiske modeller av reelle datasett",
+        "utforske og forstå regneregler for potenser og logaritmer, og bruke ulike strategier for å løse eksponentialligninger og logaritmeligninger",
+        "modellere og analysere eksponentiell og logistisk vekst i reelle datasett",
+        "gjøre rede for og argumentere for om en funksjon er kontinuerlig eller diskontinuerlig i et punkt i et definisjonsområde, og gi eksempler på anvendelser av diskontinuerlige funksjoner",
+        "utforske, analysere og derivere ulike funksjoner og deres omvendte funksjoner, og gjøre rede for egenskaper til og sammenhenger mellom slike funksjoner",
+        "anvende parameterframstillinger til linjer og bruke parameterframstillinger til å løse naturvitenskapelige problemer",
+        "forstå begrepet vektor og regneregler for vektorer i planet, og bruke vektorer til å beregne ulike størrelser i planet"
+      ]
+    }
+  }
+}

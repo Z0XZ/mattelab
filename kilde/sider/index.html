@@ -1,0 +1,68 @@
+---
+tittel: mattelab.no
+beskrivelse: Interaktive utforskere i matematikk til 1T og R1. Endre verdier, se hva som skjer, og forklar hvorfor.
+oppsett: forside
+skript: forside.js
+---
+<section class="helt">
+  <div class="ramme">
+    <div>
+      <h1>Matematikk du kan dra i.</h1>
+      <p class="inngang">Interaktive utforskere til matematikk 1T og R1, laget av en lærer for bruk i klasserommet. Endre verdiene og se med en gang hva som skjer.</p>
+      <div class="knapper">
+        <a class="knapp" href="{{rot}}utforskere/index.html">Se utforskerne</a>
+        <a class="knapp lys" href="{{rot}}opplegg/index.html">Undervisningsopplegg</a>
+      </div>
+    </div>
+    <figure class="sim mini" aria-label="Liten utforsker: andregradsfunksjonen">
+      <svg id="forside-graf" class="kun-js"></svg>
+      <p class="noscript-melding kun-uten-js">Her er det en liten utforsker der du kan endre $a$, $b$ og $c$ i $f(x) = ax^2 + bx + c$. Den trenger JavaScript.</p>
+      <dl class="sim-tall kun-js" id="forside-tall"></dl>
+      <div class="sim-styring kun-js" id="forside-glidere"></div>
+      <figcaption class="sim-hint">Hvor havner bunnpunktet hvis du gjør $b$ større? Gjett før du drar. <a href="{{rot}}utforskere/andregradsfunksjonen.html">Til hele utforskeren</a></figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="del">
+  <div class="ramme">
+    <h2>Velg fag</h2>
+    <p class="del-inngang">Utforskerne følger temaene i fagene. Til hver utforsker hører det oppgaver som kan brukes direkte i timen.</p>
+    {{fagkort}}
+  </div>
+</section>
+
+<section class="del">
+  <div class="ramme">
+    <h2>Tenkt for timen, ikke bare for skjermen</h2>
+    <p class="del-inngang">En utforsker blir mest verdt når elevene må mene noe før de ser svaret. Oppgavene er derfor bygget opp i tre steg.</p>
+    <ol class="steg">
+      <li><h3>Gjett</h3><p>Elevene forutsier hva som skjer med grafen eller figuren, og begrunner det for hverandre.</p></li>
+      <li><h3>Test</h3><p>De endrer verdiene i utforskeren og ser om de fikk rett.</p></li>
+      <li><h3>Forklar</h3><p>De knytter det de så til matematikken, og regner for å kontrollere.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="del">
+  <div class="ramme delt">
+    <div>
+      <h2>Undervisningsopplegg</h2>
+      <p>Opplegg for en eller flere timer der utforskerne brukes sammen med samtale, tavlearbeid og oppgaver.</p>
+      <a class="lenke" href="{{rot}}opplegg/index.html">Til undervisningsopplegg</a>
+    </div>
+    <div>
+      <h2>For lærere</h2>
+      <p>Kompetansemålene i 1T og R1, med lenker til utforskerne som passer. Tavlemodus, delbare oppsett og figurer som kan lastes ned.</p>
+      <a class="lenke" href="{{rot}}laerer.html">Til lærersiden</a>
+    </div>
+  </div>
+</section>
+
+<section class="del">
+  <div class="ramme">
+    <h2>Søsterside til fysikklab.no</h2>
+    <p class="del-inngang">mattelab.no er laget av samme lærer og på samme måte som <a href="https://fysikklab.no">fysikklab.no</a>, som har simuleringer og undervisningsopplegg til Fysikk 1 og Fysikk 2.</p>
+    <a class="lenke" href="{{rot}}om.html">Om mattelab.no</a>
+  </div>
+</section>

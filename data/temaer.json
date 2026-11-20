@@ -1,0 +1,17 @@
+{
+  "fag": [
+    {"id": "1T", "navn": "1T", "langt": "Matematikk 1T", "niva": "VG1"},
+    {"id": "R1", "navn": "R1", "langt": "Matematikk R1", "niva": "VG2"}
+  ],
+  "temaer": [
+    {"id": "algebra", "navn": "Algebra", "fag": ["1T"]},
+    {"id": "likninger", "navn": "Likninger og ulikheter", "fag": ["1T"]},
+    {"id": "funksjoner", "navn": "Funksjoner", "fag": ["1T", "R1"]},
+    {"id": "grenseverdier", "navn": "Grenseverdier og kontinuitet", "fag": ["R1"]},
+    {"id": "derivasjon", "navn": "Derivasjon", "fag": ["1T", "R1"]},
+    {"id": "logaritmer", "navn": "Potenser og logaritmer", "fag": ["R1"]},
+    {"id": "vekst", "navn": "Vekst og modellering", "fag": ["1T", "R1"]},
+    {"id": "trigonometri", "navn": "Trigonometri", "fag": ["1T"]},
+    {"id": "vektorer", "navn": "Vektorer", "fag": ["R1"]}
+  ]
+}

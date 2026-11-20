@@ -1,0 +1,1 @@
+KaTeX 0.16.11 (MIT), fra npm-pakken katex@0.16.11. Bare dist-filer og woff2-fonter er tatt med.

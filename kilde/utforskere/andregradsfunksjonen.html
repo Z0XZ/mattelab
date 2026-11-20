@@ -1,0 +1,207 @@
+---
+tittel: Andregradsfunksjonen
+beskrivelse: Se hvordan grafen til f(x) = ax² + bx + c endres når du endrer a, b og c. Finn toppunkt, nullpunkter og diskriminant.
+type: utforsker
+fag: 1T
+tema: funksjoner, likninger
+skript: utforskere/andregrad.js
+---
+<p class="ingress">Grafen til en andregradsfunksjon er en parabel. Her kan du endre tallene $a$, $b$ og $c$ i $f(x) = ax^2 + bx + c$ og se hva som skjer med grafen, toppunktet og nullpunktene.</p>
+
+<figure class="sim sim-bred" id="utforsker" aria-label="Utforsker for andregradsfunksjonen">
+  <div class="sim-delt">
+    <div class="sim-graf">
+      <svg id="graf" class="kun-js"></svg>
+      <div class="noscript-melding kun-uten-js">
+        <p><strong>Utforskeren trenger JavaScript.</strong> Resten av siden, med forklaring og oppgaver, virker uten.</p>
+        <p>Eksempel: Grafen til $f(x) = x^2 - 2x - 3$ er en parabel som vender opp. Bunnpunktet er $(1, -4)$, og nullpunktene er $x = -1$ og $x = 3$.</p>
+      </div>
+      <dl class="sim-tall kun-js" id="verdier"></dl>
+    </div>
+    <div class="sim-side-panel kun-js">
+      <div class="sim-styring">
+        <p class="panel-tittel">Velg a, b og c</p>
+        <div id="glidere" class="glidere"></div>
+      </div>
+      <div class="sim-blokk">
+        <p class="panel-tittel">Funksjonen</p>
+        <div class="forskrift" id="forskrift"></div>
+        <div id="former" class="former"></div>
+      </div>
+      <div id="melding" class="sim-blokk melding" hidden></div>
+    </div>
+  </div>
+  <p id="utenfor" class="utenfor-melding" hidden>Noen av punktene ligger utenfor tegneområdet. Pilene ved kanten viser hvor de er. Trykk «Vis hele grafen» for å se dem.</p>
+  <fieldset class="sim-valg kun-js" id="visvalg">
+    <legend>Vis i grafen</legend>
+    <label class="avkrysning"><input type="checkbox" name="toppunkt" checked> Topp- eller bunnpunkt</label>
+    <label class="avkrysning"><input type="checkbox" name="nullpunkter" checked> Nullpunkter</label>
+    <label class="avkrysning"><input type="checkbox" name="symmetri" checked> Symmetrilinje (stiplet)</label>
+    <label class="avkrysning"><input type="checkbox" name="yakse" checked> Skjæring med y-aksen (hul sirkel)</label>
+    <label class="avkrysning"><input type="checkbox" name="fortegn"> Fortegn på x-aksen (heltrukket: f(x) &gt; 0, stiplet: f(x) &lt; 0)</label>
+  </fieldset>
+  <div class="sim-knapper kun-js" id="figurverktoy">
+    <button type="button" class="knapp liten" id="vis-alt">Vis hele grafen</button>
+    <button type="button" class="knapp lys liten" id="zoom-inn">Zoom inn</button>
+    <button type="button" class="knapp lys liten" id="zoom-ut">Zoom ut</button>
+    <button type="button" class="knapp lys liten" id="standardvindu">Standardvindu</button>
+    <button type="button" class="knapp lys liten" id="tilbakestill">Tilbakestill</button>
+    <button type="button" class="knapp lys liten" id="last-ned-png">Last ned PNG</button>
+    <button type="button" class="knapp lys liten" id="last-ned-svg">Last ned SVG</button>
+    <button type="button" class="knapp lys liten" id="kopier-lenke">Kopier lenke til oppsettet</button>
+    <span id="lenkestatus" class="lenkestatus" role="status"></span>
+  </div>
+  <figcaption class="sim-hint">Dra i glidebryterne, eller skriv et tall i feltet. Piltastene endrer verdien med 0,1. Verdiene står i adressefeltet, så du kan dele oppsettet.</figcaption>
+</figure>
+
+<details class="teori" id="matematikken">
+<summary><span class="teori-tittel">Matematikken bak</span><span class="teori-hint">Toppunkt, abc-formelen, diskriminanten og sammenhengen med kvadratsetningene</span></summary>
+<div class="teori-innhold tekst">
+
+<h3>Hva gjør a, b og c?</h3>
+<ul>
+  <li><strong>$a$</strong> bestemmer formen. Er $a > 0$, vender grafen opp og har et bunnpunkt. Er $a < 0$, vender den ned og har et toppunkt. Jo større $|a|$ er, jo smalere blir parabelen.</li>
+  <li><strong>$c$</strong> er funksjonsverdien når $x = 0$, fordi $f(0) = c$. Grafen skjærer altså y-aksen i $(0, c)$.</li>
+  <li><strong>$b$</strong> flytter toppunktet både sidelengs og opp eller ned. Det ser du i oppgave 5.</li>
+</ul>
+
+<h3>Toppunkt og symmetrilinje</h3>
+<p>Parabelen er symmetrisk om en loddrett linje gjennom toppunktet. Linja har likningen</p>
+$$x = -\frac{b}{2a}$$
+<p>Du finner y-verdien til toppunktet ved å sette denne x-verdien inn i $f(x)$.</p>
+
+<h3>Nullpunkter og abc-formelen</h3>
+<p>Nullpunktene er der grafen skjærer x-aksen, altså løsningene av $ax^2 + bx + c = 0$. Når $a \neq 0$, gir abc-formelen</p>
+$$x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$
+<p>Tallet under rottegnet kalles <strong>diskriminanten</strong>, $D = b^2 - 4ac$. Den avgjør hvor mange nullpunkter grafen har:</p>
+<ul>
+  <li>$D > 0$: to nullpunkter</li>
+  <li>$D = 0$: ett nullpunkt, og toppunktet ligger på x-aksen</li>
+  <li>$D < 0$: ingen nullpunkter, fordi vi ikke kan ta kvadratroten av et negativt tall</li>
+</ul>
+<p>Eksempel: For $f(x) = x^2 - 2x - 3$ er $D = (-2)^2 - 4 \cdot 1 \cdot (-3) = 16$. Da er $x = \frac{2 \pm 4}{2}$, altså $x = -1$ eller $x = 3$.</p>
+
+<h3>Sammenhengen med kvadratsetningene</h3>
+<p>Ved å fullføre kvadratet kan vi skrive om funksjonsuttrykket til <em>toppunktform</em>:</p>
+$$ax^2 + bx + c = a\left(x + \frac{b}{2a}\right)^2 - \frac{b^2 - 4ac}{4a}$$
+<p>Du kan sjekke dette med første kvadratsetning. Formen viser toppunktet direkte: Kvadratet er aldri negativt og er null når $x = -\frac{b}{2a}$. Den viser også diskriminanten. Når du løser $f(x) = 0$ fra denne formen, får du abc-formelen.</p>
+
+<h3>Når a = 0</h3>
+<p>Hvis $a = 0$, forsvinner $x^2$-leddet, og $f(x) = bx + c$ er en lineær funksjon. Da er grafen en rett linje. Formlene over virker ikke, fordi vi ville delt på $2a = 0$. Prøv det i utforskeren.</p>
+</div>
+</details>
+
+<section class="oppgaver" aria-labelledby="oppgaver-tittel">
+<h2 id="oppgaver-tittel">Oppgaver</h2>
+{{elevark}}
+<p class="del-inngang">Hver oppgave har tre steg. <strong>Gjett</strong> først, uten å bruke utforskeren. <strong>Test</strong> så i utforskeren. <strong>Forklar</strong> til slutt med egne ord hvorfor det blir slik.</p>
+
+<div class="oppgave" id="oppgave-1">
+  <h3><span class="oppgave-nr">1</span>Hva gjør $c$?</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Se på $f(x) = x^2 + c$. Hva tror du skjer med grafen når $c$ blir større?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?a=1&amp;b=0&amp;c=-4#utforsker">Sett $a = 1$, $b = 0$ og $c = -4$</a>. Dra $c$ sakte fra $-4$ til $4$. Følg med på bunnpunktet og antall nullpunkter.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Hvorfor flytter $c$ hele grafen rett opp eller ned? Hvorfor har grafen noen ganger to, ett eller ingen nullpunkter?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>Tallet $c$ legges til <em>hver</em> funksjonsverdi. Da flyttes hvert punkt på grafen like mye opp (eller ned hvis $c < 0$). Formen endres ikke. Bunnpunktet er $(0, c)$.</p>
+    <ul>
+      <li>$c = -4$: bunnpunktet $(0, -4)$ ligger under x-aksen. To nullpunkter: $x = -2$ og $x = 2$.</li>
+      <li>$c = 0$: bunnpunktet $(0, 0)$ ligger på x-aksen. Ett nullpunkt: $x = 0$.</li>
+      <li>$c = 4$: bunnpunktet $(0, 4)$ ligger over x-aksen. Ingen nullpunkter.</li>
+    </ul>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-2">
+  <h3><span class="oppgave-nr">2</span>Fortegnet og størrelsen til $a$</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Se på $f(x) = ax^2$. Hvordan tror du grafen ser ut når $a = 3$? Når $a = 0{,}5$? Når $a = -1$?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?a=1&amp;b=0&amp;c=0#utforsker">Sett $a = 1$, $b = 0$ og $c = 0$</a>. Prøv de tre verdiene av $a$. Les av $f(2)$ i grafen for hver av dem.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Hvorfor blir grafen smalere når $|a|$ blir større? Hvorfor snur den når $a$ blir negativ?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>Når $x = 2$, er $f(2) = 4a$. Med $a = 3$ blir $f(2) = 12$, med $a = 0{,}5$ blir $f(2) = 2$, og med $a = -1$ blir $f(2) = -4$.</p>
+    <p>Alle funksjonsverdier ganges med $a$. Er $|a|$ stor, vokser verdiene raskt, og grafen blir smal. Er $a$ negativ, skifter alle verdiene fortegn. Da speiles grafen om x-aksen og vender ned.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-3">
+  <h3><span class="oppgave-nr">3</span>Symmetri og ulikhet</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Grafen til $f(x) = 2x^2 - 8x + 6$ har nullpunktene $x = 1$ og $x = 3$. Hvor tror du symmetrilinja og bunnpunktet ligger? For hvilke $x$ er $f(x) < 0$?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?a=2&amp;b=-8&amp;c=6#utforsker">Sett $a = 2$, $b = -8$ og $c = 6$</a>. Slå på «Fortegn på x-aksen».</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Hvorfor ligger symmetrilinja midt mellom nullpunktene? Vis ved regning at $2(x - 1)(x - 3)$ og $2(x - 2)^2 - 2$ begge er lik $2x^2 - 8x + 6$.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>Parabelen er symmetrisk om symmetrilinja. Da må de to nullpunktene ligge like langt fra den, på hver sin side. Symmetrilinja er derfor $x = \frac{1 + 3}{2} = 2$. Det stemmer med $x = -\frac{b}{2a} = -\frac{-8}{2 \cdot 2} = 2$.</p>
+    <p>Bunnpunktet er $(2, f(2)) = (2, -2)$.</p>
+    <p>Grafen vender opp fordi $a = 2 > 0$. Den ligger derfor under x-aksen mellom nullpunktene: $f(x) < 0$ når $1 < x < 3$.</p>
+    <p>Regning:</p>
+    $$2(x - 1)(x - 3) = 2(x^2 - 4x + 3) = 2x^2 - 8x + 6$$
+    $$2(x - 2)^2 - 2 = 2(x^2 - 4x + 4) - 2 = 2x^2 - 8x + 6$$
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-4">
+  <h3><span class="oppgave-nr">4</span>To, ett eller ingen nullpunkter?</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Se på $f(x) = x^2 - 4x + c$. For hvilke verdier av $c$ tror du grafen har to nullpunkter? Ett? Ingen?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?a=1&amp;b=-4&amp;c=0#utforsker">Sett $a = 1$, $b = -4$ og $c = 0$</a>. Dra $c$ sakte oppover. Følg med på diskriminanten $D$.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Bruk $D = b^2 - 4ac$ til å forklare nøyaktig hvor grensen går.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>Her er $D = (-4)^2 - 4 \cdot 1 \cdot c = 16 - 4c$.</p>
+    <ul>
+      <li>$c < 4$ gir $D > 0$ og to nullpunkter. For eksempel gir $c = 3$ nullpunktene $x = 1$ og $x = 3$.</li>
+      <li>$c = 4$ gir $D = 0$ og ett nullpunkt, $x = 2$.</li>
+      <li>$c > 4$ gir $D < 0$ og ingen nullpunkter.</li>
+    </ul>
+    <p>Grafisk: Bunnpunktet er $(2, c - 4)$. Det ligger under x-aksen når $c < 4$, på x-aksen når $c = 4$ og over x-aksen når $c > 4$.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-5">
+  <h3><span class="oppgave-nr">5</span>Bunnpunktets vei</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Se på $f(x) = x^2 + bx + 1$. Når du endrer $b$, flytter bunnpunktet seg. Hvilken kurve tror du bunnpunktet følger?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?a=1&amp;b=0&amp;c=1#utforsker">Sett $a = 1$, $b = 0$ og $c = 1$</a>. Skriv ned bunnpunktet for $b = -4$, $-2$, $0$, $2$ og $4$. Tegn punktene i et koordinatsystem.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Vis at bunnpunktet alltid ligger på grafen til $y = 1 - x^2$.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>Bunnpunktene blir $(2, -3)$, $(1, 0)$, $(0, 1)$, $(-1, 0)$ og $(-2, -3)$. Alle passer i $y = 1 - x^2$. For eksempel er $1 - 2^2 = -3$.</p>
+    <p>Generelt er $x_s = -\frac{b}{2}$, så $b = -2x_s$. Y-verdien er</p>
+    $$y_s = 1 - \frac{b^2}{4} = 1 - \frac{(-2x_s)^2}{4} = 1 - x_s^2$$
+    <p>Bunnpunktet følger altså en parabel som vender ned. Utfordring: Vis at for vilkårlige $a$ og $c$ ligger toppunktet på $y = c - ax^2$.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-6">
+  <h3><span class="oppgave-nr">6</span>Når $a$ nærmer seg null</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Se på $f(x) = ax^2 + 2x + 1$. Hva tror du skjer med grafen og nullpunktene når $a$ blir mindre og mindre, men fortsatt positiv? Hva skjer når $a = 0$?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?a=1&amp;b=2&amp;c=1#utforsker">Sett $a = 1$, $b = 2$ og $c = 1$</a>. Skriv inn $a = 0{,}5$, så $a = 0{,}1$ og til slutt $a = 0{,}01$ i tallfeltet. Trykk «Vis hele grafen» hver gang. Sett så $a = 0$.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Hvorfor forsvinner det ene nullpunktet langt ut til venstre, mens det andre nærmer seg $x = -\frac{1}{2}$?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <div class="tabell-rull">
+    <table class="tabell">
+      <caption>Bunnpunkt og nullpunkter for $f(x) = ax^2 + 2x + 1$</caption>
+      <thead><tr><th scope="col">$a$</th><th scope="col">Bunnpunkt</th><th scope="col">Nullpunkter (avrundet)</th></tr></thead>
+      <tbody>
+        <tr><td>$1$</td><td>$(-1, 0)$</td><td>$x = -1$ (ett nullpunkt)</td></tr>
+        <tr><td>$0{,}5$</td><td>$(-2, -1)$</td><td>$x \approx -3{,}414$ og $x \approx -0{,}586$</td></tr>
+        <tr><td>$0{,}1$</td><td>$(-10, -9)$</td><td>$x \approx -19{,}487$ og $x \approx -0{,}513$</td></tr>
+        <tr><td>$0{,}01$</td><td>$(-100, -99)$</td><td>$x \approx -199{,}499$ og $x \approx -0{,}501$</td></tr>
+        <tr><td>$0$</td><td>Ingen (rett linje)</td><td>$x = -0{,}5$</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p>Bunnpunktet er $\left(-\frac{1}{a}, 1 - \frac{1}{a}\right)$. Når $a$ blir liten, flytter det seg langt ned og til venstre, og det ene nullpunktet følger med.</p>
+    <p>Nær $x = -\frac{1}{2}$ er $x^2$ et lite tall. Når også $a$ er liten, blir $ax^2$ nesten null. Da er $f(x) \approx 2x + 1$, og nullpunktet nærmer seg løsningen av $2x + 1 = 0$, altså $x = -\frac{1}{2}$.</p>
+    <p>Når $a = 0$, er $f(x) = 2x + 1$ en lineær funksjon med bare ett nullpunkt.</p>
+  </div></details>
+</div>
+</section>
+
+<p class="merknad">For lærere: Se <a href="{{rot}}laerer.html">lærersiden</a> for kobling til kompetansemålene.</p>

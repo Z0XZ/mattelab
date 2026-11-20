@@ -1,0 +1,8 @@
+{
+  "_merknad": "Kobling mellom kompetansemål (nummer i rekkefølgen fra Udir, se kompetansemaal.json) og ressurser (filnavn uten .html). Koblingene er lærerens egen vurdering.",
+  "1T": {
+    "6": ["andregradsfunksjonen"],
+    "9": ["andregradsfunksjonen"]
+  },
+  "R1": {}
+}

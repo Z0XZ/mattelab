@@ -1,0 +1,11 @@
+{
+  "name": "mattelab",
+  "private": true,
+  "description": "Testverktøy for mattelab.no. Selve nettsiden bruker ikke npm.",
+  "scripts": {
+    "test": "node tester/test.mjs"
+  },
+  "devDependencies": {
+    "playwright-core": "1.48.2"
+  }
+}

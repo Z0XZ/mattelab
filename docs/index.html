@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>mattelab.no</title>
+<meta name="description" content="Interaktive utforskere i matematikk til 1T og R1. Endre verdier, se hva som skjer, og forklar hvorfor.">
+<link rel="icon" href="statisk/ikon.svg" type="image/svg+xml">
+<script>
+  /* Settes før siden tegnes, så det ikke blinker ved mørk modus. */
+  document.documentElement.classList.add("js");
+  try {
+    var t = localStorage.getItem("mattelab.tema");
+    if (t === "lys" || t === "mork") document.documentElement.dataset.tema = t;
+    if (localStorage.getItem("mattelab.tavle") === "1") document.documentElement.classList.add("tavle");
+  } catch (e) {}
+</script>
+<link rel="stylesheet" href="statisk/lib/katex/katex.min.css">
+<link rel="stylesheet" href="statisk/css/stil.css">
+</head>
+<body data-side="index">
+  <a class="hopp" href="#innhold">Hopp til innholdet</a>
+  <header class="topp">
+    <div class="ramme">
+      <a class="logo" href="index.html">mattelab<span>.no</span></a>
+      <nav aria-label="Hovedmeny"><ul class="meny">
+        <li><a href="utforskere/index.html">Utforskere</a></li>
+        <li><a href="opplegg/index.html">Undervisningsopplegg</a></li>
+        <li><a href="laerer.html">For lærere</a></li>
+        <li><a href="om.html">Om</a></li>
+      </ul></nav>
+      <div class="verktoy">
+        <select id="fagvalg" class="fag-valg" aria-label="Vis innhold for faget" title="Vis innhold for faget" hidden>
+          <option value="">Alle fag</option>
+          <option value="1T">1T</option>
+          <option value="R1">R1</option>
+        </select>
+        <button id="tavleknapp" class="tema-knapp" type="button" aria-pressed="false" aria-label="Tavlemodus: større tekst" title="Tavlemodus: større tekst" hidden>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="1"/><path d="M8 20l4-4 4 4M7 9h6M7 12h4"/></svg>
+        </button>
+        <button id="temaknapp" class="tema-knapp" type="button" aria-label="Bytt mellom lys og mørk modus" hidden>
+          <svg class="ikon-sol" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9L7 7M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg>
+          <svg class="ikon-mane" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+  <main id="innhold">
+<section class="helt">
+  <div class="ramme">
+    <div>
+      <h1>Matematikk du kan dra i.</h1>
+      <p class="inngang">Interaktive utforskere til matematikk 1T og R1, laget av en lærer for bruk i klasserommet. Endre verdiene og se med en gang hva som skjer.</p>
+      <div class="knapper">
+        <a class="knapp" href="utforskere/index.html">Se utforskerne</a>
+        <a class="knapp lys" href="opplegg/index.html">Undervisningsopplegg</a>
+      </div>
+    </div>
+    <figure class="sim mini" aria-label="Liten utforsker: andregradsfunksjonen">
+      <svg id="forside-graf" class="kun-js"></svg>
+      <p class="noscript-melding kun-uten-js">Her er det en liten utforsker der du kan endre <span class="nobr"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">a</span></span></span></span>,</span> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">b</span></span></span></span> og <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>c</mi></mrow><annotation encoding="application/x-tex">c</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">c</span></span></span></span> i <span class="nobr"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mi>a</mi><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mi>b</mi><mi>x</mi><mo>+</mo><mi>c</mi></mrow><annotation encoding="application/x-tex">f(x) = ax^2 + bx + c</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8974em;vertical-align:-0.0833em;"></span><span class="mord mathnormal">a</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7778em;vertical-align:-0.0833em;"></span><span class="mord mathnormal">b</span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">c</span></span></span></span>.</span> Den trenger JavaScript.</p>
+      <dl class="sim-tall kun-js" id="forside-tall"></dl>
+      <div class="sim-styring kun-js" id="forside-glidere"></div>
+      <figcaption class="sim-hint">Hvor havner bunnpunktet hvis du gjør <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">b</span></span></span></span> større? Gjett før du drar. <a href="utforskere/andregradsfunksjonen.html">Til hele utforskeren</a></figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="del">
+  <div class="ramme">
+    <h2>Velg fag</h2>
+    <p class="del-inngang">Utforskerne følger temaene i fagene. Til hver utforsker hører det oppgaver som kan brukes direkte i timen.</p>
+    <div class="fag"><a class="fag-kort t1" href="utforskere/index.html?fag=1T"><span class="niva">VG1</span><h3>Matematikk 1T <span class="pil" aria-hidden="true">→</span></h3><ul class="tema"><li>Algebra</li><li>Likninger og ulikheter</li><li>Funksjoner</li><li>Derivasjon</li><li>Vekst og modellering</li><li>Trigonometri</li></ul><p class="status">1 utforsker klar, 7 på vei</p></a><a class="fag-kort r1" href="utforskere/index.html?fag=R1"><span class="niva">VG2</span><h3>Matematikk R1 <span class="pil" aria-hidden="true">→</span></h3><ul class="tema"><li>Funksjoner</li><li>Grenseverdier og kontinuitet</li><li>Derivasjon</li><li>Potenser og logaritmer</li><li>Vekst og modellering</li><li>Vektorer</li></ul><p class="status">0 utforskere klar, 5 på vei</p></a></div>
+  </div>
+</section>
+
+<section class="del">
+  <div class="ramme">
+    <h2>Tenkt for timen, ikke bare for skjermen</h2>
+    <p class="del-inngang">En utforsker blir mest verdt når elevene må mene noe før de ser svaret. Oppgavene er derfor bygget opp i tre steg.</p>
+    <ol class="steg">
+      <li><h3>Gjett</h3><p>Elevene forutsier hva som skjer med grafen eller figuren, og begrunner det for hverandre.</p></li>
+      <li><h3>Test</h3><p>De endrer verdiene i utforskeren og ser om de fikk rett.</p></li>
+      <li><h3>Forklar</h3><p>De knytter det de så til matematikken, og regner for å kontrollere.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="del">
+  <div class="ramme delt">
+    <div>
+      <h2>Undervisningsopplegg</h2>
+      <p>Opplegg for en eller flere timer der utforskerne brukes sammen med samtale, tavlearbeid og oppgaver.</p>
+      <a class="lenke" href="opplegg/index.html">Til undervisningsopplegg</a>
+    </div>
+    <div>
+      <h2>For lærere</h2>
+      <p>Kompetansemålene i 1T og R1, med lenker til utforskerne som passer. Tavlemodus, delbare oppsett og figurer som kan lastes ned.</p>
+      <a class="lenke" href="laerer.html">Til lærersiden</a>
+    </div>
+  </div>
+</section>
+
+<section class="del">
+  <div class="ramme">
+    <h2>Søsterside til fysikklab.no</h2>
+    <p class="del-inngang">mattelab.no er laget av samme lærer og på samme måte som <a href="https://fysikklab.no">fysikklab.no</a>, som har simuleringer og undervisningsopplegg til Fysikk 1 og Fysikk 2.</p>
+    <a class="lenke" href="om.html">Om mattelab.no</a>
+  </div>
+</section>
+  </main>
+  <footer class="bunn">
+    <div class="ramme">
+      <span>© 2026 mattelab.no</span>
+      <span>Ingen innlogging, informasjonskapsler eller sporing.</span>
+      <span>Søsterside: <a href="https://fysikklab.no">fysikklab.no</a></span>
+    </div>
+  </footer>
+  <script type="module" src="statisk/js/felles.js"></script>
+<script type="module" src="statisk/js/forside.js"></script>
+</body>
+</html>

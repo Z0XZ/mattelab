@@ -1,0 +1,13 @@
+{
+  "_standard": "<path class=\"strek-dempet\" d=\"M8 64H114M10 66V6\"/><path class=\"strek-m1\" d=\"M12 58Q50 56 70 32T112 10\"/>",
+  "andregradsfunksjonen": "<path class=\"strek-dempet\" d=\"M6 40H114M60 4V70\"/><path class=\"strek-m1\" d=\"M24 10Q60 106 96 10\"/><circle class=\"fyll-blekk\" cx=\"38\" cy=\"40\" r=\"3.5\"/><circle class=\"fyll-blekk\" cx=\"82\" cy=\"40\" r=\"3.5\"/><circle class=\"fyll-m2\" cx=\"60\" cy=\"58\" r=\"5\"/>",
+  "kvadratsetninger": "<rect class=\"fyll-m1\" x=\"24\" y=\"6\" width=\"40\" height=\"40\"/><rect class=\"fyll-dempet\" x=\"64\" y=\"6\" width=\"22\" height=\"40\"/><rect class=\"fyll-dempet\" x=\"24\" y=\"46\" width=\"40\" height=\"22\"/><rect class=\"fyll-m2\" x=\"64\" y=\"46\" width=\"22\" height=\"22\"/>",
+  "lineaer": "<path class=\"strek-dempet\" d=\"M8 64H114M10 66V6\"/><path class=\"strek-m1\" d=\"M14 60L108 12\"/><path class=\"strek-m2\" d=\"M46 44H74V30\" style=\"stroke-width:2.5\"/>",
+  "likningssett": "<path class=\"strek-dempet\" d=\"M8 64H114M10 66V6\"/><path class=\"strek-m1\" d=\"M14 60L108 12\"/><path class=\"strek-m2\" d=\"M14 14L108 58\"/><circle class=\"fyll-blekk\" cx=\"61\" cy=\"36\" r=\"5\"/>",
+  "rasjonal": "<path class=\"strek-dempet\" d=\"M50 4V70M6 40H114\" style=\"stroke-dasharray:4 4\"/><path class=\"strek-m1\" d=\"M8 46Q40 44 46 70\"/><path class=\"strek-m1\" d=\"M54 6Q60 34 112 34\"/>",
+  "vekst": "<path class=\"strek-dempet\" d=\"M8 64H114M10 66V6\"/><path class=\"strek-m1\" d=\"M12 60Q70 58 92 6\"/><path class=\"strek-m2\" d=\"M12 58C50 58 54 18 110 16\" style=\"stroke-dasharray:5 4\"/>",
+  "sekant": "<path class=\"strek-dempet\" d=\"M8 64H114M10 66V6\"/><path class=\"strek-blekk\" d=\"M12 60Q60 60 108 8\" style=\"stroke-width:2\"/><path class=\"strek-m2\" d=\"M28 62L104 6\" style=\"stroke-width:2\"/><path class=\"strek-m1\" d=\"M30 70L106 22\"/><circle class=\"fyll-m1\" cx=\"62\" cy=\"44\" r=\"4\"/>",
+  "derivert": "<path class=\"strek-dempet\" d=\"M6 40H114\"/><path class=\"strek-m1\" d=\"M8 60C30 0 50 0 60 36S92 72 112 14\"/><path class=\"strek-m2\" d=\"M8 10C30 40 44 66 60 52S90 10 112 64\" style=\"stroke-dasharray:5 4;stroke-width:2.5\"/>",
+  "trekant": "<path class=\"strek-blekk\" d=\"M14 62L96 62L70 10Z\" style=\"stroke-width:2.5\"/><path class=\"strek-m1\" d=\"M32 62A18 18 0 0 0 29 52\"/><path class=\"strek-m2\" d=\"M70 10L96 62\" style=\"stroke-width:4\"/>",
+  "vektorer": "<path class=\"strek-m1\" d=\"M14 60L64 40M56 38L64 40L59 47\"/><path class=\"strek-m2\" d=\"M64 40L100 12M91 13L100 12L97 21\"/><path class=\"strek-blekk\" d=\"M14 60L100 12\" style=\"stroke-dasharray:5 4;stroke-width:2\"/>"
+}
