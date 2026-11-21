@@ -1,0 +1,75 @@
+%% Fasit til kortsett fra mattelab.no – laget automatisk av bygg.py.
+%% Kompiler med lualatex.
+\documentclass[11pt,a4paper]{article}
+\usepackage[norsk]{babel}
+\usepackage[a4paper,margin=1.2cm,bottom=1.7cm]{geometry}
+\usepackage{fontspec}
+\usepackage{unicode-math}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{TeX Gyre Heros}[Scale=MatchLowercase]
+\setmathfont{TeX Gyre Pagella Math}
+\usepackage{xcolor}
+\definecolor{blekk}{HTML}{16213A}
+\definecolor{dempet}{HTML}{566077}
+\definecolor{m1}{HTML}{2F4AB0}
+\usepackage{tikz}
+\usepackage{enumitem}
+\usepackage{qrcode}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+\pdfvariable suppressoptionalinfo \numexpr 1+2+4+8+16+32+64+128+256+512\relax
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[L]{\sffamily\footnotesize\color{dempet}mattelab.no · Velg metode for andregradslikninger · kortsett K7 · fasit}
+\fancyfoot[R]{\sffamily\footnotesize\color{dempet}Side \thepage}
+\begin{document}
+\begin{minipage}[t]{0.8\linewidth}\vspace{0pt}
+{\sffamily\small\color{dempet}Fasit for læreren · kortsett K7 · 1T}\par\vspace{0.25em}
+{\fontsize{20}{24}\selectfont\bfseries Velg metode for andregradslikninger}\par\vspace{0.5em}
+Sorter likningene etter hvilken metode du ville brukt for å løse dem raskest. Ofte finnes det flere gode svar. Begrunn valget, og løs gjerne likningen etterpå.\par\vspace{0.4em}{\small\color{dempet}Kortene er nummerert i den rekkefølgen de står i utskriften.}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.15\linewidth}\vspace{0pt}\raggedleft
+\qrcode[height=1.9cm]{https://mattelab.no/varierende/velg-metode.html}
+\end{minipage}\par\vspace{0.8em}
+
+\subsection*{Sett x utenfor parentes}
+\begin{itemize}[leftmargin=1.2em, itemsep=0.35em]
+\item \textsf{\small K7-01}\quad $x^2 - 5x = 0$\\{\small\color{dempet}Ingen konstant, så $x(x - 5) = 0$. $x = 0$ eller $x = 5$.}
+\item \textsf{\small K7-13}\quad $3x^2 = 12x$\\{\small\color{dempet}Flytt over og sett $3x$ utenfor: $3x(x - 4) = 0$. Ikke del på $x$, da mister du $x = 0$. $x = 0$ eller $x = 4$.}
+\end{itemize}
+\subsection*{Ta kvadratroten}
+\begin{itemize}[leftmargin=1.2em, itemsep=0.35em]
+\item \textsf{\small K7-05}\quad $x^2 - 16 = 0$ \emph{(også: Bruk kvadratsetningene)}\\{\small\color{dempet}Konjugatsetningen: $(x + 4)(x - 4) = 0$. Eller $x^2 = 16$. $x = -4$ eller $x = 4$.}
+\item \textsf{\small K7-06}\quad $(x - 2)^2 = 9$\\{\small\color{dempet}Allerede et kvadrat: $x - 2 = \pm 3$. $x = -1$ eller $x = 5$.}
+\item \textsf{\small K7-07}\quad $2x^2 - 18 = 0$ \emph{(også: Bruk kvadratsetningene)}\\{\small\color{dempet}$x^2 = 9$, eller konjugatsetningen: $2(x + 3)(x - 3) = 0$. $x = -3$ eller $x = 3$.}
+\item \textsf{\small K7-14}\quad $x^2 = 49$\\{\small\color{dempet}Ta roten på begge sider, og husk begge fortegnene. $x = -7$ eller $x = 7$.}
+\end{itemize}
+\subsection*{Bruk kvadratsetningene}
+\begin{itemize}[leftmargin=1.2em, itemsep=0.35em]
+\item \textsf{\small K7-05}\quad $x^2 - 16 = 0$ \emph{(også: Ta kvadratroten)}\\{\small\color{dempet}Konjugatsetningen: $(x + 4)(x - 4) = 0$. Eller $x^2 = 16$. $x = -4$ eller $x = 4$.}
+\item \textsf{\small K7-07}\quad $2x^2 - 18 = 0$ \emph{(også: Ta kvadratroten)}\\{\small\color{dempet}$x^2 = 9$, eller konjugatsetningen: $2(x + 3)(x - 3) = 0$. $x = -3$ eller $x = 3$.}
+\item \textsf{\small K7-08}\quad $x^2 - 10x + 25 = 0$\\{\small\color{dempet}Andre kvadratsetning: $(x - 5)^2 = 0$. Én løsning: $x = 5$.}
+\item \textsf{\small K7-11}\quad $x^2 + 6x + 9 = 0$\\{\small\color{dempet}Første kvadratsetning: $(x + 3)^2 = 0$. Én løsning: $x = -3$.}
+\end{itemize}
+\subsection*{Fullfør kvadratet}
+\begin{itemize}[leftmargin=1.2em, itemsep=0.35em]
+\item \textsf{\small K7-02}\quad $x^2 + 2x = 8$ \emph{(også: Bruk abc-formelen)}\\{\small\color{dempet}Legg til $1$ på begge sider: $(x + 1)^2 = 9$. $x = -4$ eller $x = 2$.}
+\item \textsf{\small K7-03}\quad $x^2 + 4x - 5 = 0$ \emph{(også: Bruk abc-formelen)}\\{\small\color{dempet}$(x + 2)^2 - 4 - 5 = 0$ gir $(x + 2)^2 = 9$. $x = -5$ eller $x = 1$.}
+\item \textsf{\small K7-10}\quad $x^2 - 8x + 12 = 0$ \emph{(også: Bruk abc-formelen)}\\{\small\color{dempet}$(x - 4)^2 - 16 + 12 = 0$ gir $(x - 4)^2 = 4$. $x = 2$ eller $x = 6$.}
+\item \textsf{\small K7-12}\quad $x^2 + x + 1 = 0$ \emph{(også: Bruk abc-formelen)}\\{\small\color{dempet}Regn ut $b^2 - 4ac$ først. Ingen løsning, fordi $b^2 - 4ac = -3 < 0$.}
+\end{itemize}
+\subsection*{Bruk abc-formelen}
+\begin{itemize}[leftmargin=1.2em, itemsep=0.35em]
+\item \textsf{\small K7-02}\quad $x^2 + 2x = 8$ \emph{(også: Fullfør kvadratet)}\\{\small\color{dempet}Legg til $1$ på begge sider: $(x + 1)^2 = 9$. $x = -4$ eller $x = 2$.}
+\item \textsf{\small K7-03}\quad $x^2 + 4x - 5 = 0$ \emph{(også: Fullfør kvadratet)}\\{\small\color{dempet}$(x + 2)^2 - 4 - 5 = 0$ gir $(x + 2)^2 = 9$. $x = -5$ eller $x = 1$.}
+\item \textsf{\small K7-04}\quad $3x^2 + 5x - 2 = 0$\\{\small\color{dempet}$a = 3$ gjør det tungvint å fullføre kvadratet. $b^2 - 4ac = 49$. $x = -2$ eller $x = \frac{1}{3}$.}
+\item \textsf{\small K7-09}\quad $2x^2 - 3x - 4 = 0$\\{\small\color{dempet}Løsningene er ikke pene tall, så abc-formelen er tryggest. $x = \dfrac{3 \pm \sqrt{41}}{4}$.}
+\item \textsf{\small K7-10}\quad $x^2 - 8x + 12 = 0$ \emph{(også: Fullfør kvadratet)}\\{\small\color{dempet}$(x - 4)^2 - 16 + 12 = 0$ gir $(x - 4)^2 = 4$. $x = 2$ eller $x = 6$.}
+\item \textsf{\small K7-12}\quad $x^2 + x + 1 = 0$ \emph{(også: Fullfør kvadratet)}\\{\small\color{dempet}Regn ut $b^2 - 4ac$ først. Ingen løsning, fordi $b^2 - 4ac = -3 < 0$.}
+\end{itemize}
+\subsection*{Til læreren}
+Det finnes ikke én riktig sortering. Skjermversjonen godtar alle boksene som står i fasiten. La gruppene sammenligne og argumentere: Hvorfor er abc-formelen ikke alltid raskest? Når lønner det seg å fullføre kvadratet? Avslutt gjerne med at elevene løser to av likningene med to ulike metoder.
+\end{document}

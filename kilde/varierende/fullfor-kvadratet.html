@@ -1,0 +1,63 @@
+---
+tittel: Fullfør kvadratet trinn for trinn
+beskrivelse: Skriv x² + bx + c som (x + p)² + q ett steg om gangen, med tilbakemelding på hvert steg. Fire nivåer og nye tall hver gang.
+type: ovelse
+fag: 1T
+tema: algebra, likninger
+rekkefolge: 2
+skript: ovelser/fullfor-kvadratet.js
+---
+<p class="ingress">Å fullføre kvadratet betyr å skrive $x^2 + bx + c$ som $(x + p)^2 + q$. Her gjør du det ett steg om gangen og får tilbakemelding på hvert steg. Velg nivå først.</p>
+
+<section class="ovelse" id="ovelse" aria-labelledby="fk-tittel">
+  <h2 id="fk-tittel" class="visuelt-skjult">Øving</h2>
+  <div class="kun-js">
+    <div class="sim-velg ovelse-niva">
+      <label for="fk-niva">Nivå</label>
+      <select id="fk-niva">
+        <option value="1">1: Tallet foran x er et partall</option>
+        <option value="2">2: Tallet foran x er et oddetall (brøk)</option>
+        <option value="3">3: Løs likningen</option>
+        <option value="4">4: Tallet foran x² er ikke 1</option>
+      </select>
+    </div>
+    <div class="ovelse-oppgave" id="fk-oppgave"></div>
+    <ol class="fk-liste" id="fk-steg" aria-label="Stegene"></ol>
+    <div class="ovelse-tilbake riktig" id="fk-ferdig" aria-live="polite"></div>
+    <div class="ovelse-knapper">
+      <button type="button" class="knapp liten" id="fk-ny" hidden>Ny oppgave</button>
+      <span class="ovelse-poeng" id="fk-poeng"></span>
+    </div>
+    <p class="merknad">Du kan skrive brøk som <code>5/2</code> og desimaltall med komma, for eksempel <code>2,25</code>. Trykk Enter eller «Sjekk» for å sjekke.</p>
+  </div>
+  <div class="noscript-melding kun-uten-js">
+    <p><strong>Øvingen trenger JavaScript.</strong> Eksempel: $x^2 + 6x + 5$. Halvparten av $6$ er $3$, og $3^2 = 9$. Da er $x^2 + 6x + 5 = (x^2 + 6x + 9) - 9 + 5 = (x + 3)^2 - 4$.</p>
+  </div>
+</section>
+
+<details class="teori" id="matematikken">
+<summary><span class="teori-tittel">Slik fullfører du kvadratet</span><span class="teori-hint">Metoden steg for steg, og hvorfor den virker</span></summary>
+<div class="teori-innhold tekst">
+<p>Første kvadratsetning sier at $(x + p)^2 = x^2 + 2px + p^2$. Tallet foran $x$ er altså $2p$, og konstantleddet er $p^2$, kvadratet av halvparten.</p>
+<ol>
+  <li>Finn halvparten av tallet foran $x$. Det er $p$.</li>
+  <li>Legg til og trekk fra $p^2$. Da blir $x^2 + bx + c$ lik $(x^2 + bx + p^2) - p^2 + c$.</li>
+  <li>Parentesen er nå et fullstendig kvadrat: $(x + p)^2$. Resten er $q = c - p^2$.</li>
+</ol>
+<p>Eksempel:</p>
+$$x^2 - 8x + 10 = (x^2 - 8x + 16) - 16 + 10 = (x - 4)^2 - 6$$
+<p>Når tallet foran $x^2$ er $a \neq 1$, setter du $a$ utenfor fra de to første leddene først:</p>
+$$2x^2 + 12x + 7 = 2(x^2 + 6x) + 7 = 2(x + 3)^2 - 18 + 7 = 2(x + 3)^2 - 11$$
+<p>Formen $(x + p)^2 + q$ viser toppunktet eller bunnpunktet til grafen, $(-p, q)$. Den gjør det også lett å løse likningen: $(x + p)^2 = -q$ har ingen løsning når $-q < 0$.</p>
+</div>
+</details>
+
+<div class="tekst kortsett-bruk">
+<h2>Til læreren</h2>
+<ul>
+  <li>Nivå 1 og 2 trener selve omskrivingen. Nivå 3 bruker den til å løse likninger. Nivå 4 er for dem som er klare for mer.</li>
+  <li>Etter to feil på samme steg kan eleven trykke «Vis svaret». Poengtellingen viser hvor mange oppgaver som er løst uten.</li>
+  <li>Adressen husker nivået, for eksempel <code>?niva=3</code>. Med <code>&amp;frø=1</code> får alle de samme tallene.</li>
+  <li>Utforskeren <a href="{{rot}}utforskere/fullstendig-kvadrat.html">Fullstendig kvadrat</a> viser metoden som figur.</li>
+</ul>
+</div>

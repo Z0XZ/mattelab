@@ -1,0 +1,67 @@
+---
+tittel: Én likning, tre metoder
+beskrivelse: Fire andregradslikninger løst med tre metoder side om side. Elevene sammenligner og vurderer hvilken metode som var best.
+type: tavle
+fag: 1T
+tema: likninger
+rekkefolge: 4
+---
+<p class="ingress">Hver likning kan løses med faktorisering, ved å fullføre kvadratet og med abc-formelen. Her ser elevene de tre løsningene side om side og vurderer hvilken som var best for akkurat denne likningen.</p>
+
+<div class="tekst slik-brukes">
+<p><strong>Slik kan du bruke oppgavene:</strong> Del klassen i tre grupper, én for hver metode. Alle løser likningen med sin metode. Sammenlign på tavla, og åpne forslaget til slutt. Spør: Hvilken metode var raskest? Hvilken ville du stolt mest på i en prøve? Kortsettet <a href="velg-metode.html">Velg metode for andregradslikninger</a> passer godt etterpå.</p>
+</div>
+
+<section class="tavle-ramme" aria-label="Tavleoppgaver">
+  {{tavlestyring}}
+  <ol class="tavle-liste">
+  <li class="tavle-kort">
+    <div class="tavle-sporsmal">Løs likningen på tre måter: $$x^2 - 6x + 8 = 0$$</div>
+    <details class="tavle-svar"><summary>Vis forslag</summary><div class="tavle-svar-innhold">
+      <div class="tre-metoder">
+        <div><h3>Faktorisering</h3><p>To tall med produkt $8$ og sum $-6$: $-2$ og $-4$.</p>$$(x - 2)(x - 4) = 0$$<p>$x = 2$ eller $x = 4$</p></div>
+        <div><h3>Fullføre kvadratet</h3>$$(x - 3)^2 - 9 + 8 = 0$$
+$$(x - 3)^2 = 1$$<p>$x - 3 = \pm 1$, så $x = 2$ eller $x = 4$</p></div>
+        <div><h3>abc-formelen</h3>$$x = \frac{6 \pm \sqrt{36 - 32}}{2} = \frac{6 \pm 2}{2}$$<p>$x = 2$ eller $x = 4$</p></div>
+      </div>
+      <p>Her er faktorisering raskest, fordi løsningene er hele tall.</p>
+    </div></details>
+  </li>
+  <li class="tavle-kort">
+    <div class="tavle-sporsmal">Løs likningen på tre måter: $$x^2 + 4x - 12 = 0$$</div>
+    <details class="tavle-svar"><summary>Vis forslag</summary><div class="tavle-svar-innhold">
+      <div class="tre-metoder">
+        <div><h3>Faktorisering</h3><p>To tall med produkt $-12$ og sum $4$: $6$ og $-2$.</p>$$(x + 6)(x - 2) = 0$$<p>$x = -6$ eller $x = 2$</p></div>
+        <div><h3>Fullføre kvadratet</h3>$$(x + 2)^2 - 4 - 12 = 0$$
+$$(x + 2)^2 = 16$$<p>$x + 2 = \pm 4$, så $x = -6$ eller $x = 2$</p></div>
+        <div><h3>abc-formelen</h3>$$x = \frac{-4 \pm \sqrt{16 + 48}}{2} = \frac{-4 \pm 8}{2}$$<p>$x = -6$ eller $x = 2$</p></div>
+      </div>
+      <p>Pass på fortegnene. Produktet er negativt, så de to tallene har ulike fortegn.</p>
+    </div></details>
+  </li>
+  <li class="tavle-kort">
+    <div class="tavle-sporsmal">Løs likningen på tre måter: $$2x^2 - 8x = 0$$</div>
+    <details class="tavle-svar"><summary>Vis forslag</summary><div class="tavle-svar-innhold">
+      <div class="tre-metoder">
+        <div><h3>Faktorisering</h3><p>Sett $2x$ utenfor parentes.</p>$$2x(x - 4) = 0$$<p>$x = 0$ eller $x = 4$</p></div>
+        <div><h3>Fullføre kvadratet</h3><p>Del på $2$ først.</p>$$(x - 2)^2 - 4 = 0$$
+$$(x - 2)^2 = 4$$<p>$x - 2 = \pm 2$, så $x = 0$ eller $x = 4$</p></div>
+        <div><h3>abc-formelen</h3><p>Her er $c = 0$.</p>$$x = \frac{8 \pm \sqrt{64 - 0}}{4} = \frac{8 \pm 8}{4}$$<p>$x = 0$ eller $x = 4$</p></div>
+      </div>
+      <p>Når $c = 0$, er faktorisering klart raskest. Det er fristende å dele på $x$, men da forsvinner løsningen $x = 0$.</p>
+    </div></details>
+  </li>
+  <li class="tavle-kort">
+    <div class="tavle-sporsmal">Løs likningen på tre måter: $$x^2 - 2x - 1 = 0$$</div>
+    <details class="tavle-svar"><summary>Vis forslag</summary><div class="tavle-svar-innhold">
+      <div class="tre-metoder">
+        <div><h3>Faktorisering</h3><p>Ingen hele tall har produkt $-1$ og sum $-2$. Metoden med produkt og sum stopper her.</p></div>
+        <div><h3>Fullføre kvadratet</h3>$$(x - 1)^2 - 1 - 1 = 0$$
+$$(x - 1)^2 = 2$$<p>$x = 1 - \sqrt{2}$ eller $x = 1 + \sqrt{2}$</p></div>
+        <div><h3>abc-formelen</h3>$$x = \frac{2 \pm \sqrt{4 + 4}}{2} = \frac{2 \pm 2\sqrt{2}}{2}$$<p>$x = 1 \pm \sqrt{2}$</p></div>
+      </div>
+      <p>Løsningene er $x \approx -0{,}41$ og $x \approx 2{,}41$. Når løsningene ikke er hele tall, virker ikke produkt og sum. Da er de to andre metodene tryggest.</p>
+    </div></details>
+  </li>
+  </ol>
+</section>

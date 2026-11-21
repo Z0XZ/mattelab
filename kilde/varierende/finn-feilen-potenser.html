@@ -1,0 +1,48 @@
+---
+tittel: Finn feilen: potenser
+beskrivelse: Løste oppgaver med potenser der ett steg ofte er feil. Finn feilen og få forklart regelen. Nye tall hver gang.
+type: ovelse
+fag: 1T
+tema: potenser
+rekkefolge: 1
+skript: ovelser/finn-feilen.js
+---
+<p class="ingress">Her er utregninger med potenser. Som regel er ett av stegene feil, med en feil som mange gjør. Noen ganger er alt riktig. Trykk på steget du mener er feil.</p>
+
+<section class="ovelse" id="ovelse" aria-labelledby="ff-tittel">
+  <h2 id="ff-tittel" class="visuelt-skjult">Øving</h2>
+  <div class="kun-js">
+    <p class="panel-tittel" id="ff-instruks">Forenkle</p>
+    <div class="ovelse-oppgave" id="ff-oppgave"></div>
+    <ol class="steg-liste" id="ff-steg" aria-label="Stegene i utregningen"></ol>
+    <div class="ovelse-knapper">
+      <button type="button" class="knapp lys liten" id="ff-ingen">Alle stegene er riktige</button>
+      <button type="button" class="knapp liten" id="ff-ny" hidden>Ny oppgave</button>
+      <span class="ovelse-poeng" id="ff-poeng"></span>
+    </div>
+    <div class="ovelse-tilbake" id="ff-tilbake" aria-live="polite"></div>
+  </div>
+  <div class="noscript-melding kun-uten-js">
+    <p><strong>Øvingen trenger JavaScript.</strong> Eksempel på en oppgave: $\dfrac{a^4 \cdot a^3}{a^2} = \dfrac{a^{12}}{a^2} = a^{10}$. Feilen er i første steg. Riktig er $a^{4 + 3} = a^7$, og svaret blir $a^5$.</p>
+  </div>
+</section>
+
+<details class="teori" id="matematikken">
+<summary><span class="teori-tittel">Potensreglene</span><span class="teori-hint">Reglene som brukes i øvingen</span></summary>
+<div class="teori-innhold tekst">
+<p>For $a \neq 0$ og hele tall $m$ og $n$ gjelder</p>
+$$a^m \cdot a^n = a^{m + n} \qquad \frac{a^m}{a^n} = a^{m - n} \qquad (a^m)^n = a^{m \cdot n}$$
+$$(a \cdot b)^n = a^n \cdot b^n \qquad a^0 = 1 \qquad a^{-n} = \frac{1}{a^n}$$
+<p>Reglene kommer fra at en potens er gjentatt multiplikasjon: $a^3 = a \cdot a \cdot a$. Eksponenten $0$ og negative eksponenter er definert slik at reglene fortsatt gjelder. For eksempel er $\frac{a^2}{a^2} = 1$, og regelen for divisjon gir $a^{2 - 2} = a^0$. Derfor må $a^0 = 1$.</p>
+</div>
+</details>
+
+<div class="tekst kortsett-bruk">
+<h2>Til læreren</h2>
+<ul>
+  <li>Øvingen passer som start eller slutt på en time om potenser, gjerne to og to ved én skjerm.</li>
+  <li>Be elevene si <em>hvilken regel</em> som er brutt før de trykker. Forklaringen vises etterpå.</li>
+  <li>Med <code>?frø=1</code> i adressen får alle elevene de samme oppgavene i samme rekkefølge. Bytt tallet for et nytt sett.</li>
+  <li>Kortsettene <a href="like-potenser.html">Potenser med samme verdi</a> og <a href="potenser-i-rekkefolge.html">Potenser i rekkefølge</a> trener de samme reglene.</li>
+</ul>
+</div>

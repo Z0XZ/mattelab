@@ -2,21 +2,39 @@
   "_merknad": "Kobling mellom kompetansemål (nummer i rekkefølgen fra Udir, se kompetansemaal.json) og ressurser (filnavn uten .html). Koblingene er lærerens egen vurdering.",
   "1T": {
     "2": [
-      "kvadratsetningene"
+      "kvadratsetningene",
+      "algebrabrikker",
+      "potenser"
     ],
     "3": [
       "lineaer-funksjon",
       "vekst"
     ],
     "4": [
-      "likningssett"
+      "likningssett",
+      "abc-formelen",
+      "fullstendig-kvadrat",
+      "velg-metode",
+      "en-likning-tre-metoder",
+      "fullfor-kvadratet"
     ],
     "5": [
-      "kvadratsetningene"
+      "kvadratsetningene",
+      "uttrykk-likning-identitet-funksjon",
+      "identiteter",
+      "alltid-noen-ganger-aldri"
     ],
     "6": [
       "andregradsfunksjonen",
-      "kvadratsetningene"
+      "kvadratsetningene",
+      "fullstendig-kvadrat",
+      "abc-formelen",
+      "faktorisering",
+      "algebrabrikker",
+      "fire-former",
+      "identiteter",
+      "hoderegning-kvadratsetningene",
+      "fullfor-kvadratet"
     ],
     "7": [
       "lineaer-funksjon",

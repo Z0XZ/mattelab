@@ -415,3 +415,192 @@ html.tavle .g-mal, html.tavle .g-vektor-navn { font-size: 17px; }
 .steg-tekst:first-child { margin-top: 0; }
 .sim-styring > *, .sim-velg { min-width: 0; }
 .sim-velg select { width: 100%; text-overflow: ellipsis; }
+
+/* ---------------------------------------------------------------- kortsett */
+.kortsett { margin-top: 1.75rem; }
+.kortsett-oppgave { max-width: 46rem; font-size: 1.05rem; }
+.kortsett-hjelp { max-width: 46rem; margin-top: .5rem; font-size: .9375rem; color: var(--dempet); }
+.kortsett-verktoy { position: sticky; top: 0; z-index: 2; display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin-top: 1rem; padding: .6rem 0; background: var(--papir); border-bottom: 1px solid var(--rute); }
+.kort-status { font-size: .9375rem; font-weight: 600; }
+.kort-bunke, .kort-gruppe-liste, .kort-plassert, .kort-rekke {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 12.5rem), 1fr)); gap: .6rem; margin: 0; padding: 0; list-style: none;
+}
+.kort-bunke { margin-top: 1rem; }
+.kort-bunke:empty::before { content: "Alle kortene er plassert."; color: var(--dempet); font-size: .9375rem; }
+.kort-bunke > li, .kort-gruppe-liste > li, .kort-plassert > li, .kort-rekke > li { display: flex; min-width: 0; }
+.kort {
+  position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .3rem;
+  width: 100%; min-height: 6.75rem; padding: .7rem .6rem 1.5rem; font: inherit; color: var(--blekk); text-align: center;
+  background: var(--flate); border: 1.5px solid var(--rute-sterk); border-radius: 6px; cursor: pointer;
+}
+button.kort:hover { border-color: var(--blekk); }
+.kort[aria-pressed="true"] { border-color: var(--m1); box-shadow: 0 0 0 2px var(--m1); background: color-mix(in srgb, var(--m1) 9%, var(--flate)); }
+.kort[aria-pressed="true"]::before { content: "Valgt"; position: absolute; top: .3rem; left: .45rem; font-size: .7rem; font-weight: 600; color: var(--m1); }
+.kort-innhold { max-width: 100%; overflow-wrap: break-word; }
+.kort-innhold .katex { font-size: 1.2em; white-space: nowrap; }
+.kort-innhold { overflow-x: auto; overflow-y: hidden; }
+.kort-lang { font-size: .9375rem; line-height: 1.35; }
+.kort-figur { display: block; width: 100%; }
+.kort-svg { display: block; width: 100%; height: 5.4rem; }
+.kort-kode { position: absolute; right: .45rem; bottom: .3rem; font-family: var(--mono); font-size: .7rem; color: var(--dempet); }
+.kort-kommentar { display: block; margin-top: .25rem; font-size: .8125rem; line-height: 1.35; color: var(--dempet); text-align: left; }
+.kort-kommentar .katex { font-size: 1em; }
+.kort-merke { font-size: .8rem; font-weight: 600; }
+.kort.riktig { border-color: var(--m1); border-width: 2.5px; }
+.kort.riktig .kort-merke { color: var(--m1); }
+.kort.feil { border-color: var(--m2); border-width: 2.5px; border-style: dashed; }
+.kort.feil .kort-merke { color: var(--m2); }
+.kort-grupper { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 24rem), 1fr)); gap: .75rem; margin-top: 1rem; }
+.kort-grupper:empty { display: none; }
+.kort-gruppe { padding: .6rem; background: var(--papir); border: 1.5px solid var(--rute-sterk); border-radius: 8px; }
+.kort-gruppe.riktig { border-color: var(--m1); border-width: 2.5px; }
+.kort-gruppe.feil { border-color: var(--m2); border-width: 2.5px; border-style: dashed; }
+.kort-gruppe .kort { min-height: 5.75rem; }
+.gruppe-fot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem; margin-top: .5rem; }
+.gruppe-merke { font-size: .875rem; font-weight: 600; }
+.kort-gruppe.riktig .gruppe-merke { color: var(--m1); }
+.kort-gruppe.feil .gruppe-merke { color: var(--m2); }
+.kort-kategorier { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); gap: .75rem; margin-top: 1rem; }
+.kort-kategori { display: flex; flex-direction: column; gap: .5rem; min-height: 9rem; padding: .6rem; background: var(--papir); border: 1.5px solid var(--rute-sterk); border-radius: 8px; }
+.kort-kategori .kort-plassert { grid-template-columns: minmax(0, 1fr); }
+.kategori-knapp {
+  width: 100%; min-height: 2.75rem; padding: .45rem .7rem; font: inherit; font-family: var(--serif); font-size: 1.1rem; font-weight: 600; text-align: left;
+  color: var(--blekk); background: var(--flate); border: 1.5px solid var(--blekk); border-radius: 6px; cursor: pointer;
+}
+.kategori-knapp:hover { background: var(--blekk); color: var(--papir); }
+.bunke-knapp { margin-top: 1rem; font-family: var(--sans); font-size: .9375rem; border-style: dashed; }
+.kort-rekke-ramme { margin-top: 1rem; padding: .6rem; background: var(--papir); border: 1.5px solid var(--rute-sterk); border-radius: 8px; }
+.kort-rekke { counter-reset: plass; min-height: 6rem; }
+.kort-rekke > li { counter-increment: plass; position: relative; }
+.kort-rekke > li::before { content: counter(plass) "."; position: absolute; top: .3rem; left: .45rem; z-index: 1; font-family: var(--mono); font-size: .75rem; color: var(--dempet); pointer-events: none; }
+.kort-rekke:empty::before { content: "Trykk på kortene under for å legge dem i rekka."; color: var(--dempet); font-size: .9375rem; }
+.kortsett-bruk { margin-top: clamp(2.5rem, 6vw, 4rem); }
+html.tavle .kort-innhold .katex { font-size: 1.55em; }
+html.tavle .kort { min-height: 8rem; }
+
+/* Figurer på kortene. Strekene har fast tykkelse uansett hvor stor figuren blir. */
+.kort-svg * { vector-effect: non-scaling-stroke; }
+.kf-fyll { fill: var(--m1); fill-opacity: .55; stroke: var(--blekk); stroke-width: 1.25; }
+.kf-tom { fill: var(--flate); stroke: var(--blekk); stroke-width: 1.25; }
+.kf-x2 { fill: var(--m1); fill-opacity: .35; stroke: var(--blekk); stroke-width: 1.25; }
+.kf-x { fill: var(--m2); fill-opacity: .3; stroke: var(--blekk); stroke-width: 1.25; }
+.kf-en { fill: var(--flate); stroke: var(--blekk); stroke-width: 1.25; }
+.kf-rute { fill: none; stroke: var(--rute); stroke-width: 1; }
+.kf-akse { fill: none; stroke: var(--dempet); stroke-width: 1.25; }
+.kf-graf { fill: none; stroke: var(--m1); stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
+.kf-punkt { fill: var(--m2); }
+.kf-tekst { fill: var(--dempet); font-family: var(--mono); }
+@media print {
+  .kortsett-verktoy, .kortsett-hjelp, .bunke-knapp { display: none; }
+  .kort { break-inside: avoid; }
+}
+@media (max-width: 480px) {
+  .kort-bunke, .kort-gruppe-liste, .kort-rekke { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .45rem; }
+  .kort { min-height: 5.75rem; padding: .6rem .4rem 1.4rem; }
+  .kort-innhold .katex { font-size: 1.02em; white-space: normal; }
+  .kort-lang { font-size: .875rem; }
+  .kort-svg { height: 4.4rem; }
+}
+
+/* ---------------------------------------------------------------- tavleoppgaver */
+.tavle-ramme { margin-top: 1.75rem; background: var(--papir); }
+.tavle-styring { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .75rem; padding-bottom: .75rem; border-bottom: 1px solid var(--rute); }
+.tavle-teller { font-family: var(--mono); font-size: .9375rem; min-width: 9.5rem; text-align: center; }
+.tavle-tips { flex: 1; font-size: .8125rem; color: var(--dempet); }
+.tavle-liste { margin: 0; padding: 0; list-style: none; }
+.tavle-kort { padding: clamp(1.25rem, 4vw, 2.5rem) 0; border-bottom: 1px solid var(--rute); }
+.tavle-ramme.vis-alle .tavle-kort, html:not(.js) .tavle-kort { padding-block: 1.5rem; }
+.tavle-sporsmal { font-family: var(--serif); font-size: clamp(1.35rem, 3.2vw, 2.1rem); line-height: 1.3; max-width: 34em; }
+.tavle-sporsmal .katex { font-size: 1.1em; }
+.tavle-sporsmal .katex-display { margin: 1rem 0; }
+.tavle-undertekst { display: block; margin-top: .6rem; font-family: var(--sans); font-size: 1rem; color: var(--dempet); }
+.tavle-valg { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 9rem), 1fr)); gap: .75rem; margin: 1.25rem 0 0; padding: 0; list-style: none; max-width: 46rem; }
+.tavle-valg li { display: flex; align-items: center; gap: .75rem; padding: .9rem 1rem; background: var(--flate); border: 1.5px solid var(--rute-sterk); border-radius: 6px; font-family: var(--sans); font-size: clamp(1.2rem, 2.6vw, 1.6rem); }
+.tavle-valg .bokstav { font-family: var(--mono); font-size: .9rem; color: var(--dempet); }
+.tavle-svar { margin-top: 1.25rem; max-width: 52rem; border: 1px solid var(--rute-sterk); border-radius: 6px; background: var(--flate); }
+.tavle-svar > summary { cursor: pointer; padding: .8rem 1rem; font-weight: 600; }
+.tavle-svar-innhold { padding: 0 1rem 1rem; }
+.tavle-svar-innhold > * + * { margin-top: .6rem; }
+.tavle-svar-innhold ul { padding-left: 1.3rem; margin-bottom: 0; }
+.tre-metoder { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); gap: .75rem; }
+.tre-metoder > div { min-width: 0; padding: .6rem .8rem; border: 1px solid var(--rute); border-radius: 6px; background: var(--papir); }
+.tre-metoder h3 { font-family: var(--sans); font-size: .9375rem; color: var(--dempet); margin-bottom: .3rem; }
+.tre-metoder .katex-display { margin: .35rem 0; font-size: .95rem; }
+.tavle-ramme:fullscreen { overflow: auto; padding: 2rem clamp(1rem, 5vw, 4rem); }
+.tavle-ramme:fullscreen .tavle-sporsmal { font-size: clamp(2rem, 4.2vw, 3.4rem); }
+.tavle-ramme:fullscreen .tavle-valg li { font-size: clamp(1.6rem, 3.2vw, 2.4rem); }
+.tavle-ramme:fullscreen .tavle-svar { font-size: 1.3rem; max-width: none; }
+@media (max-width: 600px) { .tavle-tips { display: none; } }
+html.tavle .tavle-sporsmal { font-size: clamp(1.7rem, 3.8vw, 2.7rem); }
+.slik-brukes { margin-top: 1.5rem; }
+@media print { .tavle-styring { display: none; } .tavle-kort { display: block !important; break-inside: avoid; } }
+
+/* ---------------------------------------------------------------- øvinger */
+.ovelse { margin-top: 1.75rem; max-width: 52rem; padding: clamp(1rem, 3vw, 1.5rem); background: var(--flate); border: 1px solid var(--rute-sterk); border-radius: 6px; }
+.ovelse-oppgave { font-size: 1.15rem; margin: .25rem 0 .5rem; overflow-x: auto; overflow-y: hidden; }
+.ovelse-oppgave .katex-display { margin: .5rem 0; text-align: left; }
+.ovelse-oppgave .katex-display > .katex { text-align: left; }
+.ovelse-niva { max-width: 26rem; margin-bottom: 1rem; }
+.steg-liste { display: grid; gap: .5rem; margin: .5rem 0 0; padding: 0; list-style: none; }
+.steg-liste li { display: flex; flex-wrap: wrap; align-items: center; gap: .25rem .75rem; }
+.steg-knapp {
+  display: flex; align-items: center; gap: 1rem; min-height: 3.25rem; padding: .5rem 1rem; font: inherit; color: var(--blekk); text-align: left;
+  background: var(--papir); border: 1.5px solid var(--rute-sterk); border-radius: 6px; cursor: pointer; min-width: min(100%, 18rem);
+}
+.steg-knapp:hover:not(:disabled) { border-color: var(--blekk); }
+.steg-knapp:disabled { cursor: default; color: var(--blekk); }
+.steg-nr { font-family: var(--mono); font-size: .8125rem; color: var(--dempet); white-space: nowrap; }
+.steg-uttrykk .katex { font-size: 1.25em; }
+.steg-merke { font-size: .875rem; font-weight: 600; }
+.steg-liste li.riktig .steg-knapp { border-color: var(--m1); border-width: 2.5px; }
+.steg-liste li.riktig .steg-merke { color: var(--m1); }
+.steg-liste li.feil .steg-knapp { border-color: var(--m2); border-style: dashed; }
+.steg-liste li.feil .steg-merke { color: var(--m2); }
+.ovelse-knapper { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1rem; margin-top: 1rem; }
+.ovelse-poeng { font-size: .875rem; color: var(--dempet); }
+.ovelse-tilbake { margin-top: .75rem; }
+.ovelse-tilbake:empty { display: none; }
+.ovelse-tilbake > * + * { margin-top: .4rem; }
+.ovelse-tilbake.riktig, .ovelse-tilbake.feil { padding: .6rem .9rem; border-radius: 6px; border: 1px solid var(--rute); border-left: 4px solid var(--m1); background: var(--papir); }
+.ovelse-tilbake.feil { border-left: 4px dashed var(--m2); }
+.fk-liste { margin: .5rem 0 0; padding: 0; list-style: none; display: grid; gap: .75rem; }
+.fk-steg { padding: .75rem .9rem; background: var(--papir); border: 1px solid var(--rute); border-radius: 6px; }
+.fk-steg.ferdig { opacity: .92; }
+.fk-steg-tekst .steg-nr { margin-right: .4rem; }
+.fk-svarrad { display: flex; flex-wrap: wrap; align-items: flex-end; gap: .5rem .9rem; margin-top: .6rem; }
+.fk-felt { display: grid; gap: .2rem; font-size: .8125rem; color: var(--dempet); }
+.fk-felt input { width: 7.5rem; min-height: 2.5rem; padding: .25rem .5rem; font-family: var(--mono); font-size: 1rem; color: var(--blekk); background: var(--flate); border: 1px solid var(--rute-sterk); border-radius: 4px; }
+.fk-felt input:disabled { color: var(--blekk); opacity: 1; }
+
+/* Brøkfigurer (brøk som areal) */
+.b-tom { fill: var(--flate); stroke: var(--rute-sterk); stroke-width: 1; }
+.b-a { fill: var(--m1); fill-opacity: .3; stroke: var(--rute-sterk); stroke-width: 1; }
+.b-b { fill: var(--m2); fill-opacity: .28; stroke: var(--rute-sterk); stroke-width: 1; }
+.b-b2 { fill: var(--m2); fill-opacity: .45; stroke: var(--rute-sterk); stroke-width: 1; }
+.b-ab { fill: var(--blekk); fill-opacity: .55; stroke: var(--flate); stroke-width: 1; }
+.b-rest { fill: var(--m2); fill-opacity: .12; stroke: var(--m2); stroke-width: 1.5; stroke-dasharray: 5 4; }
+.b-enhet { fill: none; stroke: var(--blekk); stroke-width: 2.5; }
+.b-mal { stroke: var(--dempet); stroke-width: 1.5; }
+
+/* Algebrabrikker */
+.t-x2 { fill: var(--m1); fill-opacity: .4; stroke: var(--blekk); stroke-width: 1.25; }
+.t-x { fill: var(--m2); fill-opacity: .32; stroke: var(--blekk); stroke-width: 1.25; }
+.t-1 { fill: var(--flate); stroke: var(--blekk); stroke-width: 1.25; }
+.t-neg { fill-opacity: .1; stroke: var(--m2); stroke-dasharray: 4 3; stroke-width: 1.5; }
+.t-1.t-neg { fill: var(--m2); }
+.t-minus { fill: var(--m2); font-family: var(--sans); font-weight: 700; font-size: 15px; }
+.t-ramme { fill: none; stroke: var(--blekk); stroke-width: 2.5; }
+.liten-tabell tr.treff td { font-weight: 700; background: color-mix(in srgb, var(--m1) 12%, transparent); }
+
+/* Potenser som faktorer */
+.p-boks { stroke: var(--blekk); stroke-width: 1.5; }
+.p-del0 { fill: var(--m1); fill-opacity: .25; }
+.p-del1 { fill: var(--m2); fill-opacity: .25; stroke-dasharray: 5 3; }
+.p-tall { fill: var(--blekk); font-family: var(--serif); font-weight: 600; font-size: 18px; }
+.p-stryk { stroke: var(--blekk); stroke-width: 2.5; stroke-linecap: round; }
+.p-strek { stroke: var(--blekk); stroke-width: 2.5; }
+.p-uttrykk { fill: var(--blekk); font-family: var(--serif); font-size: 22px; font-weight: 600; }
+.p-verdi { fill: var(--blekk); font-family: var(--mono); font-size: 18px; }
+.p-pil { fill: var(--m2); font-family: var(--mono); font-size: 14px; }
+.p-valgt { fill: var(--m1); fill-opacity: .12; stroke: var(--m1); stroke-width: 1.5; }
+.p-eksponent { font-size: 15px; }

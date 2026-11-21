@@ -30,6 +30,7 @@ from urllib.parse import urlsplit, unquote
 ROT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROT / "verktoy"))
 from elevark import Elevarkfeil, kompiler, lag_tex  # noqa: E402
+from kortsett import Kortfeil, bygg_kortsett  # noqa: E402
 KILDE = ROT / "kilde"
 STATISK = ROT / "statisk"
 DATA = ROT / "data"
@@ -39,6 +40,7 @@ DOMENE = "mattelab.no"
 
 MENY = [
     ("utforskere", "Utforskere", "utforskere/index.html"),
+    ("varierende", "Varierende undervisning", "varierende/index.html"),
     ("opplegg", "Undervisningsopplegg", "opplegg/index.html"),
     ("laerer", "For lærere", "laerer.html"),
     ("om", "Om", "om.html"),
@@ -49,12 +51,33 @@ MENY_TEKST = [(mid, tekst) for mid, tekst, _ in MENY]
 MAPPER = {
     "sider": "",
     "utforskere": "utforskere/",
+    "varierende": "varierende/",
     "opplegg": "opplegg/",
 }
 
-TYPE_NAVN = {"utforsker": "Utforsker", "opplegg": "Undervisningsopplegg"}
-TYPE_OVERSIKT = {"utforsker": "utforskere/index.html", "opplegg": "opplegg/index.html"}
-TYPE_MENY = {"utforsker": "utforskere", "opplegg": "opplegg"}
+# Typene under «Varierende undervisning», i den rekkefølgen de vises på oversiktssiden
+VARIERENDE = {
+    "kortsett": ("Kortsett", "Koble, sorter og ordne kort. På skjermen eller skrevet ut og klippet til."),
+    "ovelse": ("Øvinger", "Oppgaver med tilbakemelding med en gang. Nye tall hver gang."),
+    "tavle": ("Tavleoppgaver", "Spørsmål til hele klassen, ett om gangen på storskjerm. Svarforslag kan vises etter samtalen."),
+}
+
+TYPE_NAVN = {"utforsker": "Utforsker", "opplegg": "Undervisningsopplegg",
+             "kortsett": "Kortsett", "ovelse": "Øving", "tavle": "Tavleoppgave"}
+TYPE_OVERSIKT = {"utforsker": "utforskere/index.html", "opplegg": "opplegg/index.html",
+                 **{t: "varierende/index.html" for t in VARIERENDE}}
+TYPE_MENY = {"utforsker": "utforskere", "opplegg": "opplegg", **{t: "varierende" for t in VARIERENDE}}
+
+
+# Knapperaden over tavleoppgavene (se statisk/js/tavle.js)
+TAVLESTYRING = """<div class="tavle-styring kun-js" hidden>
+    <button type="button" class="knapp lys liten tavle-forrige"><span aria-hidden="true">←</span> Forrige</button>
+    <span class="tavle-teller"></span>
+    <button type="button" class="knapp liten tavle-neste">Neste <span aria-hidden="true">→</span></button>
+    <span class="tavle-tips">Du kan også bruke piltastene.</span>
+    <button type="button" class="knapp lys liten tavle-alle" aria-pressed="false">Vis alle</button>
+    <button type="button" class="knapp lys liten tavle-fullskjerm" hidden>Fullskjerm</button>
+  </div>"""
 
 
 class Byggefeil(Exception):
@@ -105,6 +128,22 @@ def elevark(s: dict) -> tuple[bytes, bytes] | None:
         else:
             raise Byggefeil(f"{s['kilde']}: elevark: {e}")
     return pdf, tex.encode("utf-8")
+
+
+def lag_kortsett(s: dict, sti: Path) -> None:
+    """Sett inn kortene der {{kortsett}} står, og lag PDF-ene (kort og fasit)."""
+    data = sti.with_suffix(".py")
+    if not data.is_file():
+        raise Byggefeil(f"{s['kilde']}: kortsett trenger kortene i {data.relative_to(ROT)}")
+    if "{{kortsett}}" not in s["innhold"]:
+        raise Byggefeil(f"{s['kilde']}: mangler {{{{kortsett}}}} der kortene skal stå")
+    try:
+        html_, filer = bygg_kortsett(s["id"], data, s["tittel"], s["fag"], f"https://{DOMENE}/{s['ut']}", CACHE / "kortsett")
+    except (Kortfeil, Elevarkfeil) as e:
+        raise Byggefeil(f"{data.relative_to(ROT)}: {e}")
+    s["innhold"] = s["innhold"].replace("{{kortsett}}", html_)
+    s["filer"] = filer
+
 
 
 # ---------------------------------------------------------------- kildefiler
@@ -264,6 +303,22 @@ def liste(ressurser: list[dict], typ: str, temaer: list[dict], temanavn: dict, i
     return "\n".join(ut)
 
 
+def liste_varierende(ressurser: list[dict], temaer: list[dict], temanavn: dict, ikoner: dict, rot: str) -> str:
+    """Oversikten over «Varierende undervisning»: én blokk per type (kortsett, øvinger, tavleoppgaver).
+    Innenfor hver blokk står ressursene i den rekkefølgen temaene kommer i faget (feltet «rekkefolge»)."""
+    tema_nr = {t["id"]: i for i, t in enumerate(temaer)}
+    ut = []
+    for typ, (navn, inngang) in VARIERENDE.items():
+        her = [r for r in ressurser if r["type"] == typ]
+        if not her:
+            continue
+        her.sort(key=lambda r: (int(r.get("rekkefolge") or 99), tema_nr[r["tema"][0]], r["tittel"].lower()))
+        ut.append(f'<div class="tema-blokk" data-blokk="{esc(typ)}"><h2>{esc(navn)}</h2><p class="del-inngang">{esc(inngang)}</p>'
+                  f'<ul class="sim-kort-liste">' + "".join(kort({**r, "ikon": r.get("ikon") or typ}, temanavn, ikoner, rot) for r in her)
+                  + "</ul></div>")
+    return "\n".join(ut) or '<p class="merknad">Det er ingen her ennå.</p>'
+
+
 def fagkort(fagliste: list[dict], temaer: list[dict], ressurser: list[dict], rot: str) -> str:
     """De to store fagkortene på forsiden, som på fysikklab.no."""
     ut = []
@@ -337,7 +392,14 @@ def bygg_alt() -> dict[str, bytes]:
         for s in hode["skript"]:
             if not (STATISK / "js" / s).is_file():
                 raise Byggefeil(f"{navn}: finner ikke skriptet statisk/js/{s}")
-        sider.append({**hode, "id": sti.stem, "ut": ut, "innhold": innhold, "kilde": str(navn)})
+        side = {**hode, "id": sti.stem, "ut": ut, "innhold": innhold, "kilde": str(navn), "filer": {}}
+        if hode["type"] == "kortsett":
+            lag_kortsett(side, sti)
+        # Kortsett og tavleoppgaver har felles skript som legges til automatisk
+        felles = {"kortsett": "kortsett.js", "tavle": "tavle.js"}.get(hode["type"])
+        if felles and felles not in side["skript"]:
+            side["skript"] = side["skript"] + [felles]
+        sider.append(side)
 
     ressurser = [s for s in sider if s["type"] in TYPE_NAVN]
     for p in planlagt:
@@ -365,6 +427,7 @@ def bygg_alt() -> dict[str, bytes]:
         ark = elevark(s)
         if ark:
             filer[f"elevark/{s['id']}.pdf"], filer[f"elevark/{s['id']}.tex"] = ark
+        filer.update(s["filer"])
         innhold = sett_inn_formler(s["innhold"], tegnet)
         if s["type"] in TYPE_NAVN:
             # Brødsmuler som på fysikklab.no: «Utforskere / 1T · Funksjoner»
@@ -384,11 +447,13 @@ def bygg_alt() -> dict[str, bytes]:
             "{{filter}}": filterpanel(tema_data["temaer"], tema_data["fag"]),
             "{{liste:utforsker}}": liste(ressurser, "utforsker", tema_data["temaer"], temanavn, ikoner, rot),
             "{{liste:opplegg}}": liste(ressurser, "opplegg", tema_data["temaer"], temanavn, ikoner, rot),
+            "{{liste:varierende}}": liste_varierende(ressurser, tema_data["temaer"], temanavn, ikoner, rot),
             "{{fagkort}}": fagkort(tema_data["fag"], tema_data["temaer"], ressurser, rot),
             "{{elevark}}": (f'<p class="elevark-lenke"><a class="knapp lys liten" href="{rot}elevark/{s["id"]}.pdf" download>'
                             f'Last ned elevark (PDF)</a> <a class="elevark-tex" href="{rot}elevark/{s["id"]}.tex" download>'
                             f'LaTeX-kilde til eget bruk</a></p>'),
             "{{kompetansemaal}}": kompetansemaal_html(km, koblinger, ressurser, rot),
+            "{{tavlestyring}}": TAVLESTYRING,
             "{{rot}}": rot,
         }
         for k, v in erstatt.items():

@@ -1,0 +1,50 @@
+%% Fasit til kortsett fra mattelab.no – laget automatisk av bygg.py.
+%% Kompiler med lualatex.
+\documentclass[11pt,a4paper]{article}
+\usepackage[norsk]{babel}
+\usepackage[a4paper,margin=1.2cm,bottom=1.7cm]{geometry}
+\usepackage{fontspec}
+\usepackage{unicode-math}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{TeX Gyre Heros}[Scale=MatchLowercase]
+\setmathfont{TeX Gyre Pagella Math}
+\usepackage{xcolor}
+\definecolor{blekk}{HTML}{16213A}
+\definecolor{dempet}{HTML}{566077}
+\definecolor{m1}{HTML}{2F4AB0}
+\usepackage{tikz}
+\usepackage{enumitem}
+\usepackage{qrcode}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+\pdfvariable suppressoptionalinfo \numexpr 1+2+4+8+16+32+64+128+256+512\relax
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[L]{\sffamily\footnotesize\color{dempet}mattelab.no · Tekst, uttrykk og figur · kortsett K2 · fasit}
+\fancyfoot[R]{\sffamily\footnotesize\color{dempet}Side \thepage}
+\begin{document}
+\begin{minipage}[t]{0.8\linewidth}\vspace{0pt}
+{\sffamily\small\color{dempet}Fasit for læreren · kortsett K2 · 1T}\par\vspace{0.25em}
+{\fontsize{20}{24}\selectfont\bfseries Tekst, uttrykk og figur}\par\vspace{0.5em}
+Finn tre og tre kort som hører sammen: en tekst, et uttrykk og en figur med algebrabrikker. Den lange brikken har lengde $x$, og den lille ruta har sider $1$.\par\vspace{0.4em}{\small\color{dempet}Kortene er nummerert i den rekkefølgen de står i utskriften.}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.15\linewidth}\vspace{0pt}\raggedleft
+\qrcode[height=1.9cm]{https://mattelab.no/varierende/tekst-uttrykk-figur.html}
+\end{minipage}\par\vspace{0.8em}
+
+\begin{enumerate}[leftmargin=1.6em, itemsep=0.7em]
+\item \begin{minipage}[t]{\linewidth}\textsf{\small K2-03}\quad Tre mer enn det dobbelte av et tall \\ \textsf{\small K2-05}\quad $2x + 3$ \\ \textsf{\small K2-17}\quad \emph{Figur:} Algebrabrikker: 2 x-brikker og 3 enerbrikker.\end{minipage}
+\item \begin{minipage}[t]{\linewidth}\textsf{\small K2-02}\quad \emph{Figur:} Algebrabrikker: 2 like rader, hver med 1 x-brikke og 3 enerbrikker. \\ \textsf{\small K2-10}\quad $2(x + 3)$ \\ \textsf{\small K2-23}\quad Det dobbelte av summen av et tall og tre\end{minipage}
+\item \begin{minipage}[t]{\linewidth}\textsf{\small K2-06}\quad \emph{Figur:} Algebrabrikker: 3 x-brikker og 2 enerbrikker. \\ \textsf{\small K2-09}\quad $3x + 2$ \\ \textsf{\small K2-13}\quad To mer enn tre ganger et tall\end{minipage}
+\item \begin{minipage}[t]{\linewidth}\textsf{\small K2-01}\quad Tre ganger summen av et tall og to \\ \textsf{\small K2-16}\quad $3(x + 2)$ \\ \textsf{\small K2-18}\quad \emph{Figur:} Algebrabrikker: 3 like rader, hver med 1 x-brikke og 2 enerbrikker.\end{minipage}
+\item \begin{minipage}[t]{\linewidth}\textsf{\small K2-12}\quad $x^2 + 2x$ \\ \textsf{\small K2-19}\quad \emph{Figur:} Algebrabrikker: 1 x²-brikke og 2 x-brikker. \\ \textsf{\small K2-24}\quad Kvadratet av et tall pluss det dobbelte av tallet\end{minipage}
+\item \begin{minipage}[t]{\linewidth}\textsf{\small K2-14}\quad \emph{Figur:} Algebrabrikker: 1 x²-brikke og 1 x-brikke. \\ \textsf{\small K2-20}\quad Et tall pluss kvadratet av tallet \\ \textsf{\small K2-22}\quad $x + x^2$\end{minipage}
+\item \begin{minipage}[t]{\linewidth}\textsf{\small K2-04}\quad Det dobbelte av kvadratet av et tall \\ \textsf{\small K2-11}\quad $2x^2$ \\ \textsf{\small K2-21}\quad \emph{Figur:} Algebrabrikker: 2 x²-brikker.\end{minipage}
+\item \begin{minipage}[t]{\linewidth}\textsf{\small K2-07}\quad $(2x)^2$ \\ \textsf{\small K2-08}\quad \emph{Figur:} Algebrabrikker: 2 like rader, hver med 2 x²-brikker. \\ \textsf{\small K2-15}\quad Kvadratet av det dobbelte av et tall\end{minipage}
+\end{enumerate}
+\subsection*{Til læreren}
+Parene 2x + 3 og 2(x + 3), 3x + 2 og 3(x + 2) og 2x² og (2x)² er laget for å bli forvekslet. La elevene forklare forskjellen med figuren: Hvor mange enerbrikker er det, og hvor mange rader? Figuren til (2x)² er et kvadrat med side 2x, altså 4x².
+\end{document}

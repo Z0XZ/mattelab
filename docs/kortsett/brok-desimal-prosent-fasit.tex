@@ -1,0 +1,50 @@
+%% Fasit til kortsett fra mattelab.no – laget automatisk av bygg.py.
+%% Kompiler med lualatex.
+\documentclass[11pt,a4paper]{article}
+\usepackage[norsk]{babel}
+\usepackage[a4paper,margin=1.2cm,bottom=1.7cm]{geometry}
+\usepackage{fontspec}
+\usepackage{unicode-math}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{TeX Gyre Heros}[Scale=MatchLowercase]
+\setmathfont{TeX Gyre Pagella Math}
+\usepackage{xcolor}
+\definecolor{blekk}{HTML}{16213A}
+\definecolor{dempet}{HTML}{566077}
+\definecolor{m1}{HTML}{2F4AB0}
+\usepackage{tikz}
+\usepackage{enumitem}
+\usepackage{qrcode}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+\pdfvariable suppressoptionalinfo \numexpr 1+2+4+8+16+32+64+128+256+512\relax
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[L]{\sffamily\footnotesize\color{dempet}mattelab.no · Brøk, figur, desimaltall og prosent · kortsett K1 · fasit}
+\fancyfoot[R]{\sffamily\footnotesize\color{dempet}Side \thepage}
+\begin{document}
+\begin{minipage}[t]{0.8\linewidth}\vspace{0pt}
+{\sffamily\small\color{dempet}Fasit for læreren · kortsett K1 · 1T}\par\vspace{0.25em}
+{\fontsize{20}{24}\selectfont\bfseries Brøk, figur, desimaltall og prosent}\par\vspace{0.5em}
+Finn fire og fire kort som viser samme tall: en brøk, en figur, et desimaltall og en prosent.\par\vspace{0.4em}{\small\color{dempet}Kortene er nummerert i den rekkefølgen de står i utskriften.}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.15\linewidth}\vspace{0pt}\raggedleft
+\qrcode[height=1.9cm]{https://mattelab.no/varierende/brok-desimal-prosent.html}
+\end{minipage}\par\vspace{0.8em}
+
+\begin{enumerate}[leftmargin=1.6em, itemsep=0.7em]
+\item \begin{minipage}[t]{\linewidth}\textsf{\small K1-04}\quad $75\,\%$ \\ \textsf{\small K1-18}\quad $\dfrac{3}{4}$ \\ \textsf{\small K1-23}\quad \emph{Figur:} Rutenett med 2 rader og 4 kolonner. 6 av de 8 rutene er fargelagt. \\ \textsf{\small K1-29}\quad $0{,}75$\end{minipage}
+\item \begin{minipage}[t]{\linewidth}\textsf{\small K1-11}\quad $\dfrac{2}{5}$ \\ \textsf{\small K1-27}\quad $0{,}4$ \\ \textsf{\small K1-30}\quad $40\,\%$ \\ \textsf{\small K1-31}\quad \emph{Figur:} Rutenett med 2 rader og 5 kolonner. 4 av de 10 rutene er fargelagt.\end{minipage}
+\item \begin{minipage}[t]{\linewidth}\textsf{\small K1-05}\quad $\dfrac{1}{8}$ \\ \textsf{\small K1-12}\quad \emph{Figur:} Sirkel delt i 8 like store deler. 1 av delene er fargelagt. \\ \textsf{\small K1-22}\quad $0{,}125$ \\ \textsf{\small K1-24}\quad $12{,}5\,\%$\end{minipage}
+\item \begin{minipage}[t]{\linewidth}\textsf{\small K1-01}\quad $1{,}25$ \\ \textsf{\small K1-03}\quad $125\,\%$ \\ \textsf{\small K1-15}\quad \emph{Figur:} 2 strimler, hver delt i 4 like store deler. 5 deler er fargelagt til sammen. \\ \textsf{\small K1-28}\quad $\dfrac{5}{4}$\end{minipage}
+\item \begin{minipage}[t]{\linewidth}\textsf{\small K1-08}\quad $\dfrac{3}{10}$ \\ \textsf{\small K1-13}\quad $30\,\%$ \\ \textsf{\small K1-25}\quad $0{,}3$ \\ \textsf{\small K1-26}\quad \emph{Figur:} Strimmel delt i 10 like store deler. 3 av delene er fargelagt.\end{minipage}
+\item \begin{minipage}[t]{\linewidth}\textsf{\small K1-02}\quad $0{,}35$ \\ \textsf{\small K1-07}\quad $35\,\%$ \\ \textsf{\small K1-09}\quad \emph{Figur:} Rutenett med 4 rader og 5 kolonner. 7 av de 20 rutene er fargelagt. \\ \textsf{\small K1-32}\quad $\dfrac{7}{20}$\end{minipage}
+\item \begin{minipage}[t]{\linewidth}\textsf{\small K1-06}\quad $\dfrac{1}{4}$ \\ \textsf{\small K1-14}\quad $0{,}25$ \\ \textsf{\small K1-16}\quad $25\,\%$ \\ \textsf{\small K1-20}\quad \emph{Figur:} Rutenett med 4 rader og 4 kolonner. 4 av de 16 rutene er fargelagt.\end{minipage}
+\item \begin{minipage}[t]{\linewidth}\textsf{\small K1-10}\quad $0{,}\overline{6}$ \\ \textsf{\small K1-17}\quad $\dfrac{2}{3}$ \\ \textsf{\small K1-19}\quad \emph{Figur:} Sirkel delt i 3 like store deler. 2 av delene er fargelagt. \\ \textsf{\small K1-21}\quad $66\tfrac{2}{3}\,\%$\end{minipage}
+\end{enumerate}
+\subsection*{Til læreren}
+Figurene viser ofte en utvidet brøk, for eksempel 6 av 8 ruter for 3/4. Da må elevene forkorte. Kortene 0,3 og 0,35 og kortene 30 \% og 35 \% ligner hverandre med vilje. Spør gjerne: Hvorfor er 5/4 større enn 100 \%? Hvorfor stopper ikke desimaltallet for 2/3?
+\end{document}

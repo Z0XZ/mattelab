@@ -1,0 +1,71 @@
+%% Fasit til kortsett fra mattelab.no – laget automatisk av bygg.py.
+%% Kompiler med lualatex.
+\documentclass[11pt,a4paper]{article}
+\usepackage[norsk]{babel}
+\usepackage[a4paper,margin=1.2cm,bottom=1.7cm]{geometry}
+\usepackage{fontspec}
+\usepackage{unicode-math}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{TeX Gyre Heros}[Scale=MatchLowercase]
+\setmathfont{TeX Gyre Pagella Math}
+\usepackage{xcolor}
+\definecolor{blekk}{HTML}{16213A}
+\definecolor{dempet}{HTML}{566077}
+\definecolor{m1}{HTML}{2F4AB0}
+\usepackage{tikz}
+\usepackage{enumitem}
+\usepackage{qrcode}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+\pdfvariable suppressoptionalinfo \numexpr 1+2+4+8+16+32+64+128+256+512\relax
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[L]{\sffamily\footnotesize\color{dempet}mattelab.no · Uttrykk, likning, identitet eller funksjon? · kortsett K6 · fasit}
+\fancyfoot[R]{\sffamily\footnotesize\color{dempet}Side \thepage}
+\begin{document}
+\begin{minipage}[t]{0.8\linewidth}\vspace{0pt}
+{\sffamily\small\color{dempet}Fasit for læreren · kortsett K6 · 1T}\par\vspace{0.25em}
+{\fontsize{20}{24}\selectfont\bfseries Uttrykk, likning, identitet eller funksjon?}\par\vspace{0.5em}
+Sorter kortene i fire bokser: uttrykk, identitet, likning og funksjon. Begrunn valget for hvert kort.\par\vspace{0.4em}{\small\color{dempet}Kortene er nummerert i den rekkefølgen de står i utskriften.}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.15\linewidth}\vspace{0pt}\raggedleft
+\qrcode[height=1.9cm]{https://mattelab.no/varierende/uttrykk-likning-identitet-funksjon.html}
+\end{minipage}\par\vspace{0.8em}
+
+\subsection*{Uttrykk}
+\begin{itemize}[leftmargin=1.2em, itemsep=0.35em]
+\item \textsf{\small K6-01}\quad $3(x - 1)$
+\item \textsf{\small K6-08}\quad $x^2 - 4x$
+\item \textsf{\small K6-12}\quad $2x + 3$
+\item \textsf{\small K6-18}\quad $\dfrac{a + b}{2}$
+\end{itemize}
+\subsection*{Identitet}
+\begin{itemize}[leftmargin=1.2em, itemsep=0.35em]
+\item \textsf{\small K6-03}\quad $x \cdot x = x^2$
+\item \textsf{\small K6-07}\quad $2(x + 3) = 2x + 6$
+\item \textsf{\small K6-09}\quad $\dfrac{x}{2} + \dfrac{x}{2} = x$
+\item \textsf{\small K6-14}\quad $(a + b)^2 = a^2 + 2ab + b^2$
+\item \textsf{\small K6-16}\quad $2x = x + x$\\{\small\color{dempet}Sann for alle x. Derfor er den en identitet, selv om den ser ut som en likning.}
+\end{itemize}
+\subsection*{Likning}
+\begin{itemize}[leftmargin=1.2em, itemsep=0.35em]
+\item \textsf{\small K6-02}\quad $y = 3$ \emph{(også: Funksjon)}\\{\small\color{dempet}Både og: en konstant funksjon (vannrett linje), eller en likning som sier at y er 3.}
+\item \textsf{\small K6-05}\quad $3(x - 1) = x + 5$
+\item \textsf{\small K6-06}\quad $x + 1 = x + 2$\\{\small\color{dempet}En likning uten løsning: Ingen x gjør sidene like. Den er ikke en identitet.}
+\item \textsf{\small K6-10}\quad $x^2 = 9$
+\item \textsf{\small K6-11}\quad $x^2 - 4x = 0$
+\item \textsf{\small K6-17}\quad $2x + 3 = 11$
+\end{itemize}
+\subsection*{Funksjon}
+\begin{itemize}[leftmargin=1.2em, itemsep=0.35em]
+\item \textsf{\small K6-02}\quad $y = 3$ \emph{(også: Likning)}\\{\small\color{dempet}Både og: en konstant funksjon (vannrett linje), eller en likning som sier at y er 3.}
+\item \textsf{\small K6-04}\quad $y = x^2 - 4x$\\{\small\color{dempet}Skrevet med y er dette en funksjon av x. Det kan også leses som en likning med to ukjente.}
+\item \textsf{\small K6-13}\quad $f(x) = 2x + 3$
+\item \textsf{\small K6-15}\quad $g(t) = 3t - 1$
+\end{itemize}
+\subsection*{Til læreren}
+Kompetansemålet i 1T sier at elevene skal kunne forklare forskjellen mellom en identitet, en likning, et algebraisk uttrykk og en funksjon. Kortene x + 1 = x + 2, 2x = x + x, y = 3 og y = x² − 4x er grensetilfeller og gir god samtale. Spør: Hva er forskjellen på x² − 4x og x² − 4x = 0? Hvordan kan du avgjøre om noe er en identitet eller en likning?
+\end{document}

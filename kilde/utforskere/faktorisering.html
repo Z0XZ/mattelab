@@ -1,0 +1,130 @@
+---
+tittel: Faktorisering med produkt og sum
+beskrivelse: Faktoriser x² + bx + c ved å finne to tall med produkt c og sum b. Se faktorene som sidene i et rektangel av algebrabrikker.
+type: utforsker
+fag: 1T
+tema: algebra
+ikon: faktorisering
+skript: utforskere/faktorisering.js
+---
+<p class="ingress">Å faktorisere $x^2 + bx + c$ betyr å skrive det som et produkt $(x + m)(x + n)$. Da må $m \cdot n = c$ og $m + n = b$. Her ser du alle tallparene med riktig produkt, og brikkene blir et rektangel når du finner riktig par.</p>
+
+<figure class="sim sim-bred" id="utforsker" aria-label="Utforsker for faktorisering">
+  <div class="sim-delt">
+    <div class="sim-graf">
+      <svg id="figur" class="figur-svg kun-js"></svg>
+      <div class="noscript-melding kun-uten-js">
+        <p><strong>Utforskeren trenger JavaScript.</strong> Resten av siden, med forklaring og oppgaver, virker uten.</p>
+        <p>Eksempel: For $x^2 + 5x + 6$ leter vi etter to tall med produkt $6$ og sum $5$. Det er $2$ og $3$. Altså er $x^2 + 5x + 6 = (x + 2)(x + 3)$.</p>
+      </div>
+      <dl class="sim-tall kun-js" id="verdier"></dl>
+    </div>
+    <div class="sim-side-panel kun-js">
+      <div class="sim-styring">
+        <p class="panel-tittel">$x^2 + bx + c$</p>
+        <div id="glidere" class="glidere"></div>
+      </div>
+      <div class="sim-blokk">
+        <p class="panel-tittel">Uttrykket</p>
+        <div class="forskrift" id="formel"></div>
+        <p class="panel-tittel ny-del">To tall med produkt $c$. Har de sum $b$?</p>
+        <div class="tabell-rull-liten" id="partabell"></div>
+      </div>
+      <div id="melding" class="sim-blokk melding" hidden></div>
+    </div>
+  </div>
+  {{figurverktoy:enkel}}
+  <figcaption class="sim-hint">Dra i glidebryterne, eller skriv et helt tall i feltet. Raden med riktig sum er uthevet og merket med ✓. Verdiene står i adressefeltet, så du kan dele oppsettet.</figcaption>
+</figure>
+
+<details class="teori" id="matematikken">
+<summary><span class="teori-tittel">Matematikken bak</span><span class="teori-hint">Hvorfor produkt og sum, og når det ikke går</span></summary>
+<div class="teori-innhold tekst">
+
+<h3>Hvorfor produkt og sum?</h3>
+<p>Gang ut $(x + m)(x + n)$:</p>
+$$(x + m)(x + n) = x^2 + nx + mx + mn = x^2 + (m + n)x + mn$$
+<p>Sammenlign med $x^2 + bx + c$. Da må $m + n = b$ og $m \cdot n = c$. I rektangelet av brikker er $m$ og $n$ de to sidene i hjørnet med enerbrikker.</p>
+
+<h3>Fortegnene</h3>
+<ul>
+  <li>Er $c > 0$, har tallene samme fortegn. Fortegnet er det samme som fortegnet til $b$.</li>
+  <li>Er $c < 0$, har tallene ulikt fortegn.</li>
+</ul>
+
+<h3>Når det ikke går med hele tall</h3>
+<p>Faktorene gir nullpunktene: $(x + m)(x + n) = 0$ når $x = -m$ eller $x = -n$. Finnes det ingen hele tall som passer, kan nullpunktene være brøker eller røtter. Da kan vi bruke abc-formelen og skrive $(x - x_1)(x - x_2)$. Er $b^2 - 4c < 0$, har uttrykket ingen nullpunkter og kan ikke faktoriseres i det hele tatt.</p>
+</div>
+</details>
+
+<section class="oppgaver" aria-labelledby="oppgaver-tittel">
+<h2 id="oppgaver-tittel">Oppgaver</h2>
+{{elevark}}
+<p class="del-inngang">Hver oppgave har tre steg. <strong>Gjett</strong> først, uten å bruke utforskeren. <strong>Test</strong> så i utforskeren. <strong>Forklar</strong> til slutt med egne ord hvorfor det blir slik.</p>
+
+<div class="oppgave" id="oppgave-1">
+  <h3><span class="oppgave-nr">1</span>To tall med produkt og sum</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Finn to tall med produkt $6$ og sum $5$. Skriv $x^2 + 5x + 6$ som et produkt.</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?b=5&amp;c=6#utforsker">Vis $x^2 + 5x + 6$</a>. Hvor mange tallpar har produkt $6$? Hvilket har sum $5$?</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Gang ut svaret ditt for å kontrollere. Forklar med rektangelet hvorfor produktet og summen må stemme.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>Tallparene med produkt $6$ er $1$ og $6$, $2$ og $3$, $-1$ og $-6$, og $-2$ og $-3$. Bare $2$ og $3$ har sum $5$. Altså er $x^2 + 5x + 6 = (x + 2)(x + 3)$.</p>
+    <p>I rektangelet ligger $2 + 3 = 5$ $x$-brikker langs kantene av $x^2$, og hjørnet har $2 \cdot 3 = 6$ enerbrikker.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-2">
+  <h3><span class="oppgave-nr">2</span>Negativt konstantledd</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Faktoriser $x^2 + x - 6$. Hvilke fortegn må de to tallene ha når produktet er negativt?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?b=1&amp;c=-6#utforsker">Vis $x^2 + x - 6$</a>. Se på fortegnene i tabellen.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Forklar hvorfor de to tallene må ha ulikt fortegn. Hvilke nullpunkter har uttrykket?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>Et negativt produkt krever ett positivt og ett negativt tall. Tallene $3$ og $-2$ har produkt $-6$ og sum $1$. Altså er $x^2 + x - 6 = (x + 3)(x - 2)$.</p>
+    <p>Nullpunktene er $x = -3$ og $x = 2$. De har motsatt fortegn av tallene i parentesene.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-3">
+  <h3><span class="oppgave-nr">3</span>Negativ sum, positivt produkt</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Faktoriser $x^2 - 7x + 12$.</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?b=-7&amp;c=12#utforsker">Vis $x^2 - 7x + 12$</a>. Finn alle tallparene med produkt $12$.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Forklar hvorfor begge tallene må være negative. Hvordan ser du det på fortegnene til $b$ og $c$?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>Produktet $12$ er positivt, så tallene har samme fortegn. Summen $-7$ er negativ, så begge er negative. Tallene $-3$ og $-4$ passer: $x^2 - 7x + 12 = (x - 3)(x - 4)$.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-4">
+  <h3><span class="oppgave-nr">4</span>Når ingen tall passer</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Prøv å faktorisere $x^2 + 4x + 5$. Går det?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?b=4&amp;c=5#utforsker">Vis $x^2 + 4x + 5$</a>. Hva står i tabellen? Hva er $b^2 - 4c$?</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Skriv uttrykket som $(x + 2)^2 + 1$. Bruk det til å forklare hvorfor uttrykket aldri blir $0$, og derfor ikke kan faktoriseres.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>Tallparene med produkt $5$ er $1$ og $5$, og $-1$ og $-5$. Summene er $6$ og $-6$, ikke $4$. Med hele tall går det ikke.</p>
+    <p>$b^2 - 4c = 16 - 20 = -4 < 0$. Uttrykket er $(x + 2)^2 + 1$, som alltid er minst $1$. Det har ingen nullpunkter, og et produkt $(x - x_1)(x - x_2)$ ville hatt nullpunkter. Derfor kan det ikke faktoriseres.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-5">
+  <h3><span class="oppgave-nr">5</span>Kvadratsetningene baklengs</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Faktoriser $x^2 + 6x + 9$ og $x^2 - 9$. Hva er spesielt med tallparene?</p></div></li>
+  <li><span class="fase test">Test</span><div><p>Vis <a class="oppsettlenke" href="?b=6&amp;c=9#utforsker">$x^2 + 6x + 9$</a> og <a class="oppsettlenke" href="?b=0&amp;c=-9#utforsker">$x^2 - 9$</a>. Se på formen til rektangelet.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Hvilke kvadratsetninger kjenner du igjen? Forklar hvordan du kan se det på uttrykket uten å lete i en tabell.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>$x^2 + 6x + 9 = (x + 3)^2$. Tallene er like, $3$ og $3$, og rektangelet blir et kvadrat. Det er første kvadratsetning: konstantleddet $9$ er kvadratet av halvparten av $6$.</p>
+    <p>$x^2 - 9 = (x + 3)(x - 3)$. Tallene er like store med motsatt fortegn, så summen blir $0$. Det er konjugatsetningen.</p>
+  </div></details>
+</div>
+</section>
+
+<p class="merknad">Se også utforskeren <a href="algebrabrikker.html">Algebrabrikker</a> og kortsettet <a href="{{rot}}varierende/fire-former.html">Fire former av samme funksjon</a>.</p>

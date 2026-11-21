@@ -1,0 +1,54 @@
+%% Fasit til kortsett fra mattelab.no – laget automatisk av bygg.py.
+%% Kompiler med lualatex.
+\documentclass[11pt,a4paper]{article}
+\usepackage[norsk]{babel}
+\usepackage[a4paper,margin=1.2cm,bottom=1.7cm]{geometry}
+\usepackage{fontspec}
+\usepackage{unicode-math}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{TeX Gyre Heros}[Scale=MatchLowercase]
+\setmathfont{TeX Gyre Pagella Math}
+\usepackage{xcolor}
+\definecolor{blekk}{HTML}{16213A}
+\definecolor{dempet}{HTML}{566077}
+\definecolor{m1}{HTML}{2F4AB0}
+\usepackage{tikz}
+\usepackage{enumitem}
+\usepackage{qrcode}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+\pdfvariable suppressoptionalinfo \numexpr 1+2+4+8+16+32+64+128+256+512\relax
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[L]{\sffamily\footnotesize\color{dempet}mattelab.no · Kvadratsetningene: finn parene · kortsett K5 · fasit}
+\fancyfoot[R]{\sffamily\footnotesize\color{dempet}Side \thepage}
+\begin{document}
+\begin{minipage}[t]{0.8\linewidth}\vspace{0pt}
+{\sffamily\small\color{dempet}Fasit for læreren · kortsett K5 · 1T}\par\vspace{0.25em}
+{\fontsize{20}{24}\selectfont\bfseries Kvadratsetningene: finn parene}\par\vspace{0.5em}
+Finn to og to uttrykk som er like for alle verdier av variablene. Det er de samme kvadratsetningene, men ikke alltid med samme bokstaver.\par\vspace{0.4em}{\small\color{dempet}Kortene er nummerert i den rekkefølgen de står i utskriften.}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.15\linewidth}\vspace{0pt}\raggedleft
+\qrcode[height=1.9cm]{https://mattelab.no/varierende/identiteter.html}
+\end{minipage}\par\vspace{0.8em}
+
+\begin{enumerate}[leftmargin=1.6em, itemsep=0.7em]
+\item \begin{minipage}[t]{\linewidth}\textsf{\small K5-19}\quad $a^2 + 2ab + b^2$ \\ \textsf{\small K5-22}\quad $(a + b)^2$\end{minipage}
+\item \begin{minipage}[t]{\linewidth}\textsf{\small K5-04}\quad $(a - b)^2$ \\ \textsf{\small K5-16}\quad $a^2 - 2ab + b^2$\end{minipage}
+\item \begin{minipage}[t]{\linewidth}\textsf{\small K5-06}\quad $a^2 - b^2$ \\ \textsf{\small K5-23}\quad $(a + b)(a - b)$\end{minipage}
+\item \begin{minipage}[t]{\linewidth}\textsf{\small K5-05}\quad $x^2 + 6x + 9$ \\ \textsf{\small K5-10}\quad $(x + 3)^2$\end{minipage}
+\item \begin{minipage}[t]{\linewidth}\textsf{\small K5-02}\quad $x^2 - 6x + 9$ \\ \textsf{\small K5-09}\quad $(x - 3)^2$\end{minipage}
+\item \begin{minipage}[t]{\linewidth}\textsf{\small K5-11}\quad $(x + 3)(x - 3)$ \\ \textsf{\small K5-15}\quad $x^2 - 9$\end{minipage}
+\item \begin{minipage}[t]{\linewidth}\textsf{\small K5-14}\quad $(2x + 1)^2$ \\ \textsf{\small K5-21}\quad $4x^2 + 4x + 1$\end{minipage}
+\item \begin{minipage}[t]{\linewidth}\textsf{\small K5-17}\quad $4x^2 - 1$ \\ \textsf{\small K5-20}\quad $(2x - 1)(2x + 1)$\end{minipage}
+\item \begin{minipage}[t]{\linewidth}\textsf{\small K5-03}\quad $x^2 + 2x + 1$ \\ \textsf{\small K5-13}\quad $(x + 1)^2$\end{minipage}
+\item \begin{minipage}[t]{\linewidth}\textsf{\small K5-18}\quad $25 - x^2$ \\ \textsf{\small K5-24}\quad $(5 - x)(5 + x)$\end{minipage}
+\item \begin{minipage}[t]{\linewidth}\textsf{\small K5-07}\quad $x^2 + 10x + 25$ \\ \textsf{\small K5-08}\quad $(x + 5)^2$\end{minipage}
+\item \begin{minipage}[t]{\linewidth}\textsf{\small K5-01}\quad $x^2 - x + \frac{1}{4}$ \\ \textsf{\small K5-12}\quad $\left(x - \frac{1}{2}\right)^2$\end{minipage}
+\end{enumerate}
+\subsection*{Til læreren}
+Vanlige feil er å koble (x − 3)² med x² − 9 og (2x + 1)² med 4x² + 1. Be elevene sette inn et tall, for eksempel x = 1, for å avsløre feil kobling. Utfordring: Lag et eget par der det ene uttrykket er (3 − x)². Hvilket kort i settet er det likt?
+\end{document}

@@ -1,0 +1,49 @@
+%% Fasit til kortsett fra mattelab.no – laget automatisk av bygg.py.
+%% Kompiler med lualatex.
+\documentclass[11pt,a4paper]{article}
+\usepackage[norsk]{babel}
+\usepackage[a4paper,margin=1.2cm,bottom=1.7cm]{geometry}
+\usepackage{fontspec}
+\usepackage{unicode-math}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{TeX Gyre Heros}[Scale=MatchLowercase]
+\setmathfont{TeX Gyre Pagella Math}
+\usepackage{xcolor}
+\definecolor{blekk}{HTML}{16213A}
+\definecolor{dempet}{HTML}{566077}
+\definecolor{m1}{HTML}{2F4AB0}
+\usepackage{tikz}
+\usepackage{enumitem}
+\usepackage{qrcode}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+\pdfvariable suppressoptionalinfo \numexpr 1+2+4+8+16+32+64+128+256+512\relax
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[L]{\sffamily\footnotesize\color{dempet}mattelab.no · Fire former av samme funksjon · kortsett K8 · fasit}
+\fancyfoot[R]{\sffamily\footnotesize\color{dempet}Side \thepage}
+\begin{document}
+\begin{minipage}[t]{0.8\linewidth}\vspace{0pt}
+{\sffamily\small\color{dempet}Fasit for læreren · kortsett K8 · 1T}\par\vspace{0.25em}
+{\fontsize{20}{24}\selectfont\bfseries Fire former av samme funksjon}\par\vspace{0.5em}
+Finn fire og fire kort som hører til samme andregradsfunksjon: utvidet form, faktorisert form, nullpunkter og graf.\par\vspace{0.4em}{\small\color{dempet}Kortene er nummerert i den rekkefølgen de står i utskriften.}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.15\linewidth}\vspace{0pt}\raggedleft
+\qrcode[height=1.9cm]{https://mattelab.no/varierende/fire-former.html}
+\end{minipage}\par\vspace{0.8em}
+
+\begin{enumerate}[leftmargin=1.6em, itemsep=0.7em]
+\item \begin{minipage}[t]{\linewidth}\textsf{\small K8-01}\quad $f(x) = x^2 - x - 6$ \\ \textsf{\small K8-07}\quad \emph{Figur:} Graf til en andregradsfunksjon som åpner oppover. Den skjærer x-aksen i x = −2 og x = 3 og y-aksen i y = −6. \\ \textsf{\small K8-14}\quad Nullpunkter: $x = -2$ og $x = 3$ \\ \textsf{\small K8-16}\quad $f(x) = (x + 2)(x - 3)$\end{minipage}
+\item \begin{minipage}[t]{\linewidth}\textsf{\small K8-05}\quad \emph{Figur:} Graf til en andregradsfunksjon som åpner oppover. Den skjærer x-aksen i x = −3 og x = 2 og y-aksen i y = −6. \\ \textsf{\small K8-06}\quad $f(x) = (x + 3)(x - 2)$ \\ \textsf{\small K8-08}\quad Nullpunkter: $x = -3$ og $x = 2$ \\ \textsf{\small K8-21}\quad $f(x) = x^2 + x - 6$\end{minipage}
+\item \begin{minipage}[t]{\linewidth}\textsf{\small K8-02}\quad \emph{Figur:} Graf til en andregradsfunksjon som åpner oppover. Den skjærer x-aksen i x = 1 og x = 4 og y-aksen i y = 4. \\ \textsf{\small K8-22}\quad $f(x) = (x - 1)(x - 4)$ \\ \textsf{\small K8-23}\quad $f(x) = x^2 - 5x + 4$ \\ \textsf{\small K8-28}\quad Nullpunkter: $x = 1$ og $x = 4$\end{minipage}
+\item \begin{minipage}[t]{\linewidth}\textsf{\small K8-13}\quad $f(x) = x^2 + 5x + 4$ \\ \textsf{\small K8-17}\quad Nullpunkter: $x = -4$ og $x = -1$ \\ \textsf{\small K8-19}\quad \emph{Figur:} Graf til en andregradsfunksjon som åpner oppover. Den skjærer x-aksen i x = −4 og x = −1 og y-aksen i y = 4. \\ \textsf{\small K8-24}\quad $f(x) = (x + 4)(x + 1)$\end{minipage}
+\item \begin{minipage}[t]{\linewidth}\textsf{\small K8-11}\quad $f(x) = x^2 - 3x$ \\ \textsf{\small K8-12}\quad Nullpunkter: $x = 0$ og $x = 3$ \\ \textsf{\small K8-26}\quad \emph{Figur:} Graf til en andregradsfunksjon som åpner oppover. Den skjærer x-aksen i x = 0 og x = 3 og y-aksen i y = 0. \\ \textsf{\small K8-27}\quad $f(x) = x(x - 3)$\end{minipage}
+\item \begin{minipage}[t]{\linewidth}\textsf{\small K8-03}\quad $f(x) = (x + 2)(x - 2)$ \\ \textsf{\small K8-09}\quad \emph{Figur:} Graf til en andregradsfunksjon som åpner oppover. Den skjærer x-aksen i x = −2 og x = 2 og y-aksen i y = −4. \\ \textsf{\small K8-10}\quad $f(x) = x^2 - 4$ \\ \textsf{\small K8-18}\quad Nullpunkter: $x = -2$ og $x = 2$\end{minipage}
+\item \begin{minipage}[t]{\linewidth}\textsf{\small K8-04}\quad Ett nullpunkt: $x = 3$ \\ \textsf{\small K8-15}\quad \emph{Figur:} Graf til en andregradsfunksjon som åpner oppover. Den skjærer x-aksen i x = 3 og y-aksen i y = 9. \\ \textsf{\small K8-20}\quad $f(x) = (x - 3)^2$ \\ \textsf{\small K8-25}\quad $f(x) = x^2 - 6x + 9$\end{minipage}
+\end{enumerate}
+\subsection*{Til læreren}
+Gruppene med nullpunkter −2 og 3 og nullpunkter 2 og −3 ligner hverandre med vilje. Fortegnet i parentesen er motsatt av fortegnet til nullpunktet. Spør også: Hvordan ser du konstantleddet på grafen? Hvorfor har (x − 3)² bare ett nullpunkt?
+\end{document}

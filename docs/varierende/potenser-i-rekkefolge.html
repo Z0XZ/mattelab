@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Potenser i rekkefølge – mattelab.no</title>
+<meta name="description" content="Legg ti potenser i rekkefølge fra minst til størst. Negative eksponenter gir ikke negative tall.">
+<link rel="icon" href="../statisk/ikon.svg" type="image/svg+xml">
+<script>
+  /* Settes før siden tegnes, så det ikke blinker ved mørk modus. */
+  document.documentElement.classList.add("js");
+  try {
+    var t = localStorage.getItem("mattelab.tema");
+    if (t === "lys" || t === "mork") document.documentElement.dataset.tema = t;
+    if (localStorage.getItem("mattelab.tavle") === "1") document.documentElement.classList.add("tavle");
+  } catch (e) {}
+</script>
+<link rel="stylesheet" href="../statisk/lib/katex/katex.min.css">
+<link rel="stylesheet" href="../statisk/css/stil.css">
+</head>
+<body data-side="potenser-i-rekkefolge">
+  <a class="hopp" href="#innhold">Hopp til innholdet</a>
+  <header class="topp">
+    <div class="ramme">
+      <a class="logo" href="../index.html">mattelab<span>.no</span></a>
+      <nav aria-label="Hovedmeny"><ul class="meny">
+        <li><a href="../utforskere/index.html">Utforskere</a></li>
+        <li><a href="../varierende/index.html" aria-current="page">Varierende undervisning</a></li>
+        <li><a href="../opplegg/index.html">Undervisningsopplegg</a></li>
+        <li><a href="../laerer.html">For lærere</a></li>
+        <li><a href="../om.html">Om</a></li>
+      </ul></nav>
+      <div class="verktoy">
+        <select id="fagvalg" class="fag-valg" aria-label="Vis innhold for faget" title="Vis innhold for faget" hidden>
+          <option value="">Alle fag</option>
+          <option value="1T">1T</option>
+          <option value="R1">R1</option>
+        </select>
+        <button id="tavleknapp" class="tema-knapp" type="button" aria-pressed="false" aria-label="Tavlemodus: større tekst" title="Tavlemodus: større tekst" hidden>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="1"/><path d="M8 20l4-4 4 4M7 9h6M7 12h4"/></svg>
+        </button>
+        <button id="temaknapp" class="tema-knapp" type="button" aria-label="Bytt mellom lys og mørk modus" hidden>
+          <svg class="ikon-sol" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9L7 7M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg>
+          <svg class="ikon-mane" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+  <main id="innhold">
+<section class="side">
+<div class="ramme">
+<p class="brodsmuler"><a href="../varierende/index.html">Varierende undervisning</a> / <a href="../varierende/index.html?fag=1T&amp;tema=potenser">1T · Potenser</a></p><h1>Potenser i rekkefølge</h1><p class="ingress">Ti potenser skal legges i rekkefølge fra minst til størst. For å klare det må elevene vite hva en negativ eksponent og eksponenten null betyr.</p>
+
+<div class="kortsett" id="kortsett" data-type="ordne" data-kode="K4">
+<p class="kortsett-oppgave"><strong>Oppgave:</strong> Legg kortene i rekkefølge fra minst til størst. Regn uten kalkulator.</p>
+<p class="elevark-lenke"><a class="knapp lys liten" href="../kortsett/potenser-i-rekkefolge.pdf" download>Last ned kortene (PDF)</a> <a class="knapp lys liten" href="../kortsett/potenser-i-rekkefolge-fasit.pdf" download>Fasit for læreren (PDF)</a> <a class="elevark-tex" href="../kortsett/potenser-i-rekkefolge.tex" download>LaTeX-kilde til eget bruk</a></p>
+<p class="kortsett-hjelp kun-js">Trykk på kortene i riktig rekkefølge (fra minst til størst). Trykk på et kort i rekka for å ta det ut igjen.</p>
+<p class="kortsett-hjelp kun-uten-js">Uten JavaScript kan du ikke flytte kortene her. Skriv dem ut i stedet.</p>
+<div class="kortsett-verktoy kun-js"><button type="button" class="knapp liten" id="kort-sjekk">Sjekk</button><button type="button" class="knapp lys liten" id="kort-bland">Bland kortene</button><button type="button" class="knapp lys liten" id="kort-nullstill">Start på nytt</button><span class="kort-status" id="kort-status" role="status"></span></div>
+<div class="kort-rekke-ramme"><p class="panel-tittel">Fra minst til størst</p><ol class="kort-rekke" id="kort-rekke" aria-label="Rekka di"></ol></div>
+<ul class="kort-bunke" id="kort-bunke" aria-label="Kort som ikke er plassert"><li><div class="kort" data-nr="01" data-svar="9"><span class="kort-innhold"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mrow><mo fence="true">(</mo><mstyle displaystyle="true" scriptlevel="0"><mfrac><mn>1</mn><mn>2</mn></mfrac></mstyle><mo fence="true">)</mo></mrow><mrow><mo>−</mo><mn>3</mn></mrow></msup></mrow><annotation encoding="application/x-tex">\left(\dfrac{1}{2}\right)^{-3}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.604em;vertical-align:-0.95em;"></span><span class="minner"><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size3">(</span></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size3">)</span></span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:1.654em;"><span style="top:-3.9029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">3</span></span></span></span></span></span></span></span></span></span></span></span></span><span class="kort-kode">K4-01</span></div></li><li><div class="kort" data-nr="02" data-svar="4"><span class="kort-innhold"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mrow><mo>−</mo><mn>2</mn></mrow></msup></mrow><annotation encoding="application/x-tex">2^{-2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span></span><span class="kort-kode">K4-02</span></div></li><li><div class="kort" data-nr="03" data-svar="2"><span class="kort-innhold"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><msup><mn>2</mn><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">-2^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8974em;vertical-align:-0.0833em;"></span><span class="mord">−</span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span><span class="kort-kode">K4-03</span></div></li><li><div class="kort" data-nr="04" data-svar="3"><span class="kort-innhold"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><msup><mn>0</mn><mrow><mo>−</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">10^{-1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span></span><span class="kort-kode">K4-04</span></div></li><li><div class="kort" data-nr="05" data-svar="1"><span class="kort-innhold"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mo>−</mo><mn>2</mn><msup><mo stretchy="false">)</mo><mn>3</mn></msup></mrow><annotation encoding="application/x-tex">(-2)^3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0641em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">−</span><span class="mord">2</span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span></span></span></span></span><span class="kort-kode">K4-05</span></div></li><li><div class="kort" data-nr="06" data-svar="8"><span class="kort-innhold"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo separator="true" lspace="0em" rspace="0em">,</mo><msup><mn>5</mn><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">1{,}5^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0085em;vertical-align:-0.1944em;"></span><span class="mord">1</span><span class="mord"><span class="mpunct">,</span></span><span class="mord"><span class="mord">5</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span><span class="kort-kode">K4-06</span></div></li><li><div class="kort" data-nr="07" data-svar="10"><span class="kort-innhold"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>3</mn><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">3^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">3</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span><span class="kort-kode">K4-07</span></div></li><li><div class="kort" data-nr="08" data-svar="5"><span class="kort-innhold"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>3</mn><mrow><mo>−</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">3^{-1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">3</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span></span><span class="kort-kode">K4-08</span></div></li><li><div class="kort" data-nr="09" data-svar="7"><span class="kort-innhold"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mo separator="true" lspace="0em" rspace="0em">,</mo><msup><mn>5</mn><mrow><mo>−</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">0{,}5^{-1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0085em;vertical-align:-0.1944em;"></span><span class="mord">0</span><span class="mord"><span class="mpunct">,</span></span><span class="mord"><span class="mord">5</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span></span><span class="kort-kode">K4-09</span></div></li><li><div class="kort" data-nr="10" data-svar="6"><span class="kort-innhold"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>5</mn><mn>0</mn></msup></mrow><annotation encoding="application/x-tex">5^0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">5</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span></span></span></span></span></span></span></span></span><span class="kort-kode">K4-10</span></div></li></ul>
+</div>
+
+<section class="tekst kortsett-bruk">
+<h2>Slik kan kortene brukes</h2>
+<ul>
+  <li>Be elevene først dele kortene i tre hauger: negative tall, tall mellom 0 og 1, og tall større enn 1.</li>
+  <li>Etterpå regner de ut kortene i hver haug og ordner dem.</li>
+  <li>Spør til slutt: Når blir en potens negativ? Når blir den mindre enn 1?</li>
+</ul>
+</section>
+</div>
+</section>
+  </main>
+  <footer class="bunn">
+    <div class="ramme">
+      <span>© 2026 mattelab.no</span>
+      <span>Ingen innlogging, informasjonskapsler eller sporing.</span>
+      <span>Søsterside: <a href="https://fysikklab.no">fysikklab.no</a></span>
+    </div>
+  </footer>
+  <script type="module" src="../statisk/js/felles.js"></script>
+<script type="module" src="../statisk/js/kortsett.js"></script>
+</body>
+</html>

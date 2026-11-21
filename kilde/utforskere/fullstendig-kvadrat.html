@@ -1,0 +1,138 @@
+---
+tittel: Fullstendig kvadrat
+beskrivelse: Se hvorfor x² + bx mangler et hjørne for å bli et kvadrat. Skriv x² + bx + c som (x + p)² + q, finn bunnpunktet og løs likningen.
+type: utforsker
+fag: 1T
+tema: algebra, likninger
+ikon: fullstendig-kvadrat
+skript: utforskere/fullstendig.js
+---
+<p class="ingress">Uttrykket $x^2 + bx$ er nesten et kvadrat. Bare ett hjørne mangler. Når du legger til hjørnet og trekker det fra igjen, kan du skrive $x^2 + bx + c$ som $(x + p)^2 + q$. Den formen viser bunnpunktet og gjør likningen lett å løse.</p>
+
+<figure class="sim sim-bred" id="utforsker" aria-label="Utforsker for fullstendige kvadraters metode">
+  <div class="sim-delt">
+    <div class="sim-graf">
+      <svg id="figur" class="figur-svg kun-js"></svg>
+      <div class="noscript-melding kun-uten-js">
+        <p><strong>Utforskeren trenger JavaScript.</strong> Resten av siden, med forklaring og oppgaver, virker uten.</p>
+        <p>Eksempel: $x^2 + 6x$ er et kvadrat $x^2$ og to striper på $3x$. Hjørnet som mangler, er $3^2 = 9$. Derfor er $x^2 + 6x + 5 = (x + 3)^2 - 9 + 5 = (x + 3)^2 - 4$.</p>
+      </div>
+      <dl class="sim-tall kun-js" id="verdier"></dl>
+    </div>
+    <div class="sim-side-panel kun-js">
+      <div class="sim-styring">
+        <p class="panel-tittel">$x^2 + bx + c$</p>
+        <div id="glidere" class="glidere"></div>
+      </div>
+      <fieldset class="sim-valg">
+        <legend>Vis</legend>
+        <label class="avkrysning"><input type="checkbox" id="fyll" checked> Fyll inn hjørnet</label>
+      </fieldset>
+      <div class="sim-blokk">
+        <p class="panel-tittel">Metoden</p>
+        <div class="forskrift" id="formel"></div>
+        <p class="panel-tittel ny-del">Med tallene dine</p>
+        <div class="utregning" id="utregning"></div>
+      </div>
+      <div id="melding" class="sim-blokk melding" hidden></div>
+    </div>
+  </div>
+  {{figurverktoy:enkel}}
+  <figcaption class="sim-hint">Lengden x er tegnet like lang hele tiden, fordi x kan være et hvilket som helst tall. Slå av «Fyll inn hjørnet» for å se hva som mangler. Verdiene står i adressefeltet, så du kan dele oppsettet.</figcaption>
+</figure>
+
+<details class="teori" id="matematikken">
+<summary><span class="teori-tittel">Matematikken bak</span><span class="teori-hint">Hvorfor metoden virker, og hva q forteller</span></summary>
+<div class="teori-innhold tekst">
+
+<h3>Fra første kvadratsetning</h3>
+<p>Første kvadratsetning gir $(x + p)^2 = x^2 + 2px + p^2$. Tallet foran $x$ er $2p$. Skal det være $b$, må $p = \frac{b}{2}$. Da har vi</p>
+$$x^2 + bx = \left(x + \tfrac{b}{2}\right)^2 - \left(\tfrac{b}{2}\right)^2$$
+<p>I figuren er $x^2 + bx$ et kvadrat $x^2$ med to striper på $\frac{b}{2} \cdot x$. Hjørnet $\left(\frac{b}{2}\right)^2$ mangler. Vi legger det til for å få et helt kvadrat, og trekker det fra igjen så verdien ikke endres.</p>
+
+<h3>Hva formen forteller</h3>
+<p>Når $x^2 + bx + c = (x + p)^2 + q$:</p>
+<ul>
+  <li>Kvadratet $(x + p)^2$ er aldri negativt, og er $0$ når $x = -p$. Derfor er den minste verdien $q$. Grafen har bunnpunkt i $(-p, q)$.</li>
+  <li>Likningen $x^2 + bx + c = 0$ blir $(x + p)^2 = -q$. Er $-q > 0$, finnes to løsninger, $x = -p \pm \sqrt{-q}$. Er $-q < 0$, finnes ingen.</li>
+</ul>
+<p>abc-formelen kommer fra å gjøre akkurat dette med bokstaver i stedet for tall.</p>
+</div>
+</details>
+
+<section class="oppgaver" aria-labelledby="oppgaver-tittel">
+<h2 id="oppgaver-tittel">Oppgaver</h2>
+{{elevark}}
+<p class="del-inngang">Hver oppgave har tre steg. <strong>Gjett</strong> først, uten å bruke utforskeren. <strong>Test</strong> så i utforskeren. <strong>Forklar</strong> til slutt med egne ord hvorfor det blir slik.</p>
+
+<div class="oppgave" id="oppgave-1">
+  <h3><span class="oppgave-nr">1</span>Hjørnet som mangler</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Hva må du legge til $x^2 + 6x$ for å få et fullstendig kvadrat?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?b=6&amp;c=0&amp;hjorne=0#utforsker">Vis $x^2 + 6x$ uten hjørnet</a>. Hvor brede er stripene? Slå på «Fyll inn hjørnet».</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Forklar hvorfor hjørnet er kvadratet av halvparten av $6$, og ikke $6$ eller $6^2$.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>$6x$ deles i to striper på $3x$, én på hver side av $x^2$. Hjørnet mellom dem er et kvadrat med side $3$. Det har areal $3^2 = 9$.</p>
+    <p>Altså er $x^2 + 6x + 9 = (x + 3)^2$. Hjørnet er $\left(\frac{6}{2}\right)^2$, fordi stripene er halvparten så brede som $6$.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-2">
+  <h3><span class="oppgave-nr">2</span>Legg til og trekk fra</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Skriv $x^2 + 6x + 5$ på formen $(x + p)^2 + q$.</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?b=6&amp;c=5&amp;hjorne=1#utforsker">Vis $x^2 + 6x + 5$</a>. Les av $p$ og $q$.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Forklar hvorfor vi må trekke fra $9$ etter at vi har lagt det til. Hva er bunnpunktet til grafen?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    $$x^2 + 6x + 5 = (x^2 + 6x + 9) - 9 + 5 = (x + 3)^2 - 4$$
+    <p>Å legge til $9$ endrer verdien. Når vi trekker fra $9$ igjen, er uttrykket like stort som før. Bunnpunktet er $(-3, -4)$, fordi $(x + 3)^2$ er minst når $x = -3$.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-3">
+  <h3><span class="oppgave-nr">3</span>Når $b$ er negativ</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Skriv $x^2 - 4x + 1$ på formen $(x + p)^2 + q$. Er $p$ positiv eller negativ?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?b=-4&amp;c=1&amp;hjorne=1#utforsker">Vis $x^2 - 4x + 1$</a>. Hvorfor blir hjørnet lagt til, selv om stripene tas bort?</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Kontroller svaret ved å sette $x = 0$ i begge formene.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>Halvparten av $-4$ er $-2$, og $(-2)^2 = 4$:</p>
+    $$x^2 - 4x + 1 = (x - 2)^2 - 4 + 1 = (x - 2)^2 - 3$$
+    <p>$p = -2$ er negativ. I figuren tar vi bort to striper på $2x$. De overlapper i hjørnet, så hjørnet $4$ tas bort to ganger. Det må legges til én gang. Det er andre kvadratsetning.</p>
+    <p>Kontroll med $x = 0$: $0 - 0 + 1 = 1$ og $(0 - 2)^2 - 3 = 4 - 3 = 1$.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-4">
+  <h3><span class="oppgave-nr">4</span>Oddetall gir brøk</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Hva er halvparten av $5$ i kvadrat? Prøv å skrive $x^2 + 5x + 4$ på formen $(x + p)^2 + q$.</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?b=5&amp;c=4&amp;hjorne=1#utforsker">Vis $x^2 + 5x + 4$</a>. Sammenlign med svaret ditt.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Vis utregningen med brøker. Hvorfor er det lurt å skrive $4$ som $\frac{16}{4}$?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>Halvparten av $5$ er $\frac{5}{2}$, og $\left(\frac{5}{2}\right)^2 = \frac{25}{4}$.</p>
+    $$x^2 + 5x + 4 = \left(x + \frac{5}{2}\right)^2 - \frac{25}{4} + \frac{16}{4} = \left(x + \frac{5}{2}\right)^2 - \frac{9}{4}$$
+    <p>Med felles nevner $4$ blir det lett å trekke sammen $-\frac{25}{4} + 4$.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-5">
+  <h3><span class="oppgave-nr">5</span>Løs likningen</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Bruk svaret i oppgave 2 til å løse $x^2 + 6x + 5 = 0$. Hva skjer med $x^2 + 2x + 5 = 0$?</p></div></li>
+  <li><span class="fase test">Test</span><div><p>Vis <a class="oppsettlenke" href="?b=6&amp;c=5&amp;hjorne=1#utforsker">$x^2 + 6x + 5$</a> og <a class="oppsettlenke" href="?b=2&amp;c=5&amp;hjorne=1#utforsker">$x^2 + 2x + 5$</a>. Se på løsningene i tabellen.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Forklar hvordan du kan se på $q$ om likningen har løsninger.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>$(x + 3)^2 - 4 = 0$ gir $(x + 3)^2 = 4$, så $x + 3 = \pm 2$. Løsningene er $x = -1$ og $x = -5$.</p>
+    <p>$x^2 + 2x + 5 = (x + 1)^2 + 4$. Likningen blir $(x + 1)^2 = -4$. Et kvadrat kan ikke være negativt, så likningen har ingen løsning.</p>
+    <p>Er $q < 0$, finnes to løsninger. Er $q = 0$, finnes én. Er $q > 0$, finnes ingen.</p>
+  </div></details>
+</div>
+</section>
+
+<p class="merknad">Se også øvingen <a href="{{rot}}varierende/fullfor-kvadratet.html">Fullfør kvadratet trinn for trinn</a> og utforskeren <a href="andregradsfunksjonen.html">Andregradsfunksjonen</a>.</p>

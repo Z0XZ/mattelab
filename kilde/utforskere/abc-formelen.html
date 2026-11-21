@@ -1,0 +1,135 @@
+---
+tittel: abc-formelen og grafen
+beskrivelse: Se abc-formelen på grafen. Symmetrilinjen er x = −b/2a, og nullpunktene ligger √(b² − 4ac)/2|a| på hver side. Med ingen, én eller to løsninger.
+type: utforsker
+fag: 1T
+tema: likninger, funksjoner
+ikon: abc
+skript: utforskere/abc.js
+---
+<p class="ingress">abc-formelen løser alle andregradslikninger $ax^2 + bx + c = 0$. Her ser du hva de to delene av formelen betyr på grafen: midtpunktet mellom løsningene og avstanden ut til dem.</p>
+
+<figure class="sim sim-bred" id="utforsker" aria-label="Utforsker for abc-formelen">
+  <div class="sim-delt">
+    <div class="sim-graf">
+      <svg id="graf" class="kun-js"></svg>
+      <div class="noscript-melding kun-uten-js">
+        <p><strong>Utforskeren trenger JavaScript.</strong> Resten av siden, med forklaring og oppgaver, virker uten.</p>
+        <p>Eksempel: For $x^2 - 2x - 3 = 0$ er $b^2 - 4ac = 4 + 12 = 16$. Da er $x = \frac{2 \pm 4}{2}$, altså $x = -1$ eller $x = 3$. Midt mellom dem ligger symmetrilinjen $x = 1$.</p>
+      </div>
+      <dl class="sim-tall kun-js" id="verdier"></dl>
+    </div>
+    <div class="sim-side-panel kun-js">
+      <div class="sim-styring">
+        <p class="panel-tittel">Likningen</p>
+        <div class="forskrift" id="forskrift"></div>
+        <div id="glidere" class="glidere"></div>
+      </div>
+      <div class="sim-blokk">
+        <p class="panel-tittel">abc-formelen</p>
+        <div class="forskrift" id="formel"></div>
+        <p class="panel-tittel ny-del">Med tallene dine</p>
+        <div class="utregning" id="utregning"></div>
+      </div>
+      <div id="melding" class="sim-blokk melding" hidden></div>
+    </div>
+  </div>
+  {{figurverktoy}}
+  <figcaption class="sim-hint">Den stiplede linjen er symmetrilinjen. Pilene går fra symmetrilinjen ut til nullpunktene og er like lange. Dra i glidebryterne, eller skriv et tall i feltet. Verdiene står i adressefeltet, så du kan dele oppsettet.</figcaption>
+</figure>
+
+<details class="teori" id="matematikken">
+<summary><span class="teori-tittel">Matematikken bak</span><span class="teori-hint">Formelen delt i to, diskriminanten og hvor formelen kommer fra</span></summary>
+<div class="teori-innhold tekst">
+
+<h3>Formelen delt i to</h3>
+$$x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} = -\frac{b}{2a} \pm \frac{\sqrt{b^2 - 4ac}}{2a}$$
+<p>Den første delen, $-\frac{b}{2a}$, er symmetrilinjen. Den er den samme for begge løsningene. Den andre delen er avstanden fra symmetrilinjen ut til hver løsning. Vi går like langt til hver side.</p>
+
+<h3>Diskriminanten</h3>
+<p>Tallet $D = b^2 - 4ac$ under rottegnet avgjør hvor mange løsninger det er:</p>
+<ul>
+  <li>$D > 0$: to løsninger. Grafen skjærer x-aksen to steder.</li>
+  <li>$D = 0$: én løsning. Grafen berører x-aksen.</li>
+  <li>$D < 0$: ingen løsning. Vi kan ikke ta roten av et negativt tall, og grafen når aldri x-aksen.</li>
+</ul>
+
+<h3>Hvor formelen kommer fra</h3>
+<p>Formelen er det du får når du fullfører kvadratet med bokstaver. Del på $a$, legg til og trekk fra $\left(\frac{b}{2a}\right)^2$, og løs:</p>
+$$\left(x + \frac{b}{2a}\right)^2 = \frac{b^2 - 4ac}{4a^2}$$
+<p>Ta roten på begge sider, og flytt $\frac{b}{2a}$ over. Da står formelen der.</p>
+</div>
+</details>
+
+<section class="oppgaver" aria-labelledby="oppgaver-tittel">
+<h2 id="oppgaver-tittel">Oppgaver</h2>
+{{elevark}}
+<p class="del-inngang">Hver oppgave har tre steg. <strong>Gjett</strong> først, uten å bruke utforskeren. <strong>Test</strong> så i utforskeren. <strong>Forklar</strong> til slutt med egne ord hvorfor det blir slik.</p>
+
+<div class="oppgave" id="oppgave-1">
+  <h3><span class="oppgave-nr">1</span>Midtpunkt og avstand</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Løs $x^2 - 2x - 3 = 0$ med abc-formelen. Hvor ligger punktet midt mellom løsningene?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?a=1&amp;b=-2&amp;c=-3#utforsker">Vis $x^2 - 2x - 3$</a>. Hvor går symmetrilinjen? Hvor lange er pilene?</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Forklar hvilken del av formelen som gir symmetrilinjen, og hvilken som gir lengden på pilene.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>$b^2 - 4ac = 4 + 12 = 16$, så $x = \frac{2 \pm 4}{2}$. Løsningene er $x = -1$ og $x = 3$.</p>
+    <p>Symmetrilinjen er $x = -\frac{b}{2a} = \frac{2}{2} = 1$, midt mellom $-1$ og $3$. Pilene er $\frac{\sqrt{16}}{2} = 2$ lange. Fra $1$ går vi $2$ til hver side.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-2">
+  <h3><span class="oppgave-nr">2</span>Én løsning</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Behold $a = 1$ og $b = -2$. Hvilken verdi av $c$ gir bare én løsning?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?a=1&amp;b=-2&amp;c=-3#utforsker">Start med $x^2 - 2x - 3$</a> og øk $c$ med glidebryteren. Følg med på pilene og på $b^2 - 4ac$.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Forklar hva som skjer med pilene når $b^2 - 4ac$ blir $0$.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>Én løsning når $b^2 - 4ac = 4 - 4c = 0$, altså $c = 1$. Likningen er da $x^2 - 2x + 1 = (x - 1)^2 = 0$, med løsningen $x = 1$.</p>
+    <p>Pilene blir kortere når $c$ øker, og har lengde $0$ når $b^2 - 4ac = 0$. Da faller de to løsningene sammen på symmetrilinjen.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-3">
+  <h3><span class="oppgave-nr">3</span>Ingen løsning</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Hva skjer i abc-formelen for $x^2 - 2x + 3 = 0$?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?a=1&amp;b=-2&amp;c=3#utforsker">Vis $x^2 - 2x + 3$</a>. Hvor ligger grafen?</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Forklar sammenhengen mellom fortegnet til $b^2 - 4ac$ og om grafen skjærer x-aksen.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>$b^2 - 4ac = 4 - 12 = -8$. Vi kan ikke ta kvadratroten av et negativt tall, så likningen har ingen løsning.</p>
+    <p>Grafen ligger over x-aksen hele veien. Løsningene av $f(x) = 0$ er der grafen skjærer x-aksen. Når den ikke skjærer, finnes ingen løsninger, og da er $b^2 - 4ac < 0$.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-4">
+  <h3><span class="oppgave-nr">4</span>Når $a$ ikke er $1$</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Løs $2x^2 - 8x + 6 = 0$. Hvor ligger symmetrilinjen?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?a=2&amp;b=-8&amp;c=6#utforsker">Vis $2x^2 - 8x + 6$</a>. Sammenlign med svaret ditt.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>En elev glemmer $2a$ i nevneren og deler på $2$. Hva blir feil? Forklar hvorfor $a$ må være med.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>$b^2 - 4ac = 64 - 48 = 16$, så $x = \frac{8 \pm 4}{4}$. Løsningene er $x = 1$ og $x = 3$. Symmetrilinjen er $x = \frac{8}{4} = 2$.</p>
+    <p>Med $2$ i nevneren ville eleven fått $x = 2$ og $x = 6$. Det er dobbelt så mye. Tallet $a$ bestemmer hvor bred parabelen er, og dermed hvor langt det er ut til nullpunktene.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-5">
+  <h3><span class="oppgave-nr">5</span>Snu parabelen</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Har $-x^2 + 4x - 3 = 0$ og $x^2 - 4x + 3 = 0$ de samme løsningene?</p></div></li>
+  <li><span class="fase test">Test</span><div><p>Sammenlign <a class="oppsettlenke" href="?a=-1&amp;b=4&amp;c=-3#utforsker">$-x^2 + 4x - 3$</a> og <a class="oppsettlenke" href="?a=1&amp;b=-4&amp;c=3#utforsker">$x^2 - 4x + 3$</a>.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Forklar hvorfor løsningene blir de samme når alle tre tallene skifter fortegn. Hva skjer med grafen?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>Begge har løsningene $x = 1$ og $x = 3$. $b^2 - 4ac = 16 - 12 = 4$ i begge.</p>
+    <p>Den første likningen er den andre ganget med $-1$. Å gange begge sider av en likning med $-1$ endrer ikke løsningene. Grafen speiles om x-aksen, men nullpunktene ligger på x-aksen og blir der de er.</p>
+  </div></details>
+</div>
+</section>
+
+<p class="merknad">Se også utforskeren <a href="fullstendig-kvadrat.html">Fullstendig kvadrat</a>, kortsettet <a href="{{rot}}varierende/velg-metode.html">Velg metode for andregradslikninger</a> og tavleoppgavene <a href="{{rot}}varierende/en-likning-tre-metoder.html">Én likning, tre metoder</a>.</p>

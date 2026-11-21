@@ -24,12 +24,17 @@ Se på siden lokalt: `python3 -m http.server --directory docs` og åpne http://l
 | `kilde/maler/side.html` | Felles topp, meny og bunn for alle sider |
 | `kilde/sider/` | Forside, Om, For lærere |
 | `kilde/utforskere/` | Én kildefil per utforsker, og oversiktssiden `index.html` |
+| `kilde/varierende/` | Varierende undervisning: kortsett (`.html` + `.py` med kortene), øvinger og tavleoppgaver, og oversiktssiden |
 | `kilde/opplegg/` | Undervisningsopplegg, og oversiktssiden `index.html` |
 | `statisk/css/stil.css` | Alt av stil. Farger er variabler med lys og mørk modus |
 | `statisk/js/felles.js` | Felles kode: tallformat, glidebryter, koordinatsystem (med piler og ulike enheter på aksene), lagring, nedlasting, fagvalg, filter |
 | `statisk/js/utforsker.js` | Byggeklosser for utforskerne: glidebrytere fra adressefeltet, verditabell, meldinger, figurverktøy, oppgavelenker, tilpass vindu |
 | `statisk/js/matte.js` | Tall og uttrykk i TeX (`texTall`, `texPolynom`, `texT`, `texP`) |
 | `statisk/js/utforskere/` | Ett skript per utforsker. Den rene matematikken eksporteres, så testene kan sjekke den med tilfeldige verdier |
+| `statisk/js/brikker.js` | Algebrabrikker i SVG (brukes av algebrabrikker og faktorisering) |
+| `statisk/js/kortsett.js` | Kortsett på skjermen: koble, sortere og ordne med klikk eller tastatur |
+| `statisk/js/tavle.js` | Tavleoppgaver: ett spørsmål om gangen, piltaster, fullskjerm |
+| `statisk/js/ovelse.js` og `statisk/js/ovelser/` | Øvinger: tilfeldige tall (`?frø=`), tolking av elevsvar (brøk, komma, minus) |
 | `statisk/js/forside.js` | Den lille parabel-utforskeren på forsiden |
 | `statisk/lib/katex/` | KaTeX 0.16.11 (MIT, se `LICENSE`) |
 | `data/temaer.json` | Fag og temaer. Temanavnene står bare her |
@@ -38,6 +43,7 @@ Se på siden lokalt: `python3 -m http.server --directory docs` og åpne http://l
 | `data/kompetansemaal.json` | Kompetansemål sitert ordrett fra Udir (MAT09-02 og MAT03-02) |
 | `data/koblinger.json` | Kobling mellom kompetansemål og ressurser (lærerens vurdering) |
 | `verktoy/elevark.py` | Lager elevark (PDF uten fasit) fra oppgavene med LuaLaTeX |
+| `verktoy/kortsett.py` og `verktoy/kortfigurer.py` | Lager kortsett til skjerm og utskrift (kort og fasit som PDF), og kontrollerer at kortene i en gruppe har samme verdi |
 | `verktoy/fasit/` | Python-skript som regner ut alle tall i oppgaver og fasit |
 | `tester/test.mjs` | Automatiske tester i headless Chrome |
 | `tester/titt.mjs` | Rask titt på én side under arbeidet: feil, verdier og skjermbilder (`node tester/titt.mjs utforskere/vekst.html "?p=5"`) |
@@ -57,8 +63,24 @@ Se på siden lokalt: `python3 -m http.server --directory docs` og åpne http://l
 | Funksjonen og den deriverte | R1 | `funksjon-og-derivert.html` |
 | Trekantutforsker | 1T | `trekant.html` |
 | Vektorer i planet | R1 | `vektorer.html` |
+| Brøk som areal | 1T | `brok-som-areal.html` |
+| Algebrabrikker | 1T | `algebrabrikker.html` |
+| Potensreglene | 1T | `potenser.html` |
+| Fullstendig kvadrat | 1T | `fullstendig-kvadrat.html` |
+| abc-formelen og grafen | 1T | `abc-formelen.html` |
+| Faktorisering med produkt og sum | 1T | `faktorisering.html` |
 
 Hver har en fasitfil i `verktoy/fasit/` med alle tallene i oppgavene og løsningsforslagene.
+
+## Varierende undervisning
+
+| Type | Innhold | Kildefiler |
+|---|---|---|
+| Kortsett | K1 brøk, figur, desimaltall og prosent · K2 tekst, uttrykk og figur · K3 potenser med samme verdi · K4 potenser i rekkefølge · K5 kvadratsetningene: finn parene · K6 uttrykk, likning, identitet eller funksjon · K7 velg metode · K8 fire former av samme funksjon | `kilde/varierende/<navn>.html` og `<navn>.py` |
+| Øvinger | Finn feilen: potenser · Fullfør kvadratet trinn for trinn | `kilde/varierende/` og `statisk/js/ovelser/` |
+| Tavleoppgaver | Hvilken passer ikke inn? · Alltid, noen ganger eller aldri? · Hoderegning med kvadratsetningene · Én likning, tre metoder | `kilde/varierende/` |
+
+Tallene i tavleoppgavene er regnet ut i `verktoy/fasit/tavle.py`. Kortsettene kontrolleres når nettstedet bygges (se [BYGG.md](BYGG.md)).
 
 ## Lage en ny utforsker
 

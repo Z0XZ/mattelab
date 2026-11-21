@@ -1,0 +1,140 @@
+---
+tittel: Brøk som areal
+beskrivelse: Se brøkregning som figurer. Felles nevner som strimler, multiplikasjon som et rektangel og divisjon som «hvor mange ganger går det opp?».
+type: utforsker
+fag: 1T
+tema: tall
+ikon: brok
+skript: utforskere/brok.js
+---
+<p class="ingress">Brøkregning blir lettere å forstå når du ser den. Her kan du velge to brøker og se hvordan de legges sammen, ganges og deles.</p>
+
+<figure class="sim sim-bred" id="utforsker" aria-label="Utforsker for brøkregning">
+  <div class="sim-delt">
+    <div class="sim-graf">
+      <svg id="figur" class="figur-svg kun-js"></svg>
+      <div class="noscript-melding kun-uten-js">
+        <p><strong>Utforskeren trenger JavaScript.</strong> Resten av siden, med forklaring og oppgaver, virker uten.</p>
+        <p>Eksempel: $\frac{2}{3} \cdot \frac{3}{4}$ er arealet av et rektangel med sider $\frac{2}{3}$ og $\frac{3}{4}$. Del et kvadrat i $3$ kolonner og $4$ rader. Rektangelet dekker $6$ av de $12$ rutene, altså $\frac{6}{12} = \frac{1}{2}$.</p>
+      </div>
+      <dl class="sim-tall kun-js" id="verdier"></dl>
+    </div>
+    <div class="sim-side-panel kun-js">
+      <div class="sim-styring">
+        <div class="sim-velg">
+          <label for="modus">Regneart</label>
+          <select id="modus">
+            <option value="pluss">Pluss: a/b + c/d</option>
+            <option value="gange">Gange: a/b · c/d</option>
+            <option value="dele">Dele: a/b : c/d</option>
+          </select>
+        </div>
+        <div id="glidere" class="glidere"></div>
+      </div>
+      <div class="sim-blokk">
+        <p class="panel-tittel">Regelen</p>
+        <div class="forskrift" id="formel"></div>
+        <p class="panel-tittel ny-del">Med tallene dine</p>
+        <div class="utregning" id="utregning"></div>
+      </div>
+      <div id="melding" class="sim-blokk melding" hidden></div>
+    </div>
+  </div>
+  {{figurverktoy:enkel}}
+  <figcaption class="sim-hint">Velg regneart og dra i glidebryterne, eller skriv et tall i feltet. Tellerne og nevnerne er hele tall. Den tykke rammen viser én hel. Verdiene står i adressefeltet, så du kan dele oppsettet.</figcaption>
+</figure>
+
+<details class="teori" id="matematikken">
+<summary><span class="teori-tittel">Matematikken bak</span><span class="teori-hint">Felles nevner, multiplikasjon som areal og divisjon som måling</span></summary>
+<div class="teori-innhold tekst">
+
+<h3>Pluss: samme størrelse på delene</h3>
+<p>Vi kan bare legge sammen deler som er like store. Derfor deler vi begge brøkene i like store deler først. Det er den felles nevneren:</p>
+$$\frac{1}{2} + \frac{1}{3} = \frac{3}{6} + \frac{2}{6} = \frac{5}{6}$$
+<p>Den minste felles nevneren er det minste tallet som begge nevnerne går opp i.</p>
+
+<h3>Gange: areal av et rektangel</h3>
+<p>Produktet $\frac{a}{b} \cdot \frac{c}{d}$ er arealet av et rektangel med sider $\frac{a}{b}$ og $\frac{c}{d}$. Del et kvadrat med side $1$ i $b$ kolonner og $d$ rader. Da får du $b \cdot d$ små ruter, og rektangelet dekker $a \cdot c$ av dem:</p>
+$$\frac{a}{b} \cdot \frac{c}{d} = \frac{a \cdot c}{b \cdot d}$$
+<p>Når $\frac{c}{d} < 1$, tar vi bare en del av $\frac{a}{b}$. Da blir svaret mindre enn $\frac{a}{b}$.</p>
+
+<h3>Dele: hvor mange ganger går det opp?</h3>
+<p>$\frac{a}{b} : \frac{c}{d}$ svarer på spørsmålet «hvor mange ganger går $\frac{c}{d}$ opp i $\frac{a}{b}$?». Med felles nevner blir det å dele tellerne: $\frac{3}{4} : \frac{1}{8} = \frac{6}{8} : \frac{1}{8} = 6$. Regelen er å gange med den omvendte brøken:</p>
+$$\frac{a}{b} : \frac{c}{d} = \frac{a}{b} \cdot \frac{d}{c}$$
+<p>Når $\frac{c}{d} < 1$, går den opp mer enn én gang. Da blir svaret større enn $\frac{a}{b}$.</p>
+</div>
+</details>
+
+<section class="oppgaver" aria-labelledby="oppgaver-tittel">
+<h2 id="oppgaver-tittel">Oppgaver</h2>
+{{elevark}}
+<p class="del-inngang">Hver oppgave har tre steg. <strong>Gjett</strong> først, uten å bruke utforskeren. <strong>Test</strong> så i utforskeren. <strong>Forklar</strong> til slutt med egne ord hvorfor det blir slik.</p>
+
+<div class="oppgave" id="oppgave-1">
+  <h3><span class="oppgave-nr">1</span>Blir det mindre når vi ganger?</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Er $\frac{2}{3} \cdot \frac{3}{4}$ større eller mindre enn $\frac{2}{3}$? Gjett før du regner.</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?modus=gange&amp;t1=2&amp;n1=3&amp;t2=3&amp;n2=4#utforsker">Vis $\frac{2}{3} \cdot \frac{3}{4}$</a>. Tell de mørke rutene. Hvor mange små ruter er det i alt?</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Forklar med figuren hvorfor vi ganger tellerne med hverandre og nevnerne med hverandre.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>Svaret er $\frac{6}{12} = \frac{1}{2}$, som er mindre enn $\frac{2}{3}$. Vi tar bare $\frac{3}{4}$ av $\frac{2}{3}$.</p>
+    <p>Kvadratet er delt i $3$ kolonner og $4$ rader, altså $3 \cdot 4 = 12$ små ruter. Det er nevnernes produkt. Rektangelet dekker $2$ kolonner og $3$ rader, altså $2 \cdot 3 = 6$ ruter. Det er tellernes produkt.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-2">
+  <h3><span class="oppgave-nr">2</span>Hvorfor ikke $\frac{2}{5}$?</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>En elev skriver $\frac{1}{2} + \frac{1}{3} = \frac{2}{5}$. Kan det stemme? Sammenlign $\frac{2}{5}$ med $\frac{1}{2}$.</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?modus=pluss&amp;t1=1&amp;n1=2&amp;t2=1&amp;n2=3#utforsker">Vis $\frac{1}{2} + \frac{1}{3}$</a>. Hva skjer når begge brøkene deles i like store deler?</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Forklar hvorfor vi trenger felles nevner, og hva som er galt med å legge sammen tellere og nevnere hver for seg.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>$\frac{2}{5} = 0{,}4$, som er mindre enn $\frac{1}{2} = 0{,}5$. Summen kan ikke være mindre enn et av leddene, så svaret er feil.</p>
+    <p>Med felles nevner $6$ er $\frac{1}{2} = \frac{3}{6}$ og $\frac{1}{3} = \frac{2}{6}$. Summen er $\frac{5}{6}$.</p>
+    <p>Halvdeler og tredjedeler er ulike store. Vi kan bare legge sammen antall deler når delene er like store. Den felles nevneren gjør delene like store.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-3">
+  <h3><span class="oppgave-nr">3</span>Blir det større når vi deler?</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Hvor mange åttendeler er det i tre firedeler? Gjett hva $\frac{3}{4} : \frac{1}{8}$ er.</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?modus=dele&amp;t1=3&amp;n1=4&amp;t2=1&amp;n2=8#utforsker">Vis $\frac{3}{4} : \frac{1}{8}$</a>. Tell hvor mange ganger $\frac{1}{8}$ går opp.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Forklar hvorfor svaret blir større enn $\frac{3}{4}$, og vis at regelen «gang med den omvendte brøken» gir samme svar.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>$\frac{3}{4} = \frac{6}{8}$, så $\frac{1}{8}$ går opp $6$ ganger. Svaret er $6$.</p>
+    <p>Når vi deler på et tall mindre enn $1$, går det opp mer enn én gang. Derfor blir svaret større. Med regelen: $\frac{3}{4} \cdot \frac{8}{1} = \frac{24}{4} = 6$.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-4">
+  <h3><span class="oppgave-nr">4</span>Når det ikke går opp</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Hvor mange ganger går $\frac{1}{4}$ opp i $\frac{2}{3}$? Er svaret et helt tall?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?modus=dele&amp;t1=2&amp;n1=3&amp;t2=1&amp;n2=4#utforsker">Vis $\frac{2}{3} : \frac{1}{4}$</a>. Hvor mange hele ganger går det opp? Hvor stor er resten?</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Forklar hva svaret $2\frac{2}{3}$ betyr. Bruk ordene «hele ganger» og «rest».</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>Med felles nevner $12$ er $\frac{2}{3} = \frac{8}{12}$ og $\frac{1}{4} = \frac{3}{12}$. Tre tolvdeler går opp i åtte tolvdeler $2$ hele ganger, og det er $2$ tolvdeler igjen.</p>
+    <p>Resten er $\frac{2}{3}$ av en hel $\frac{1}{4}$. Derfor er $\frac{2}{3} : \frac{1}{4} = \frac{8}{3} = 2\frac{2}{3}$.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-5">
+  <h3><span class="oppgave-nr">5</span>Når blir produktet større?</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Du ganger $\frac{3}{4}$ med et tall. Når blir svaret større enn $\frac{3}{4}$, og når blir det mindre?</p></div></li>
+  <li><span class="fase test">Test</span><div><p>Sammenlign <a class="oppsettlenke" href="?modus=gange&amp;t1=3&amp;n1=4&amp;t2=1&amp;n2=2#utforsker">$\frac{3}{4} \cdot \frac{1}{2}$</a> og <a class="oppsettlenke" href="?modus=gange&amp;t1=3&amp;n1=4&amp;t2=3&amp;n2=2#utforsker">$\frac{3}{4} \cdot \frac{3}{2}$</a>. Prøv også å gange med $\frac{4}{4}$.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Lag en regel for når et produkt blir større enn det første tallet. Forklar regelen med figuren.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>$\frac{3}{4} \cdot \frac{1}{2} = \frac{3}{8}$, som er mindre enn $\frac{3}{4}$. $\frac{3}{4} \cdot \frac{3}{2} = \frac{9}{8}$, som er større.</p>
+    <p>Regelen: Svaret blir større når vi ganger med et tall større enn $1$, og mindre når vi ganger med et positivt tall mindre enn $1$. Å gange med $\frac{4}{4} = 1$ endrer ingenting. I figuren går rektangelet ut over kvadratet når $\frac{c}{d} > 1$.</p>
+  </div></details>
+</div>
+</section>
+
+<p class="merknad">Se også kortsettet <a href="{{rot}}varierende/brok-desimal-prosent.html">Brøk, figur, desimaltall og prosent</a> og tavleoppgavene <a href="{{rot}}varierende/hvilken-passer-ikke-inn.html">Hvilken passer ikke inn?</a></p>

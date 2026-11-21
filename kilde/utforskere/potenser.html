@@ -1,0 +1,138 @@
+---
+tittel: Potensreglene
+beskrivelse: Se potensreglene som telling av faktorer. Faktorer over og under brøkstreken strykes mot hverandre, og mønsteret viser hvorfor a⁰ = 1.
+type: utforsker
+fag: 1T
+tema: potenser
+ikon: potenser
+skript: utforskere/potenser.js
+---
+<p class="ingress">En potens er gjentatt multiplikasjon: $2^3 = 2 \cdot 2 \cdot 2$. Her ser du hver faktor som en boks. Da blir potensreglene et spørsmål om å telle, og negative eksponenter blir faktorer under brøkstreken.</p>
+
+<figure class="sim sim-bred" id="utforsker" aria-label="Utforsker for potensreglene">
+  <div class="sim-delt">
+    <div class="sim-graf">
+      <svg id="figur" class="figur-svg kun-js"></svg>
+      <div class="noscript-melding kun-uten-js">
+        <p><strong>Utforskeren trenger JavaScript.</strong> Resten av siden, med forklaring og oppgaver, virker uten.</p>
+        <p>Eksempel: $2^3 \cdot 2^4 = (2 \cdot 2 \cdot 2) \cdot (2 \cdot 2 \cdot 2 \cdot 2)$. Det er $3 + 4 = 7$ faktorer, så svaret er $2^7 = 128$.</p>
+      </div>
+      <dl class="sim-tall kun-js" id="verdier"></dl>
+    </div>
+    <div class="sim-side-panel kun-js">
+      <div class="sim-styring">
+        <div class="sim-velg">
+          <label for="modus">Regel</label>
+          <select id="modus">
+            <option value="produkt">Produkt: aᵐ · aⁿ</option>
+            <option value="kvotient">Kvotient: aᵐ / aⁿ</option>
+            <option value="potens">Potens av potens: (aᵐ)ⁿ</option>
+            <option value="monster">Mønster: a⁰ og negative eksponenter</option>
+          </select>
+        </div>
+        <div id="glidere" class="glidere"></div>
+      </div>
+      <div class="sim-blokk">
+        <p class="panel-tittel">Regelen</p>
+        <div class="forskrift" id="formel"></div>
+        <p class="panel-tittel ny-del">Med tallene dine</p>
+        <div class="utregning" id="utregning"></div>
+      </div>
+      <div id="melding" class="sim-blokk melding" hidden></div>
+    </div>
+  </div>
+  {{figurverktoy:enkel}}
+  <figcaption class="sim-hint">Hver boks er én faktor. Heltrukne bokser kommer fra den første potensen, stiplede fra den andre. En skrå strek betyr at faktoren er strøket mot en lik faktor på den andre siden av brøkstreken. I mønsteret er raden for eksponenten m uthevet.</figcaption>
+</figure>
+
+<details class="teori" id="matematikken">
+<summary><span class="teori-tittel">Matematikken bak</span><span class="teori-hint">Reglene, og hvorfor a⁰ = 1 og a⁻ⁿ = 1/aⁿ</span></summary>
+<div class="teori-innhold tekst">
+
+<h3>Reglene</h3>
+<p>For $a \neq 0$ og hele tall $m$ og $n$ gjelder</p>
+$$a^m \cdot a^n = a^{m + n} \qquad \frac{a^m}{a^n} = a^{m - n} \qquad (a^m)^n = a^{m \cdot n}$$
+<p>For positive eksponenter kan vi telle: $a^m$ er $m$ faktorer, og $a^n$ er $n$ faktorer. Ganger vi dem, får vi $m + n$ faktorer. Deler vi, strykes $n$ faktorer mot $n$ av de $m$.</p>
+
+<h3>Eksponenten 0</h3>
+<p>Med regelen for divisjon er $\frac{a^3}{a^3} = a^{3 - 3} = a^0$. Men et tall delt på seg selv er $1$. Skal regelen gjelde, må $a^0 = 1$.</p>
+
+<h3>Negative eksponenter</h3>
+<p>På samme måte er $\frac{a^2}{a^5} = a^{2 - 5} = a^{-3}$. Strykingen gir $\frac{1}{a \cdot a \cdot a} = \frac{1}{a^3}$. Derfor er</p>
+$$a^{-n} = \frac{1}{a^n}$$
+<p>En negativ eksponent gir altså <em>ikke</em> et negativt tall. Mønsteret viser det samme: Hver gang eksponenten blir én mindre, deler vi på $a$.</p>
+</div>
+</details>
+
+<section class="oppgaver" aria-labelledby="oppgaver-tittel">
+<h2 id="oppgaver-tittel">Oppgaver</h2>
+{{elevark}}
+<p class="del-inngang">Hver oppgave har tre steg. <strong>Gjett</strong> først, uten å bruke utforskeren. <strong>Test</strong> så i utforskeren. <strong>Forklar</strong> til slutt med egne ord hvorfor det blir slik.</p>
+
+<div class="oppgave" id="oppgave-1">
+  <h3><span class="oppgave-nr">1</span>Gange potenser</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Skriv $2^3 \cdot 2^4$ som én potens. Mange svarer $2^{12}$. Hva tror du?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?modus=produkt&amp;g=2&amp;m=3&amp;n=4#utforsker">Vis $2^3 \cdot 2^4$</a>. Tell boksene.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Forklar hvorfor vi legger sammen eksponentene og ikke ganger dem. Kontroller med $8 \cdot 16$.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>Det er $3 + 4 = 7$ bokser, så $2^3 \cdot 2^4 = 2^7 = 128$. Kontroll: $8 \cdot 16 = 128$.</p>
+    <p>Hver eksponent teller faktorer. Når vi ganger, legger vi faktorene ved siden av hverandre, og antallet blir summen. $2^{12}$ ville vært $12$ faktorer.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-2">
+  <h3><span class="oppgave-nr">2</span>Dele potenser</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Hva er $\frac{2^5}{2^2}$? Hva er $\frac{2^2}{2^5}$?</p></div></li>
+  <li><span class="fase test">Test</span><div><p>Vis <a class="oppsettlenke" href="?modus=kvotient&amp;g=2&amp;m=5&amp;n=2#utforsker">$\frac{2^5}{2^2}$</a> og <a class="oppsettlenke" href="?modus=kvotient&amp;g=2&amp;m=2&amp;n=5#utforsker">$\frac{2^2}{2^5}$</a>. Hvor mange bokser strykes? Hvor havner de som er igjen?</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Forklar hvorfor $\frac{2^2}{2^5} = 2^{-3} = \frac{1}{2^3}$.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>$\frac{2^5}{2^2} = 2^3 = 8$. To par strykes, og tre bokser blir igjen i telleren.</p>
+    <p>$\frac{2^2}{2^5}$: To par strykes igjen, men nå blir tre bokser igjen i nevneren. Svaret er $\frac{1}{2^3} = \frac{1}{8}$. Regelen gir $2^{2 - 5} = 2^{-3}$. Derfor må $2^{-3} = \frac{1}{2^3}$.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-3">
+  <h3><span class="oppgave-nr">3</span>Hvorfor er $a^0 = 1$?</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Hva er $\frac{2^3}{2^3}$? Hva sier regelen for divisjon at det skal være?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?modus=kvotient&amp;g=2&amp;m=3&amp;n=3#utforsker">Vis $\frac{2^3}{2^3}$</a>. Prøv også med andre grunntall.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Forklar hvorfor $a^0 = 1$ og ikke $0$.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>$\frac{2^3}{2^3} = \frac{8}{8} = 1$. Alle tre parene strykes. Regelen gir $2^{3 - 3} = 2^0$.</p>
+    <p>Begge deler må stemme, så $2^0 = 1$. Det samme gjelder for alle grunntall $a \neq 0$. Når alle faktorene strykes, står $1$ igjen, ikke $0$.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-4">
+  <h3><span class="oppgave-nr">4</span>Potens av en potens</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Er $(2^3)^2$ lik $2^5$ eller $2^6$?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?modus=potens&amp;g=2&amp;m=3&amp;n=2#utforsker">Vis $(2^3)^2$</a>. Hvor mange grupper er det, og hvor mange bokser i hver?</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Forklar forskjellen på $(2^3)^2$ og $2^3 \cdot 2^2$.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>$(2^3)^2 = 2^3 \cdot 2^3$, altså to grupper med tre bokser. Det er $3 \cdot 2 = 6$ faktorer: $2^6 = 64$. Kontroll: $8^2 = 64$.</p>
+    <p>$2^3 \cdot 2^2$ er tre bokser og to bokser, altså $2^5 = 32$. I en potens av en potens ganger vi eksponentene. I et produkt legger vi dem sammen.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-5">
+  <h3><span class="oppgave-nr">5</span>Mønsteret nedover</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>$2^3 = 8$, $2^2 = 4$ og $2^1 = 2$. Fortsett mønsteret nedover. Hva blir $2^0$, $2^{-1}$ og $2^{-2}$?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?modus=monster&amp;g=2&amp;m=-2#utforsker">Vis mønsteret for grunntallet $2$</a>. Bytt så til <a class="oppsettlenke" href="?modus=monster&amp;g=10&amp;m=-1#utforsker">grunntallet $10$</a>.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Hva gjør du for å komme fra én rad til den neste? Forklar hvorfor $10^{-1} = 0{,}1$.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>Hver gang eksponenten blir én mindre, deler vi på $2$: $2^0 = 1$, $2^{-1} = \frac{1}{2}$, $2^{-2} = \frac{1}{4}$, $2^{-3} = \frac{1}{8}$.</p>
+    <p>Med grunntallet $10$ deler vi på $10$ for hvert steg: $10^0 = 1$, $10^{-1} = \frac{1}{10} = 0{,}1$ og $10^{-3} = 0{,}001$. Det er derfor negative tierpotenser brukes for små tall på standardform.</p>
+  </div></details>
+</div>
+</section>
+
+<p class="merknad">Se også øvingen <a href="{{rot}}varierende/finn-feilen-potenser.html">Finn feilen: potenser</a> og kortsettet <a href="{{rot}}varierende/like-potenser.html">Potenser med samme verdi</a>.</p>

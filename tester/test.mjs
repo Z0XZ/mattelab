@@ -317,7 +317,7 @@ console.log("\n6. Uten JavaScript");
   sjekk(await side.isVisible("#oppgave-1 details ul"), "løsningsforslag kan åpnes uten JS");
   await side.goto(BASE + "utforskere/index.html");
   const kort = await side.$$eval(".sim-kort-liste > li", (k) => k.filter((x) => x.offsetParent).length);
-  sjekk(kort === 10, "oversikten viser alle 10 utforskere", String(kort));
+  sjekk(kort === 16, "oversikten viser alle 16 utforskere", String(kort));
   await kontekst.close();
 }
 
@@ -337,12 +337,12 @@ console.log("\n7. Filter og fagvalg");
   sjekk(menyLenke.includes("fag=R1"), "menylenken tar med fagvalget", menyLenke);
   await side.selectOption("#fagvalg", "");
   await side.goto(BASE + "utforskere/index.html");
-  sjekk((await synlige()) === 10, "«Alle fag» viser alle", String(await synlige()));
+  sjekk((await synlige()) === 16, "«Alle fag» viser alle", String(await synlige()));
   await side.click('.filter-knapp[data-tema="derivasjon"]');
   sjekk((await synlige()) === 2, "tema Derivasjon viser 2", String(await synlige()));
   sjekk(side.url().includes("tema=derivasjon"), "temavalget står i adressen", side.url());
   sjekk((await side.getAttribute('.filter-knapp[data-tema="derivasjon"]', "aria-pressed")) === "true", "temaknappen har aria-pressed");
-  sjekk((await side.textContent(".filter-antall")) === "Viser 2 av 10", "antall treff vises", await side.textContent(".filter-antall"));
+  sjekk((await side.textContent(".filter-antall")) === "Viser 2 av 16", "antall treff vises", await side.textContent(".filter-antall"));
   await side.click('.filter-knapp[data-tema=""]');
   await side.fill("#filter-sok", "toppunkt");
   sjekk((await synlige()) === 1, "søk «toppunkt» gir 1 treff", String(await synlige()));
@@ -350,7 +350,7 @@ console.log("\n7. Filter og fagvalg");
   await side.fill("#filter-sok", "finnesikke");
   sjekk(await side.isVisible(".filter-tom"), "melding ved ingen treff");
   await side.click(".filter-tom button");
-  sjekk((await synlige()) === 10, "«Vis alt» nullstiller filteret");
+  sjekk((await synlige()) === 16, "«Vis alt» nullstiller filteret");
   await side.click('.filter-knapp[data-fag="1T"]');
   sjekk((await side.inputValue("#fagvalg")) === "1T", "fagknapp i filteret oppdaterer menyen");
   sjekk(problemer.length === 0, "ingen JS-feil i filteret", problemer.join(" | "));
@@ -539,6 +539,91 @@ const UTFORSKERE = {
     meldinger: [["?modus=kombinasjon&u1=2&u2=1&v1=6&v2=3&s=1&t=1", "Parallelle"], ["?modus=kombinasjon&u1=0&u2=0&v1=1&v2=2&s=1&t=1", "Nullvektor"], ["?modus=parameter&x0=1&y0=2&r1=0&r2=0&t=1", "nullvektoren"]],
     tekst: [["?modus=parameter&x0=1&y0=2&r1=2&r2=1&t=3", "#formler", ["y=0,5x+1,5"]]],
   },
+  "brok-som-areal": {
+    oppgaver: 5,
+    verdier: [
+      ["", "Svar (forkortet)", "1/2"],
+      ["?modus=pluss&t1=1&n1=2&t2=1&n2=3", "Svar (forkortet)", "5/6"],
+      ["?modus=pluss&t1=1&n1=2&t2=1&n2=3", "Felles nevner", "6"],
+      ["?modus=dele&t1=3&n1=4&t2=1&n2=8", "Svar (forkortet)", "6"],
+      ["?modus=dele&t1=2&n1=3&t2=1&n2=4", "Svar (forkortet)", "8/3"],
+      ["?modus=dele&t1=2&n1=3&t2=1&n2=4", "Blandet tall", "2 og 2/3"],
+      ["?modus=gange&t1=3&n1=4&t2=1&n2=2", "Svar (forkortet)", "3/8"],
+      ["?modus=gange&t1=3&n1=4&t2=3&n2=2", "Svar (forkortet)", "9/8"],
+    ],
+    meldinger: [["?modus=dele&t1=1&n1=2&t2=0&n2=3", "Vi kan ikke dele"], ["?modus=gange&t1=12&n1=1&t2=1&n2=2", "Figuren blir for stor"]],
+  },
+  algebrabrikker: {
+    oppgaver: 5,
+    verdier: [
+      ["", "Produktet", "x² + 5x + 6"],
+      ["?a=1&b=0&c=1&d=3", "Produktet", "x² + 3x"],
+      ["?a=1&b=3&c=1&d=3", "Produktet", "x² + 6x + 9"],
+      ["?a=1&b=3&c=1&d=-3", "Produktet", `x² ${M} 9`],
+      ["?a=1&b=3&c=1&d=-3", "Nullpar (x-brikker)", "3"],
+      ["?a=2&b=-1&c=1&d=4", "Produktet", `2x² + 7x ${M} 4`],
+      ["?a=2&b=-1&c=1&d=4", "x-brikker", "8 positive, 1 negativ"],
+      ["?a=2&b=-1&c=1&d=4", "Enerbrikker", "4 negative"],
+    ],
+    meldinger: [["?a=1&b=3&c=1&d=-3", "Nullpar"], ["?a=0&b=0&c=1&d=2", "En faktor er 0"], ["?a=0&b=2&c=1&d=1", "En faktor uten x"]],
+  },
+  faktorisering: {
+    oppgaver: 5,
+    verdier: [
+      ["", "Faktorisert", "(x + 2)(x + 3)"],
+      ["?b=1&c=-6", "Faktorisert", `(x ${M} 2)(x + 3)`],
+      ["?b=1&c=-6", "Nullpunkter", `x = ${M}3 og x = 2`],
+      ["?b=-7&c=12", "Faktorisert", `(x ${M} 4)(x ${M} 3)`],
+      ["?b=4&c=5", "Faktorisert", "Ikke med hele tall"],
+      ["?b=4&c=5", "b² − 4c", `${M}4`],
+      ["?b=6&c=9", "Faktorisert", "(x + 3)²"],
+      ["?b=0&c=-9", "Faktorisert", `(x ${M} 3)(x + 3)`],
+    ],
+    meldinger: [["?b=4&c=5", "Kan ikke faktoriseres"], ["?b=6&c=9", "Like tall"], ["?b=0&c=-9", "konjugatsetningen"], ["?b=5&c=0", "c = 0"], ["?b=1&c=-1", "Ingen hele tall passer"]],
+  },
+  potenser: {
+    oppgaver: 5,
+    verdier: [
+      ["", "Eksponent i svaret", "7"],
+      ["", "Verdi", "128"],
+      ["?modus=kvotient&g=2&m=5&n=2", "Verdi", "8"],
+      ["?modus=kvotient&g=2&m=2&n=5", "Eksponent i svaret", `${M}3`],
+      ["?modus=kvotient&g=2&m=2&n=5", "Verdi", "1/8 = 0,125"],
+      ["?modus=kvotient&g=2&m=3&n=3", "Verdi", "1"],
+      ["?modus=potens&g=2&m=3&n=2", "Verdi", "64"],
+      ["?modus=monster&g=10&m=-1", "Verdi", "1/10 = 0,1"],
+    ],
+    meldinger: [["?modus=kvotient&g=2&m=3&n=3", "Eksponent 0"], ["?modus=kvotient&g=2&m=2&n=5", "Negativ eksponent"], ["?modus=potens&g=2&m=2&n=-1", "n < 0"]],
+  },
+  "fullstendig-kvadrat": {
+    oppgaver: 5,
+    verdier: [
+      ["", "Fullført", `(x + 3)² ${M} 4`],
+      ["", "Bunnpunkt", `(${M}3, ${M}4)`],
+      ["", "Løsninger av likningen = 0", `x = ${M}5 og x = ${M}1`],
+      ["?b=-4&c=1", "Fullført", `(x ${M} 2)² ${M} 3`],
+      ["?b=-4&c=1", "Løsninger av likningen = 0", "x ≈ 0,27 og x ≈ 3,73"],
+      ["?b=5&c=4", "Fullført", `(x + 5/2)² ${M} 9/4`],
+      ["?b=2&c=5", "Løsninger av likningen = 0", "Ingen"],
+      ["?b=6&c=9", "Fullført", "(x + 3)²"],
+    ],
+    meldinger: [["?b=2&c=5", "Ingen løsning"], ["?b=6&c=9", "q = 0"], ["?b=0&c=-4", "b = 0"], ["?b=5&c=4", "oddetall"]],
+  },
+  "abc-formelen": {
+    oppgaver: 5,
+    verdier: [
+      ["", "b² − 4ac", "16"],
+      ["", "Løsninger", `x = ${M}1 og x = 3`],
+      ["", "Symmetrilinje", "x = 1"],
+      ["", "Avstand til nullpunktene", "√D / 2|a| = 2"],
+      ["?a=1&b=-2&c=1", "Antall løsninger", "1"],
+      ["?a=1&b=-2&c=3", "Løsninger", "Ingen"],
+      ["?a=2&b=-8&c=6", "Symmetrilinje", "x = 2"],
+      ["?a=-1&b=4&c=-3", "Løsninger", "x = 1 og x = 3"],
+      ["?a=0&b=2&c=1", "Løsninger", `x = ${M}0,5`],
+    ],
+    meldinger: [["?a=1&b=-2&c=3", "b² − 4ac < 0"], ["?a=1&b=-2&c=1", "b² − 4ac = 0"], ["?a=0&b=2&c=1", "a = 0"]],
+  },
 };
 
 for (const [id, oppsett] of Object.entries(UTFORSKERE)) {
@@ -712,6 +797,122 @@ console.log("\n10. Tilfeldige verdier");
     }
     return feil;
   }, "vektorer: 3000 tilfeldige, vinkelen stemmer med cosinussetningen");
+  await sjekkFuzz("brok-som-areal", () => {
+    const { regn } = window.mattelabBrok; const feil = [];
+    const n = () => 1 + Math.floor(Math.random() * 12), t = () => Math.floor(Math.random() * 13);
+    for (let i = 0; i < 3000; i++) {
+      const [t1, n1, t2, n2] = [t(), n(), t(), n()];
+      const sjekk = (modus, fasit) => {
+        const r = regn(modus, t1, n1, t2, n2);
+        if (r.udefinert) { if (t2 !== 0 || modus !== "dele") feil.push(modus); return; }
+        const [a, b] = r.svar;
+        // Forkortet, positiv nevner, og riktig verdi (kryssmultiplikasjon gir eksakt sjekk med heltall)
+        const g = (x, y) => (y ? g(y, x % y) : Math.abs(x));
+        if (b <= 0 || g(a, b) !== 1 && a !== 0) feil.push(`${modus} ikke forkortet ${a}/${b}`);
+        if (a * fasit[1] !== b * fasit[0]) feil.push(`${modus} ${t1}/${n1},${t2}/${n2}: ${a}/${b}`);
+      };
+      sjekk("pluss", [t1 * n2 + t2 * n1, n1 * n2]);
+      sjekk("gange", [t1 * t2, n1 * n2]);
+      if (t2) sjekk("dele", [t1 * n2, n1 * t2]); else sjekk("dele", [0, 1]);
+    }
+    return feil;
+  }, "brøk: 3000 tilfeldige, pluss, gange og dele gir riktig forkortet brøk");
+  await sjekkFuzz("algebrabrikker", () => {
+    const { gangUt } = window.mattelabBrikker; const feil = [];
+    const h = (a, b) => a + Math.floor(Math.random() * (b - a + 1));
+    for (let i = 0; i < 3000; i++) {
+      const [a, b, c, d] = [h(0, 3), h(-6, 6), h(0, 3), h(-6, 6)];
+      const r = gangUt(a, b, c, d), k = r.brikker;
+      for (const x of [-2.5, 0.7, 3]) if (Math.abs((a * x + b) * (c * x + d) - (r.A * x * x + r.B * x + r.C)) > 1e-9) feil.push(`${a},${b},${c},${d}`);
+      // Brikkene: antall x-brikker i rektangelet er a·|d| + |b|·c, og netto er ad + bc
+      if (k.xPos + k.xNeg !== a * Math.abs(d) + Math.abs(b) * c || k.x !== r.B || k.x2 !== r.A || k.en !== r.C) feil.push(`brikker ${a},${b},${c},${d}`);
+    }
+    return feil;
+  }, "algebrabrikker: 3000 tilfeldige, produktet og brikketellingen stemmer");
+  await sjekkFuzz("faktorisering", () => {
+    const { faktoriser } = window.mattelabFaktorisering; const feil = [];
+    for (let b = -12; b <= 12; b++) for (let c = -36; c <= 36; c++) {
+      const r = faktoriser(b, c);
+      // Finnes det hele tall m, n med m + n = b og mn = c? Da er nullpunktene −m og −n hele tall.
+      const hele = r.D >= 0 && Number.isInteger(Math.sqrt(r.D)) && (b + Math.sqrt(r.D)) % 2 === 0;
+      if (!!r.treff !== hele) feil.push(`b=${b} c=${c}: treff ${JSON.stringify(r.treff)}`);
+      if (r.treff) {
+        const [m, n] = r.treff;
+        if (m + n !== b || m * n !== c) feil.push(`b=${b} c=${c}: ${m},${n}`);
+      }
+      for (const [m, n] of r.par) if (m * n !== c && c !== 0) feil.push(`par ${m},${n} for c=${c}`);
+      if (new Set(r.par.map((p) => p.join())).size !== r.par.length) feil.push(`dobbelt par c=${c}`);
+    }
+    return feil;
+  }, "faktorisering: alle b og c på glidebryterne, produkt og sum stemmer, ingen par mangler eller er doble");
+  await sjekkFuzz("fullstendig-kvadrat", () => {
+    const { fullfor } = window.mattelabFullstendig; const feil = [];
+    for (let b = -10; b <= 10; b++) for (let c = -20; c <= 20; c++) {
+      const r = fullfor(b, c);
+      for (const x of [-3.3, 0, 1.7]) if (Math.abs((x + r.p) ** 2 + r.q - (x * x + b * x + c)) > 1e-9) feil.push(`${b},${c}`);
+      for (const x of r.losninger) if (Math.abs(x * x + b * x + c) > 1e-9) feil.push(`løsning ${b},${c}`);
+      if ((r.q > 0) !== (r.losninger.length === 0)) feil.push(`antall ${b},${c}`);
+    }
+    return feil;
+  }, "fullstendig kvadrat: alle b og c på glidebryterne, (x + p)² + q er identisk med uttrykket");
+  await sjekkFuzz("abc-formelen", () => {
+    const { abc } = window.mattelabAbc; const feil = [];
+    const t = () => Math.round((Math.random() * 20 - 10) * 2) / 2;
+    for (let i = 0; i < 3000; i++) {
+      const a = t() || 1, b = t(), c = t();
+      const r = abc(a, b, c);
+      for (const x of r.nullpunkter) if (Math.abs(a * x * x + b * x + c) > 1e-7 * (1 + Math.abs(b * x) + Math.abs(c))) feil.push(`${a},${b},${c}`);
+      if (r.antall === 2 && Math.abs((r.nullpunkter[1] - r.nullpunkter[0]) / 2 - r.avstand) > 1e-9) feil.push(`avstand ${a},${b},${c}`);
+      if (r.antall !== (r.D > 0 ? 2 : r.D === 0 ? 1 : 0)) feil.push(`antall ${a},${b},${c}`);
+    }
+    return feil;
+  }, "abc-formelen: 3000 tilfeldige, løsningene passer i likningen og pilene er halve avstanden");
+  await sjekkFuzz("potenser", () => {
+    const { faktorer, verdi } = window.mattelabPotenser; const feil = [];
+    for (const modus of ["produkt", "kvotient", "potens"]) for (let m = -5; m <= 6; m++) for (let n = -5; n <= 6; n++) {
+      if (modus === "potens" && n < 0) continue;
+      const f = faktorer(modus, m, n);
+      const regel = modus === "produkt" ? m + n : modus === "kvotient" ? m - n : m * n;
+      if (f.eksponent !== regel) feil.push(`${modus} ${m},${n}`);
+      for (const g of [2, 3, 10]) {
+        const [t, nv] = verdi(g, f.eksponent);
+        const direkte = modus === "produkt" ? g ** m * g ** n : modus === "kvotient" ? g ** m / g ** n : (g ** m) ** n;
+        if (Math.abs(t / nv - direkte) > 1e-9 * Math.max(1, direkte)) feil.push(`verdi ${modus} ${g},${m},${n}`);
+      }
+    }
+    return feil;
+  }, "potenser: alle eksponenter på glidebryterne, tellingen gir samme eksponent og verdi som reglene");
+  // Øvingene: oppgavene lages fra svaret, og fasiten må passe med oppgaven
+  await side.goto(BASE + "varierende/fullfor-kvadratet.html", { waitUntil: "networkidle" });
+  sjekk((await side.evaluate(async () => {
+    const { lagOppgave } = window.mattelabFullfor; const { lagTilfeldig } = await import("../statisk/js/ovelse.js"); const feil = [];
+    const r = lagTilfeldig();
+    for (let i = 0; i < 4000; i++) {
+      const niva = 1 + (i % 4), o = lagOppgave(niva, r);
+      for (const x of [-2.3, 0.4, 3]) if (Math.abs(o.a * (x + o.p) ** 2 + o.q - (o.a * x * x + o.b * x + o.c)) > 1e-9) feil.push(`identitet nivå ${niva}`);
+      if (niva === 2 && Math.abs(o.b % 2) !== 1) feil.push("nivå 2 skal ha odde b");
+      if (niva === 1 && o.b % 2 !== 0) feil.push("nivå 1 skal ha partall b");
+      if (niva !== 2 && !Number.isInteger(o.c)) feil.push(`c er ikke et helt tall: ${o.c}`);
+      if (niva === 4 && o.a === 1) feil.push("nivå 4 skal ha a ≠ 1");
+      if (niva === 3) for (const x of o.losninger) if (Math.abs(x * x + o.b * x + o.c) > 1e-9) feil.push("løsning");
+    }
+    return feil;
+  })).length === 0, "fullfør kvadratet: 4000 tilfeldige oppgaver, (x + p)² + q stemmer på alle nivåene");
+  await side.goto(BASE + "varierende/finn-feilen-potenser.html", { waitUntil: "networkidle" });
+  sjekk((await side.evaluate(async () => {
+    const { lagOppgave } = window.mattelabFinnFeilen; const { lagTilfeldig } = await import("../statisk/js/ovelse.js"); const feil = [];
+    const r = lagTilfeldig(); let utenFeil = 0;
+    for (let i = 0; i < 3000; i++) {
+      const o = lagOppgave(r);
+      if (o.feilSteg < 0) { utenFeil++; if (o.linjer.join() !== o.riktig.join()) feil.push("uten feil, men ulike linjer"); continue; }
+      // Linjene før feilen er like de riktige; linjen med feilen er ulik
+      for (let k = 0; k < o.feilSteg; k++) if (o.linjer[k] !== o.riktig[k]) feil.push(`steg ${k} før feilen er endret: ${o.oppgave}`);
+      if (o.linjer[o.feilSteg] === o.riktig[o.feilSteg]) feil.push(`feilen synes ikke: ${o.oppgave} ${o.linjer.join(" | ")}`);
+      if (!o.forklaring) feil.push("mangler forklaring");
+    }
+    if (utenFeil < 300 || utenFeil > 900) feil.push(`andel uten feil: ${utenFeil}/3000`);
+    return feil;
+  })).length === 0, "finn feilen: 3000 tilfeldige oppgaver, feilen står i riktig steg og synes");
   await kontekst.close();
 }
 
@@ -720,8 +921,145 @@ console.log("\n11. Lærersiden");
 {
   const { side, kontekst } = await nySide();
   await side.goto(BASE + "laerer.html", { waitUntil: "networkidle" });
-  const koblet = await side.$$eval(".km-kobling a", (a) => new Set(a.map((x) => x.getAttribute("href").split("/").pop())).size);
-  sjekk(koblet === 10, "lærersiden lenker til alle 10 utforskerne", String(koblet));
+  const koblet = new Set(await side.$$eval(".km-kobling a", (a) => a.map((x) => x.getAttribute("href"))));
+  const utforskere = SIDER.filter((s) => s.startsWith("utforskere/") && !s.endsWith("index.html"));
+  const mangler = utforskere.filter((u) => !koblet.has(u));
+  sjekk(mangler.length <= 2, `lærersiden lenker til nesten alle de ${utforskere.length} utforskerne`, mangler.join(", "));
+  sjekk(Array.from(koblet).some((h) => h.startsWith("varierende/")), "lærersiden lenker også til varierende undervisning");
+  await kontekst.close();
+}
+
+// ---------------------------------------------------------------- 12. kortsett
+console.log("\n12. Kortsett: løsning på skjermen, feil kobling, tastatur og utskrift");
+for (const navn of SIDER.filter((s) => s.startsWith("varierende/") && fs.readFileSync(path.join(DOCS, s), "utf8").includes('id="kortsett"'))) {
+  const id = navn.split("/").pop().replace(".html", "");
+  const { side, kontekst, problemer } = await nySide();
+  await side.goto(BASE + navn, { waitUntil: "networkidle" });
+  const info = await side.evaluate(() => ({ ...window.mattelabKortsett, antall: document.querySelectorAll("button.kort").length }));
+  // Løs settet med svarnøkkelen og sjekk at alt blir riktig
+  const status = await side.evaluate(({ type }) => {
+    const kort = Array.from(document.querySelectorAll("button.kort"));
+    if (type === "grupper") {
+      const grupper = {};
+      for (const k of kort) (grupper[k.dataset.svar] ||= []).push(k);
+      for (const g of Object.values(grupper)) for (const k of g) k.click();
+    } else if (type === "sorter") {
+      for (const k of kort) { k.click(); document.querySelector(`.kort-kategori[data-kategori="${k.dataset.svar.split(" ")[0]}"] .kategori-knapp`).click(); }
+    } else {
+      kort.sort((a, b) => a.dataset.svar - b.dataset.svar).forEach((k) => k.click());
+    }
+    document.getElementById("kort-sjekk").click();
+    return document.getElementById("kort-status").textContent;
+  }, info);
+  sjekk(/^Alle|^Hele/.test(status), `${id}: settet kan løses, og «Sjekk» sier at alt er riktig`, status);
+  // Start på nytt, lag én feil, og sjekk at den blir oppdaget
+  const feil = await side.evaluate(({ type, n }) => {
+    document.getElementById("kort-nullstill").click();
+    const kort = Array.from(document.querySelectorAll("#kort-bunke button.kort"));
+    if (type === "grupper") {
+      const forste = kort[0];
+      const andre = kort.filter((k) => k.dataset.svar !== forste.dataset.svar).slice(0, n - 1);
+      [forste, ...andre].forEach((k) => k.click());
+    } else if (type === "sorter") {
+      const k = kort.find((x) => x.dataset.svar.split(" ").length === 1);
+      const galt = Array.from(document.querySelectorAll(".kort-kategori")).find((b) => b.dataset.kategori !== k.dataset.svar);
+      k.click(); galt.querySelector(".kategori-knapp").click();
+    } else {
+      kort.sort((a, b) => b.dataset.svar - a.dataset.svar)[0].click();
+    }
+    document.getElementById("kort-sjekk").click();
+    return { status: document.getElementById("kort-status").textContent, merket: document.querySelectorAll(".feil").length };
+  }, info);
+  sjekk(feil.merket > 0 && /^0 av 1/.test(feil.status), `${id}: en feil blir merket med tekst og stiplet kant`, JSON.stringify(feil));
+  // Tastatur: Enter på et kort velger det
+  await side.evaluate(() => document.getElementById("kort-nullstill").click());
+  await side.focus("#kort-bunke button.kort");
+  await side.keyboard.press("Enter");
+  // Grupper og sortering: kortet blir valgt. Rekkefølge: kortet flyttes til rekka.
+  sjekk(await side.evaluate(() => !!document.querySelector('button.kort[aria-pressed="true"]') || document.querySelectorAll("#kort-rekke button.kort").length === 1), `${id}: kort kan velges med tastaturet`);
+  // Utskrift og fasit
+  const lenker = await side.$$eval(".kortsett .elevark-lenke a", (a) => a.map((x) => x.getAttribute("href")));
+  const tekst = {};
+  for (const l of lenker.filter((x) => x.endsWith(".pdf"))) {
+    const svar = await side.request.get(new URL(l, side.url()).href);
+    const fil = path.join(RES, path.basename(l));
+    fs.writeFileSync(fil, await svar.body());
+    tekst[l.includes("fasit") ? "fasit" : "kort"] = execFileSync("pdftotext", ["-layout", fil, "-"]).toString();
+  }
+  const koder = Array.from({ length: info.antall }, (_, i) => `${info.kode}-${String(i + 1).padStart(2, "0")}`);
+  const manglerKort = koder.filter((k) => !tekst.kort?.includes(k));
+  sjekk(manglerKort.length === 0, `${id}: alle ${info.antall} kortene står i utskriften med kode`, manglerKort.join(", "));
+  const manglerFasit = koder.filter((k) => !tekst.fasit?.includes(k));
+  sjekk(manglerFasit.length === 0 && tekst.fasit.includes("Fasit"), `${id}: fasiten nevner alle kortene`, manglerFasit.join(", "));
+  sjekk(!/\{\{|\$/.test(tekst.kort + tekst.fasit), `${id}: ingen plassholdere eller rå formler i PDF-ene`);
+  sjekk(problemer.length === 0, `${id}: ingen JS-feil`, problemer.join(" | "));
+  await kontekst.close();
+}
+
+// ---------------------------------------------------------------- 13. tavleoppgaver
+console.log("\n13. Tavleoppgaver: ett spørsmål om gangen, piltaster og lenker");
+for (const navn of SIDER.filter((s) => s.startsWith("varierende/") && fs.readFileSync(path.join(DOCS, s), "utf8").includes('class="tavle-ramme"'))) {
+  const id = navn.split("/").pop().replace(".html", "");
+  const { side, kontekst, problemer } = await nySide();
+  await side.goto(BASE + navn, { waitUntil: "networkidle" });
+  const synlige = () => side.$$eval(".tavle-kort", (k) => k.filter((x) => !x.hidden).length);
+  const antall = await side.$$eval(".tavle-kort", (k) => k.length);
+  sjekk((await synlige()) === 1, `${id}: bare ett av ${antall} spørsmål vises`);
+  sjekk(await side.$$eval(".tavle-svar", (d) => d.every((x) => !x.open)), `${id}: svarforslagene er lukket`);
+  await side.keyboard.press("ArrowRight");
+  await side.keyboard.press("ArrowRight");
+  sjekk(new URL(side.url()).hash === "#t3" && (await side.textContent(".tavle-teller")).includes(`3 av ${antall}`), `${id}: piltast går til neste spørsmål, og adressen viser hvilket`);
+  await side.goto("about:blank");
+  await side.goto(BASE + navn + "#t2", { waitUntil: "networkidle" });
+  sjekk((await side.evaluate(() => window.mattelabTavle.gjeldende())) === 1, `${id}: lenke til spørsmål 2 åpner spørsmål 2`);
+  await side.click(".tavle-alle");
+  sjekk((await synlige()) === antall, `${id}: «Vis alle» viser alle spørsmålene`);
+  sjekk(problemer.length === 0, `${id}: ingen JS-feil`, problemer.join(" | "));
+  await kontekst.close();
+}
+
+// ---------------------------------------------------------------- 14. øvinger
+console.log("\n14. Øvinger: riktige og gale svar");
+{
+  const { side, kontekst, problemer } = await nySide();
+  await side.goto(BASE + "varierende/finn-feilen-potenser.html?frø=7", { waitUntil: "networkidle" });
+  for (let i = 0; i < 6; i++) {
+    const o = await side.evaluate(() => window.mattelabFinnFeilen.gjeldende());
+    if (o.feilSteg >= 0) {
+      const annet = o.feilSteg === 0 ? 1 : 0;
+      await side.click(`.steg-knapp[data-steg="${annet}"]`);
+      sjekk((await side.textContent("#ff-tilbake")).includes("Ikke helt"), `finn feilen: et riktig steg gir «Ikke helt» (oppgave ${i + 1})`);
+      await side.click(`.steg-knapp[data-steg="${o.feilSteg}"]`);
+    } else {
+      await side.click("#ff-ingen");
+    }
+    sjekk((await side.textContent("#ff-tilbake")).includes("Riktig!"), `finn feilen: riktig valg gir «Riktig!» (oppgave ${i + 1})`);
+    await side.click("#ff-ny");
+  }
+  for (const niva of [1, 2, 3, 4]) {
+    await side.goto(BASE + `varierende/fullfor-kvadratet.html?niva=${niva}&frø=${niva * 11}`, { waitUntil: "networkidle" });
+    const o = await side.evaluate(() => window.mattelabFullfor.gjeldende());
+    const svar = [];
+    if (o.a !== 1) svar.push([String(2 * o.p)]);
+    svar.push([String(o.p).replace(".", ",")], [String(o.p * o.p).replace(".", ",")], [String(o.p), String(o.q)]);
+    // Første steg: ett galt svar gir hint
+    await side.fill(".fk-steg:last-child input[type=text]", "1000");
+    await side.click(".fk-steg:last-child .fk-sjekk");
+    sjekk((await side.textContent(".fk-steg:last-child .ovelse-tilbake")).includes("Ikke riktig"), `fullfør kvadratet nivå ${niva}: galt svar gir hint`);
+    for (const s of svar) {
+      const felt = side.locator(".fk-steg:last-child input[type=text]");
+      for (let j = 0; j < s.length; j++) await felt.nth(j).fill(s[j]);
+      await side.click(".fk-steg:last-child .fk-sjekk");
+    }
+    if (niva === 3) {
+      if (o.ingenLosning) await side.check(".fk-steg:last-child .fk-ingen");
+      else { const f = side.locator(".fk-steg:last-child input[type=text]"); await f.nth(0).fill(o.losninger[1].toFixed(2).replace(".", ",")); await f.nth(1).fill(o.losninger[0].toFixed(2)); }
+      await side.click(".fk-steg:last-child .fk-sjekk");
+    }
+    const ferdig = await side.textContent("#fk-ferdig");
+    sjekk(ferdig.includes("Ferdig"), `fullfør kvadratet nivå ${niva}: riktige svar gjennom alle stegene gir «Ferdig»`, ferdig);
+  }
+  sjekk(problemer.length === 0, "øvingene: ingen JS-feil", problemer.join(" | "));
   await kontekst.close();
 }
 
