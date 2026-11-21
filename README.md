@@ -32,7 +32,7 @@ Se på siden lokalt: `python3 -m http.server --directory docs` og åpne http://l
 | `statisk/js/matte.js` | Tall og uttrykk i TeX (`texTall`, `texPolynom`, `texT`, `texP`) |
 | `statisk/js/utforskere/` | Ett skript per utforsker. Den rene matematikken eksporteres, så testene kan sjekke den med tilfeldige verdier |
 | `statisk/js/brikker.js` | Algebrabrikker i SVG (brukes av algebrabrikker og faktorisering) |
-| `statisk/js/kortsett.js` | Kortsett på skjermen: koble, sortere og ordne med klikk eller tastatur |
+| `statisk/js/kortsett.js` | Kortbordet: dra og slipp (mus, finger, penn), trykk-og-velg og tastatur, faste plasser på brettet, bytte, tekst som tilpasses kortet |
 | `statisk/js/tavle.js` | Tavleoppgaver: ett spørsmål om gangen, piltaster, fullskjerm |
 | `statisk/js/ovelse.js` og `statisk/js/ovelser/` | Øvinger: tilfeldige tall (`?frø=`), tolking av elevsvar (brøk, komma, minus) |
 | `statisk/js/forside.js` | Den lille parabel-utforskeren på forsiden |

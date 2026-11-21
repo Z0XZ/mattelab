@@ -91,7 +91,7 @@ FASITNOTAT = "Tips til læreren i fasiten."
 - **Sortering:** `KATEGORIER = [("id", "Navn"), …]` og `kort(..., riktig=["id"], kommentar="…")`. Flere lovlige bokser er lov. Kommentaren vises etter «Sjekk» og står i fasiten.
 - **Rekkefølge:** `kort(..., verdi=…)`. Ingen to kort kan ha samme verdi.
 - **Utskrift:** `docs/kortsett/<navn>.pdf` (A4, 3 × 6 kort med stiplede klippelinjer, kode i hjørnet og en rad blanke kort) og `docs/kortsett/<navn>-fasit.pdf`. LaTeX-kildene ligger ved siden av. Stokkingen er fast (frø = koden), så nummeret på skjermen og på papiret er det samme.
-- Skriptet `kortsett.js` legges til automatisk.
+- Skriptet `kortsett.js` legges til automatisk. Det lager kortbordet: bunken (til venstre, eller som en stripe nederst på mobil) og brettet med plasser eller bokser. Kortene kan dras, eller velges med trykk og legges med et nytt trykk.
 
 ## Tavleoppgaver og øvinger
 

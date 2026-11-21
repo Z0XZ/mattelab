@@ -72,7 +72,7 @@ for (const navn of SIDER) {
     if (bredde === 360) {
       // Finn elementer som stikker utenfor skjermen (hjelp ved feilsøking)
       const utenfor = await side.evaluate(() => Array.from(document.querySelectorAll("body *")).filter((e) => {
-        const r = e.getBoundingClientRect(); return r.width > 0 && r.right > document.documentElement.clientWidth + 1 && !e.closest(".katex-display, .tabell-rull, .tabell-rull-liten, .forskrift, .former p, .utregning, .likning, .katex-mathml, svg");
+        const r = e.getBoundingClientRect(); return r.width > 0 && r.right > document.documentElement.clientWidth + 1 && !e.closest(".katex-display, .tabell-rull, .tabell-rull-liten, .forskrift, .former p, .utregning, .likning, .katex-mathml, svg, .kort-bunke");
       }).slice(0, 5).map((e) => e.tagName + "." + e.className));
       sjekk(utenfor.length === 0, `${navn} @ 360px: ingen elementer utenfor skjermkanten`, utenfor.join(", "));
       await side.screenshot({ path: path.join(RES, navn.replace(/\//g, "_") + "-360.png"), fullPage: true });
@@ -930,53 +930,109 @@ console.log("\n11. Lærersiden");
 }
 
 // ---------------------------------------------------------------- 12. kortsett
-console.log("\n12. Kortsett: løsning på skjermen, feil kobling, tastatur og utskrift");
+console.log("\n12. Kortsett: løsning på brettet, dra og slipp, bytte, tastatur og utskrift");
 for (const navn of SIDER.filter((s) => s.startsWith("varierende/") && fs.readFileSync(path.join(DOCS, s), "utf8").includes('id="kortsett"'))) {
   const id = navn.split("/").pop().replace(".html", "");
   const { side, kontekst, problemer } = await nySide();
   await side.goto(BASE + navn, { waitUntil: "networkidle" });
-  const info = await side.evaluate(() => ({ ...window.mattelabKortsett, antall: document.querySelectorAll("button.kort").length }));
-  // Løs settet med svarnøkkelen og sjekk at alt blir riktig
+  const info = await side.evaluate(() => ({ ...window.mattelabKortsett, flytt: null, bunke: null, brett: null, antall: document.querySelectorAll("button.kort").length }));
+
+  // Løs settet med trykk: velg et kort, trykk så på en ledig plass eller en boks
   const status = await side.evaluate(({ type }) => {
     const kort = Array.from(document.querySelectorAll("button.kort"));
+    const leggPaa = (k, knapp) => { k.click(); knapp.click(); };
     if (type === "grupper") {
       const grupper = {};
       for (const k of kort) (grupper[k.dataset.svar] ||= []).push(k);
-      for (const g of Object.values(grupper)) for (const k of g) k.click();
+      const rader = Array.from(document.querySelectorAll(".kort-rad"));
+      Object.values(grupper).forEach((g, i) => g.forEach((k, j) => leggPaa(k, rader[i].querySelectorAll(".plass-knapp")[j])));
     } else if (type === "sorter") {
-      for (const k of kort) { k.click(); document.querySelector(`.kort-kategori[data-kategori="${k.dataset.svar.split(" ")[0]}"] .kategori-knapp`).click(); }
+      for (const k of kort) leggPaa(k, document.querySelector(`.kort-kategori[data-kategori="${k.dataset.svar.split(" ")[0]}"] .kategori-knapp`));
     } else {
-      kort.sort((a, b) => a.dataset.svar - b.dataset.svar).forEach((k) => k.click());
+      const plasser = Array.from(document.querySelectorAll(".plass-knapp"));
+      for (const k of kort) leggPaa(k, plasser[Number(k.dataset.svar) - 1]);
     }
     document.getElementById("kort-sjekk").click();
     return document.getElementById("kort-status").textContent;
   }, info);
-  sjekk(/^Alle|^Hele/.test(status), `${id}: settet kan løses, og «Sjekk» sier at alt er riktig`, status);
-  // Start på nytt, lag én feil, og sjekk at den blir oppdaget
+  sjekk(/^Alle|^Hele/.test(status), `${id}: settet kan løses med trykk, og «Sjekk» sier at alt er riktig`, status);
+  sjekk((await side.textContent("#kort-fremdrift")) === `${info.antall} av ${info.antall} kort plassert`, `${id}: telleren viser at alle kortene er plassert`);
+
+  // Lag én feil og sjekk at den blir merket
   const feil = await side.evaluate(({ type, n }) => {
     document.getElementById("kort-nullstill").click();
     const kort = Array.from(document.querySelectorAll("#kort-bunke button.kort"));
     if (type === "grupper") {
       const forste = kort[0];
       const andre = kort.filter((k) => k.dataset.svar !== forste.dataset.svar).slice(0, n - 1);
-      [forste, ...andre].forEach((k) => k.click());
+      const plasser = document.querySelectorAll(".kort-rad")[0].querySelectorAll(".plass-knapp");
+      [forste, ...andre].forEach((k, i) => { k.click(); plasser[i].click(); });
     } else if (type === "sorter") {
       const k = kort.find((x) => x.dataset.svar.split(" ").length === 1);
       const galt = Array.from(document.querySelectorAll(".kort-kategori")).find((b) => b.dataset.kategori !== k.dataset.svar);
       k.click(); galt.querySelector(".kategori-knapp").click();
     } else {
       kort.sort((a, b) => b.dataset.svar - a.dataset.svar)[0].click();
+      document.querySelector(".plass-knapp").click();
     }
     document.getElementById("kort-sjekk").click();
     return { status: document.getElementById("kort-status").textContent, merket: document.querySelectorAll(".feil").length };
   }, info);
   sjekk(feil.merket > 0 && /^0 av 1/.test(feil.status), `${id}: en feil blir merket med tekst og stiplet kant`, JSON.stringify(feil));
-  // Tastatur: Enter på et kort velger det
+
+  // Ekte dra og slipp med musa: første kort i bunken til første ledige plass eller boks
+  await side.evaluate(() => document.getElementById("kort-nullstill").click());
+  const kortet = side.locator("#kort-bunke button.kort").first();
+  const nr = await kortet.getAttribute("data-nr");
+  const mal = side.locator(".plass-knapp, .kategori-knapp").first();
+  await mal.scrollIntoViewIfNeeded();
+  await kortet.scrollIntoViewIfNeeded();
+  const a = await kortet.boundingBox(), m = await mal.boundingBox();
+  await side.mouse.move(a.x + a.width / 2, a.y + a.height / 2);
+  await side.mouse.down();
+  await side.mouse.move(a.x + a.width / 2 + 30, a.y + a.height / 2 + 20, { steps: 4 });
+  await side.mouse.move(m.x + m.width / 2, m.y + m.height / 2, { steps: 10 });
+  await side.mouse.up();
+  await side.waitForTimeout(50);
+  const dratt = await side.evaluate((nr) => ({
+    paaBrett: !!document.querySelector(`#kort-brett button.kort[data-nr="${nr}"]`),
+    valgt: document.querySelectorAll('button.kort[aria-pressed="true"]').length,
+    spokelse: document.querySelectorAll(".kort-spokelse").length,
+  }), nr);
+  sjekk(dratt.paaBrett && !dratt.valgt && !dratt.spokelse, `${id}: et kort kan dras med musa og slippes på brettet`, JSON.stringify(dratt));
+
+  // Bytte: et valgt kort som trykkes på et kort på brettet, bytter plass med det
+  if (info.type !== "sorter") {
+    const byttet = await side.evaluate((nr) => {
+      const paaBrett = document.querySelector(`#kort-brett button.kort[data-nr="${nr}"]`);
+      const annet = document.querySelector("#kort-bunke button.kort");
+      annet.click(); paaBrett.click();
+      return { annet: !!annet.closest("#kort-brett"), forste: !!paaBrett.closest("#kort-bunke") };
+    }, nr);
+    sjekk(byttet.annet && byttet.forste, `${id}: kort bytter plass når et kort legges på et opptatt sted`, JSON.stringify(byttet));
+  }
+
+  // Tastatur: Enter på et kort velger det, Enter på en plass legger det der, Esc avbryter
   await side.evaluate(() => document.getElementById("kort-nullstill").click());
   await side.focus("#kort-bunke button.kort");
   await side.keyboard.press("Enter");
-  // Grupper og sortering: kortet blir valgt. Rekkefølge: kortet flyttes til rekka.
-  sjekk(await side.evaluate(() => !!document.querySelector('button.kort[aria-pressed="true"]') || document.querySelectorAll("#kort-rekke button.kort").length === 1), `${id}: kort kan velges med tastaturet`);
+  const valgtNr = await side.evaluate(() => document.querySelector('button.kort[aria-pressed="true"]')?.dataset.nr);
+  await side.keyboard.press("Escape");
+  const etterEsc = await side.evaluate(() => document.querySelectorAll('button.kort[aria-pressed="true"]').length);
+  await side.focus("#kort-bunke button.kort");
+  await side.keyboard.press("Enter");
+  await side.focus(".plass-knapp, .kategori-knapp");
+  await side.keyboard.press("Enter");
+  const lagtMedTastatur = await side.evaluate((nr) => !!document.querySelector(`#kort-brett button.kort[data-nr="${nr}"]`), valgtNr);
+  sjekk(valgtNr && etterEsc === 0 && lagtMedTastatur, `${id}: kort kan velges, avbrytes og legges med tastaturet`);
+
+  // Teksten passer på alle kortene
+  const forStore = await side.evaluate(() => Array.from(document.querySelectorAll(".kort-innhold:not(.kort-figur)")).filter((i) => {
+    const k = i.closest(".kort"), st = getComputedStyle(k);
+    return i.scrollWidth > i.clientWidth + 1 || i.getBoundingClientRect().height > k.clientHeight - parseFloat(st.paddingTop) - parseFloat(st.paddingBottom) + 1;
+  }).map((i) => i.closest(".kort").dataset.nr));
+  sjekk(forStore.length === 0, `${id}: teksten passer inni alle kortene`, forStore.join(", "));
+
   // Utskrift og fasit
   const lenker = await side.$$eval(".kortsett .elevark-lenke a", (a) => a.map((x) => x.getAttribute("href")));
   const tekst = {};
@@ -993,6 +1049,27 @@ for (const navn of SIDER.filter((s) => s.startsWith("varierende/") && fs.readFil
   sjekk(manglerFasit.length === 0 && tekst.fasit.includes("Fasit"), `${id}: fasiten nevner alle kortene`, manglerFasit.join(", "));
   sjekk(!/\{\{|\$/.test(tekst.kort + tekst.fasit), `${id}: ingen plassholdere eller rå formler i PDF-ene`);
   sjekk(problemer.length === 0, `${id}: ingen JS-feil`, problemer.join(" | "));
+  await kontekst.close();
+}
+
+// Dra og slipp med berøring på mobil (ett sett er nok)
+{
+  const { side, kontekst, problemer } = await nySide({ viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true });
+  await side.goto(BASE + "varierende/identiteter.html", { waitUntil: "networkidle" });
+  const kortet = side.locator("#kort-bunke button.kort").first();
+  const nr = await kortet.getAttribute("data-nr");
+  await kortet.scrollIntoViewIfNeeded();
+  const mal = side.locator(".plass-knapp").first();
+  const a = await kortet.boundingBox(), m = await mal.boundingBox();
+  // Berøring sendes som pointer-hendelser med pointerType «touch»
+  const cdp = await kontekst.newCDPSession(side);
+  const trykk = (type, x, y) => cdp.send("Input.dispatchTouchEvent", { type, touchPoints: type === "touchEnd" ? [] : [{ x, y }] });
+  await trykk("touchStart", a.x + a.width / 2, a.y + a.height / 2);
+  for (let i = 1; i <= 12; i++) await trykk("touchMove", a.x + a.width / 2 + (m.x + m.width / 2 - a.x - a.width / 2) * i / 12, a.y + a.height / 2 + (m.y + m.height / 2 - a.y - a.height / 2) * i / 12);
+  await trykk("touchEnd");
+  await side.waitForTimeout(100);
+  sjekk(await side.evaluate((nr) => !!document.querySelector(`#kort-brett button.kort[data-nr="${nr}"]`), nr), "kortsett på mobil: et kort kan dras opp fra stripa med fingeren");
+  sjekk(problemer.length === 0, "kortsett på mobil: ingen JS-feil", problemer.join(" | "));
   await kontekst.close();
 }
 

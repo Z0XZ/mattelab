@@ -154,44 +154,64 @@ def kort_html(k: Kort, kode: str) -> str:
         lang = len(k.tekst) > 40 and "$" not in k.tekst[:2]
         innhold = f'<span class="kort-innhold{" kort-lang" if lang else ""}">{k.tekst}</span>'
     kommentar = f'<span class="kort-kommentar" hidden>{k.kommentar}</span>' if k.kommentar else ""
-    return (f'<li><div class="kort" data-nr="{k.nr}" data-svar="{esc(k.svar)}">{innhold}'
-            f'<span class="kort-kode">{esc(kode)}-{k.nr}</span>{kommentar}</div></li>')
+    return (f'<div class="kort" data-nr="{k.nr}" data-svar="{esc(k.svar)}">{innhold}'
+            f'<span class="kort-kode">{esc(kode)}-{k.nr}</span>{kommentar}</div>')
+
+
+def plass(navn: str, nr: str) -> str:
+    """En tom plass på brettet. Knappen brukes med tastatur og trykk; kortet legges ved siden av den."""
+    return (f'<div class="kort-plass" data-plass="{esc(nr)}">'
+            f'<button type="button" class="plass-knapp" aria-label="Tom plass: {esc(navn)}"><span aria-hidden="true">+</span></button></div>')
 
 
 def lag_html(sid: str, m, kortliste: list[Kort]) -> str:
+    """Kortbordet: bunken med kort, og brettet med plasser (grupper og rekkefølge) eller bokser (sortering).
+    Brettet vises bare med JavaScript. Uten JavaScript står kortene som en liste."""
     kode = m.KODE
     lenker = (f'<p class="elevark-lenke"><a class="knapp lys liten" href="{{{{rot}}}}kortsett/{sid}.pdf" download>Last ned kortene (PDF)</a> '
               f'<a class="knapp lys liten" href="{{{{rot}}}}kortsett/{sid}-fasit.pdf" download>Fasit for læreren (PDF)</a> '
               f'<a class="elevark-tex" href="{{{{rot}}}}kortsett/{sid}.tex" download>LaTeX-kilde til eget bruk</a></p>')
     if m.TYPE == "grupper":
-        hjelp = (f"Velg {m.STORRELSE} kort som hører sammen. Når du har valgt {m.STORRELSE}, blir de en gruppe. "
-                 "Trykk «Sjekk» når du vil se om gruppene stemmer.")
-        midt = '<div class="kort-grupper" id="kort-grupper" aria-label="Gruppene dine"></div>'
+        n = m.STORRELSE
+        hjelp = f"Dra kortene til brettet, {n} og {n} i hver rad. Eller trykk på et kort og så på en ledig plass."
+        rader_ = "".join(
+            f'<div class="kort-rad" data-rad="{g}" role="group" aria-label="Gruppe {g}">'
+            f'<span class="rad-navn">Gruppe {g}</span><div class="rad-plasser">'
+            + "".join(plass(f"gruppe {g}, plass {p}", f"{g}-{p}") for p in range(1, n + 1))
+            + '</div><span class="rad-merke" aria-live="off"></span></div>'
+            for g in range(1, len(m.GRUPPER) + 1))
+        brett = f'<div class="kort-rader kort-rader-{n}">{rader_}</div>'
     elif m.TYPE == "sorter":
-        hjelp = "Velg et kort, og trykk så på boksen det hører til i. Velg et kort i en boks for å flytte det igjen."
-        bokser = "".join(
+        hjelp = "Dra kortene til boksen de hører til i. Eller trykk på et kort og så på navnet på boksen."
+        brett = '<div class="kort-kategorier">' + "".join(
             f'<section class="kort-kategori" data-kategori="{esc(k)}" aria-label="{esc(n)}">'
             f'<button type="button" class="kategori-knapp" data-kategori="{esc(k)}">{esc(n)}</button>'
-            f'<ul class="kort-plassert"></ul></section>' for k, n in m.KATEGORIER)
-        midt = f'<div class="kort-kategorier" id="kort-kategorier">{bokser}</div>'
+            f'<div class="kort-plassert"></div></section>' for k, n in m.KATEGORIER) + "</div>"
     else:
         retning = getattr(m, "RETNING", "Fra minst til størst")
-        hjelp = f"Trykk på kortene i riktig rekkefølge ({retning.lower()}). Trykk på et kort i rekka for å ta det ut igjen."
-        midt = (f'<div class="kort-rekke-ramme"><p class="panel-tittel">{esc(retning)}</p>'
-                '<ol class="kort-rekke" id="kort-rekke" aria-label="Rekka di"></ol></div>')
-    verktoy = ('<div class="kortsett-verktoy kun-js">'
+        hjelp = f"Dra kortene til plassene i rekkefølge ({retning.lower()}). Eller trykk på et kort og så på en plass."
+        brett = (f'<p class="rekke-retning">{esc(retning)} <span aria-hidden="true">→</span></p>'
+                 '<div class="kort-rad kort-rekke" data-rad="1" role="group" aria-label="Rekka"><div class="rad-plasser">'
+                 + "".join(plass(f"plass {p}", f"1-{p}") for p in range(1, len(m.KORT) + 1)) + "</div></div>")
+    verktoy = ('<div class="kortbord-verktoy kun-js">'
                '<button type="button" class="knapp liten" id="kort-sjekk">Sjekk</button>'
-               '<button type="button" class="knapp lys liten" id="kort-bland">Bland kortene</button>'
+               '<button type="button" class="knapp lys liten" id="kort-bland">Bland</button>'
                '<button type="button" class="knapp lys liten" id="kort-nullstill">Start på nytt</button>'
+               '<button type="button" class="knapp lys liten" id="kort-fullskjerm" hidden>Fullskjerm</button>'
+               '<span class="kort-fremdrift" id="kort-fremdrift"></span>'
                '<span class="kort-status" id="kort-status" role="status"></span></div>')
-    bunke = ('<ul class="kort-bunke" id="kort-bunke" aria-label="Kort som ikke er plassert">'
-             + "".join(kort_html(k, kode) for k in kortliste) + "</ul>")
+    bunke = ('<section class="kort-bunke-ramme" aria-labelledby="bunke-tittel">'
+             '<h3 class="panel-tittel" id="bunke-tittel">Bunken <span class="kort-igjen kun-js" id="kort-igjen"></span></h3>'
+             '<div class="kort-bunke" id="kort-bunke">'
+             + "".join(kort_html(k, kode) for k in kortliste) + "</div></section>")
     storrelse = f' data-storrelse="{m.STORRELSE}"' if m.TYPE == "grupper" else ""
     return (f'<div class="kortsett" id="kortsett" data-type="{m.TYPE}" data-kode="{esc(kode)}"{storrelse}>\n'
             f'<p class="kortsett-oppgave"><strong>Oppgave:</strong> {m.OPPGAVE}</p>\n{lenker}\n'
-            f'<p class="kortsett-hjelp kun-js">{hjelp}</p>\n'
+            f'<div class="kortbord" id="kortbord">\n{verktoy}\n'
+            f'<p class="kortsett-hjelp kun-js">{hjelp} Esc avbryter et valg.</p>\n'
             f'<p class="kortsett-hjelp kun-uten-js">Uten JavaScript kan du ikke flytte kortene her. Skriv dem ut i stedet.</p>\n'
-            f'{verktoy}\n{midt}\n{bunke}\n</div>')
+            f'<div class="kortbord-flate">\n<section class="kort-brett kun-js" id="kort-brett" aria-label="Brettet">{brett}</section>\n{bunke}\n</div>\n'
+            f'<div class="kort-kommentarer" id="kort-kommentarer" hidden></div>\n</div>\n</div>')
 
 
 # ---------------------------------------------------------------- LaTeX

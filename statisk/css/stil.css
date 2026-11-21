@@ -416,67 +416,135 @@ html.tavle .g-mal, html.tavle .g-vektor-navn { font-size: 17px; }
 .sim-styring > *, .sim-velg { min-width: 0; }
 .sim-velg select { width: 100%; text-overflow: ellipsis; }
 
-/* ---------------------------------------------------------------- kortsett */
+/* ---------------------------------------------------------------- kortsett: kortbordet
+   Alle kort har samme størrelse (--kb × --kh, samme forhold som på papiret).
+   Bunken står til venstre på store skjermer og som en stripe nederst på mobil. */
 .kortsett { margin-top: 1.75rem; }
 .kortsett-oppgave { max-width: 46rem; font-size: 1.05rem; }
-.kortsett-hjelp { max-width: 46rem; margin-top: .5rem; font-size: .9375rem; color: var(--dempet); }
-.kortsett-verktoy { position: sticky; top: 0; z-index: 2; display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin-top: 1rem; padding: .6rem 0; background: var(--papir); border-bottom: 1px solid var(--rute); }
-.kort-status { font-size: .9375rem; font-weight: 600; }
-.kort-bunke, .kort-gruppe-liste, .kort-plassert, .kort-rekke {
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 12.5rem), 1fr)); gap: .6rem; margin: 0; padding: 0; list-style: none;
-}
-.kort-bunke { margin-top: 1rem; }
-.kort-bunke:empty::before { content: "Alle kortene er plassert."; color: var(--dempet); font-size: .9375rem; }
-.kort-bunke > li, .kort-gruppe-liste > li, .kort-plassert > li, .kort-rekke > li { display: flex; min-width: 0; }
+.kortsett-hjelp { max-width: 52rem; margin-top: .5rem; font-size: .9375rem; color: var(--dempet); }
+.kortbord { --kb: 9.6rem; --kh: 6.2rem; --gap: .5rem; margin-top: 1rem; background: var(--papir); }
+.kortbord-verktoy { position: sticky; top: 0; z-index: 5; display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; padding: .6rem 0; background: var(--papir); border-bottom: 1px solid var(--rute); }
+.kort-fremdrift { margin-left: auto; font-family: var(--mono); font-size: .8125rem; color: var(--dempet); }
+.kort-status { flex-basis: 100%; font-size: .9375rem; font-weight: 600; }
+.kort-status:empty { display: none; }
+.kortbord-flate { display: grid; grid-template-columns: calc(2 * var(--kb) + var(--gap) + 2.6rem) minmax(0, 1fr); grid-template-areas: "bunke brett"; gap: 1rem; align-items: start; margin-top: 1rem; }
+html:not(.js) .kortbord-flate { grid-template-columns: minmax(0, 1fr); grid-template-areas: "bunke"; }
+.kort-brett { grid-area: brett; min-width: 0; }
+
+/* Bunken */
+.kort-bunke-ramme { grid-area: bunke; position: sticky; top: 3.75rem; max-height: calc(100vh - 4.75rem); overflow-y: auto; padding: .55rem .7rem .7rem; background: var(--flate); border: 1.5px dashed var(--rute-sterk); border-radius: 10px; }
+html:not(.js) .kort-bunke-ramme { position: static; max-height: none; }
+.kort-bunke-ramme.mal { border-color: var(--m1); border-style: solid; background: color-mix(in srgb, var(--m1) 6%, var(--flate)); }
+.kort-igjen { font-weight: 400; }
+.til-bunken { width: 100%; margin-bottom: .5rem; }
+.kort-bunke { display: grid; grid-template-columns: repeat(auto-fill, var(--kb)); gap: var(--gap); justify-content: center; min-height: var(--kh); }
+.kort-bunke:empty::before { content: "Bunken er tom."; align-self: center; font-size: .875rem; color: var(--dempet); }
+
+/* Kortene */
 .kort {
-  position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .3rem;
-  width: 100%; min-height: 6.75rem; padding: .7rem .6rem 1.5rem; font: inherit; color: var(--blekk); text-align: center;
-  background: var(--flate); border: 1.5px solid var(--rute-sterk); border-radius: 6px; cursor: pointer;
+  position: relative; display: flex; align-items: center; justify-content: center; flex: none;
+  width: var(--kb); height: var(--kh); padding: .45rem .5rem 1.05rem; margin: 0;
+  font: inherit; color: var(--blekk); text-align: center; line-height: 1.25;
+  background: var(--flate); border: 1px solid var(--rute-sterk); border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(22, 33, 58, .06), 0 3px 8px rgba(22, 33, 58, .07);
+  overflow: hidden; cursor: grab; touch-action: none; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none;
+  transition: transform .12s, box-shadow .12s, border-color .12s;
 }
-button.kort:hover { border-color: var(--blekk); }
-.kort[aria-pressed="true"] { border-color: var(--m1); box-shadow: 0 0 0 2px var(--m1); background: color-mix(in srgb, var(--m1) 9%, var(--flate)); }
-.kort[aria-pressed="true"]::before { content: "Valgt"; position: absolute; top: .3rem; left: .45rem; font-size: .7rem; font-weight: 600; color: var(--m1); }
-.kort-innhold { max-width: 100%; overflow-wrap: break-word; }
+button.kort:hover { border-color: var(--blekk); transform: translateY(-1px); }
+.kort-innhold { display: block; width: 100%; }
+.kort-figur { height: 100%; }
 .kort-innhold .katex { font-size: 1.2em; white-space: nowrap; }
-.kort-innhold { overflow-x: auto; overflow-y: hidden; }
-.kort-lang { font-size: .9375rem; line-height: 1.35; }
-.kort-figur { display: block; width: 100%; }
-.kort-svg { display: block; width: 100%; height: 5.4rem; }
-.kort-kode { position: absolute; right: .45rem; bottom: .3rem; font-family: var(--mono); font-size: .7rem; color: var(--dempet); }
-.kort-kommentar { display: block; margin-top: .25rem; font-size: .8125rem; line-height: 1.35; color: var(--dempet); text-align: left; }
-.kort-kommentar .katex { font-size: 1em; }
-.kort-merke { font-size: .8rem; font-weight: 600; }
-.kort.riktig { border-color: var(--m1); border-width: 2.5px; }
-.kort.riktig .kort-merke { color: var(--m1); }
-.kort.feil { border-color: var(--m2); border-width: 2.5px; border-style: dashed; }
-.kort.feil .kort-merke { color: var(--m2); }
-.kort-grupper { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 24rem), 1fr)); gap: .75rem; margin-top: 1rem; }
-.kort-grupper:empty { display: none; }
-.kort-gruppe { padding: .6rem; background: var(--papir); border: 1.5px solid var(--rute-sterk); border-radius: 8px; }
-.kort-gruppe.riktig { border-color: var(--m1); border-width: 2.5px; }
-.kort-gruppe.feil { border-color: var(--m2); border-width: 2.5px; border-style: dashed; }
-.kort-gruppe .kort { min-height: 5.75rem; }
-.gruppe-fot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem; margin-top: .5rem; }
-.gruppe-merke { font-size: .875rem; font-weight: 600; }
-.kort-gruppe.riktig .gruppe-merke { color: var(--m1); }
-.kort-gruppe.feil .gruppe-merke { color: var(--m2); }
-.kort-kategorier { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); gap: .75rem; margin-top: 1rem; }
-.kort-kategori { display: flex; flex-direction: column; gap: .5rem; min-height: 9rem; padding: .6rem; background: var(--papir); border: 1.5px solid var(--rute-sterk); border-radius: 8px; }
-.kort-kategori .kort-plassert { grid-template-columns: minmax(0, 1fr); }
-.kategori-knapp {
-  width: 100%; min-height: 2.75rem; padding: .45rem .7rem; font: inherit; font-family: var(--serif); font-size: 1.1rem; font-weight: 600; text-align: left;
-  color: var(--blekk); background: var(--flate); border: 1.5px solid var(--blekk); border-radius: 6px; cursor: pointer;
+.kort-innhold.bryt .katex { white-space: normal; }
+.kort-innhold.bryt .katex .base { margin-block: .1em; }
+.kort-lang { font-size: .875rem; line-height: 1.3; }
+.kort-svg { display: block; width: 100%; height: 100%; }
+.kort-kode { position: absolute; right: .4rem; bottom: .2rem; font-family: var(--mono); font-size: .62rem; color: var(--dempet); }
+.kort-kommentar { display: none; }
+.kort[aria-pressed="true"] { border-color: var(--m1); outline: 3px solid var(--m1); outline-offset: 2px; transform: translateY(-3px); box-shadow: 0 8px 18px rgba(22, 33, 58, .2); }
+.kort[aria-pressed="true"]::before { content: "Valgt"; position: absolute; top: .2rem; left: .4rem; font-size: .65rem; font-weight: 700; color: var(--m1); }
+.kort.drar { opacity: .25; }
+.kort-spokelse { position: fixed; z-index: 1000; pointer-events: none; transform: rotate(-2.5deg) scale(1.06); box-shadow: 0 14px 30px rgba(22, 33, 58, .3); cursor: grabbing; transition: none; }
+.drar-nå, .drar-nå * { cursor: grabbing !important; }
+.kort.riktig { border: 2px solid var(--m1); }
+.kort.feil { border: 2px dashed var(--m2); }
+.kort-merke { position: absolute; top: .25rem; right: .3rem; display: grid; place-items: center; width: 1.35rem; height: 1.35rem; border-radius: 50%; font-size: .8rem; font-weight: 700; color: var(--knapp-tekst); background: var(--m1); }
+.kort.feil .kort-merke { background: var(--m2); }
+
+/* Plasser på brettet */
+.kort-plass { position: relative; flex: none; width: var(--kb); height: var(--kh); border-radius: 8px; }
+.plass-knapp {
+  position: absolute; inset: 0; width: 100%; height: 100%; font: inherit; font-size: 1.5rem; line-height: 1; color: var(--rute-sterk);
+  background: transparent; border: 2px dashed var(--rute-sterk); border-radius: 8px; cursor: pointer;
 }
-.kategori-knapp:hover { background: var(--blekk); color: var(--papir); }
-.bunke-knapp { margin-top: 1rem; font-family: var(--sans); font-size: .9375rem; border-style: dashed; }
-.kort-rekke-ramme { margin-top: 1rem; padding: .6rem; background: var(--papir); border: 1.5px solid var(--rute-sterk); border-radius: 8px; }
-.kort-rekke { counter-reset: plass; min-height: 6rem; }
-.kort-rekke > li { counter-increment: plass; position: relative; }
-.kort-rekke > li::before { content: counter(plass) "."; position: absolute; top: .3rem; left: .45rem; z-index: 1; font-family: var(--mono); font-size: .75rem; color: var(--dempet); pointer-events: none; }
-.kort-rekke:empty::before { content: "Trykk på kortene under for å legge dem i rekka."; color: var(--dempet); font-size: .9375rem; }
+.plass-knapp:hover { border-color: var(--blekk); color: var(--blekk); }
+.har-valg .plass-knapp, .drar-nå .plass-knapp { border-color: var(--m1); color: var(--m1); background: color-mix(in srgb, var(--m1) 5%, transparent); }
+.kort-plass.mal .plass-knapp, .kort-plass.mal > .kort { outline: 3px solid var(--m1); outline-offset: 2px; background: color-mix(in srgb, var(--m1) 14%, transparent); }
+
+/* Grupper: én rad per gruppe */
+.kort-rader { --n: 2; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, calc(var(--n) * var(--kb) + (var(--n) - 1) * var(--gap) + 1.5rem)), 1fr)); gap: .7rem; }
+.kort-rader-3 { --n: 3; }
+.kort-rader-4 { --n: 4; }
+.kort-rad { padding: .4rem .7rem .5rem; background: var(--flate); border: 1px solid var(--rute); border-radius: 10px; }
+.kort-rad.riktig { border: 2px solid var(--m1); }
+.kort-rad.feil { border: 2px dashed var(--m2); }
+.rad-navn { font-family: var(--mono); font-size: .72rem; color: var(--dempet); }
+.rad-plasser { display: flex; flex-wrap: wrap; gap: var(--gap); margin-top: .25rem; }
+.rad-merke { display: block; min-height: 1.25em; margin-top: .3rem; font-size: .85rem; font-weight: 600; }
+.kort-rad.riktig .rad-merke { color: var(--m1); }
+.kort-rad.feil .rad-merke { color: var(--m2); }
+
+/* Rekkefølge: nummererte plasser */
+.rekke-retning { font-size: .875rem; font-weight: 600; color: var(--dempet); margin-bottom: .4rem; }
+.kort-rekke .rad-plasser { counter-reset: plass; }
+.kort-rekke .kort-plass { counter-increment: plass; margin-top: 1.1rem; }
+.kort-rekke .kort-plass::before { content: counter(plass) "."; position: absolute; top: -1.15rem; left: .2rem; font-family: var(--mono); font-size: .75rem; color: var(--dempet); }
+
+/* Sortering: bokser */
+.kort-kategorier { display: grid; grid-template-columns: repeat(auto-fill, minmax(calc(var(--kb) + 1.4rem), 1fr)); gap: .7rem; }
+.kort-kategori { display: flex; flex-direction: column; min-height: calc(var(--kh) * 2 + 4.5rem); padding: .5rem; background: var(--flate); border: 1.5px solid var(--rute-sterk); border-radius: 10px; }
+.kort-kategori.mal { border-color: var(--m1); outline: 3px solid var(--m1); background: color-mix(in srgb, var(--m1) 7%, var(--flate)); }
+.kategori-knapp {
+  width: 100%; min-height: 2.75rem; padding: .4rem .6rem; font: inherit; font-family: var(--serif); font-size: 1.05rem; font-weight: 600; text-align: left;
+  color: var(--blekk); background: var(--papir); border: 1.5px solid var(--blekk); border-radius: 6px; cursor: pointer;
+  overflow-wrap: anywhere; hyphens: auto;
+}
+.kategori-knapp:hover, .har-valg .kategori-knapp { background: var(--blekk); color: var(--papir); }
+.kort-plassert { display: flex; flex-wrap: wrap; justify-content: center; align-content: flex-start; gap: var(--gap); flex: 1; margin-top: .5rem; }
+.kort-kommentarer { margin-top: 1rem; padding: .75rem 1rem; background: var(--flate); border: 1px solid var(--rute); border-left: 4px solid var(--m1); border-radius: 6px; }
+.kort-kommentarer ul { margin: .25rem 0 0; padding-left: 1.2rem; }
+.kort-kommentarer li + li { margin-top: .35rem; }
+
 .kortsett-bruk { margin-top: clamp(2.5rem, 6vw, 4rem); }
-html.tavle .kort-innhold .katex { font-size: 1.55em; }
-html.tavle .kort { min-height: 8rem; }
+.kortbord:fullscreen { overflow: auto; padding: 0 clamp(1rem, 3vw, 2.5rem) 2rem; }
+.kortbord:fullscreen .kort-bunke-ramme { max-height: calc(100vh - 5rem); }
+html.tavle .kortbord { --kb: 11rem; --kh: 7.1rem; }
+
+@media (max-width: 1060px) {
+  .kortbord-flate { grid-template-columns: calc(var(--kb) + 2.6rem) minmax(0, 1fr); }
+}
+/* Mobil: brettet øverst, bunken som en stripe nederst som rulles sidelengs */
+@media (max-width: 760px) {
+  .kortbord { --kb: 8.2rem; --kh: 5.3rem; --gap: .4rem; }
+  .kortbord-flate { grid-template-columns: minmax(0, 1fr); grid-template-areas: "brett" "bunke"; }
+  .kort-bunke-ramme { position: sticky; top: auto; bottom: 0; z-index: 4; max-height: none; overflow: visible; margin-inline: calc(-1 * var(--marg)); padding: .4rem var(--marg) .5rem; border-radius: 0; border-width: 1.5px 0 0; box-shadow: 0 -6px 16px rgba(22, 33, 58, .1); }
+  html:not(.js) .kort-bunke-ramme { margin-inline: 0; border-width: 1.5px; border-radius: 10px; }
+  .kort-bunke { display: flex; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x proximity; justify-content: flex-start; padding-bottom: .3rem; }
+  html:not(.js) .kort-bunke { flex-wrap: wrap; justify-content: center; }
+  .kort-bunke > .kort { touch-action: pan-x; scroll-snap-align: start; }
+  .kort-innhold .katex { font-size: 1.05em; }
+  .kort-rad { padding-inline: .5rem; }
+  .rad-plasser { justify-content: center; }
+  .kort-kategorier { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .kort-kategori .kort { --kb: 100%; }
+  .kategori-knapp { font-size: .95rem; }
+  .kort-fremdrift { margin-left: 0; }
+}
+@media print {
+  .kortbord-verktoy, .kortsett-hjelp, .kort-brett, .til-bunken { display: none; }
+  .kortbord-flate { display: block; }
+  .kort-bunke-ramme { position: static; max-height: none; border: 0; }
+  .kort { box-shadow: none; break-inside: avoid; }
+}
 
 /* Figurer på kortene. Strekene har fast tykkelse uansett hvor stor figuren blir. */
 .kort-svg * { vector-effect: non-scaling-stroke; }
@@ -490,17 +558,6 @@ html.tavle .kort { min-height: 8rem; }
 .kf-graf { fill: none; stroke: var(--m1); stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
 .kf-punkt { fill: var(--m2); }
 .kf-tekst { fill: var(--dempet); font-family: var(--mono); }
-@media print {
-  .kortsett-verktoy, .kortsett-hjelp, .bunke-knapp { display: none; }
-  .kort { break-inside: avoid; }
-}
-@media (max-width: 480px) {
-  .kort-bunke, .kort-gruppe-liste, .kort-rekke { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .45rem; }
-  .kort { min-height: 5.75rem; padding: .6rem .4rem 1.4rem; }
-  .kort-innhold .katex { font-size: 1.02em; white-space: normal; }
-  .kort-lang { font-size: .875rem; }
-  .kort-svg { height: 4.4rem; }
-}
 
 /* ---------------------------------------------------------------- tavleoppgaver */
 .tavle-ramme { margin-top: 1.75rem; background: var(--papir); }
