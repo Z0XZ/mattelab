@@ -1,0 +1,81 @@
+%% Elevark fra mattelab.no – laget automatisk av bygg.py. Rediger gjerne til eget bruk.
+%% Kompiler med lualatex.
+\documentclass[11pt,a4paper]{article}
+\usepackage[norsk]{babel}
+\usepackage[a4paper,margin=2.2cm,top=2cm,bottom=2.4cm]{geometry}
+\usepackage{fontspec}
+\usepackage{unicode-math}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{TeX Gyre Heros}[Scale=MatchLowercase]
+\setmathfont{TeX Gyre Pagella Math}
+\usepackage{xcolor}
+\definecolor{blekk}{HTML}{16213A}
+\definecolor{dempet}{HTML}{566077}
+\definecolor{rute}{HTML}{CFC9B8}
+\definecolor{m1}{HTML}{2F4AB0}
+\definecolor{m2}{HTML}{99266D}
+\usepackage[most]{tcolorbox}
+\usepackage{qrcode}
+\usepackage{needspace}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+\pdfvariable suppressoptionalinfo \numexpr 1+2+4+8+16+32+64+128+256+512\relax
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.4em}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[L]{\sffamily\footnotesize\color{dempet}mattelab.no · Lineær funksjon · elevark uten fasit}
+\fancyfoot[R]{\sffamily\footnotesize\color{dempet}Side \thepage}
+
+\newcommand{\fase}[2]{\tcbox[on line, colframe=#2, colback=white, coltext=#2, boxrule=0.6pt, arc=2pt,
+  boxsep=0pt, left=3pt, right=3pt, top=1.5pt, bottom=1.5pt, fontupper=\sffamily\bfseries\footnotesize]{#1}}
+\newcommand{\steg}[4]{%
+  \par\noindent{\color{rute}\rule{\linewidth}{0.4pt}}\par\nopagebreak
+  \noindent\begin{minipage}[t]{2.1cm}\vspace{0pt}\fase{#1}{#2}\end{minipage}%
+  \begin{minipage}[t]{\dimexpr\linewidth-2.1cm\relax}\vspace{0pt}#3\end{minipage}\par
+  \vspace{#4}}
+\newcommand{\oppgave}[2]{\par\Needspace{12\baselineskip}\vspace{0.6em}%
+  {\fontsize{14}{17}\selectfont\bfseries{\color{m1}#1}\enspace #2}\par\vspace{0.2em}}
+
+\begin{document}
+\begin{minipage}[t]{0.72\linewidth}\vspace{0pt}
+{\sffamily\small\color{dempet}Elevark · 1T · mattelab.no}\par\vspace{0.3em}
+{\fontsize{24}{28}\selectfont\bfseries Lineær funksjon}\par\vspace{1em}
+{\sffamily\small Navn: \rule{4.6cm}{0.4pt}\quad Klasse: \rule{1.5cm}{0.4pt}\quad Dato: \rule{1.9cm}{0.4pt}}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.22\linewidth}\vspace{0pt}\raggedleft
+\qrcode[height=2.3cm]{https://mattelab.no/utforskere/lineaer-funksjon.html}\par\vspace{0.2em}
+{\sffamily\scriptsize\color{dempet}Utforskeren}
+\end{minipage}
+
+\vspace{1em}
+{\sffamily\small\color{dempet}Utforskeren ligger på \url{https://mattelab.no/utforskere/lineaer-funksjon.html}}\par
+Hver oppgave har tre steg. \textbf{Gjett} først, uten å bruke utforskeren. \textbf{Test} så i utforskeren. \textbf{Forklar} til slutt med egne ord hvorfor det blir slik.
+
+\oppgave{1}{Hva gjør $b$?}
+\steg{Gjett}{m1}{Se på $f(x) = 2x + b$. Hva tror du skjer med linja når $b$ endres? Hva skjer med nullpunktet?}{2.2cm}
+\steg{Test}{m2}{Sett $a = 2$ og $b = 0$. Dra $b$ fra $-3$ til $3$. Skriv ned nullpunktet for $b = -3$, $b = 0$ og $b = 3$.}{2.6cm}
+\steg{Forklar}{blekk}{Hvorfor blir alle linjene parallelle? Finn en formel for nullpunktet uttrykt med $b$.}{3.4cm}
+
+\oppgave{2}{Hva betyr stigningstallet?}
+\steg{Gjett}{m1}{Se på $f(x) = ax + 1$. Hvor mye tror du $f(x)$ øker fra $x = 2$ til $x = 3$ når $a = 2$? Når $a = 0{,}5$? Når $a = -1$? Når $a = 0$?}{2.2cm}
+\steg{Test}{m2}{Sett $a = 2$ og $b = 1$. Bruk verditabellen til å finne $f(2)$ og $f(3)$ for hver av de fire verdiene av $a$.}{2.6cm}
+\steg{Forklar}{blekk}{Vis ved regning at $f(x + 1) - f(x) = a$ for alle $x$.}{3.4cm}
+
+\oppgave{3}{Linja gjennom to punkter}
+\steg{Gjett}{m1}{En linje går gjennom $(1, 2)$ og $(4, 8)$. Hva tror du stigningstallet og konstantleddet er? Hva med linja gjennom $(-2, 5)$ og $(2, -1)$?}{2.2cm}
+\steg{Test}{m2}{Velg «to punkter» med $(1, 2)$ og $(4, 8)$. Les av $\Delta x$, $\Delta y$ og funksjonsuttrykket. Gjør det samme for $(-2, 5)$ og $(2, -1)$.}{2.6cm}
+\steg{Forklar}{blekk}{Hvorfor er $a = \frac{\Delta y}{\Delta x}$? Hvordan kan du finne $b$ når du kjenner $a$ og ett punkt?}{3.4cm}
+
+\oppgave{4}{Stearinlyset}
+\steg{Gjett}{m1}{Et stearinlys er $20$ cm høyt når det blir tent. Det brenner ned $2{,}5$ cm i timen. Skriv et uttrykk for høyden $h(x)$ etter $x$ timer. Hvor høyt er lyset etter $3$ timer? Når har det brent ut?}{2.2cm}
+\steg{Test}{m2}{Sett $a = -2{,}5$ og $b = 20$. Bruk grafen, verditabellen og nullpunktet til å kontrollere svarene dine.}{2.6cm}
+\steg{Forklar}{blekk}{Vis modellen på fire måter: uttrykk, tabell, graf og tekst. For hvilke $x$ gir modellen mening?}{3.4cm}
+
+\oppgave{5}{Når $x_1 = x_2$}
+\steg{Gjett}{m1}{Hva tror du skjer med stigningstallet når de to punktene er $(2, 1)$ og $(2, 5)$?}{2.2cm}
+\steg{Test}{m2}{Velg «to punkter» med $(2, 1)$ og $(4, 5)$. Dra $x_2$ sakte mot $2$. Følg med på stigningstallet. Sett til slutt $x_2 = 2$.}{2.6cm}
+\steg{Forklar}{blekk}{Hvorfor finnes ikke stigningstallet når $x_1 = x_2$? Hvorfor er en loddrett linje ikke grafen til en funksjon?}{3.4cm}
+
+\end{document}

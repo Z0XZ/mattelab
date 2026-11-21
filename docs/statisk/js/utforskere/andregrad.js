@@ -1,7 +1,7 @@
 // Utforsker: andregradsfunksjonen f(x) = ax² + bx + c
 import "../../lib/katex/katex.min.js";
 import {
-  tall, tallOmtrent, lagGlider, Koordinatsystem, annonser,
+  tall, tallOmtrent, lik, lagGlider, Koordinatsystem, annonser,
   lesAdresse, skrivAdresse, lastNedPNG, lastNedSVG,
 } from "../felles.js";
 import { analyser, fortegn, texTall, texPolynom, texFaktor, texKoeffisient } from "./andregrad-matte.js";
@@ -118,8 +118,8 @@ function beskrivNullpunkter() {
   if (r.alleNull) return "Alle x er nullpunkter";
   const n = r.nullpunkter;
   if (n.length === 0) return "Ingen";
-  if (n.length === 1) return `x = ${tallOmtrent(n[0])}`;
-  return `x = ${tallOmtrent(n[0])} og x = ${tallOmtrent(n[1])}`;
+  if (n.length === 1) return lik("x", n[0]);
+  return `${lik("x", n[0])} og ${lik("x", n[1])}`;
 }
 
 function oppdaterTekst() {
@@ -158,7 +158,7 @@ function oppdaterTekst() {
     rader.push(["Grafen vender", "", a > 0 ? "Opp (a > 0)" : "Ned (a < 0)"]);
     rader.push(["Nullpunkter", "bred", beskrivNullpunkter()]);
     rader.push([a > 0 ? "Bunnpunkt" : "Toppunkt", "", `(${tallOmtrent(r.xs)}, ${tallOmtrent(r.ys)})`]);
-    rader.push(["Symmetrilinje", "", `x = ${tallOmtrent(r.xs)}`]);
+    rader.push(["Symmetrilinje", "", lik("x", r.xs)]);
   } else {
     rader.push(["Diskriminant", "bred", "Finnes ikke når a = 0"]);
     rader.push(["Nullpunkter", "bred", beskrivNullpunkter()]);

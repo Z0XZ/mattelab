@@ -1,0 +1,169 @@
+---
+tittel: Rasjonale funksjoner og asymptoter
+beskrivelse: Loddrette og vannrette asymptoter for f(x) = (ax + b)/(cx + d). Se hva som skjer nær asymptotene, og når grafen får et hull i stedet.
+type: utforsker
+fag: 1T, R1
+tema: funksjoner, grenseverdier
+ikon: rasjonal
+skript: utforskere/rasjonal.js
+---
+<p class="ingress">En rasjonal funksjon er en brøk med polynomer i teller og nevner. Her ser du på $f(x) = \frac{ax + b}{cx + d}$. Grafen kan ha en loddrett og en vannrett asymptote. Det er linjer som grafen kommer nærmere og nærmere uten å nå.</p>
+
+<figure class="sim sim-bred" id="utforsker" aria-label="Utforsker for rasjonale funksjoner">
+  <div class="sim-delt">
+    <div class="sim-graf">
+      <svg id="graf" class="kun-js"></svg>
+      <div class="noscript-melding kun-uten-js">
+        <p><strong>Utforskeren trenger JavaScript.</strong> Resten av siden, med forklaring og oppgaver, virker uten.</p>
+        <p>Eksempel: $f(x) = \frac{2x + 1}{x - 1}$ har den loddrette asymptoten $x = 1$ og den vannrette asymptoten $y = 2$.</p>
+      </div>
+      <dl class="sim-tall kun-js" id="verdier"></dl>
+    </div>
+    <div class="sim-side-panel kun-js">
+      <div class="sim-styring">
+        <div class="panel-gruppe">
+          <p class="panel-tittel">Telleren: $ax + b$</p>
+          <div id="glidere-teller" class="glidere"></div>
+        </div>
+        <div class="panel-gruppe">
+          <p class="panel-tittel">Nevneren: $cx + d$</p>
+          <div id="glidere-nevner" class="glidere"></div>
+        </div>
+      </div>
+      <div class="sim-blokk">
+        <p class="panel-tittel">Funksjonen</p>
+        <div class="forskrift" id="forskrift"></div>
+        <div id="omskrevet-blokk">
+          <p class="panel-tittel ny-del">Skrevet om</p>
+          <div class="utregning" id="omskrevet"></div>
+        </div>
+        <div id="grense-blokk">
+          <p class="panel-tittel ny-del">Nær den loddrette asymptoten</p>
+          <div id="grensetabell" class="tabell-rull-liten"></div>
+        </div>
+      </div>
+      <div id="melding" class="sim-blokk melding" hidden></div>
+    </div>
+  </div>
+  <p id="utenfor" class="utenfor-melding" hidden>Asymptotene krysser hverandre utenfor tegneområdet. Trykk «Vis hele grafen» for å se dem.</p>
+  <fieldset class="sim-valg kun-js" id="visvalg">
+    <legend>Vis i grafen</legend>
+    <label class="avkrysning"><input type="checkbox" name="asymptoter" checked> Asymptoter (stiplet)</label>
+    <label class="avkrysning"><input type="checkbox" name="punkter" checked> Skjæring med aksene</label>
+  </fieldset>
+  {{figurverktoy}}
+  <figcaption class="sim-hint">Dra i glidebryterne, eller skriv et tall i feltet. Aksene kan ha ulik målestokk etter «Vis hele grafen». Verdiene står i adressefeltet, så du kan dele oppsettet.</figcaption>
+</figure>
+
+<details class="teori" id="matematikken">
+<summary><span class="teori-tittel">Matematikken bak</span><span class="teori-hint">Loddrett og vannrett asymptote, grenseverdier og hull i grafen</span></summary>
+<div class="teori-innhold tekst">
+
+<h3>Loddrett asymptote</h3>
+<p>Vi kan ikke dele på null. Derfor er $f$ ikke definert når $cx + d = 0$, altså når $x = -\frac{d}{c}$. Nær denne verdien er nevneren et lite tall. Er telleren ikke null der, blir brøken veldig stor, enten positiv eller negativ. Grafen får en <strong>loddrett asymptote</strong>:</p>
+$$x = -\frac{d}{c}$$
+
+<h3>Vannrett asymptote</h3>
+<p>Når $x$ er et veldig stort tall, betyr $b$ og $d$ lite i forhold til $ax$ og $cx$. Da er $f(x) \approx \frac{ax}{cx} = \frac{a}{c}$. Grafen får en <strong>vannrett asymptote</strong>:</p>
+$$y = \frac{a}{c}$$
+<p>Du ser det enda tydeligere når du deler telleren på nevneren. Da får du $f(x) = \frac{a}{c} + \frac{k}{cx + d}$ for et tall $k$. Den siste brøken går mot null når $x$ blir stor.</p>
+
+<h3>Grenseverdier</h3>
+<p>Med grenseverdier skriver vi dette slik:</p>
+$$\lim_{x \to \pm\infty} f(x) = \frac{a}{c}$$
+<p>Ved den loddrette asymptoten finnes ingen grenseverdi. Funksjonsverdiene vokser over alle grenser, og fortegnet er ulikt på de to sidene.</p>
+
+<h3>Når grafen får et hull</h3>
+<p>Hvis $ad - bc = 0$, er telleren et tall ganger nevneren. Et eksempel er $\frac{2x - 4}{x - 2} = \frac{2(x - 2)}{x - 2}$. Da kan brøken forkortes, og $f(x) = 2$ for alle $x \neq 2$. Grafen er en vannrett linje med et hull i $x = 2$. Grenseverdien når $x \to 2$ er $2$, selv om $f(2)$ ikke finnes. I R1 kalles dette en hevbar diskontinuitet.</p>
+
+<h3>Når c = 0</h3>
+<p>Er $c = 0$, står det bare et tall i nevneren. Da er $f$ en lineær funksjon uten asymptoter. Er også $d = 0$, er nevneren alltid null, og $f$ er ikke definert noe sted.</p>
+</div>
+</details>
+
+<section class="oppgaver" aria-labelledby="oppgaver-tittel">
+<h2 id="oppgaver-tittel">Oppgaver</h2>
+{{elevark}}
+<p class="del-inngang">Hver oppgave har tre steg. <strong>Gjett</strong> først, uten å bruke utforskeren. <strong>Test</strong> så i utforskeren. <strong>Forklar</strong> til slutt med egne ord hvorfor det blir slik.</p>
+
+<div class="oppgave" id="oppgave-1">
+  <h3><span class="oppgave-nr">1</span>Finn asymptotene</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Se på $f(x) = \frac{2x + 1}{x - 1}$. For hvilken $x$ er $f$ ikke definert? Hva tror du $f(x)$ er omtrent lik når $x = 100$?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?a=2&amp;b=1&amp;c=1&amp;d=-1#utforsker">Sett $a = 2$, $b = 1$, $c = 1$ og $d = -1$</a>. Les av asymptotene. Prøv også <a class="oppsettlenke" href="?a=0&amp;b=1&amp;c=1&amp;d=0#utforsker">$f(x) = \frac{1}{x}$</a>.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Forklar hvorfor den loddrette asymptoten er $x = -\frac{d}{c}$ og den vannrette er $y = \frac{a}{c}$.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>Nevneren $x - 1$ er null når $x = 1$. Der er $f$ ikke definert, og grafen har den loddrette asymptoten $x = 1$.</p>
+    <p>$f(100) = \frac{201}{99} \approx 2{,}03$. For store $x$ betyr $+1$ og $-1$ lite, så $f(x) \approx \frac{2x}{x} = 2$. Den vannrette asymptoten er $y = 2$.</p>
+    <p>For $f(x) = \frac{1}{x}$ er asymptotene $x = 0$ og $y = 0$.</p>
+    <p>Generelt er nevneren null når $cx + d = 0$, altså $x = -\frac{d}{c}$. For store $x$ er $f(x) \approx \frac{ax}{cx} = \frac{a}{c}$.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-2">
+  <h3><span class="oppgave-nr">2</span>Nær den loddrette asymptoten</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Fortsatt med $f(x) = \frac{2x + 1}{x - 1}$: Hva tror du $f(1{,}01)$ og $f(0{,}99)$ er omtrent lik?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?a=2&amp;b=1&amp;c=1&amp;d=-1#utforsker">Sett opp funksjonen</a>. Se på tabellen «Nær den loddrette asymptoten».</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Hvorfor blir verdiene så store? Hvorfor har de ulikt fortegn på hver side av $x = 1$?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <div class="tabell-rull">
+    <table class="tabell">
+      <caption>Verdier av $f(x) = \frac{2x + 1}{x - 1}$ nær $x = 1$</caption>
+      <thead><tr><th scope="col">$x$</th><td>$0{,}9$</td><td>$0{,}99$</td><td>$0{,}999$</td><td>$1{,}001$</td><td>$1{,}01$</td><td>$1{,}1$</td></tr></thead>
+      <tbody><tr><th scope="row">$f(x)$</th><td>$-28$</td><td>$-298$</td><td>$-2998$</td><td>$3002$</td><td>$302$</td><td>$32$</td></tr></tbody>
+    </table>
+    </div>
+    <p>Nær $x = 1$ er telleren nesten $3$, mens nevneren er et lite tall. Å dele $3$ på et lite tall gir et stort tall.</p>
+    <p>Til høyre for $1$ er nevneren $x - 1$ positiv, så $f(x)$ blir stor og positiv. Til venstre er nevneren negativ, så $f(x)$ blir stor og negativ.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-3">
+  <h3><span class="oppgave-nr">3</span>Et hull i grafen</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Se på $f(x) = \frac{2x - 4}{x - 2}$. Hva tror du grafen ser ut som? Har den en loddrett asymptote?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?a=2&amp;b=-3&amp;c=1&amp;d=-2#utforsker">Start med $f(x) = \frac{2x - 3}{x - 2}$</a>. Dra $b$ sakte fra $-3$ til $-4$. Følg med på grafen og på tallet $ad - bc$.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Forkort brøken $\frac{2x - 4}{x - 2}$. Hvorfor er $f(2)$ ikke definert, selv om grafen ser ut som en rett linje? Hva er $\lim\limits_{x \to 2} f(x)$?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>Når $b$ nærmer seg $-4$, legger grenene seg tettere og tettere inntil asymptotene. Når $b = -4$, er $ad - bc = 2 \cdot (-2) - (-4) \cdot 1 = 0$. Da forsvinner den loddrette asymptoten, og grafen blir en vannrett linje med et hull.</p>
+    $$\frac{2x - 4}{x - 2} = \frac{2(x - 2)}{x - 2} = 2, \quad x \neq 2$$
+    <p>Vi får bare forkorte når $x - 2 \neq 0$. For $x = 2$ står det $\frac{0}{0}$ i det opprinnelige uttrykket, og det er ikke definert. Grenseverdien finnes likevel: $\lim\limits_{x \to 2} f(x) = 2$.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-4">
+  <h3><span class="oppgave-nr">4</span>Pris per t-skjorte</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Et trykkeri tar $200$ kr i oppstartspris og $15$ kr per t-skjorte. Gjennomsnittsprisen per skjorte for $x$ skjorter er $G(x) = \frac{15x + 200}{x}$. Hva tror du skjer med $G(x)$ når du bestiller mange skjorter? Kan prisen per skjorte bli under $15$ kr?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?a=15&amp;b=200&amp;c=1&amp;d=0&amp;tilpass=1#utforsker">Sett $a = 15$, $b = 200$, $c = 1$ og $d = 0$</a>. Zoom ut og se på grafen for $x > 0$. Finn $G(10)$ og $G(100)$.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Hva betyr den vannrette asymptoten i praksis? Hvor mange skjorter må du bestille for at prisen per skjorte skal bli under $20$ kr? Hvilken del av grafen gir mening i denne situasjonen?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>$G(10) = \frac{350}{10} = 35$ kr og $G(100) = \frac{1700}{100} = 17$ kr.</p>
+    <p>Vi kan skrive $G(x) = 15 + \frac{200}{x}$. Oppstartsprisen fordeles på flere og flere skjorter, så $\frac{200}{x}$ går mot null. Den vannrette asymptoten $y = 15$ er prisen per skjorte uten oppstartspris. Gjennomsnittsprisen kommer nærmere og nærmere $15$ kr, men blir aldri under.</p>
+    <p>$G(x) < 20$ gir $15x + 200 < 20x$, altså $x > 40$. Du må bestille flere enn $40$ skjorter.</p>
+    <p>Bare positive hele tall $x$ gir mening. Grenen til venstre for $x = 0$ hører ikke med til modellen.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-5">
+  <h3><span class="oppgave-nr">5</span>Kan grafen krysse den vannrette asymptoten?</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Tror du grafen til $f(x) = \frac{ax + b}{cx + d}$ kan krysse den vannrette asymptoten $y = \frac{a}{c}$?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?a=2&amp;b=1&amp;c=1&amp;d=-1#utforsker">Start med standardoppsettet</a>. Prøv mange ulike verdier av $a$, $b$, $c$ og $d$. Finner du en graf som krysser den vannrette asymptoten?</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Løs likningen $\frac{ax + b}{cx + d} = \frac{a}{c}$. Hva finner du ut?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>For funksjoner av denne typen krysser grafen aldri den vannrette asymptoten. Vi ganger med $c(cx + d)$ på begge sider:</p>
+    $$c(ax + b) = a(cx + d) \quad\Rightarrow\quad acx + bc = acx + ad \quad\Rightarrow\quad bc = ad$$
+    <p>Leddene med $x$ forsvinner. Hvis $ad - bc \neq 0$, får vi en likning som aldri er sann. Da finnes det ingen løsning, og grafen krysser ikke asymptoten. Hvis $ad - bc = 0$, er grafen selve linja $y = \frac{a}{c}$ med et hull, og den har ingen asymptoter.</p>
+    <p>Merk: Andre rasjonale funksjoner, for eksempel $\frac{x}{x^2 + 1}$, <em>kan</em> krysse den vannrette asymptoten sin.</p>
+  </div></details>
+</div>
+</section>
+
+<p class="merknad">For lærere: Se <a href="{{rot}}laerer.html">lærersiden</a> for kobling til kompetansemålene.</p>

@@ -64,6 +64,26 @@ class Byggefeil(Exception):
 ADVARSLER: list[str] = []
 
 
+def figurverktoy(variant: str) -> str:
+    """Knapperaden under figuren. «enkel» er for figurer uten koordinatsystem (ingen zoom)."""
+    knapper = []
+    if variant != "enkel":
+        knapper += [
+            '<button type="button" class="knapp liten" id="vis-alt">Vis hele grafen</button>',
+            '<button type="button" class="knapp lys liten" id="zoom-inn">Zoom inn</button>',
+            '<button type="button" class="knapp lys liten" id="zoom-ut">Zoom ut</button>',
+            '<button type="button" class="knapp lys liten" id="standardvindu">Standardvindu</button>',
+        ]
+    knapper += [
+        '<button type="button" class="knapp lys liten" id="tilbakestill">Tilbakestill</button>',
+        '<button type="button" class="knapp lys liten" id="last-ned-png">Last ned PNG</button>',
+        '<button type="button" class="knapp lys liten" id="last-ned-svg">Last ned SVG</button>',
+        '<button type="button" class="knapp lys liten" id="kopier-lenke">Kopier lenke til oppsettet</button>',
+        '<span id="lenkestatus" class="lenkestatus" role="status"></span>',
+    ]
+    return '<div class="sim-knapper kun-js" id="figurverktoy">\n' + "\n".join("    " + k for k in knapper) + "\n  </div>"
+
+
 def elevark(s: dict) -> tuple[bytes, bytes] | None:
     """Lag elevark (PDF og LaTeX-kilde) for en utforsker med oppgaver. Fasiten tas ikke med."""
     if '<section class="oppgaver"' not in s["innhold"]:
@@ -239,6 +259,8 @@ def liste(ressurser: list[dict], typ: str, temaer: list[dict], temanavn: dict, i
         her.sort(key=lambda r: (bool(r.get("planlagt")), r["tittel"].lower()))
         ut.append(f'<div class="tema-blokk" data-blokk="{esc(t["id"])}"><h2>{esc(t["navn"])}</h2>'
                   f'<ul class="sim-kort-liste">' + "".join(kort(r, temanavn, ikoner, rot) for r in her) + "</ul></div>")
+    if any(r.get("planlagt") for r in valgte):
+        ut.append('<p class="merknad">Kort med stiplet kant er planlagt, men ikke laget ennå.</p>')
     return "\n".join(ut)
 
 
@@ -249,7 +271,7 @@ def fagkort(fagliste: list[dict], temaer: list[dict], ressurser: list[dict], rot
         tema = "".join(f"<li>{esc(t['navn'])}</li>" for t in temaer if f["id"] in t["fag"])
         alle = [r for r in ressurser if r["type"] == "utforsker" and f["id"] in r["fag"]]
         ferdige = sum(1 for r in alle if not r.get("planlagt"))
-        status = f"{ferdige} {'utforsker' if ferdige == 1 else 'utforskere'} klar, {len(alle) - ferdige} på vei"
+        status = f"{ferdige} {'utforsker' if ferdige == 1 else 'utforskere'}" + (f", {len(alle) - ferdige} på vei" if len(alle) > ferdige else "")
         ut.append(f'<a class="fag-kort {fagklasse(f["id"])}" href="{rot}utforskere/index.html?fag={esc(f["id"])}">'
                   f'<span class="niva">{esc(f["niva"])}</span><h3>{esc(f["langt"])} <span class="pil" aria-hidden="true">→</span></h3>'
                   f'<ul class="tema">{tema}</ul><p class="status">{esc(status)}</p></a>')
@@ -371,6 +393,7 @@ def bygg_alt() -> dict[str, bytes]:
         }
         for k, v in erstatt.items():
             innhold = innhold.replace(k, v)
+        innhold = re.sub(r"\{\{figurverktoy(?::(\w+))?\}\}", lambda m: figurverktoy(m.group(1) or ""), innhold)
         aktiv = s.get("meny") or TYPE_MENY.get(s["type"], s["id"])
         meny = "\n".join(
             f'        <li><a href="{rot}{url}"{" aria-current=\"page\"" if mid == aktiv else ""}>{esc(tekst)}</a></li>'

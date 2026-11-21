@@ -1,0 +1,81 @@
+%% Elevark fra mattelab.no – laget automatisk av bygg.py. Rediger gjerne til eget bruk.
+%% Kompiler med lualatex.
+\documentclass[11pt,a4paper]{article}
+\usepackage[norsk]{babel}
+\usepackage[a4paper,margin=2.2cm,top=2cm,bottom=2.4cm]{geometry}
+\usepackage{fontspec}
+\usepackage{unicode-math}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{TeX Gyre Heros}[Scale=MatchLowercase]
+\setmathfont{TeX Gyre Pagella Math}
+\usepackage{xcolor}
+\definecolor{blekk}{HTML}{16213A}
+\definecolor{dempet}{HTML}{566077}
+\definecolor{rute}{HTML}{CFC9B8}
+\definecolor{m1}{HTML}{2F4AB0}
+\definecolor{m2}{HTML}{99266D}
+\usepackage[most]{tcolorbox}
+\usepackage{qrcode}
+\usepackage{needspace}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+\pdfvariable suppressoptionalinfo \numexpr 1+2+4+8+16+32+64+128+256+512\relax
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.4em}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[L]{\sffamily\footnotesize\color{dempet}mattelab.no · Vektorer i planet · elevark uten fasit}
+\fancyfoot[R]{\sffamily\footnotesize\color{dempet}Side \thepage}
+
+\newcommand{\fase}[2]{\tcbox[on line, colframe=#2, colback=white, coltext=#2, boxrule=0.6pt, arc=2pt,
+  boxsep=0pt, left=3pt, right=3pt, top=1.5pt, bottom=1.5pt, fontupper=\sffamily\bfseries\footnotesize]{#1}}
+\newcommand{\steg}[4]{%
+  \par\noindent{\color{rute}\rule{\linewidth}{0.4pt}}\par\nopagebreak
+  \noindent\begin{minipage}[t]{2.1cm}\vspace{0pt}\fase{#1}{#2}\end{minipage}%
+  \begin{minipage}[t]{\dimexpr\linewidth-2.1cm\relax}\vspace{0pt}#3\end{minipage}\par
+  \vspace{#4}}
+\newcommand{\oppgave}[2]{\par\Needspace{12\baselineskip}\vspace{0.6em}%
+  {\fontsize{14}{17}\selectfont\bfseries{\color{m1}#1}\enspace #2}\par\vspace{0.2em}}
+
+\begin{document}
+\begin{minipage}[t]{0.72\linewidth}\vspace{0pt}
+{\sffamily\small\color{dempet}Elevark · R1 · mattelab.no}\par\vspace{0.3em}
+{\fontsize{24}{28}\selectfont\bfseries Vektorer i planet}\par\vspace{1em}
+{\sffamily\small Navn: \rule{4.6cm}{0.4pt}\quad Klasse: \rule{1.5cm}{0.4pt}\quad Dato: \rule{1.9cm}{0.4pt}}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.22\linewidth}\vspace{0pt}\raggedleft
+\qrcode[height=2.3cm]{https://mattelab.no/utforskere/vektorer.html}\par\vspace{0.2em}
+{\sffamily\scriptsize\color{dempet}Utforskeren}
+\end{minipage}
+
+\vspace{1em}
+{\sffamily\small\color{dempet}Utforskeren ligger på \url{https://mattelab.no/utforskere/vektorer.html}}\par
+Hver oppgave har tre steg. \textbf{Gjett} først, uten å bruke utforskeren. \textbf{Test} så i utforskeren. \textbf{Forklar} til slutt med egne ord hvorfor det blir slik.
+
+\oppgave{1}{Summen av to vektorer}
+\steg{Gjett}{m1}{La $\vec u = [3, 1]$ og $\vec v = [1, 2]$. Hva er $\vec u + \vec v$? Er $|\vec u + \vec v|$ lik $|\vec u| + |\vec v|$?}{2.2cm}
+\steg{Test}{m2}{Sett $\vec u = [3, 1]$, $\vec v = [1, 2]$ og $s = t = 1$. Se på parallellogrammet.}{2.6cm}
+\steg{Forklar}{blekk}{Hvorfor er $|\vec u + \vec v| < |\vec u| + |\vec v|$ her? Når blir de like?}{3.4cm}
+
+\oppgave{2}{Skalarprodukt og vinkel}
+\steg{Gjett}{m1}{Hva tror du vinkelen mellom $[3, 1]$ og $[1, 2]$ er? Hva med $[3, 1]$ og $[-1, 3]$?}{2.2cm}
+\steg{Test}{m2}{Sett $\vec u = [3, 1]$ og $\vec v = [1, 2]$. Les av skalarproduktet og vinkelen. Endre så $\vec v$ til $[-1, 3]$.}{2.6cm}
+\steg{Forklar}{blekk}{Regn ut vinkelen med formelen $\cos \theta = \frac{\vec u \cdot \vec v}{|\vec u|\,|\vec v|}$. Hvorfor betyr $\vec u \cdot \vec v = 0$ at vektorene står vinkelrett på hverandre?}{3.4cm}
+
+\oppgave{3}{Når er vektorene parallelle?}
+\steg{Gjett}{m1}{La $\vec u = [2, 1]$ og $\vec v = [k, 3]$. For hvilken $k$ tror du vektorene er parallelle?}{2.2cm}
+\steg{Test}{m2}{Sett $\vec u = [2, 1]$ og $\vec v = [0, 3]$. Dra $v_1$ (som er $k$) til vektorene blir parallelle. Se hva som skjer med parallellogrammet.}{2.6cm}
+\steg{Forklar}{blekk}{Finn $k$ ved regning. Hvorfor blir parallellogrammet flatt når vektorene er parallelle?}{3.4cm}
+
+\oppgave{4}{Skriv en vektor som lineærkombinasjon}
+\steg{Gjett}{m1}{La $\vec u = [3, 1]$ og $\vec v = [1, 2]$. Finnes det tall $s$ og $t$ slik at $s\vec u + t\vec v = [5, 4]$? Hva tror du de er omtrent?}{2.2cm}
+\steg{Test}{m2}{Sett $\vec u = [3, 1]$ og $\vec v = [1, 2]$. Juster $s$ og $t$ til $\vec w = [5, 4]$.}{2.6cm}
+\steg{Forklar}{blekk}{Sett opp et likningssett for $s$ og $t$, og løs det. Hvorfor ville det ikke gått hvis $\vec u$ og $\vec v$ var parallelle?}{3.4cm}
+
+\oppgave{5}{En båt i bevegelse}
+\steg{Gjett}{m1}{En båt starter i punktet $P = (1, 2)$ og har fartsvektoren $\vec r = [2, 1]$ (km per time). Hvor er båten etter $3$ timer? Passerer den punktet $(5, 4)$? Og $(4, 4)$?}{2.2cm}
+\steg{Test}{m2}{Velg parameterframstilling med $P = (1, 2)$, $\vec r = [2, 1]$ og $t = 3$. Dra $t$ og se båten bevege seg.}{2.6cm}
+\steg{Forklar}{blekk}{Skriv parameterframstillingen. Vis ved regning hvilke av punktene båten passerer. Hva er farten til båten?}{3.4cm}
+
+\end{document}

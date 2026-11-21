@@ -348,3 +348,70 @@ html.tavle .g-tall, html.tavle .g-etikett { font-size: 16px; }
 .elevark-lenke { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1rem; margin: .9rem 0 .5rem; }
 .elevark-tex { font-size: .875rem; color: var(--dempet); }
 .oppsettlenke { text-decoration: none; border-bottom: 1.5px solid currentColor; }
+
+/* ---------- flere grafelementer (vektorer, flere grafer, trekanter) ---------- */
+.g-graf-3 { fill: none; stroke: var(--blekk); stroke-width: 2.5; stroke-dasharray: 8 5; }
+.g-tangent { fill: none; stroke: var(--m2); stroke-width: 2.5; }
+.g-sekant { fill: none; stroke: var(--blekk); stroke-width: 2; stroke-dasharray: 8 5; }
+.g-asymptote { fill: none; stroke: var(--m2); stroke-width: 1.75; stroke-dasharray: 7 6; }
+.g-vektor line { stroke: var(--m1); stroke-width: 3; stroke-linecap: round; }
+.g-vektor .g-vektor-spiss { fill: var(--m1); }
+.g-vektor-2 line { stroke: var(--m2); stroke-width: 3; stroke-linecap: round; }
+.g-vektor-2 .g-vektor-spiss { fill: var(--m2); }
+.g-vektor-3 line { stroke: var(--blekk); stroke-width: 3.5; stroke-linecap: round; }
+.g-vektor-3 .g-vektor-spiss { fill: var(--blekk); }
+.g-vektor-svak line { stroke: var(--dempet); stroke-width: 2; stroke-dasharray: 6 5; }
+.g-vektor-svak .g-vektor-spiss { fill: var(--dempet); }
+.g-vektor-null { fill: none; stroke: currentColor; stroke-width: 2; }
+.g-vektor-navn { font-family: var(--serif); font-style: italic; font-weight: 600; font-size: 16px; }
+.g-fyll-2 { fill: var(--m2); fill-opacity: .14; stroke: none; }
+.g-fyll-3 { fill: var(--dempet); fill-opacity: .12; stroke: none; }
+.g-kant { fill: none; stroke: var(--blekk); stroke-width: 2.5; stroke-linejoin: round; }
+.g-kant-2 { fill: none; stroke: var(--m2); stroke-width: 2.5; stroke-dasharray: 7 5; stroke-linejoin: round; }
+.g-vinkel { fill: var(--m1); fill-opacity: .16; stroke: var(--m1); stroke-width: 1.5; }
+.g-hjorne { fill: var(--blekk); font-family: var(--serif); font-style: italic; font-weight: 600; font-size: 17px; }
+.g-mal { fill: var(--blekk); font-family: var(--sans); font-size: 13px; paint-order: stroke; stroke: var(--flate); stroke-width: 4px; stroke-linejoin: round; }
+html.tavle .g-mal, html.tavle .g-vektor-navn { font-size: 17px; }
+
+/* Valg av modus eller funksjon i sidepanelet */
+.sim-velg { display: grid; gap: .3rem; }
+.sim-velg label { font-size: .875rem; color: var(--dempet); }
+.sim-velg select { min-height: 2.75rem; padding: 0 .5rem; font-size: 1rem; color: var(--blekk); background: var(--papir); border: 1px solid var(--rute-sterk); border-radius: 4px; max-width: 100%; }
+.sim-velg select:hover { border-color: var(--blekk); }
+.liten-tabell { width: 100%; border-collapse: collapse; font-size: .9rem; font-variant-numeric: tabular-nums; }
+.liten-tabell th, .liten-tabell td { padding: .2rem .4rem; text-align: right; border-bottom: 1px solid var(--rute); }
+.liten-tabell th { font-weight: 600; color: var(--dempet); font-size: .8rem; }
+.liten-tabell th:first-child, .liten-tabell td:first-child { text-align: left; }
+.tabell-rull-liten { overflow-x: auto; }
+.graf-etikett { padding: .45rem 1rem 0; font-size: .875rem; color: var(--dempet); }
+.graf-etikett + svg { margin-top: .2rem; }
+.sim-graf .skille { border-top: 1px solid var(--rute); }
+.panel-tittel.ny-del { margin-top: .75rem; }
+.g-stiplet { stroke-dasharray: 11 7; }
+.likning { display: flex; flex-wrap: wrap; align-items: baseline; gap: .2rem .6rem; margin-top: .3rem; overflow-x: auto; overflow-y: hidden; }
+.likning .yform { color: var(--dempet); font-size: .9375rem; }
+.forklaring-farge { font-size: .8125rem; color: var(--dempet); }
+.panel-gruppe + .panel-gruppe { margin-top: .6rem; padding-top: .6rem; border-top: 1px dashed var(--rute); }
+.glider-etikett i sub { font-size: .62em; font-style: normal; }
+
+/* Arealmodeller (kvadratsetningene) */
+.figur-svg { display: block; width: 100%; height: auto; }
+.k-a2 { fill: var(--m1); fill-opacity: .2; stroke: var(--m1); stroke-width: 1.5; }
+.k-ab { fill: var(--m2); fill-opacity: .18; stroke: var(--m2); stroke-width: 1.5; }
+.k-b2 { fill: var(--dempet); fill-opacity: .22; stroke: var(--dempet); stroke-width: 1.5; }
+.k-resultat { fill: var(--m1); fill-opacity: .3; stroke: var(--m1); stroke-width: 2.5; }
+.k-stripe { stroke-dasharray: 6 4; }
+.k-dobbel { fill-opacity: .45; }
+.k-omriss { fill: none; stroke: var(--blekk); stroke-width: 2; }
+.k-borte { fill: none; stroke: var(--dempet); stroke-width: 1.5; stroke-dasharray: 5 4; }
+.k-flytt { fill: none; stroke: var(--blekk); stroke-width: 1.5; stroke-dasharray: 3 4; }
+.k-flytt-ende { fill: var(--blekk); }
+.utregning { margin-top: .4rem; font-size: .95rem; overflow-x: auto; overflow-y: hidden; }
+.fortegnsskjema td { text-align: center; white-space: nowrap; }
+.fortegnsskjema td.punkt { font-weight: 600; background: var(--papir); }
+.fortegnsskjema tr:first-child td { font-size: .8rem; color: var(--dempet); }
+.g-vinkel-rett { fill: none; stroke: var(--m1); stroke-width: 1.75; }
+.steg-tekst { margin-top: .5rem; font-size: .8125rem; color: var(--dempet); }
+.steg-tekst:first-child { margin-top: 0; }
+.sim-styring > *, .sim-velg { min-width: 0; }
+.sim-velg select { width: 100%; text-overflow: ellipsis; }

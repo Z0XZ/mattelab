@@ -1,8 +1,70 @@
 {
   "_merknad": "Kobling mellom kompetansemål (nummer i rekkefølgen fra Udir, se kompetansemaal.json) og ressurser (filnavn uten .html). Koblingene er lærerens egen vurdering.",
   "1T": {
-    "6": ["andregradsfunksjonen"],
-    "9": ["andregradsfunksjonen"]
+    "2": [
+      "kvadratsetningene"
+    ],
+    "3": [
+      "lineaer-funksjon",
+      "vekst"
+    ],
+    "4": [
+      "likningssett"
+    ],
+    "5": [
+      "kvadratsetningene"
+    ],
+    "6": [
+      "andregradsfunksjonen",
+      "kvadratsetningene"
+    ],
+    "7": [
+      "lineaer-funksjon",
+      "vekst"
+    ],
+    "9": [
+      "andregradsfunksjonen",
+      "rasjonale-funksjoner",
+      "vekst"
+    ],
+    "10": [
+      "sekant-tangent"
+    ],
+    "12": [
+      "trekant"
+    ],
+    "13": [
+      "trekant"
+    ],
+    "14": [
+      "trekant"
+    ]
   },
-  "R1": {}
+  "R1": {
+    "2": [
+      "sekant-tangent",
+      "rasjonale-funksjoner"
+    ],
+    "3": [
+      "rasjonale-funksjoner"
+    ],
+    "4": [
+      "sekant-tangent"
+    ],
+    "5": [
+      "funksjon-og-derivert"
+    ],
+    "8": [
+      "vekst"
+    ],
+    "9": [
+      "rasjonale-funksjoner"
+    ],
+    "11": [
+      "vektorer"
+    ],
+    "12": [
+      "vektorer"
+    ]
+  }
 }

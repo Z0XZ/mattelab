@@ -1,0 +1,81 @@
+%% Elevark fra mattelab.no – laget automatisk av bygg.py. Rediger gjerne til eget bruk.
+%% Kompiler med lualatex.
+\documentclass[11pt,a4paper]{article}
+\usepackage[norsk]{babel}
+\usepackage[a4paper,margin=2.2cm,top=2cm,bottom=2.4cm]{geometry}
+\usepackage{fontspec}
+\usepackage{unicode-math}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{TeX Gyre Heros}[Scale=MatchLowercase]
+\setmathfont{TeX Gyre Pagella Math}
+\usepackage{xcolor}
+\definecolor{blekk}{HTML}{16213A}
+\definecolor{dempet}{HTML}{566077}
+\definecolor{rute}{HTML}{CFC9B8}
+\definecolor{m1}{HTML}{2F4AB0}
+\definecolor{m2}{HTML}{99266D}
+\usepackage[most]{tcolorbox}
+\usepackage{qrcode}
+\usepackage{needspace}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+\pdfvariable suppressoptionalinfo \numexpr 1+2+4+8+16+32+64+128+256+512\relax
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.4em}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[L]{\sffamily\footnotesize\color{dempet}mattelab.no · Funksjonen og den deriverte · elevark uten fasit}
+\fancyfoot[R]{\sffamily\footnotesize\color{dempet}Side \thepage}
+
+\newcommand{\fase}[2]{\tcbox[on line, colframe=#2, colback=white, coltext=#2, boxrule=0.6pt, arc=2pt,
+  boxsep=0pt, left=3pt, right=3pt, top=1.5pt, bottom=1.5pt, fontupper=\sffamily\bfseries\footnotesize]{#1}}
+\newcommand{\steg}[4]{%
+  \par\noindent{\color{rute}\rule{\linewidth}{0.4pt}}\par\nopagebreak
+  \noindent\begin{minipage}[t]{2.1cm}\vspace{0pt}\fase{#1}{#2}\end{minipage}%
+  \begin{minipage}[t]{\dimexpr\linewidth-2.1cm\relax}\vspace{0pt}#3\end{minipage}\par
+  \vspace{#4}}
+\newcommand{\oppgave}[2]{\par\Needspace{12\baselineskip}\vspace{0.6em}%
+  {\fontsize{14}{17}\selectfont\bfseries{\color{m1}#1}\enspace #2}\par\vspace{0.2em}}
+
+\begin{document}
+\begin{minipage}[t]{0.72\linewidth}\vspace{0pt}
+{\sffamily\small\color{dempet}Elevark · R1 · mattelab.no}\par\vspace{0.3em}
+{\fontsize{24}{28}\selectfont\bfseries Funksjonen og den deriverte}\par\vspace{1em}
+{\sffamily\small Navn: \rule{4.6cm}{0.4pt}\quad Klasse: \rule{1.5cm}{0.4pt}\quad Dato: \rule{1.9cm}{0.4pt}}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.22\linewidth}\vspace{0pt}\raggedleft
+\qrcode[height=2.3cm]{https://mattelab.no/utforskere/funksjon-og-derivert.html}\par\vspace{0.2em}
+{\sffamily\scriptsize\color{dempet}Utforskeren}
+\end{minipage}
+
+\vspace{1em}
+{\sffamily\small\color{dempet}Utforskeren ligger på \url{https://mattelab.no/utforskere/funksjon-og-derivert.html}}\par
+Hver oppgave har tre steg. \textbf{Gjett} først, uten å bruke utforskeren. \textbf{Test} så i utforskeren. \textbf{Forklar} til slutt med egne ord hvorfor det blir slik.
+
+\oppgave{1}{Fortegnslinje og ekstremalpunkter}
+\steg{Gjett}{m1}{For $f(x) = x^3 - 3x$ er $f'(x) = 3x^2 - 3$. Hvor tror du $f$ har toppunkt og bunnpunkt?}{2.2cm}
+\steg{Test}{m2}{Sett $a = 1$, $b = 0$, $c = -3$ og $d = 0$. Sammenlign grafen til $f'$ med fortegnslinja.}{2.6cm}
+\steg{Forklar}{blekk}{Lag fortegnslinja for $f'$ for hånd ved å faktorisere $f'(x)$. Hvordan ser du på fortegnslinja hvilket punkt som er toppunkt og hvilket som er bunnpunkt?}{3.4cm}
+
+\oppgave{2}{Tangenten og verdien til $f'$}
+\steg{Gjett}{m1}{For $f(x) = x^3 - 3x$: Hva tror du stigningstallet til tangenten er i $x = 2$? I $x = 0$? I $x = -2$?}{2.2cm}
+\steg{Test}{m2}{Sett opp funksjonen med $x_0 = 2$. Dra $x_0$ og følg punktet på grafen til $f'$.}{2.6cm}
+\steg{Forklar}{blekk}{Hva betyr y-verdien til punktet på grafen til $f'$ for grafen til $f$? Hvorfor har tangentene i $x = 2$ og $x = -2$ samme stigningstall?}{3.4cm}
+
+\oppgave{3}{Terrassepunkt}
+\steg{Gjett}{m1}{Se på $f(x) = x^3 + cx$. Hvor mange ekstremalpunkter tror du grafen har når $c = -3$? Når $c = 0$? Når $c = 3$?}{2.2cm}
+\steg{Test}{m2}{Sett $a = 1$, $b = 0$, $c = -3$ og $d = 0$. Dra $c$ sakte opp til $3$. Følg med på grafen til $f'$ og på fortegnslinja.}{2.6cm}
+\steg{Forklar}{blekk}{Hvorfor er $(0, 0)$ ikke et toppunkt eller bunnpunkt når $c = 0$, selv om $f'(0) = 0$? Bruk diskriminanten til $f'$ til å forklare hvor grensen går.}{3.4cm}
+
+\oppgave{4}{Vendepunktet}
+\steg{Gjett}{m1}{Se på $f(x) = x^3 - 3x^2 + 4$. Hvor tror du grafen er brattest mellom toppunktet og bunnpunktet?}{2.2cm}
+\steg{Test}{m2}{Sett $a = 1$, $b = -3$, $c = 0$ og $d = 4$. Finn ekstremalpunktene og vendepunktet. Se hvor grafen til $f'$ har sitt bunnpunkt.}{2.6cm}
+\steg{Forklar}{blekk}{Regn ut $f'(x)$ og $f''(x)$. Vis at vendepunktet ligger der $f''(x) = 0$, og finn stigningstallet til tangenten der.}{3.4cm}
+
+\oppgave{5}{Den største esken}
+\steg{Gjett}{m1}{Du har et kvadratisk ark som er $10$ cm på hver side. Du klipper bort et kvadrat med side $x$ i hvert hjørne og bretter opp kantene til en eske uten lokk. Volumet er $V(x) = x(10 - 2x)^2$. Hvilken $x$ tror du gir størst volum?}{2.2cm}
+\steg{Test}{m2}{Gang ut: $V(x) = 4x^3 - 40x^2 + 100x$. Sett $a = 4$, $b = -40$, $c = 100$ og $d = 0$. Finn toppunktet.}{2.6cm}
+\steg{Forklar}{blekk}{Løs $V'(x) = 0$ ved regning. Hvilke verdier av $x$ gir mening her? Hvorfor er bunnpunktet ikke interessant?}{3.4cm}
+
+\end{document}

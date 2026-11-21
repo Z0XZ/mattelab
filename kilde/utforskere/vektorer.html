@@ -1,0 +1,155 @@
+---
+tittel: Vektorer i planet
+beskrivelse: Sum, skalering, skalarprodukt og vinkel mellom vektorer. Se en parameterframstilling av en linje som et punkt i bevegelse.
+type: utforsker
+fag: R1
+tema: vektorer
+ikon: vektorer
+skript: utforskere/vektorer.js
+---
+<p class="ingress">En vektor har lengde og retning, og kan skrives med koordinater, for eksempel $\vec u = [3, 1]$. Her kan du legge sammen og skalere vektorer, regne ut skalarproduktet, og se hvordan en parameterframstilling beskriver en linje.</p>
+
+<figure class="sim sim-bred" id="utforsker" aria-label="Utforsker for vektorer i planet">
+  <div class="sim-delt">
+    <div class="sim-graf">
+      <svg id="graf" class="kun-js"></svg>
+      <div class="noscript-melding kun-uten-js">
+        <p><strong>Utforskeren trenger JavaScript.</strong> Resten av siden, med forklaring og oppgaver, virker uten.</p>
+        <p>Eksempel: $[3, 1] + [1, 2] = [4, 3]$. Skalarproduktet er $[3, 1] \cdot [1, 2] = 3 + 2 = 5$, og vinkelen mellom vektorene er $45^\circ$.</p>
+      </div>
+      <dl class="sim-tall kun-js" id="verdier"></dl>
+    </div>
+    <div class="sim-side-panel kun-js">
+      <div class="sim-styring">
+        <div class="sim-velg">
+          <label for="modus">Vis</label>
+          <select id="modus">
+            <option value="kombinasjon">sum, skalering og skalarprodukt</option>
+            <option value="parameter">parameterframstilling av en linje</option>
+          </select>
+        </div>
+        <div id="glidere-kombinasjon" class="glidere"></div>
+        <div id="glidere-parameter" class="glidere" hidden></div>
+        <div id="glider-t" class="glidere"></div>
+      </div>
+      <div class="sim-blokk">
+        <p class="panel-tittel">Regning</p>
+        <div id="formler" class="former"></div>
+      </div>
+      <div id="melding" class="sim-blokk melding" hidden></div>
+    </div>
+  </div>
+  <fieldset class="sim-valg kun-js" id="visvalg">
+    <legend>Vis i figuren</legend>
+    <span id="visvalg-kombinasjon"><label class="avkrysning"><input type="checkbox" name="parallellogram" checked> Parallellogram for w = su + tv (stiplede piler)</label></span>
+    <span id="visvalg-parameter" hidden><label class="avkrysning"><input type="checkbox" name="retning" checked> Retningsvektor r og tr</label></span>
+  </fieldset>
+  {{figurverktoy}}
+  <figcaption class="sim-hint">I sum-visningen er u blå, v plomme og w mørk og tykkest. Dra i glidebryterne, eller skriv et tall i feltet. Verdiene står i adressefeltet, så du kan dele oppsettet.</figcaption>
+</figure>
+
+<details class="teori" id="matematikken">
+<summary><span class="teori-tittel">Matematikken bak</span><span class="teori-hint">Regneregler, lengde, skalarprodukt, parallelle vektorer og parameterframstilling</span></summary>
+<div class="teori-innhold tekst">
+
+<h3>Regning med koordinater</h3>
+<p>Vi legger sammen vektorer ved å legge sammen koordinatene. Vi ganger en vektor med et tall ved å gange begge koordinatene:</p>
+$$[u_1, u_2] + [v_1, v_2] = [u_1 + v_1,\; u_2 + v_2] \qquad s \cdot [u_1, u_2] = [s u_1,\; s u_2]$$
+<p>Geometrisk setter vi vektorene etter hverandre. Da blir summen diagonalen i et parallellogram.</p>
+
+<h3>Lengde og skalarprodukt</h3>
+$$|\vec u| = \sqrt{u_1^2 + u_2^2} \qquad \vec u \cdot \vec v = u_1 v_1 + u_2 v_2 = |\vec u|\,|\vec v| \cos \theta$$
+<p>der $\theta$ er vinkelen mellom vektorene. Er $\vec u \cdot \vec v = 0$, og ingen av vektorene er nullvektoren, står de vinkelrett på hverandre. Vi sier at de er ortogonale.</p>
+
+<h3>Parallelle vektorer</h3>
+<p>To vektorer er parallelle når den ene er et tall ganger den andre. Med koordinater skjer det nøyaktig når $u_1 v_2 - u_2 v_1 = 0$. Er $\vec u$ og $\vec v$ ikke parallelle, kan alle vektorer i planet skrives som $s\vec u + t\vec v$ på nøyaktig én måte.</p>
+
+<h3>Parameterframstilling</h3>
+<p>Linja gjennom punktet $P = (x_0, y_0)$ med retningsvektor $\vec r = [r_1, r_2]$ kan skrives</p>
+$$\begin{cases} x = x_0 + r_1 t \\ y = y_0 + r_2 t \end{cases}$$
+<p>Tenk på $t$ som tid. Da er $\vec r$ fartsvektoren, og punktet beveger seg langs linja. Farten er $|\vec r|$. Retningsvektoren kan ikke være nullvektoren, for da står punktet stille.</p>
+</div>
+</details>
+
+<section class="oppgaver" aria-labelledby="oppgaver-tittel">
+<h2 id="oppgaver-tittel">Oppgaver</h2>
+{{elevark}}
+<p class="del-inngang">Hver oppgave har tre steg. <strong>Gjett</strong> først, uten å bruke utforskeren. <strong>Test</strong> så i utforskeren. <strong>Forklar</strong> til slutt med egne ord hvorfor det blir slik.</p>
+
+<div class="oppgave" id="oppgave-1">
+  <h3><span class="oppgave-nr">1</span>Summen av to vektorer</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>La $\vec u = [3, 1]$ og $\vec v = [1, 2]$. Hva er $\vec u + \vec v$? Er $|\vec u + \vec v|$ lik $|\vec u| + |\vec v|$?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?modus=kombinasjon&amp;u1=3&amp;u2=1&amp;v1=1&amp;v2=2&amp;s=1&amp;t=1#utforsker">Sett $\vec u = [3, 1]$, $\vec v = [1, 2]$ og $s = t = 1$</a>. Se på parallellogrammet.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Hvorfor er $|\vec u + \vec v| < |\vec u| + |\vec v|$ her? Når blir de like?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>$\vec u + \vec v = [4, 3]$, og $|\vec u + \vec v| = \sqrt{16 + 9} = 5$. Men $|\vec u| + |\vec v| = \sqrt{10} + \sqrt{5} \approx 5{,}40$.</p>
+    <p>Vektorene $\vec u$, $\vec v$ (satt etter $\vec u$) og $\vec u + \vec v$ danner en trekant. I en trekant er én side alltid kortere enn de to andre til sammen. Lengdene blir like bare når vektorene peker i samme retning.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-2">
+  <h3><span class="oppgave-nr">2</span>Skalarprodukt og vinkel</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Hva tror du vinkelen mellom $[3, 1]$ og $[1, 2]$ er? Hva med $[3, 1]$ og $[-1, 3]$?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?modus=kombinasjon&amp;u1=3&amp;u2=1&amp;v1=1&amp;v2=2&amp;s=1&amp;t=1#utforsker">Sett $\vec u = [3, 1]$ og $\vec v = [1, 2]$</a>. Les av skalarproduktet og vinkelen. Endre så $\vec v$ til $[-1, 3]$.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Regn ut vinkelen med formelen $\cos \theta = \frac{\vec u \cdot \vec v}{|\vec u|\,|\vec v|}$. Hvorfor betyr $\vec u \cdot \vec v = 0$ at vektorene står vinkelrett på hverandre?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>$\vec u \cdot \vec v = 3 \cdot 1 + 1 \cdot 2 = 5$, $|\vec u| = \sqrt{10}$ og $|\vec v| = \sqrt{5}$.</p>
+    $$\cos \theta = \frac{5}{\sqrt{10} \cdot \sqrt{5}} = \frac{5}{\sqrt{50}} = \frac{1}{\sqrt{2}} \quad\Rightarrow\quad \theta = 45^\circ$$
+    <p>Med $\vec v = [-1, 3]$ er $\vec u \cdot \vec v = -3 + 3 = 0$. Da er $\cos \theta = 0$, og $\theta = 90^\circ$. Fordi $\cos \theta = 0$ bare når $\theta = 90^\circ$, betyr skalarprodukt null at vektorene står vinkelrett på hverandre.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-3">
+  <h3><span class="oppgave-nr">3</span>Når er vektorene parallelle?</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>La $\vec u = [2, 1]$ og $\vec v = [k, 3]$. For hvilken $k$ tror du vektorene er parallelle?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?modus=kombinasjon&amp;u1=2&amp;u2=1&amp;v1=0&amp;v2=3&amp;s=1&amp;t=1#utforsker">Sett $\vec u = [2, 1]$ og $\vec v = [0, 3]$</a>. Dra $v_1$ (som er $k$) til vektorene blir parallelle. Se hva som skjer med parallellogrammet.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Finn $k$ ved regning. Hvorfor blir parallellogrammet flatt når vektorene er parallelle?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>Vektorene er parallelle når $\vec v = c \cdot \vec u$ for et tall $c$. Andrekoordinaten gir $3 = c \cdot 1$, så $c = 3$. Da må $k = 3 \cdot 2 = 6$.</p>
+    <p>Med determinanten: $u_1 v_2 - u_2 v_1 = 2 \cdot 3 - 1 \cdot k = 6 - k = 0$ gir $k = 6$.</p>
+    <p>Når vektorene er parallelle, ligger de på samme linje gjennom origo. Da får parallellogrammet areal null og blir en strek.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-4">
+  <h3><span class="oppgave-nr">4</span>Skriv en vektor som lineærkombinasjon</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>La $\vec u = [3, 1]$ og $\vec v = [1, 2]$. Finnes det tall $s$ og $t$ slik at $s\vec u + t\vec v = [5, 4]$? Hva tror du de er omtrent?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?modus=kombinasjon&amp;u1=3&amp;u2=1&amp;v1=1&amp;v2=2&amp;s=1&amp;t=1#utforsker">Sett $\vec u = [3, 1]$ og $\vec v = [1, 2]$</a>. Juster $s$ og $t$ til $\vec w = [5, 4]$.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Sett opp et likningssett for $s$ og $t$, og løs det. Hvorfor ville det ikke gått hvis $\vec u$ og $\vec v$ var parallelle?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>Vi regner ut venstre side:</p>
+    $$s[3, 1] + t[1, 2] = [3s + t,\; s + 2t] = [5, 4]$$
+    <p>Det gir likningssettet</p>
+    $$3s + t = 5 \qquad s + 2t = 4$$
+    <p>Fra den første er $t = 5 - 3s$. Innsatt i den andre: $s + 10 - 6s = 4$, så $s = \frac{6}{5} = 1{,}2$ og $t = 5 - 3{,}6 = 1{,}4$.</p>
+    <p>Kontroll:</p>
+    $$1{,}2 \cdot [3, 1] + 1{,}4 \cdot [1, 2] = [3{,}6 + 1{,}4,\; 1{,}2 + 2{,}8] = [5, 4]$$
+    <p>Hvis vektorene er parallelle, ligger alle kombinasjonene $s\vec u + t\vec v$ på én linje gjennom origo. En vektor utenfor linja kan da ikke skrives slik.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-5">
+  <h3><span class="oppgave-nr">5</span>En båt i bevegelse</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>En båt starter i punktet $P = (1, 2)$ og har fartsvektoren $\vec r = [2, 1]$ (km per time). Hvor er båten etter $3$ timer? Passerer den punktet $(5, 4)$? Og $(4, 4)$?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?modus=parameter&amp;x0=1&amp;y0=2&amp;r1=2&amp;r2=1&amp;t=3#utforsker">Velg parameterframstilling med $P = (1, 2)$, $\vec r = [2, 1]$ og $t = 3$</a>. Dra $t$ og se båten bevege seg.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Skriv parameterframstillingen. Vis ved regning hvilke av punktene båten passerer. Hva er farten til båten?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>Parameterframstillingen er $x = 1 + 2t$, $y = 2 + t$. Etter $3$ timer er båten i $(7, 5)$.</p>
+    <p>For $(5, 4)$: $1 + 2t = 5$ gir $t = 2$, og $2 + t = 4$ gir også $t = 2$. Samme $t$, så båten passerer punktet etter $2$ timer.</p>
+    <p>For $(4, 4)$: $1 + 2t = 4$ gir $t = 1{,}5$, mens $2 + t = 4$ gir $t = 2$. Ulike $t$, så punktet ligger ikke på linja.</p>
+    <p>Farten er $|\vec r| = \sqrt{2^2 + 1^2} = \sqrt{5} \approx 2{,}24$ km per time.</p>
+  </div></details>
+</div>
+</section>
+
+<p class="merknad">For lærere: Se <a href="{{rot}}laerer.html">lærersiden</a> for kobling til kompetansemålene.</p>

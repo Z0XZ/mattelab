@@ -52,33 +52,5 @@ export function fortegn(r) {
   return opp ? { pos: utenfor, neg: mellom } : { pos: mellom, neg: utenfor };
 }
 
-// ------------------------------------------------------------------ formler i TeX
-
-/** Tall i TeX med desimalkomma: 2.5 → "2{,}5" */
-export function texTall(x, des = 2) {
-  return tall(Math.abs(x), des).replace(/ /g, "\\,").replace(",", "{,}");
-}
-
-/** Bygg «ax² + bx + c» uten nulledd, uten 1-tall foran x og med riktige fortegn. */
-export function texPolynom(ledd) {
-  // ledd: [[koeffisient, "x^2"], [koeffisient, "x"], [koeffisient, ""]]
-  let s = "";
-  for (const [k, v] of ledd) {
-    if (k === 0) continue;
-    const fortegn = k < 0 ? "-" : s ? "+" : "";
-    const tallDel = Math.abs(k) === 1 && v ? "" : texTall(k);
-    s += (s ? ` ${fortegn} ` : fortegn) + tallDel + v;
-  }
-  return s || "0";
-}
-
-export function texFaktor(rot) {
-  // (x − r), med fortegn som gir mening når r er negativ
-  if (rot === 0) return "x";
-  return `(x ${rot < 0 ? "+" : "-"} ${texTall(rot)})`;
-}
-
-export function texKoeffisient(a) {
-  return a === 1 ? "" : a === -1 ? "-" : (a < 0 ? "-" : "") + texTall(a);
-}
-
+// Formelhjelperne ligger i matte.js og brukes av alle utforskerne.
+export { texTall, texPolynom, texFaktor, texKoeffisient } from "../matte.js";

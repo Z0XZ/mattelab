@@ -39,6 +39,12 @@ export function tallOmtrent(x, desimaler = 2) {
   return (Math.abs(avrundet - x) > 1e-9 ? "≈ " : "") + tall(x, desimaler);
 }
 
+/** «x = 2» eller «x ≈ 1,33»: likhetstegnet blir «≈» når tallet er avrundet. */
+export function lik(navn, x, desimaler = 2) {
+  const avrundet = Number(x.toFixed(desimaler));
+  return `${navn} ${Math.abs(avrundet - x) > 1e-9 ? "≈" : "="} ${tall(x, desimaler)}`;
+}
+
 /** Les et tall skrevet av eleven. Godtar komma eller punktum og både − og -. Gir NaN ved feil. */
 export function tolkTall(tekst) {
   const s = String(tekst).trim().replace(/[−–]/g, "-").replace(/[\s ]/g, "").replace(",", ".");
@@ -190,6 +196,9 @@ export class Koordinatsystem {
     this.xnavn = valg.xnavn || "x";
     this.ynavn = valg.ynavn || "y";
     this.standard = { xmin: valg.xmin ?? -10, xmax: valg.xmax ?? 10, ymin: valg.ymin ?? -10, ymax: valg.ymax ?? 10 };
+    // likeEnheter: én enhet er like lang på begge akser (standard). Slås av for for eksempel vekstmodeller,
+    // der y kan gå til 1000 mens x går til 20.
+    this.likeEnheter = valg.likeEnheter !== false;
     Object.assign(this, this.standard);
     this.vedTegning = () => {};
     const id = "ks" + ++ksTeller;
@@ -235,7 +244,7 @@ export class Koordinatsystem {
     this.H = Math.round(B * (B < 520 ? 1 : this.forhold));
     this.svg.setAttribute("viewBox", `0 0 ${this.B} ${this.H}`);
     for (const r of this.rammer) { r.setAttribute("width", this.B); r.setAttribute("height", this.H); }
-    Object.assign(this, this.medRiktigForhold(this));
+    if (this.likeEnheter) Object.assign(this, this.medRiktigForhold(this));
     if (tegnPaNytt) this.tegn();
   }
 
@@ -261,7 +270,7 @@ export class Koordinatsystem {
     const hx = (this.xmax - this.xmin) / 2, hy = (this.ymax - this.ymin) / 2;
     this.settVindu({ xmin: x - hx, xmax: x + hx, ymin: y - hy, ymax: y + hy });
   }
-  tilbakestill() { this.settVindu(this.medRiktigForhold(this.standard)); }
+  tilbakestill() { this.settVindu(this.likeEnheter ? this.medRiktigForhold(this.standard) : { ...this.standard }); }
 
   /** Juster y-området rundt midtpunktet slik at én enhet er like lang på begge akser. */
   medRiktigForhold(v) {
@@ -278,8 +287,11 @@ export class Koordinatsystem {
 
   tegnAkser() {
     const { B, H } = this;
-    const steg = pentSteg(Math.max(this.xmax - this.xmin, this.ymax - this.ymin), 12);
+    const felles = pentSteg(Math.max(this.xmax - this.xmin, this.ymax - this.ymin), 12);
+    const steg = this.likeEnheter ? felles : pentSteg(this.xmax - this.xmin, Math.max(4, Math.round(B / 60)));
+    const stegY = this.likeEnheter ? felles : pentSteg(this.ymax - this.ymin, Math.max(4, Math.round(H / 45)));
     const des = Math.max(0, -Math.floor(Math.log10(steg) + 1e-9));
+    const desY = Math.max(0, -Math.floor(Math.log10(stegY) + 1e-9));
     // Aksene ligger på x = 0 og y = 0, eller langs kanten når nullpunktet er utenfor.
     const ax = Math.min(Math.max(this.sy(0), 0), H);
     const ay = Math.min(Math.max(this.sx(0), 0), B);
@@ -289,7 +301,8 @@ export class Koordinatsystem {
     const pxSteg = (steg * B) / (this.xmax - this.xmin);
     const lengst = Math.max(tall(this.xmin, des).length, tall(this.xmax, des).length);
     const hvertX = [1, 2, 5, 10].find((k) => k * pxSteg >= lengst * 7.5 + 8) || 10;
-    const hvertY = [1, 2, 5, 10].find((k) => k * pxSteg >= 20) || 10;
+    const pxStegY = (stegY * H) / (this.ymax - this.ymin);
+    const hvertY = [1, 2, 5, 10].find((k) => k * pxStegY >= 20) || 10;
     for (let i = Math.ceil(this.xmin / steg); i * steg <= this.xmax; i++) {
       const x = rens(i * steg), px = this.sx(x);
       svgEl("line", { class: "g-rutenett", x1: px, y1: 0, x2: px, y2: H }, this.lagRutenett);
@@ -299,13 +312,13 @@ export class Koordinatsystem {
         t.textContent = tall(x, des);
       }
     }
-    for (let i = Math.ceil(this.ymin / steg); i * steg <= this.ymax; i++) {
-      const y = rens(i * steg), py = this.sy(y);
+    for (let i = Math.ceil(this.ymin / stegY); i * stegY <= this.ymax; i++) {
+      const y = rens(i * stegY), py = this.sy(y);
       svgEl("line", { class: "g-rutenett", x1: 0, y1: py, x2: B, y2: py }, this.lagRutenett);
       if (y !== 0 && py > 22 && py < H - 10 && i % hvertY === 0) {
         svgEl("line", { class: "g-akse", x1: ay - 4, y1: py, x2: ay + 4, y2: py }, this.lagAkser);
         const t = svgEl("text", { class: "g-tall", x: tallVenstre ? ay - 8 : ay + 8, y: py + 4.5, "text-anchor": tallVenstre ? "end" : "start" }, this.lagAkser);
-        t.textContent = tall(y, des);
+        t.textContent = tall(y, desY);
       }
     }
     svgEl("line", { class: "g-akse", x1: 0, y1: ax, x2: B, y2: ax }, this.lagAkser);
@@ -342,6 +355,36 @@ export class Koordinatsystem {
       forrige = yk;
     }
     return svgEl("path", { class: klasse, d }, lag);
+  }
+
+  /**
+   * Tegn en vektor som pil fra (x1, y1) til (x2, y2). Etiketten står ved midten av pilen.
+   * En nullvektor tegnes som en liten ring, siden den ikke har noen retning.
+   */
+  pil(x1, y1, x2, y2, { klasse = "g-vektor", etikett = "", side = 1 } = {}) {
+    const g = svgEl("g", { class: klasse }, this.lagInnhold);
+    const [a, b, c, d] = [this.sx(x1), this.sy(y1), this.sx(x2), this.sy(y2)];
+    const lengde = Math.hypot(c - a, d - b);
+    if (lengde < 2) {
+      svgEl("circle", { class: "g-vektor-null", cx: a, cy: b, r: 5 }, g);
+    } else {
+      const ux = (c - a) / lengde, uy = (d - b) / lengde;
+      const spiss = Math.min(14, lengde * 0.6);
+      svgEl("line", { x1: a, y1: b, x2: c - ux * spiss * 0.8, y2: d - uy * spiss * 0.8 }, g);
+      svgEl("path", { class: "g-vektor-spiss", d: `M${c} ${d} L${c - ux * spiss - uy * spiss * 0.45} ${d - uy * spiss + ux * spiss * 0.45} L${c - ux * spiss + uy * spiss * 0.45} ${d - uy * spiss - ux * spiss * 0.45} Z` }, g);
+    }
+    if (etikett) {
+      // Etiketten legges litt til siden av pilen (normalretningen), så den ikke ligger oppå streken.
+      const nx = lengde < 2 ? 0 : -(d - b) / lengde, ny = lengde < 2 ? -1 : (c - a) / lengde;
+      const t = svgEl("text", { class: "g-etikett g-vektor-navn", x: (a + c) / 2 + nx * 16 * side, y: (b + d) / 2 + ny * 16 * side + 5, "text-anchor": "middle" }, this.lagPunkter);
+      t.textContent = etikett;
+    }
+    return g;
+  }
+
+  /** Fylt mangekant gjennom punktene [[x, y], …]. */
+  mangekant(punkter, klasse = "g-fyll", lag = this.lagBak) {
+    return svgEl("polygon", { class: klasse, points: punkter.map(([x, y]) => `${this.sx(x)},${this.sy(y)}`).join(" ") }, lag);
   }
 
   linje(x1, y1, x2, y2, klasse = "g-hjelp", lag = this.lagInnhold) {

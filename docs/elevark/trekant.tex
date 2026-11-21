@@ -1,0 +1,81 @@
+%% Elevark fra mattelab.no – laget automatisk av bygg.py. Rediger gjerne til eget bruk.
+%% Kompiler med lualatex.
+\documentclass[11pt,a4paper]{article}
+\usepackage[norsk]{babel}
+\usepackage[a4paper,margin=2.2cm,top=2cm,bottom=2.4cm]{geometry}
+\usepackage{fontspec}
+\usepackage{unicode-math}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{TeX Gyre Heros}[Scale=MatchLowercase]
+\setmathfont{TeX Gyre Pagella Math}
+\usepackage{xcolor}
+\definecolor{blekk}{HTML}{16213A}
+\definecolor{dempet}{HTML}{566077}
+\definecolor{rute}{HTML}{CFC9B8}
+\definecolor{m1}{HTML}{2F4AB0}
+\definecolor{m2}{HTML}{99266D}
+\usepackage[most]{tcolorbox}
+\usepackage{qrcode}
+\usepackage{needspace}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+\pdfvariable suppressoptionalinfo \numexpr 1+2+4+8+16+32+64+128+256+512\relax
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.4em}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[L]{\sffamily\footnotesize\color{dempet}mattelab.no · Trekantutforsker · elevark uten fasit}
+\fancyfoot[R]{\sffamily\footnotesize\color{dempet}Side \thepage}
+
+\newcommand{\fase}[2]{\tcbox[on line, colframe=#2, colback=white, coltext=#2, boxrule=0.6pt, arc=2pt,
+  boxsep=0pt, left=3pt, right=3pt, top=1.5pt, bottom=1.5pt, fontupper=\sffamily\bfseries\footnotesize]{#1}}
+\newcommand{\steg}[4]{%
+  \par\noindent{\color{rute}\rule{\linewidth}{0.4pt}}\par\nopagebreak
+  \noindent\begin{minipage}[t]{2.1cm}\vspace{0pt}\fase{#1}{#2}\end{minipage}%
+  \begin{minipage}[t]{\dimexpr\linewidth-2.1cm\relax}\vspace{0pt}#3\end{minipage}\par
+  \vspace{#4}}
+\newcommand{\oppgave}[2]{\par\Needspace{12\baselineskip}\vspace{0.6em}%
+  {\fontsize{14}{17}\selectfont\bfseries{\color{m1}#1}\enspace #2}\par\vspace{0.2em}}
+
+\begin{document}
+\begin{minipage}[t]{0.72\linewidth}\vspace{0pt}
+{\sffamily\small\color{dempet}Elevark · 1T · mattelab.no}\par\vspace{0.3em}
+{\fontsize{24}{28}\selectfont\bfseries Trekantutforsker}\par\vspace{1em}
+{\sffamily\small Navn: \rule{4.6cm}{0.4pt}\quad Klasse: \rule{1.5cm}{0.4pt}\quad Dato: \rule{1.9cm}{0.4pt}}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.22\linewidth}\vspace{0pt}\raggedleft
+\qrcode[height=2.3cm]{https://mattelab.no/utforskere/trekant.html}\par\vspace{0.2em}
+{\sffamily\scriptsize\color{dempet}Utforskeren}
+\end{minipage}
+
+\vspace{1em}
+{\sffamily\small\color{dempet}Utforskeren ligger på \url{https://mattelab.no/utforskere/trekant.html}}\par
+Hver oppgave har tre steg. \textbf{Gjett} først, uten å bruke utforskeren. \textbf{Test} så i utforskeren. \textbf{Forklar} til slutt med egne ord hvorfor det blir slik.
+
+\oppgave{1}{Cosinussetningen}
+\steg{Gjett}{m1}{I en trekant er $b = 5$, $c = 7$ og $A = 60^\circ$. Er siden $a$ kortere eller lengre enn $7$? Hva tror du arealet er omtrent?}{2.2cm}
+\steg{Test}{m2}{Velg to sider og vinkelen mellom med $b = 5$, $c = 7$ og $A = 60^\circ$. Dra så $A$ til $90^\circ$.}{2.6cm}
+\steg{Forklar}{blekk}{Regn ut $a$ og arealet for hånd. Vis at cosinussetningen blir til Pytagoras' setning når $A = 90^\circ$.}{3.4cm}
+
+\oppgave{2}{Tre sider}
+\steg{Gjett}{m1}{Hvilken vinkel tror du er størst i trekanten med sidene $3$, $4$ og $5$? Finnes det en trekant med sidene $2$, $3$ og $6$?}{2.2cm}
+\steg{Test}{m2}{Velg tre sider med $a = 3$, $b = 4$ og $c = 5$. Prøv så $a = 2$, $b = 3$ og $c = 6$, og dra $c$ sakte nedover.}{2.6cm}
+\steg{Forklar}{blekk}{Hvorfor er den største vinkelen alltid overfor den lengste siden? Hvorfor finnes det ingen trekant med sidene $2$, $3$ og $6$? Når dukker trekanten opp?}{3.4cm}
+
+\oppgave{3}{Sinussetningen}
+\steg{Gjett}{m1}{I en trekant er $A = 40^\circ$, $B = 75^\circ$ og $c = 10$. Hvilken side tror du er lengst?}{2.2cm}
+\steg{Test}{m2}{Velg to vinkler og siden mellom med $A = 40^\circ$, $B = 75^\circ$ og $c = 10$. Dra $B$ opp mot $140^\circ$.}{2.6cm}
+\steg{Forklar}{blekk}{Regn ut $C$, $a$ og $b$ for hånd. Hva skjer når $A + B$ nærmer seg $180^\circ$?}{3.4cm}
+
+\oppgave{4}{Én, to eller ingen trekanter}
+\steg{Gjett}{m1}{Du vet at $b = 8$ og $A = 40^\circ$. Siden $a$ kan svinge om hjørnet $C$. Hvor mange trekanter tror du det finnes når $a = 4$? Når $a = 6$? Når $a = 9$?}{2.2cm}
+\steg{Test}{m2}{Velg to sider og en vinkel som ikke er mellom, med $a = 6$, $b = 8$ og $A = 40^\circ$. Bytt mellom de to løsningene. Dra så $a$ fra $4$ til $9$.}{2.6cm}
+\steg{Forklar}{blekk}{Bruk sinussetningen og sirkelen i figuren til å forklare hvorfor det kan bli to trekanter. Hvorfor blir det ingen når $a = 4$, og bare én når $a = 9$?}{3.4cm}
+
+\oppgave{5}{Arealet av en tomt}
+\steg{Gjett}{m1}{En trekantet tomt har to sider på $40$ m og $55$ m. Vinkelen mellom dem er $110^\circ$. Er arealet større eller mindre enn $\tfrac{1}{2} \cdot 40 \cdot 55 = 1100$ m²?}{2.2cm}
+\steg{Test}{m2}{Velg to sider og vinkelen mellom med $b = 40$, $c = 55$ og $A = 110^\circ$. Prøv også $A = 70^\circ$ og $A = 90^\circ$.}{2.6cm}
+\steg{Forklar}{blekk}{Hvorfor gir $70^\circ$ og $110^\circ$ samme areal? Hvilken vinkel gir størst areal?}{3.4cm}
+
+\end{document}

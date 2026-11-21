@@ -1,0 +1,164 @@
+---
+tittel: Trekantutforsker
+beskrivelse: Sinus-, cosinus- og arealsetningen i vilkårlige trekanter. Se når målene gir én, to eller ingen trekanter.
+type: utforsker
+fag: 1T
+tema: trigonometri
+ikon: trekant
+skript: utforskere/trekant.js
+---
+<p class="ingress">Tre mål kan være nok til å bestemme en trekant. Velg hvilke mål du kjenner, og se hvordan sinus-, cosinus- og arealsetningen gir resten. Noen ganger finnes det ingen trekant, og noen ganger finnes det to.</p>
+
+<figure class="sim sim-bred" id="utforsker" aria-label="Trekantutforsker">
+  <div class="sim-delt">
+    <div class="sim-graf">
+      <svg id="figur" class="figur-svg kun-js"></svg>
+      <div class="noscript-melding kun-uten-js">
+        <p><strong>Utforskeren trenger JavaScript.</strong> Resten av siden, med forklaring og oppgaver, virker uten.</p>
+        <p>Eksempel: Er $b = 5$, $c = 7$ og $A = 60^\circ$, gir cosinussetningen $a^2 = 25 + 49 - 70 \cos 60^\circ = 39$, så $a = \sqrt{39} \approx 6{,}24$.</p>
+      </div>
+      <dl class="sim-tall kun-js" id="verdier"></dl>
+    </div>
+    <div class="sim-side-panel kun-js">
+      <div class="sim-styring">
+        <div class="sim-velg">
+          <label for="modus">Jeg kjenner</label>
+          <select id="modus">
+            <option value="SVS">to sider og vinkelen mellom (b, c, A)</option>
+            <option value="SSS">tre sider (a, b, c)</option>
+            <option value="VSV">to vinkler og siden mellom (A, B, c)</option>
+            <option value="SSV">to sider og en vinkel som ikke er mellom (a, b, A)</option>
+          </select>
+        </div>
+        <div id="glidere" class="glidere"></div>
+        <div class="sim-velg" id="losning-valg" hidden>
+          <label for="losning">Vis løsning</label>
+          <select id="losning">
+            <option value="1">1: B er spiss</option>
+            <option value="2">2: B er stump</option>
+          </select>
+        </div>
+      </div>
+      <div class="sim-blokk">
+        <p class="panel-tittel">Slik regner vi</p>
+        <div id="utregning"></div>
+      </div>
+      <div id="melding" class="sim-blokk melding" hidden></div>
+    </div>
+  </div>
+  {{figurverktoy:enkel}}
+  <figcaption class="sim-hint">Siden a ligger overfor hjørnet A, b overfor B og c overfor C. Figuren skaleres så den alltid passer. Verdiene står i adressefeltet, så du kan dele oppsettet.</figcaption>
+</figure>
+
+<details class="teori" id="matematikken">
+<summary><span class="teori-tittel">Matematikken bak</span><span class="teori-hint">Arealsetningen, sinussetningen, cosinussetningen og når målene ikke gir én trekant</span></summary>
+<div class="teori-innhold tekst">
+
+<h3>Navn i trekanten</h3>
+<p>Vi kaller hjørnene $A$, $B$ og $C$, og bruker de samme bokstavene om vinklene. Siden $a$ ligger overfor $A$, $b$ overfor $B$ og $c$ overfor $C$.</p>
+
+<h3>Arealsetningen</h3>
+<p>Arealet er halvparten av produktet av to sider ganget med sinus til vinkelen mellom dem:</p>
+$$T = \tfrac{1}{2}\, bc \sin A = \tfrac{1}{2}\, ac \sin B = \tfrac{1}{2}\, ab \sin C$$
+<p>Grunnen er at høyden fra $C$ ned på $c$ er $b \sin A$.</p>
+
+<h3>Sinussetningen</h3>
+$$\frac{a}{\sin A} = \frac{b}{\sin B} = \frac{c}{\sin C}$$
+<p>Den følger av arealsetningen: De tre uttrykkene for $T$ er like. Del med $\tfrac{1}{2}abc$, så får du $\frac{\sin A}{a} = \frac{\sin B}{b} = \frac{\sin C}{c}$. Sinussetningen brukes når du kjenner en side og vinkelen overfor.</p>
+
+<h3>Cosinussetningen</h3>
+$$a^2 = b^2 + c^2 - 2bc \cos A$$
+<p>Den brukes når du kjenner to sider og vinkelen mellom, eller alle tre sidene. Er $A = 90^\circ$, er $\cos A = 0$, og vi får Pytagoras' setning.</p>
+
+<h3>Ingen, én eller to trekanter</h3>
+<ul>
+  <li><strong>Tre sider:</strong> Det finnes en trekant bare hvis hver side er kortere enn de to andre til sammen.</li>
+  <li><strong>To vinkler:</strong> Summen må være mindre enn $180^\circ$.</li>
+  <li><strong>To sider og en vinkel som ikke er mellom dem:</strong> Sinussetningen gir $\sin B$. Er $\sin B > 1$, finnes ingen trekant. Ellers kan både en spiss og en stump vinkel ha samme sinus, fordi $\sin(180^\circ - B) = \sin B$. Da kan det finnes to trekanter. Dette kalles det tvetydige tilfellet.</li>
+</ul>
+</div>
+</details>
+
+<section class="oppgaver" aria-labelledby="oppgaver-tittel">
+<h2 id="oppgaver-tittel">Oppgaver</h2>
+{{elevark}}
+<p class="del-inngang">Hver oppgave har tre steg. <strong>Gjett</strong> først, uten å bruke utforskeren. <strong>Test</strong> så i utforskeren. <strong>Forklar</strong> til slutt med egne ord hvorfor det blir slik.</p>
+
+<div class="oppgave" id="oppgave-1">
+  <h3><span class="oppgave-nr">1</span>Cosinussetningen</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>I en trekant er $b = 5$, $c = 7$ og $A = 60^\circ$. Er siden $a$ kortere eller lengre enn $7$? Hva tror du arealet er omtrent?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?modus=SVS&amp;b=5&amp;c=7&amp;A=60#utforsker">Velg to sider og vinkelen mellom med $b = 5$, $c = 7$ og $A = 60^\circ$</a>. Dra så $A$ til $90^\circ$.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Regn ut $a$ og arealet for hånd. Vis at cosinussetningen blir til Pytagoras' setning når $A = 90^\circ$.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    $$a^2 = 5^2 + 7^2 - 2 \cdot 5 \cdot 7 \cdot \cos 60^\circ = 25 + 49 - 35 = 39$$
+    <p>Altså er $a = \sqrt{39} \approx 6{,}24$, som er kortere enn $7$.</p>
+    <p>Arealet er $T = \tfrac{1}{2} \cdot 5 \cdot 7 \cdot \sin 60^\circ \approx 15{,}16$.</p>
+    <p>Når $A = 90^\circ$, er $\cos A = 0$, og leddet $2bc \cos A$ forsvinner. Da står det $a^2 = b^2 + c^2$, som er Pytagoras' setning. Her blir $a = \sqrt{74} \approx 8{,}60$.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-2">
+  <h3><span class="oppgave-nr">2</span>Tre sider</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Hvilken vinkel tror du er størst i trekanten med sidene $3$, $4$ og $5$? Finnes det en trekant med sidene $2$, $3$ og $6$?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?modus=SSS&amp;a=3&amp;b=4&amp;c=5#utforsker">Velg tre sider med $a = 3$, $b = 4$ og $c = 5$</a>. Prøv så <a class="oppsettlenke" href="?modus=SSS&amp;a=2&amp;b=3&amp;c=6#utforsker">$a = 2$, $b = 3$ og $c = 6$</a>, og dra $c$ sakte nedover.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Hvorfor er den største vinkelen alltid overfor den lengste siden? Hvorfor finnes det ingen trekant med sidene $2$, $3$ og $6$? Når dukker trekanten opp?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>Trekanten $3$, $4$, $5$ er rettvinklet: $C = 90^\circ$, fordi $3^2 + 4^2 = 5^2$. De andre vinklene er $A \approx 36{,}87^\circ$ og $B \approx 53{,}13^\circ$. Arealet er $\tfrac{1}{2} \cdot 3 \cdot 4 = 6$.</p>
+    <p>Cosinussetningen gir $\cos C = \frac{a^2 + b^2 - c^2}{2ab}$. Jo lengre $c$ er, jo mindre blir $\cos C$, og jo større blir $C$.</p>
+    <p>$2 + 3 = 5 < 6$. De to korte sidene når ikke sammen. Trekanten dukker opp når $c < 5$. Når $c = 5$, blir den flat.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-3">
+  <h3><span class="oppgave-nr">3</span>Sinussetningen</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>I en trekant er $A = 40^\circ$, $B = 75^\circ$ og $c = 10$. Hvilken side tror du er lengst?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?modus=VSV&amp;A=40&amp;B=75&amp;c=10#utforsker">Velg to vinkler og siden mellom med $A = 40^\circ$, $B = 75^\circ$ og $c = 10$</a>. Dra $B$ opp mot $140^\circ$.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Regn ut $C$, $a$ og $b$ for hånd. Hva skjer når $A + B$ nærmer seg $180^\circ$?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>$C = 180^\circ - 40^\circ - 75^\circ = 65^\circ$.</p>
+    $$a = \frac{10 \sin 40^\circ}{\sin 65^\circ} \approx 7{,}09 \qquad b = \frac{10 \sin 75^\circ}{\sin 65^\circ} \approx 10{,}66$$
+    <p>Den største vinkelen er $B$, så $b$ er lengst.</p>
+    <p>Når $A + B$ nærmer seg $180^\circ$, blir $C$ liten, og $\sin C$ nærmer seg null. Da blir $a$ og $b$ veldig lange. Sidene $a$ og $b$ blir nesten parallelle og møtes langt borte. Når $A + B \geq 180^\circ$, finnes det ingen trekant.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-4">
+  <h3><span class="oppgave-nr">4</span>Én, to eller ingen trekanter</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Du vet at $b = 8$ og $A = 40^\circ$. Siden $a$ kan svinge om hjørnet $C$. Hvor mange trekanter tror du det finnes når $a = 4$? Når $a = 6$? Når $a = 9$?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?modus=SSV&amp;a=6&amp;b=8&amp;A=40#utforsker">Velg to sider og en vinkel som ikke er mellom, med $a = 6$, $b = 8$ og $A = 40^\circ$</a>. Bytt mellom de to løsningene. Dra så $a$ fra $4$ til $9$.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Bruk sinussetningen og sirkelen i figuren til å forklare hvorfor det kan bli to trekanter. Hvorfor blir det ingen når $a = 4$, og bare én når $a = 9$?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>Sinussetningen gir $\sin B = \frac{8 \sin 40^\circ}{a}$.</p>
+    <ul>
+      <li>$a = 4$: $\sin B \approx 1{,}29 > 1$. Ingen trekant. Sirkelen med radius $4$ rundt $C$ når ikke ned til grunnlinja.</li>
+      <li>$a = 6$: $\sin B \approx 0{,}857$. Både $B \approx 58{,}99^\circ$ og $B \approx 121{,}01^\circ$ har denne sinusverdien, og begge gir en trekant. Da er $c \approx 9{,}22$ eller $c \approx 3{,}04$.</li>
+      <li>$a = 9$: $\sin B \approx 0{,}571$, så $B \approx 34{,}85^\circ$ eller $B \approx 145{,}15^\circ$. Den stumpe gir $A + B > 180^\circ$, så det finnes bare én trekant.</li>
+    </ul>
+    <p>Sirkelen med radius $a$ rundt $C$ kan treffe linja gjennom $A$ i to punkter. Det gir de to trekantene. Er $a \geq b$, ligger det ene skjæringspunktet på feil side av $A$.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-5">
+  <h3><span class="oppgave-nr">5</span>Arealet av en tomt</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>En trekantet tomt har to sider på $40$ m og $55$ m. Vinkelen mellom dem er $110^\circ$. Er arealet større eller mindre enn $\tfrac{1}{2} \cdot 40 \cdot 55 = 1100$ m²?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?modus=SVS&amp;b=40&amp;c=55&amp;A=110#utforsker">Velg to sider og vinkelen mellom med $b = 40$, $c = 55$ og $A = 110^\circ$</a>. Prøv også $A = 70^\circ$ og $A = 90^\circ$.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Hvorfor gir $70^\circ$ og $110^\circ$ samme areal? Hvilken vinkel gir størst areal?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>$T = \tfrac{1}{2} \cdot 40 \cdot 55 \cdot \sin 110^\circ \approx 1033{,}66$ m². Det er mindre enn $1100$ m², fordi $\sin 110^\circ \approx 0{,}94 < 1$.</p>
+    <p>$\sin 70^\circ = \sin 110^\circ$, fordi $\sin(180^\circ - v) = \sin v$. Derfor gir de to vinklene samme areal, selv om trekantene har ulik form.</p>
+    <p>Arealet er størst når $\sin A = 1$, altså når $A = 90^\circ$. Da er arealet $1100$ m².</p>
+  </div></details>
+</div>
+</section>
+
+<p class="merknad">For lærere: Se <a href="{{rot}}laerer.html">lærersiden</a> for kobling til kompetansemålene.</p>

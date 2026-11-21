@@ -1,0 +1,183 @@
+---
+tittel: Lineær funksjon
+beskrivelse: Stigningstall og konstantledd i f(x) = ax + b. Finn linja gjennom to punkter, og se funksjonen som uttrykk, tabell, graf og tekst.
+type: utforsker
+fag: 1T
+tema: funksjoner
+ikon: lineaer
+skript: utforskere/lineaer.js
+---
+<p class="ingress">Grafen til en lineær funksjon er en rett linje. Her kan du endre stigningstallet $a$ og konstantleddet $b$ i $f(x) = ax + b$, eller la linja gå gjennom to punkter du velger selv.</p>
+
+<figure class="sim sim-bred" id="utforsker" aria-label="Utforsker for lineære funksjoner">
+  <div class="sim-delt">
+    <div class="sim-graf">
+      <svg id="graf" class="kun-js"></svg>
+      <div class="noscript-melding kun-uten-js">
+        <p><strong>Utforskeren trenger JavaScript.</strong> Resten av siden, med forklaring og oppgaver, virker uten.</p>
+        <p>Eksempel: Grafen til $f(x) = 2x - 1$ er en rett linje som stiger. Den skjærer y-aksen i $(0, -1)$. For hver gang $x$ øker med $1$, øker $f(x)$ med $2$.</p>
+      </div>
+      <dl class="sim-tall kun-js" id="verdier"></dl>
+    </div>
+    <div class="sim-side-panel kun-js">
+      <div class="sim-styring">
+        <div class="sim-velg">
+          <label for="modus">Bestem linja med</label>
+          <select id="modus">
+            <option value="ab">stigningstall og konstantledd</option>
+            <option value="punkter">to punkter</option>
+          </select>
+        </div>
+        <div id="glidere-ab" class="glidere"></div>
+        <div id="glidere-punkter" class="glidere" hidden></div>
+      </div>
+      <div class="sim-blokk">
+        <p class="panel-tittel">Funksjonen</p>
+        <div class="forskrift" id="forskrift"></div>
+        <div id="former" class="former"></div>
+        <div id="representasjoner">
+        <p class="panel-tittel ny-del">Med ord</p>
+        <p id="tekstform" class="melding"></p>
+        <p class="panel-tittel ny-del">Verditabell</p>
+        <div id="tabell" class="tabell-rull-liten"></div>
+        </div>
+      </div>
+      <div id="melding" class="sim-blokk melding" hidden></div>
+    </div>
+  </div>
+  <fieldset class="sim-valg kun-js" id="visvalg">
+    <legend>Vis i grafen</legend>
+    <label class="avkrysning"><input type="checkbox" name="trekant" checked> Stigningstrekant (skravert)</label>
+    <label class="avkrysning"><input type="checkbox" name="punkter" checked> Skjæring med aksene</label>
+  </fieldset>
+  {{figurverktoy}}
+  <figcaption class="sim-hint">Dra i glidebryterne, eller skriv et tall i feltet. Piltastene endrer verdien med 0,1. Verdiene står i adressefeltet, så du kan dele oppsettet.</figcaption>
+</figure>
+
+<details class="teori" id="matematikken">
+<summary><span class="teori-tittel">Matematikken bak</span><span class="teori-hint">Stigningstall, konstantledd, linja gjennom to punkter og fire måter å vise en funksjon på</span></summary>
+<div class="teori-innhold tekst">
+
+<h3>Stigningstall og konstantledd</h3>
+<p>En lineær funksjon kan skrives $f(x) = ax + b$.</p>
+<ul>
+  <li><strong>$b$</strong> er konstantleddet. Fordi $f(0) = b$, skjærer grafen y-aksen i $(0, b)$.</li>
+  <li><strong>$a$</strong> er stigningstallet. Det forteller hvor mye $f(x)$ endres når $x$ øker med $1$. Er $a > 0$, stiger linja. Er $a < 0$, synker den. Er $a = 0$, er den vannrett.</li>
+</ul>
+<p>Du kan se hvorfor ved å regne ut endringen:</p>
+$$f(x + 1) - f(x) = a(x + 1) + b - (ax + b) = a$$
+<p>Endringen er den samme overalt. Derfor blir grafen rett.</p>
+
+<h3>Linja gjennom to punkter</h3>
+<p>Går linja gjennom $(x_1, y_1)$ og $(x_2, y_2)$, er stigningstallet</p>
+$$a = \frac{\Delta y}{\Delta x} = \frac{y_2 - y_1}{x_2 - x_1}$$
+<p>Så finner du $b$ ved å sette ett av punktene inn i $y = ax + b$. Formelen virker ikke når $x_1 = x_2$, fordi vi da deler på null. Da er linja loddrett, og den er ikke grafen til en funksjon.</p>
+
+<h3>Nullpunktet</h3>
+<p>Nullpunktet er løsningen av $ax + b = 0$. Når $a \neq 0$, er $x = -\frac{b}{a}$. Når $a = 0$, er grafen vannrett. Da finnes det ikke noe nullpunkt, med mindre $b = 0$ også.</p>
+
+<h3>Fire måter å vise en funksjon på</h3>
+<p>Den samme funksjonen kan vises som <strong>uttrykk</strong>, <strong>verditabell</strong>, <strong>graf</strong> og <strong>tekst</strong>. Utforskeren viser alle fire samtidig. Når du skal løse en oppgave, kan det lønne seg å bytte mellom dem.</p>
+</div>
+</details>
+
+<section class="oppgaver" aria-labelledby="oppgaver-tittel">
+<h2 id="oppgaver-tittel">Oppgaver</h2>
+{{elevark}}
+<p class="del-inngang">Hver oppgave har tre steg. <strong>Gjett</strong> først, uten å bruke utforskeren. <strong>Test</strong> så i utforskeren. <strong>Forklar</strong> til slutt med egne ord hvorfor det blir slik.</p>
+
+<div class="oppgave" id="oppgave-1">
+  <h3><span class="oppgave-nr">1</span>Hva gjør $b$?</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Se på $f(x) = 2x + b$. Hva tror du skjer med linja når $b$ endres? Hva skjer med nullpunktet?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?modus=ab&amp;a=2&amp;b=0#utforsker">Sett $a = 2$ og $b = 0$</a>. Dra $b$ fra $-3$ til $3$. Skriv ned nullpunktet for $b = -3$, $b = 0$ og $b = 3$.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Hvorfor blir alle linjene parallelle? Finn en formel for nullpunktet uttrykt med $b$.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>Linja flyttes rett opp eller ned. Den skjærer y-aksen i $(0, b)$.</p>
+    <ul>
+      <li>$b = -3$: nullpunkt $x = 1{,}5$</li>
+      <li>$b = 0$: nullpunkt $x = 0$</li>
+      <li>$b = 3$: nullpunkt $x = -1{,}5$</li>
+    </ul>
+    <p>Alle linjene har stigningstall $2$. De stiger like bratt og blir derfor parallelle. Nullpunktet finner vi fra $2x + b = 0$, som gir $x = -\frac{b}{2}$.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-2">
+  <h3><span class="oppgave-nr">2</span>Hva betyr stigningstallet?</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Se på $f(x) = ax + 1$. Hvor mye tror du $f(x)$ øker fra $x = 2$ til $x = 3$ når $a = 2$? Når $a = 0{,}5$? Når $a = -1$? Når $a = 0$?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?modus=ab&amp;a=2&amp;b=1#utforsker">Sett $a = 2$ og $b = 1$</a>. Bruk verditabellen til å finne $f(2)$ og $f(3)$ for hver av de fire verdiene av $a$.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Vis ved regning at $f(x + 1) - f(x) = a$ for alle $x$.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <div class="tabell-rull">
+    <table class="tabell">
+      <caption>$f(2)$ og $f(3)$ for $f(x) = ax + 1$</caption>
+      <thead><tr><th scope="col">$a$</th><th scope="col">$f(2)$</th><th scope="col">$f(3)$</th><th scope="col">Endring</th></tr></thead>
+      <tbody>
+        <tr><td>$2$</td><td>$5$</td><td>$7$</td><td>$2$</td></tr>
+        <tr><td>$0{,}5$</td><td>$2$</td><td>$2{,}5$</td><td>$0{,}5$</td></tr>
+        <tr><td>$-1$</td><td>$-1$</td><td>$-2$</td><td>$-1$</td></tr>
+        <tr><td>$0$</td><td>$1$</td><td>$1$</td><td>$0$</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p>Endringen er alltid lik $a$:</p>
+    $$f(x + 1) - f(x) = a(x + 1) + 1 - (ax + 1) = ax + a + 1 - ax - 1 = a$$
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-3">
+  <h3><span class="oppgave-nr">3</span>Linja gjennom to punkter</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>En linje går gjennom $(1, 2)$ og $(4, 8)$. Hva tror du stigningstallet og konstantleddet er? Hva med linja gjennom $(-2, 5)$ og $(2, -1)$?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?modus=punkter&amp;x1=1&amp;y1=2&amp;x2=4&amp;y2=8#utforsker">Velg «to punkter» med $(1, 2)$ og $(4, 8)$</a>. Les av $\Delta x$, $\Delta y$ og funksjonsuttrykket. Gjør det samme for <a class="oppsettlenke" href="?modus=punkter&amp;x1=-2&amp;y1=5&amp;x2=2&amp;y2=-1#utforsker">$(-2, 5)$ og $(2, -1)$</a>.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Hvorfor er $a = \frac{\Delta y}{\Delta x}$? Hvordan kan du finne $b$ når du kjenner $a$ og ett punkt?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>Første linje: $\Delta x = 4 - 1 = 3$ og $\Delta y = 8 - 2 = 6$. Da er $a = \frac{6}{3} = 2$. Setter vi inn $(1, 2)$, får vi $2 = 2 \cdot 1 + b$, så $b = 0$. Funksjonen er $f(x) = 2x$.</p>
+    <p>Andre linje: $\Delta x = 2 - (-2) = 4$ og $\Delta y = -1 - 5 = -6$. Da er $a = \frac{-6}{4} = -1{,}5$. Setter vi inn $(2, -1)$, får vi $-1 = -1{,}5 \cdot 2 + b$, så $b = 2$. Funksjonen er $f(x) = -1{,}5x + 2$.</p>
+    <p>Stigningstallet er endringen i $y$ når $x$ øker med $1$. Øker $x$ med $\Delta x$, endres $y$ med $a \cdot \Delta x$. Altså er $\Delta y = a \cdot \Delta x$, og $a = \frac{\Delta y}{\Delta x}$.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-4">
+  <h3><span class="oppgave-nr">4</span>Stearinlyset</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Et stearinlys er $20$ cm høyt når det blir tent. Det brenner ned $2{,}5$ cm i timen. Skriv et uttrykk for høyden $h(x)$ etter $x$ timer. Hvor høyt er lyset etter $3$ timer? Når har det brent ut?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?modus=ab&amp;a=-2.5&amp;b=20&amp;tilpass=1#utforsker">Sett $a = -2{,}5$ og $b = 20$</a>. Bruk grafen, verditabellen og nullpunktet til å kontrollere svarene dine.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Vis modellen på fire måter: uttrykk, tabell, graf og tekst. For hvilke $x$ gir modellen mening?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>Uttrykk: $h(x) = -2{,}5x + 20$. Høyden etter $3$ timer er $h(3) = -2{,}5 \cdot 3 + 20 = 12{,}5$ cm.</p>
+    <p>Lyset har brent ut når $h(x) = 0$: $-2{,}5x + 20 = 0$ gir $x = 8$. Det tar $8$ timer.</p>
+    <div class="tabell-rull">
+    <table class="tabell">
+      <caption>Verditabell for $h(x) = -2{,}5x + 20$</caption>
+      <thead><tr><th scope="col">$x$ (timer)</th><td>$0$</td><td>$2$</td><td>$4$</td><td>$6$</td><td>$8$</td></tr></thead>
+      <tbody><tr><th scope="row">$h(x)$ (cm)</th><td>$20$</td><td>$15$</td><td>$10$</td><td>$5$</td><td>$0$</td></tr></tbody>
+    </table>
+    </div>
+    <p>Graf: en rett linje fra $(0, 20)$ ned til $(8, 0)$. Tekst: Lyset starter på $20$ cm og blir $2{,}5$ cm kortere for hver time.</p>
+    <p>Modellen gir bare mening når $0 \leq x \leq 8$. Før lyset er tent, og etter at det har brent ut, beskriver den ikke virkeligheten. En negativ høyde gir ingen mening.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-5">
+  <h3><span class="oppgave-nr">5</span>Når $x_1 = x_2$</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Hva tror du skjer med stigningstallet når de to punktene er $(2, 1)$ og $(2, 5)$?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?modus=punkter&amp;x1=2&amp;y1=1&amp;x2=4&amp;y2=5#utforsker">Velg «to punkter» med $(2, 1)$ og $(4, 5)$</a>. Dra $x_2$ sakte mot $2$. Følg med på stigningstallet. Sett til slutt $x_2 = 2$.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Hvorfor finnes ikke stigningstallet når $x_1 = x_2$? Hvorfor er en loddrett linje ikke grafen til en funksjon?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>Når $x_2$ nærmer seg $2$, blir $\Delta x$ liten, mens $\Delta y = 4$. Da blir $a = \frac{4}{\Delta x}$ veldig stor, og linja blir brattere og brattere.</p>
+    <p>Når $x_2 = 2$, er $\Delta x = 0$. Vi kan ikke dele på null, så stigningstallet finnes ikke. Linja er loddrett og har likningen $x = 2$.</p>
+    <p>En funksjon gir <em>én</em> verdi for hver $x$. På linja $x = 2$ hører $x = 2$ til uendelig mange y-verdier. Derfor er den ikke grafen til en funksjon.</p>
+  </div></details>
+</div>
+</section>
+
+<p class="merknad">For lærere: Se <a href="{{rot}}laerer.html">lærersiden</a> for kobling til kompetansemålene.</p>

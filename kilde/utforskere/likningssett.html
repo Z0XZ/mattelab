@@ -1,0 +1,153 @@
+---
+tittel: Likningssett løst grafisk
+beskrivelse: To likninger med to ukjente er to linjer. Løsningen er skjæringspunktet – hvis det finnes. Se når det er én, ingen eller uendelig mange løsninger.
+type: utforsker
+fag: 1T
+tema: likninger
+ikon: likningssett
+skript: utforskere/likningssett.js
+---
+<p class="ingress">En likning med to ukjente, som $2x + y = 5$, har uendelig mange løsninger. Tegner du dem, får du en rett linje. Et likningssett med to slike likninger blir to linjer. Her kan du endre tallene og se hvor linjene møtes.</p>
+
+<figure class="sim sim-bred" id="utforsker" aria-label="Utforsker for likningssett">
+  <div class="sim-delt">
+    <div class="sim-graf">
+      <svg id="graf" class="kun-js"></svg>
+      <div class="noscript-melding kun-uten-js">
+        <p><strong>Utforskeren trenger JavaScript.</strong> Resten av siden, med forklaring og oppgaver, virker uten.</p>
+        <p>Eksempel: Linjene $2x + y = 5$ og $x - y = 1$ skjærer hverandre i $(2, 1)$. Derfor er $x = 2$ og $y = 1$ løsningen av likningssettet.</p>
+      </div>
+      <dl class="sim-tall kun-js" id="verdier"></dl>
+    </div>
+    <div class="sim-side-panel kun-js">
+      <div class="sim-styring">
+        <div class="panel-gruppe">
+          <p class="panel-tittel">Likning 1 <span class="forklaring-farge">(blå, heltrukket linje)</span></p>
+          <div class="likning" id="likning-1"></div>
+          <div id="glidere-1" class="glidere"></div>
+        </div>
+        <div class="panel-gruppe">
+          <p class="panel-tittel">Likning 2 <span class="forklaring-farge">(plomme, stiplet linje)</span></p>
+          <div class="likning" id="likning-2"></div>
+          <div id="glidere-2" class="glidere"></div>
+        </div>
+      </div>
+      <div class="sim-blokk">
+        <p class="panel-tittel">Kontroll: sett løsningen inn</p>
+        <div id="kontroll" class="former"></div>
+      </div>
+      <div id="melding" class="sim-blokk melding" hidden></div>
+    </div>
+  </div>
+  <p id="utenfor" class="utenfor-melding" hidden>Skjæringspunktet ligger utenfor tegneområdet. Pilen ved kanten viser hvor det er. Trykk «Vis hele grafen» for å se det.</p>
+  {{figurverktoy}}
+  <figcaption class="sim-hint">Dra i glidebryterne, eller skriv et tall i feltet. Piltastene endrer verdien med 0,1. Verdiene står i adressefeltet, så du kan dele oppsettet.</figcaption>
+</figure>
+
+<details class="teori" id="matematikken">
+<summary><span class="teori-tittel">Matematikken bak</span><span class="teori-hint">Hvorfor skjæringspunktet er løsningen, innsetting og addisjon, og når det ikke finnes én løsning</span></summary>
+<div class="teori-innhold tekst">
+
+<h3>Hvorfor skjæringspunktet er løsningen</h3>
+<p>Alle punkter $(x, y)$ som passer i $2x + y = 5$, ligger på en rett linje. Det ser du hvis du løser likningen med hensyn på $y$: $y = -2x + 5$. Et punkt som ligger på <em>begge</em> linjene, passer i begge likningene. Det er nettopp skjæringspunktet.</p>
+
+<h3>Løse ved regning</h3>
+<p>Å lese av en graf gir ofte bare et omtrentlig svar. Med regning får du det nøyaktige svaret.</p>
+<ul>
+  <li><strong>Innsettingsmetoden:</strong> Løs den ene likningen med hensyn på én ukjent, og sett uttrykket inn i den andre likningen.</li>
+  <li><strong>Addisjonsmetoden:</strong> Gang likningene med tall slik at én ukjent forsvinner når du legger dem sammen.</li>
+</ul>
+<p>Eksempel: Legger vi sammen $2x + y = 5$ og $x - y = 1$, forsvinner $y$, og vi får $3x = 6$. Altså er $x = 2$. Setter vi det inn i den første likningen, får vi $4 + y = 5$, så $y = 1$.</p>
+
+<h3>Én, ingen eller uendelig mange løsninger</h3>
+<p>To rette linjer i planet kan</p>
+<ul>
+  <li>skjære hverandre i ett punkt: <strong>én løsning</strong></li>
+  <li>være parallelle og aldri møtes: <strong>ingen løsning</strong></li>
+  <li>ligge oppå hverandre: <strong>uendelig mange løsninger</strong></li>
+</ul>
+<p>Linjene er parallelle (eller like) når de har samme stigningstall. For likninger på formen $a_1x + b_1y = c_1$ og $a_2x + b_2y = c_2$ skjer det nøyaktig når $a_1b_2 - a_2b_1 = 0$. Utforskeren viser dette tallet.</p>
+</div>
+</details>
+
+<section class="oppgaver" aria-labelledby="oppgaver-tittel">
+<h2 id="oppgaver-tittel">Oppgaver</h2>
+{{elevark}}
+<p class="del-inngang">Hver oppgave har tre steg. <strong>Gjett</strong> først, uten å bruke utforskeren. <strong>Test</strong> så i utforskeren. <strong>Forklar</strong> til slutt med egne ord hvorfor det blir slik.</p>
+
+<div class="oppgave" id="oppgave-1">
+  <h3><span class="oppgave-nr">1</span>Les av skjæringspunktet</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Se på likningssettet $2x + y = 5$ og $x - y = 1$. Prøv deg fram med små hele tall. Hvilke $x$ og $y$ passer i begge likningene?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?a1=2&amp;b1=1&amp;c1=5&amp;a2=1&amp;b2=-1&amp;c2=1#utforsker">Sett opp likningssettet</a>. Les av skjæringspunktet, og se på kontrollen i panelet.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Hvorfor er skjæringspunktet løsningen av likningssettet? Løs likningssettet med addisjonsmetoden.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>Linjene skjærer hverandre i $(2, 1)$. Kontroll: $2 \cdot 2 + 1 = 5$ og $2 - 1 = 1$.</p>
+    <p>Hvert punkt på den første linja passer i den første likningen, og hvert punkt på den andre linja passer i den andre. Skjæringspunktet ligger på begge linjene og passer derfor i begge likningene.</p>
+    <p>Addisjonsmetoden: Legg sammen likningene. Da forsvinner $y$:</p>
+    $$(2x + y) + (x - y) = 5 + 1 \quad\Rightarrow\quad 3x = 6 \quad\Rightarrow\quad x = 2$$
+    <p>Innsatt i $x - y = 1$ gir det $2 - y = 1$, så $y = 1$.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-2">
+  <h3><span class="oppgave-nr">2</span>Parallelle linjer</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Se på $x + 2y = 4$ og $x + 2y = 1$. Hvor mange løsninger tror du likningssettet har? Hva skjer hvis den andre likningen er $x + 2y = 4$? Eller $2x + 4y = 8$?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?a1=1&amp;b1=2&amp;c1=4&amp;a2=1&amp;b2=2&amp;c2=1#utforsker">Sett opp likningssettet</a>. Dra $c_2$ sakte opp til $4$. Prøv deretter <a class="oppsettlenke" href="?a1=1&amp;b1=2&amp;c1=4&amp;a2=2&amp;b2=4&amp;c2=8#utforsker">$2x + 4y = 8$ som likning 2</a>.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Prøv å løse $x + 2y = 4$ og $x + 2y = 1$ ved regning. Hva skjer? Hvorfor har $x + 2y = 4$ og $2x + 4y = 8$ uendelig mange løsninger?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>Begge linjene har stigningstall $-\frac{1}{2}$. Når $c_2 \neq 4$, er de parallelle og møtes aldri: ingen løsning. Når $c_2 = 4$, er likningene like, og linjene ligger oppå hverandre: uendelig mange løsninger.</p>
+    <p>Trekker vi den andre likningen fra den første, får vi $0 = 4 - 1 = 3$. Det er aldri sant. Derfor finnes det ingen løsning.</p>
+    <p>Likningen $2x + 4y = 8$ er bare $x + 2y = 4$ ganget med $2$. Den beskriver den samme linja, så alle punktene på linja er løsninger. Utforskeren viser $a_1b_2 - a_2b_1 = 1 \cdot 4 - 2 \cdot 2 = 0$.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-3">
+  <h3><span class="oppgave-nr">3</span>Når grafen ikke er nøyaktig nok</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Linjene $3x + 2y = 6$ og $x - 2y = 1$ skjærer hverandre et sted mellom $x = 1$ og $x = 2$. Hvor tror du skjæringspunktet er?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?a1=3&amp;b1=2&amp;c1=6&amp;a2=1&amp;b2=-2&amp;c2=1#utforsker">Sett opp likningssettet</a>. Zoom inn rundt skjæringspunktet. Hvor nøyaktig klarer du å lese det av?</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Løs likningssettet med regning. Skriv svaret som brøk og som desimaltall.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>Addisjonsmetoden: Legg sammen likningene. Da forsvinner $y$, og vi får $4x = 7$, altså $x = \frac{7}{4} = 1{,}75$.</p>
+    <p>Innsatt i $x - 2y = 1$: $1{,}75 - 2y = 1$, så $2y = 0{,}75$ og $y = \frac{3}{8} = 0{,}375$.</p>
+    <p>Skjæringspunktet er $\left(\frac{7}{4}, \frac{3}{8}\right)$. Et slikt punkt er vanskelig å lese nøyaktig av en graf. Grafen er fin til å se omtrent hvor svaret er og til å kontrollere. Regning gir det nøyaktige svaret.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-4">
+  <h3><span class="oppgave-nr">4</span>Kinobilletter</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Tre voksne og to barn betaler $590$ kr for kino. En voksen og fire barn betaler $480$ kr. La $x$ være prisen for en voksen og $y$ prisen for et barn. Sett opp to likninger. Hva tror du billettene koster?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?a1=3&amp;b1=2&amp;c1=590&amp;a2=1&amp;b2=4&amp;c2=480#utforsker">Sett opp likningssettet</a>. Trykk «Vis hele grafen» hvis du ikke ser skjæringspunktet.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Løs likningssettet med innsettingsmetoden. Kontroller at svaret passer i teksten.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>Likningene er $3x + 2y = 590$ og $x + 4y = 480$.</p>
+    <p>Fra den andre likningen er $x = 480 - 4y$. Innsatt i den første:</p>
+    $$3(480 - 4y) + 2y = 590 \quad\Rightarrow\quad 1440 - 10y = 590 \quad\Rightarrow\quad y = 85$$
+    <p>Da er $x = 480 - 4 \cdot 85 = 140$. En voksenbillett koster $140$ kr, og en barnebillett koster $85$ kr.</p>
+    <p>Kontroll: $3 \cdot 140 + 2 \cdot 85 = 420 + 170 = 590$ og $140 + 4 \cdot 85 = 140 + 340 = 480$.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-5">
+  <h3><span class="oppgave-nr">5</span>Når finnes det ingen løsning?</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Se på likningssettet $kx + y = 3$ og $2x + y = 1$. For hvilken verdi av $k$ tror du det ikke finnes noen løsning?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?a1=0&amp;b1=1&amp;c1=3&amp;a2=2&amp;b2=1&amp;c2=1#utforsker">Sett opp likningssettet med $k = 0$</a>. Dra $a_1$ (som er $k$) sakte oppover. Følg med på skjæringspunktet og på tallet $a_1b_2 - a_2b_1$.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Bruk stigningstallene til å forklare svaret. Hva skjer med skjæringspunktet når $k$ nærmer seg denne verdien?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>Løst med hensyn på $y$ er linjene $y = -kx + 3$ og $y = -2x + 1$. De er parallelle når stigningstallene er like, altså når $k = 2$. Siden konstantleddene $3$ og $1$ er ulike, er linjene da ikke den samme linja. Derfor har likningssettet ingen løsning når $k = 2$.</p>
+    <p>Tallet $a_1b_2 - a_2b_1 = k \cdot 1 - 2 \cdot 1 = k - 2$ er null nettopp når $k = 2$.</p>
+    <p>Når $k$ nærmer seg $2$, blir linjene nesten parallelle. Skjæringspunktet flytter seg da lenger og lenger bort. For eksempel gir $k = 3$ skjæringspunktet $(2, -3)$.</p>
+  </div></details>
+</div>
+</section>
+
+<p class="merknad">For lærere: Se <a href="{{rot}}laerer.html">lærersiden</a> for kobling til kompetansemålene.</p>

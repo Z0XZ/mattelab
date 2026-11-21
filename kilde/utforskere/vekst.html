@@ -1,0 +1,171 @@
+---
+tittel: Eksponentiell og logistisk vekst
+beskrivelse: Vekstfaktor, prosentvis endring, doblingstid og bæreevne. Sammenlign eksponentiell og logistisk vekst.
+type: utforsker
+fag: 1T, R1
+tema: vekst, funksjoner
+ikon: vekst
+skript: utforskere/vekst.js
+---
+<p class="ingress">Når noe øker med samme <em>prosent</em> hver tidsenhet, får vi eksponentiell vekst. Men ingenting kan vokse slik for alltid. I en logistisk modell bremser veksten når verdien nærmer seg en øvre grense, bæreevnen $K$.</p>
+
+<figure class="sim sim-bred" id="utforsker" aria-label="Utforsker for eksponentiell og logistisk vekst">
+  <div class="sim-delt">
+    <div class="sim-graf">
+      <svg id="graf" class="kun-js"></svg>
+      <div class="noscript-melding kun-uten-js">
+        <p><strong>Utforskeren trenger JavaScript.</strong> Resten av siden, med forklaring og oppgaver, virker uten.</p>
+        <p>Eksempel: Med startverdi $10$ og $20\,\%$ vekst per tidsenhet er $f(t) = 10 \cdot 1{,}2^t$. Verdien dobles omtrent hver $3{,}8$ tidsenhet.</p>
+      </div>
+      <dl class="sim-tall kun-js" id="verdier"></dl>
+    </div>
+    <div class="sim-side-panel kun-js">
+      <div class="sim-styring">
+        <div class="sim-velg">
+          <label for="modus">Vis modell</label>
+          <select id="modus">
+            <option value="eksp">eksponentiell</option>
+            <option value="logistisk">logistisk</option>
+            <option value="begge">begge, for å sammenligne</option>
+          </select>
+        </div>
+        <p id="forklaring-begge" class="forklaring-farge">Eksponentiell: blå, heltrukket. Logistisk: plomme, stiplet.</p>
+        <div id="glidere" class="glidere"></div>
+      </div>
+      <div class="sim-blokk">
+        <p class="panel-tittel">Modellene</p>
+        <div id="formler" class="former"></div>
+        <p class="panel-tittel ny-del">Verditabell</p>
+        <div id="tabell" class="tabell-rull-liten"></div>
+      </div>
+      <div id="melding" class="sim-blokk melding" hidden></div>
+    </div>
+  </div>
+  {{figurverktoy}}
+  <figcaption class="sim-hint">Dra i glidebryterne, eller skriv et tall i feltet. Aksene har ulik målestokk. Trykk «Vis hele grafen» når du har endret mye. Verdiene står i adressefeltet, så du kan dele oppsettet.</figcaption>
+</figure>
+
+<details class="teori" id="matematikken">
+<summary><span class="teori-tittel">Matematikken bak</span><span class="teori-hint">Vekstfaktor, doblingstid, logistisk vekst og når en modell er gyldig</span></summary>
+<div class="teori-innhold tekst">
+
+<h3>Vekstfaktor</h3>
+<p>Øker noe med $p\,\%$ per tidsenhet, ganger vi med <strong>vekstfaktoren</strong> $b = 1 + \frac{p}{100}$ for hver tidsenhet. Etter $t$ tidsenheter er verdien</p>
+$$f(t) = N_0 \cdot b^t$$
+<p>der $N_0$ er startverdien. Ved $20\,\%$ økning er $b = 1{,}2$. Ved $15\,\%$ nedgang er $b = 0{,}85$.</p>
+
+<h3>Doblingstid og halveringstid</h3>
+<p>Doblingstiden $T$ er tiden det tar før verdien er dobbelt så stor. Den finner vi fra $b^T = 2$:</p>
+$$T = \frac{\ln 2}{\ln b}$$
+<p>Legg merke til at $N_0$ ikke er med. Doblingstiden er den samme uansett hvor du starter. På samme måte gir $b^T = \frac{1}{2}$ halveringstiden når $b < 1$. En tommelfingerregel er at doblingstiden er omtrent $\frac{70}{p}$ når $p$ er lite.</p>
+
+<h3>Logistisk vekst</h3>
+<p>En logistisk modell kan skrives</p>
+$$N(t) = \frac{K}{1 + c \cdot e^{-rt}}$$
+<p>der $K$ er bæreevnen og $c = \frac{K - N_0}{N_0}$, slik at $N(0) = N_0$. I utforskeren er $r = \ln b$. Da vokser de to modellene nesten likt så lenge $N$ er liten i forhold til $K$.</p>
+<p>Veksten er raskest når $N = \frac{K}{2}$. Der har grafen et <strong>vendepunkt</strong>. Etterpå bremser veksten, og $N(t)$ nærmer seg $K$.</p>
+
+<h3>Når er en modell gyldig?</h3>
+<p>En eksponentiell modell passer ofte godt i starten, for eksempel for bakterier med god plass og mye næring. Over lang tid gir den urimelig store tall. En logistisk modell tar hensyn til at plass og ressurser er begrenset. Ingen modell er riktig for alltid. Du må alltid vurdere om modellen passer for tidsrommet du ser på.</p>
+</div>
+</details>
+
+<section class="oppgaver" aria-labelledby="oppgaver-tittel">
+<h2 id="oppgaver-tittel">Oppgaver</h2>
+{{elevark}}
+<p class="del-inngang">Hver oppgave har tre steg. <strong>Gjett</strong> først, uten å bruke utforskeren. <strong>Test</strong> så i utforskeren. <strong>Forklar</strong> til slutt med egne ord hvorfor det blir slik.</p>
+
+<div class="oppgave" id="oppgave-1">
+  <h3><span class="oppgave-nr">1</span>Penger i banken</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Du setter inn $1000$ kr på en konto med $5\,\%$ rente per år. Hvor mye tror du står på kontoen etter $10$ år? Hvor lang tid tar det før beløpet er doblet?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?modus=eksp&amp;N0=1000&amp;p=5&amp;t=10#utforsker">Velg eksponentiell modell med $N_0 = 1000$, $p = 5$ og $t = 10$</a>. Dra $t$ for å finne når beløpet passerer $2000$ kr.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Hvorfor blir det mer enn $1000 + 10 \cdot 50 = 1500$ kr? Regn ut doblingstiden med formelen.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>Etter $10$ år: $1000 \cdot 1{,}05^{10} \approx 1628{,}89$ kr.</p>
+    <p>Renten regnes hvert år av hele beløpet, også av rentene fra årene før. Derfor øker beløpet mer enn $50$ kr hvert år etter det første året.</p>
+    <p>Doblingstiden er $T = \frac{\ln 2}{\ln 1{,}05} \approx 14{,}2$ år. Etter $14$ år er beløpet omtrent $1979{,}93$ kr, og etter $15$ år omtrent $2078{,}93$ kr.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-2">
+  <h3><span class="oppgave-nr">2</span>Doblingstid og startverdi</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>En bakteriekultur vokser med $20\,\%$ per time. Tror du doblingstiden blir kortere, lengre eller lik om vi starter med $50$ bakterier i stedet for $10$?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?modus=eksp&amp;N0=10&amp;p=20&amp;t=0#utforsker">Velg eksponentiell modell med $N_0 = 10$ og $p = 20$</a>. Les av doblingstiden. Endre så $N_0$ til $50$. Prøv også $p = 5$ og $p = 100$.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Vis med formelen at doblingstiden ikke avhenger av $N_0$. Sammenlign doblingstidene med tommelfingerregelen $\frac{70}{p}$. Når er regelen god?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>Doblingstiden er den samme, $T = \frac{\ln 2}{\ln 1{,}2} \approx 3{,}80$ timer, for begge startverdiene.</p>
+    <p>Dobling betyr $N_0 \cdot b^T = 2N_0$. Vi deler på $N_0$ og får $b^T = 2$. Startverdien forsvinner.</p>
+    <div class="tabell-rull">
+    <table class="tabell">
+      <caption>Doblingstid sammenlignet med $\frac{70}{p}$</caption>
+      <thead><tr><th scope="col">$p$</th><th scope="col">$T$</th><th scope="col">$\frac{70}{p}$</th></tr></thead>
+      <tbody>
+        <tr><td>$5$</td><td>$\approx 14{,}21$</td><td>$14$</td></tr>
+        <tr><td>$20$</td><td>$\approx 3{,}80$</td><td>$3{,}5$</td></tr>
+        <tr><td>$100$</td><td>$1$</td><td>$0{,}7$</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p>Regelen er god når $p$ er lite, og blir dårligere jo større $p$ er.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-3">
+  <h3><span class="oppgave-nr">3</span>Medisin i blodet</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>En pasient får $400$ mg av en medisin. Mengden i blodet minker med $15\,\%$ per time. Hvor mye tror du er igjen etter $6$ timer? Hva er halveringstiden?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?modus=eksp&amp;N0=400&amp;p=-15&amp;t=6#utforsker">Velg eksponentiell modell med $N_0 = 400$, $p = -15$ og $t = 6$</a>.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Hvorfor er vekstfaktoren $0{,}85$? Hvorfor blir mengden aldri helt null i denne modellen?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>Når $15\,\%$ forsvinner, er $85\,\%$ igjen. Vekstfaktoren er derfor $1 - 0{,}15 = 0{,}85$.</p>
+    <p>Etter $6$ timer: $400 \cdot 0{,}85^6 \approx 150{,}86$ mg.</p>
+    <p>Halveringstiden er $T = \frac{\ln 0{,}5}{\ln 0{,}85} \approx 4{,}27$ timer.</p>
+    <p>Vi ganger hele tiden med $0{,}85$. Et positivt tall ganget med $0{,}85$ blir mindre, men aldri null. I virkeligheten er det til slutt så lite igjen at det ikke kan måles.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-4">
+  <h3><span class="oppgave-nr">4</span>Når bremser veksten?</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>En dam har plass til omtrent $200$ fisker. Vi setter ut $10$ fisker, og bestanden vokser først med omtrent $20\,\%$ per år. Hvor mange fisker tror du det er etter $20$ år? Når vokser bestanden raskest?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?modus=begge&amp;N0=10&amp;p=20&amp;K=200&amp;t=20#utforsker">Vis begge modellene med $N_0 = 10$, $p = 20$, $K = 200$ og $t = 20$</a>. Sammenlign modellene ved $t = 5$, $t = 10$ og $t = 20$. Finn vendepunktet.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Hvorfor er modellene nesten like i starten? Hvilken modell er mest realistisk etter $20$ år, og hvorfor?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <div class="tabell-rull">
+    <table class="tabell">
+      <caption>Antall fisker i de to modellene (avrundet)</caption>
+      <thead><tr><th scope="col">$t$ (år)</th><th scope="col">Eksponentiell</th><th scope="col">Logistisk</th></tr></thead>
+      <tbody>
+        <tr><td>$0$</td><td>$10$</td><td>$10$</td></tr>
+        <tr><td>$5$</td><td>$24{,}88$</td><td>$23{,}16$</td></tr>
+        <tr><td>$10$</td><td>$61{,}92$</td><td>$49{,}16$</td></tr>
+        <tr><td>$20$</td><td>$383{,}38$</td><td>$133{,}73$</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p>Vendepunktet er ved $t \approx 16{,}15$ år, når det er $100$ fisker. Der vokser bestanden raskest.</p>
+    <p>I starten er det god plass, og bremsen i den logistiske modellen virker nesten ikke. Etter $20$ år gir den eksponentielle modellen $383$ fisker, men dammen har bare plass til omtrent $200$. Den logistiske modellen er derfor mest realistisk over tid.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-5">
+  <h3><span class="oppgave-nr">5</span>For mange fra start</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Hva tror du skjer i den logistiske modellen hvis vi setter ut $300$ fisker i en dam med bæreevne $200$?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?modus=logistisk&amp;N0=300&amp;p=20&amp;K=200&amp;t=10#utforsker">Velg logistisk modell med $N_0 = 300$, $p = 20$ og $K = 200$</a>.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Se på formelen for $N(t)$. Hvilket fortegn har $c$ nå? Forklar ut fra formelen hvorfor $N(t)$ minker mot $K$.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>Bestanden minker mot $200$. Etter $5$ år er det omtrent $230{,}94$ fisker, og etter $20$ år omtrent $201{,}75$.</p>
+    <p>Nå er $c = \frac{200 - 300}{300} = -\frac{1}{3}$. Da er nevneren $1 - \frac{1}{3}e^{-rt}$ mindre enn $1$, så $N(t)$ er større enn $K$. Når $t$ øker, går $e^{-rt}$ mot null. Nevneren nærmer seg $1$ nedenfra, og $N(t)$ minker mot $K = 200$.</p>
+  </div></details>
+</div>
+</section>
+
+<p class="merknad">For lærere: Se <a href="{{rot}}laerer.html">lærersiden</a> for kobling til kompetansemålene.</p>

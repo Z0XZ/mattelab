@@ -1,0 +1,161 @@
+---
+tittel: Funksjonen og den deriverte
+beskrivelse: Se f og f′ over hverandre, med fortegnslinje, ekstremalpunkter og vendepunkt for tredjegradsfunksjoner.
+type: utforsker
+fag: R1
+tema: derivasjon, funksjoner
+ikon: derivert
+skript: utforskere/derivert.js
+---
+<p class="ingress">Den deriverte $f'(x)$ forteller hvor bratt grafen til $f$ er i hvert punkt. Her ser du grafen til en tredjegradsfunksjon øverst og grafen til den deriverte under. Når $f'$ er positiv, vokser $f$. Når $f'$ er negativ, avtar $f$.</p>
+
+<figure class="sim sim-bred" id="utforsker" aria-label="Utforsker for funksjonen og den deriverte">
+  <div class="sim-delt">
+    <div class="sim-graf">
+      <p class="graf-etikett kun-js">Grafen til $f$ (blå) med tangent i $x_0$</p>
+      <svg id="graf" class="kun-js"></svg>
+      <p class="graf-etikett skille kun-js">Grafen til $f'$ (plomme) med fortegnslinje</p>
+      <svg id="graf-derivert" class="kun-js"></svg>
+      <div class="noscript-melding kun-uten-js">
+        <p><strong>Utforskeren trenger JavaScript.</strong> Resten av siden, med forklaring og oppgaver, virker uten.</p>
+        <p>Eksempel: $f(x) = x^3 - 3x$ har $f'(x) = 3x^2 - 3$. Den deriverte er null i $x = -1$ og $x = 1$. Toppunktet er $(-1, 2)$, og bunnpunktet er $(1, -2)$.</p>
+      </div>
+      <dl class="sim-tall kun-js" id="verdier"></dl>
+    </div>
+    <div class="sim-side-panel kun-js">
+      <div class="sim-styring">
+        <p class="panel-tittel">Velg $a$, $b$, $c$ og $d$</p>
+        <div id="glidere" class="glidere"></div>
+        <div id="glider-x0" class="glidere panel-gruppe"></div>
+      </div>
+      <div class="sim-blokk">
+        <p class="panel-tittel">Funksjonen og de deriverte</p>
+        <div id="forskrift" class="former"></div>
+        <p class="panel-tittel ny-del">Fortegnslinje</p>
+        <div id="fortegn" class="tabell-rull-liten"></div>
+      </div>
+      <div id="melding" class="sim-blokk melding" hidden></div>
+    </div>
+  </div>
+  <fieldset class="sim-valg kun-js" id="visvalg">
+    <legend>Vis i grafene</legend>
+    <label class="avkrysning"><input type="checkbox" name="tangent" checked> Tangent i x₀</label>
+    <label class="avkrysning"><input type="checkbox" name="punkter" checked> Topp-, bunn- og terrassepunkter</label>
+    <label class="avkrysning"><input type="checkbox" name="vendepunkt" checked> Vendepunkt (hul sirkel)</label>
+    <label class="avkrysning"><input type="checkbox" name="fortegn" checked> Fortegn til f′ på x-aksen (heltrukket: positiv, stiplet: negativ)</label>
+  </fieldset>
+  {{figurverktoy}}
+  <figcaption class="sim-hint">Dra i glidebryterne, eller skriv et tall i feltet. De to grafene har samme x-akse, men ulik y-akse. Nedlasting gir grafen til f. Verdiene står i adressefeltet, så du kan dele oppsettet.</figcaption>
+</figure>
+
+<details class="teori" id="matematikken">
+<summary><span class="teori-tittel">Matematikken bak</span><span class="teori-hint">Fortegnslinje, ekstremalpunkter, terrassepunkt og vendepunkt</span></summary>
+<div class="teori-innhold tekst">
+
+<h3>Den deriverte og veksten til f</h3>
+<ul>
+  <li>Er $f'(x) > 0$ på et intervall, vokser $f$ der.</li>
+  <li>Er $f'(x) < 0$ på et intervall, avtar $f$ der.</li>
+  <li>Er $f'(x_0) = 0$, er tangenten vannrett i $x_0$. Vi kaller $x_0$ et stasjonært punkt.</li>
+</ul>
+
+<h3>Topp-, bunn- og terrassepunkt</h3>
+<p>Et stasjonært punkt er ikke alltid et toppunkt eller bunnpunkt. Vi må se på fortegnet til $f'$ på hver side:</p>
+<ul>
+  <li>$f'$ går fra $+$ til $-$: <strong>toppunkt</strong></li>
+  <li>$f'$ går fra $-$ til $+$: <strong>bunnpunkt</strong></li>
+  <li>$f'$ har samme fortegn på begge sider: <strong>terrassepunkt</strong></li>
+</ul>
+<p>Derfor lager vi en fortegnslinje for $f'$. For $f(x) = x^3 - 3x$ er $f'(x) = 3x^2 - 3 = 3(x + 1)(x - 1)$. Den er positiv utenfor $[-1, 1]$ og negativ mellom.</p>
+
+<h3>Vendepunkt</h3>
+<p>Der grafen går fra å krumme den ene veien til den andre, har den et <strong>vendepunkt</strong>. Der har $f'$ et toppunkt eller bunnpunkt, så $f''(x) = 0$. For $f(x) = ax^3 + bx^2 + cx + d$ er $f''(x) = 6ax + 2b$, og vendepunktet ligger i $x = -\frac{b}{3a}$.</p>
+
+<h3>Antall ekstremalpunkter</h3>
+<p>Den deriverte $f'(x) = 3ax^2 + 2bx + c$ er en andregradsfunksjon. Den har to, ett eller ingen nullpunkter, avhengig av diskriminanten. Derfor har en tredjegradsfunksjon enten to ekstremalpunkter, ett terrassepunkt eller ingen stasjonære punkter.</p>
+</div>
+</details>
+
+<section class="oppgaver" aria-labelledby="oppgaver-tittel">
+<h2 id="oppgaver-tittel">Oppgaver</h2>
+{{elevark}}
+<p class="del-inngang">Hver oppgave har tre steg. <strong>Gjett</strong> først, uten å bruke utforskeren. <strong>Test</strong> så i utforskeren. <strong>Forklar</strong> til slutt med egne ord hvorfor det blir slik.</p>
+
+<div class="oppgave" id="oppgave-1">
+  <h3><span class="oppgave-nr">1</span>Fortegnslinje og ekstremalpunkter</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>For $f(x) = x^3 - 3x$ er $f'(x) = 3x^2 - 3$. Hvor tror du $f$ har toppunkt og bunnpunkt?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?a=1&amp;b=0&amp;c=-3&amp;d=0&amp;x0=2#utforsker">Sett $a = 1$, $b = 0$, $c = -3$ og $d = 0$</a>. Sammenlign grafen til $f'$ med fortegnslinja.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Lag fortegnslinja for $f'$ for hånd ved å faktorisere $f'(x)$. Hvordan ser du på fortegnslinja hvilket punkt som er toppunkt og hvilket som er bunnpunkt?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>$f'(x) = 3(x^2 - 1) = 3(x + 1)(x - 1)$. Den er null i $x = -1$ og $x = 1$, positiv når $x < -1$ eller $x > 1$, og negativ når $-1 < x < 1$.</p>
+    <p>I $x = -1$ går $f'$ fra $+$ til $-$. Da slutter $f$ å vokse og begynner å avta, så det er et toppunkt: $(-1, f(-1)) = (-1, 2)$.</p>
+    <p>I $x = 1$ går $f'$ fra $-$ til $+$, så det er et bunnpunkt: $(1, -2)$.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-2">
+  <h3><span class="oppgave-nr">2</span>Tangenten og verdien til $f'$</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>For $f(x) = x^3 - 3x$: Hva tror du stigningstallet til tangenten er i $x = 2$? I $x = 0$? I $x = -2$?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?a=1&amp;b=0&amp;c=-3&amp;d=0&amp;x0=2#utforsker">Sett opp funksjonen med $x_0 = 2$</a>. Dra $x_0$ og følg punktet på grafen til $f'$.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Hva betyr y-verdien til punktet på grafen til $f'$ for grafen til $f$? Hvorfor har tangentene i $x = 2$ og $x = -2$ samme stigningstall?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>$f'(2) = 3 \cdot 4 - 3 = 9$, $f'(0) = -3$ og $f'(-2) = 9$.</p>
+    <p>Y-verdien til punktet på grafen til $f'$ er stigningstallet til tangenten i samme $x$ på grafen til $f$.</p>
+    <p>$f'(x) = 3x^2 - 3$ inneholder bare $x^2$, og $(-2)^2 = 2^2$. Grafen til $f$ er symmetrisk om origo, så den er like bratt i $x = 2$ og $x = -2$.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-3">
+  <h3><span class="oppgave-nr">3</span>Terrassepunkt</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Se på $f(x) = x^3 + cx$. Hvor mange ekstremalpunkter tror du grafen har når $c = -3$? Når $c = 0$? Når $c = 3$?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?a=1&amp;b=0&amp;c=-3&amp;d=0&amp;x0=0#utforsker">Sett $a = 1$, $b = 0$, $c = -3$ og $d = 0$</a>. Dra $c$ sakte opp til $3$. Følg med på grafen til $f'$ og på fortegnslinja.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Hvorfor er $(0, 0)$ ikke et toppunkt eller bunnpunkt når $c = 0$, selv om $f'(0) = 0$? Bruk diskriminanten til $f'$ til å forklare hvor grensen går.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>$f'(x) = 3x^2 + c$ har diskriminanten $D = 0^2 - 4 \cdot 3 \cdot c = -12c$.</p>
+    <ul>
+      <li>$c < 0$: $D > 0$, to nullpunkter i $f'$, et toppunkt og et bunnpunkt.</li>
+      <li>$c = 0$: $D = 0$, $f'(x) = 3x^2$ er null bare i $x = 0$.</li>
+      <li>$c > 0$: $D < 0$, $f'$ er alltid positiv, og $f$ vokser hele tiden.</li>
+    </ul>
+    <p>Når $c = 0$, er $f'(x) = 3x^2 \geq 0$ på begge sider av $0$. Grafen flater ut i origo, men fortsetter å vokse. Fortegnet skifter ikke, så det er et terrassepunkt.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-4">
+  <h3><span class="oppgave-nr">4</span>Vendepunktet</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Se på $f(x) = x^3 - 3x^2 + 4$. Hvor tror du grafen er brattest mellom toppunktet og bunnpunktet?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?a=1&amp;b=-3&amp;c=0&amp;d=4&amp;x0=1#utforsker">Sett $a = 1$, $b = -3$, $c = 0$ og $d = 4$</a>. Finn ekstremalpunktene og vendepunktet. Se hvor grafen til $f'$ har sitt bunnpunkt.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Regn ut $f'(x)$ og $f''(x)$. Vis at vendepunktet ligger der $f''(x) = 0$, og finn stigningstallet til tangenten der.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>$f'(x) = 3x^2 - 6x = 3x(x - 2)$. Toppunktet er $(0, 4)$, og bunnpunktet er $(2, 0)$.</p>
+    <p>$f''(x) = 6x - 6$ er null når $x = 1$. Vendepunktet er $(1, f(1)) = (1, 2)$.</p>
+    <p>$f'(1) = 3 - 6 = -3$. Det er den minste verdien $f'$ har, fordi $f'$ har bunnpunkt i $x = 1$. Mellom toppunktet og bunnpunktet er grafen derfor brattest i vendepunktet.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-5">
+  <h3><span class="oppgave-nr">5</span>Den største esken</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Du har et kvadratisk ark som er $10$ cm på hver side. Du klipper bort et kvadrat med side $x$ i hvert hjørne og bretter opp kantene til en eske uten lokk. Volumet er $V(x) = x(10 - 2x)^2$. Hvilken $x$ tror du gir størst volum?</p></div></li>
+  <li><span class="fase test">Test</span><div><p>Gang ut: $V(x) = 4x^3 - 40x^2 + 100x$. <a class="oppsettlenke" href="?a=4&amp;b=-40&amp;c=100&amp;d=0&amp;x0=1&amp;tilpass=1#utforsker">Sett $a = 4$, $b = -40$, $c = 100$ og $d = 0$</a>. Finn toppunktet.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Løs $V'(x) = 0$ ved regning. Hvilke verdier av $x$ gir mening her? Hvorfor er bunnpunktet ikke interessant?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>$V'(x) = 12x^2 - 80x + 100$. Abc-formelen gir</p>
+    $$x = \frac{80 \pm \sqrt{80^2 - 4 \cdot 12 \cdot 100}}{24} = \frac{80 \pm 40}{24}$$
+    <p>altså $x = \frac{5}{3}$ eller $x = 5$.</p>
+    <p>Bare $0 < x < 5$ gir mening, fordi vi ikke kan klippe bort mer enn halve arket. Toppunktet er $x = \frac{5}{3} \approx 1{,}67$ cm. Da er $V = \frac{2000}{27} \approx 74{,}07$ cm³. Til sammenligning gir $x = 1$ volumet $64$ cm³ og $x = 2$ volumet $72$ cm³.</p>
+    <p>Bunnpunktet $x = 5$ gir $V = 0$: Da er hele arket klippet bort. Det er endepunktet av definisjonsmengden og gir ingen eske.</p>
+  </div></details>
+</div>
+</section>
+
+<p class="merknad">For lærere: Se <a href="{{rot}}laerer.html">lærersiden</a> for kobling til kompetansemålene.</p>

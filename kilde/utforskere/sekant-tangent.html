@@ -1,0 +1,159 @@
+---
+tittel: Sekant som blir tangent
+beskrivelse: Fra gjennomsnittlig til momentan vekstfart. Se sekanten bli til en tangent når h går mot null, og finn punkter der den deriverte ikke finnes.
+type: utforsker
+fag: 1T, R1
+tema: derivasjon
+ikon: sekant
+skript: utforskere/sekant.js
+---
+<p class="ingress">En sekant er en linje gjennom to punkter på grafen. Stigningstallet er den gjennomsnittlige vekstfarten mellom punktene. Når det ene punktet glir mot det andre, blir sekanten til en tangent. Stigningstallet til tangenten er den deriverte.</p>
+
+<figure class="sim sim-bred" id="utforsker" aria-label="Utforsker for sekant og tangent">
+  <div class="sim-delt">
+    <div class="sim-graf">
+      <svg id="graf" class="kun-js"></svg>
+      <div class="noscript-melding kun-uten-js">
+        <p><strong>Utforskeren trenger JavaScript.</strong> Resten av siden, med forklaring og oppgaver, virker uten.</p>
+        <p>Eksempel: For $f(x) = x^2$ har sekanten gjennom $x = 1$ og $x = 1 + h$ stigningstallet $2 + h$. Når $h$ går mot $0$, går stigningstallet mot $f'(1) = 2$.</p>
+      </div>
+      <dl class="sim-tall kun-js" id="verdier"></dl>
+    </div>
+    <div class="sim-side-panel kun-js">
+      <div class="sim-styring">
+        <div class="sim-velg">
+          <label for="funksjon">Funksjon</label>
+          <select id="funksjon">
+            <option value="x2">f(x) = x²</option>
+            <option value="kubisk">f(x) = x³ − 3x</option>
+            <option value="eksp">f(x) = eˣ</option>
+            <option value="rot">f(x) = √x</option>
+            <option value="abs">f(x) = |x|</option>
+          </select>
+        </div>
+        <div id="glidere" class="glidere"></div>
+        <button type="button" class="knapp liten" id="mot-null">La h gå mot 0</button>
+      </div>
+      <div class="sim-blokk">
+        <p class="panel-tittel">Funksjonen og den deriverte</p>
+        <div class="likning" id="forskrift"></div>
+        <p class="panel-tittel ny-del">Sekantens stigningstall</p>
+        <div class="utregning" id="utregning"></div>
+        <p class="panel-tittel ny-del">Når h blir liten</p>
+        <div id="tabell" class="tabell-rull-liten"></div>
+      </div>
+      <div id="melding" class="sim-blokk melding" hidden></div>
+    </div>
+  </div>
+  <fieldset class="sim-valg kun-js" id="visvalg">
+    <legend>Vis i grafen</legend>
+    <label class="avkrysning"><input type="checkbox" name="tangent" checked> Tangent i P (heltrukket)</label>
+    <label class="avkrysning"><input type="checkbox" name="trekant" checked> Δx og Δy for sekanten (skravert)</label>
+  </fieldset>
+  {{figurverktoy}}
+  <figcaption class="sim-hint">Sekanten er stiplet, tangenten er heltrukket. Skriv små verdier av h, som 0,001, i tallfeltet. Verdiene står i adressefeltet, så du kan dele oppsettet.</figcaption>
+</figure>
+
+<details class="teori" id="matematikken">
+<summary><span class="teori-tittel">Matematikken bak</span><span class="teori-hint">Gjennomsnittlig og momentan vekstfart, definisjonen av den deriverte og når den ikke finnes</span></summary>
+<div class="teori-innhold tekst">
+
+<h3>Gjennomsnittlig vekstfart</h3>
+<p>Den gjennomsnittlige vekstfarten til $f$ fra $x_0$ til $x_0 + h$ er</p>
+$$\frac{\Delta y}{\Delta x} = \frac{f(x_0 + h) - f(x_0)}{h}$$
+<p>Det er stigningstallet til sekanten gjennom $P = (x_0, f(x_0))$ og $Q = (x_0 + h, f(x_0 + h))$.</p>
+
+<h3>Momentan vekstfart og den deriverte</h3>
+<p>Når $h$ går mot null, glir $Q$ mot $P$. Hvis stigningstallet til sekanten nærmer seg et bestemt tall, kaller vi tallet den <strong>deriverte</strong> av $f$ i $x_0$:</p>
+$$f'(x_0) = \lim_{h \to 0} \frac{f(x_0 + h) - f(x_0)}{h}$$
+<p>Den deriverte er den momentane vekstfarten, og stigningstallet til tangenten i $P$. Vi kan ikke sette $h = 0$ direkte, fordi vi da får $\frac{0}{0}$.</p>
+
+<h3>Eksempel</h3>
+<p>For $f(x) = x^2$ er</p>
+$$\frac{(x + h)^2 - x^2}{h} = \frac{x^2 + 2xh + h^2 - x^2}{h} = 2x + h$$
+<p>Når $h \to 0$, går dette mot $2x$. Altså er $f'(x) = 2x$.</p>
+
+<h3>Når den deriverte ikke finnes</h3>
+<ul>
+  <li><strong>Knekk:</strong> For $f(x) = |x|$ i $x = 0$ er stigningstallet $1$ fra høyre og $-1$ fra venstre. Grenseverdien finnes ikke.</li>
+  <li><strong>Loddrett tangent:</strong> For $f(x) = \sqrt{x}$ i $x = 0$ vokser stigningstallet over alle grenser.</li>
+  <li><strong>Utenfor definisjonsmengden:</strong> $\sqrt{x}$ er ikke definert for $x < 0$, så der finnes ingen deriverte.</li>
+</ul>
+</div>
+</details>
+
+<section class="oppgaver" aria-labelledby="oppgaver-tittel">
+<h2 id="oppgaver-tittel">Oppgaver</h2>
+{{elevark}}
+<p class="del-inngang">Hver oppgave har tre steg. <strong>Gjett</strong> først, uten å bruke utforskeren. <strong>Test</strong> så i utforskeren. <strong>Forklar</strong> til slutt med egne ord hvorfor det blir slik.</p>
+
+<div class="oppgave" id="oppgave-1">
+  <h3><span class="oppgave-nr">1</span>Gjennomsnittlig vekstfart</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Hva er den gjennomsnittlige vekstfarten til $f(x) = x^2$ fra $x = 1$ til $x = 3$?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?fn=x2&amp;x0=1&amp;h=2#utforsker">Velg $f(x) = x^2$ med $x_0 = 1$ og $h = 2$</a>. Les av $\Delta x$, $\Delta y$ og stigningstallet til sekanten.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Hvorfor er den gjennomsnittlige vekstfarten det samme som stigningstallet til sekanten?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>$\frac{f(3) - f(1)}{3 - 1} = \frac{9 - 1}{2} = 4$.</p>
+    <p>Sekanten går gjennom $(1, 1)$ og $(3, 9)$. Stigningstallet er $\frac{\Delta y}{\Delta x}$, akkurat som for en lineær funksjon. Det er nettopp gjennomsnittlig endring i $y$ per enhet i $x$.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-2">
+  <h3><span class="oppgave-nr">2</span>La $h$ gå mot null</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Fortsatt med $f(x) = x^2$ og $x_0 = 1$: Hva tror du skjer med stigningstallet til sekanten når $h$ blir $1$, $0{,}1$, $0{,}01$ og $0{,}001$?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?fn=x2&amp;x0=1&amp;h=1#utforsker">Sett $x_0 = 1$ og $h = 1$</a>. Trykk «La h gå mot 0», og se på tabellen. Prøv også negative $h$.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Vis at stigningstallet til sekanten er $2 + h$. Hva skjer når $h \to 0$? Hvorfor kan vi ikke bare sette $h = 0$?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>Stigningstallene blir $3$, $2{,}1$, $2{,}01$ og $2{,}001$. Med $h = -0{,}1$ og $h = -0{,}01$ blir de $1{,}9$ og $1{,}99$. De nærmer seg $2$ fra begge sider.</p>
+    $$\frac{(1 + h)^2 - 1^2}{h} = \frac{1 + 2h + h^2 - 1}{h} = \frac{h(2 + h)}{h} = 2 + h$$
+    <p>Når $h \to 0$, går $2 + h$ mot $2$. Altså er $f'(1) = 2$. Setter vi $h = 0$ i den opprinnelige brøken, får vi $\frac{0}{0}$, som ikke er definert. Vi må derfor se på grenseverdien.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-3">
+  <h3><span class="oppgave-nr">3</span>Den deriverte som funksjon</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>For $f(x) = x^2$: Hva tror du stigningstallet til tangenten er i $x = -1$, $x = 0$ og $x = 2$?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?fn=x2&amp;x0=-1&amp;h=0.001#utforsker">Sett $x_0 = -1$ og $h = 0{,}001$</a>. Dra $x_0$ til $0$ og så til $2$. Følg med på tangentens stigningstall.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Vis at $\frac{(x + h)^2 - x^2}{h} = 2x + h$, og bruk det til å finne $f'(x)$.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>Stigningstallene er $-2$, $0$ og $4$. Mønsteret er at stigningstallet er dobbelt så stort som $x$.</p>
+    $$\frac{(x + h)^2 - x^2}{h} = \frac{2xh + h^2}{h} = 2x + h \;\to\; 2x \quad \text{når } h \to 0$$
+    <p>Altså er $f'(x) = 2x$. I $x = 0$ er tangenten vannrett, fordi bunnpunktet ligger der.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-4">
+  <h3><span class="oppgave-nr">4</span>Vannrett tangent</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Grafen til $f(x) = x^3 - 3x$ har et toppunkt og et bunnpunkt. I hvilke $x$-verdier tror du tangenten er vannrett?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?fn=kubisk&amp;x0=0&amp;h=0.5#utforsker">Velg $f(x) = x^3 - 3x$</a>. Dra $x_0$ til du finner punktene der tangentens stigningstall er $0$.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Den deriverte er $f'(x) = 3x^2 - 3$. Løs $f'(x) = 0$. Hvorfor er tangenten vannrett i et toppunkt eller bunnpunkt?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>$3x^2 - 3 = 0$ gir $x^2 = 1$, altså $x = -1$ eller $x = 1$. Toppunktet er $(-1, 2)$, og bunnpunktet er $(1, -2)$.</p>
+    <p>Rett før et toppunkt stiger grafen, og rett etter synker den. Stigningstallet går fra positivt til negativt, og i selve toppunktet er det $0$. Tilsvarende for et bunnpunkt.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-5">
+  <h3><span class="oppgave-nr">5</span>Når finnes ikke den deriverte?</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Grafen til $f(x) = |x|$ har en knekk i $x = 0$. Hva tror du skjer med sekanten når $h$ går mot $0$ fra høyre? Fra venstre?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?fn=abs&amp;x0=0&amp;h=1#utforsker">Velg $f(x) = |x|$ med $x_0 = 0$</a>. Se på tabellen for positive og negative $h$. Velg så <a class="oppsettlenke" href="?fn=rot&amp;x0=0&amp;h=1#utforsker">$f(x) = \sqrt{x}$ med $x_0 = 0$</a>, og la $h$ gå mot $0$.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Forklar hvorfor $f'(0)$ ikke finnes for noen av de to funksjonene. Er grunnen den samme?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>For $|x|$ er stigningstallet $\frac{|h|}{h}$. Det er $1$ når $h > 0$ og $-1$ når $h < 0$, uansett hvor liten $h$ er. De ensidige grensene er ulike, så grenseverdien finnes ikke.</p>
+    <p>For $\sqrt{x}$ er stigningstallet $\frac{\sqrt{h}}{h} = \frac{1}{\sqrt{h}}$. Med $h = 1$, $0{,}01$ og $0{,}0001$ blir det $1$, $10$ og $100$. Det vokser over alle grenser, og tangenten blir loddrett. Negative $h$ går ikke, fordi $\sqrt{x}$ ikke er definert for $x < 0$.</p>
+    <p>Grunnene er altså ulike: Den ene grafen har en knekk, den andre har en loddrett tangent.</p>
+  </div></details>
+</div>
+</section>
+
+<p class="merknad">For lærere: Se <a href="{{rot}}laerer.html">lærersiden</a> for kobling til kompetansemålene.</p>

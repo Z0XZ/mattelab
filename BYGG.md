@@ -22,6 +22,7 @@ type: utforsker              # utforsker | opplegg | side (standard)
 fag: 1T, R1                  # fra data/temaer.json
 tema: funksjoner, likninger  # id-er fra data/temaer.json
 skript: utforskere/andregrad.js   # relativt til statisk/js/
+ikon: lineaer                # nøkkel i data/ikoner.json (valgfritt, standard er filnavnet)
 meny: utforskere             # hvilket menypunkt som er aktivt (valgfritt)
 oppsett: forside             # bare forsiden: innholdet pakkes ikke inn i <section class="side">
 ---
@@ -42,6 +43,8 @@ Skriv `$…$` for formler i teksten og `$$…$$` for formler på egen linje. For
 | `{{filter}}` | Filterpanel (fag, temaknapper, søk) |
 | `{{liste:utforsker}}`, `{{liste:opplegg}}` | Kort med ikon, gruppert i temablokker (etter første tema) |
 | `{{elevark}}` | Knapp for å laste ned elevarket (PDF) og LaTeX-kilden. Påkrevd på utforskere med oppgaver |
+| `{{figurverktoy}}` | Knapperaden under figuren: vis hele grafen, zoom, standardvindu, tilbakestill, last ned PNG/SVG, kopier lenke |
+| `{{figurverktoy:enkel}}` | Samme uten zoom og vindusknapper, for figurer uten koordinatsystem |
 | `{{fagkort}}` | De to store fagkortene på forsiden, med temaer og antall utforskere |
 | `{{kompetansemaal}}` | Kompetansemålene med koblinger (lærersiden) |
 

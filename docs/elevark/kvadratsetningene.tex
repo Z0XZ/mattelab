@@ -1,0 +1,81 @@
+%% Elevark fra mattelab.no – laget automatisk av bygg.py. Rediger gjerne til eget bruk.
+%% Kompiler med lualatex.
+\documentclass[11pt,a4paper]{article}
+\usepackage[norsk]{babel}
+\usepackage[a4paper,margin=2.2cm,top=2cm,bottom=2.4cm]{geometry}
+\usepackage{fontspec}
+\usepackage{unicode-math}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{TeX Gyre Heros}[Scale=MatchLowercase]
+\setmathfont{TeX Gyre Pagella Math}
+\usepackage{xcolor}
+\definecolor{blekk}{HTML}{16213A}
+\definecolor{dempet}{HTML}{566077}
+\definecolor{rute}{HTML}{CFC9B8}
+\definecolor{m1}{HTML}{2F4AB0}
+\definecolor{m2}{HTML}{99266D}
+\usepackage[most]{tcolorbox}
+\usepackage{qrcode}
+\usepackage{needspace}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+\pdfvariable suppressoptionalinfo \numexpr 1+2+4+8+16+32+64+128+256+512\relax
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.4em}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[L]{\sffamily\footnotesize\color{dempet}mattelab.no · Kvadratsetningene som arealmodeller · elevark uten fasit}
+\fancyfoot[R]{\sffamily\footnotesize\color{dempet}Side \thepage}
+
+\newcommand{\fase}[2]{\tcbox[on line, colframe=#2, colback=white, coltext=#2, boxrule=0.6pt, arc=2pt,
+  boxsep=0pt, left=3pt, right=3pt, top=1.5pt, bottom=1.5pt, fontupper=\sffamily\bfseries\footnotesize]{#1}}
+\newcommand{\steg}[4]{%
+  \par\noindent{\color{rute}\rule{\linewidth}{0.4pt}}\par\nopagebreak
+  \noindent\begin{minipage}[t]{2.1cm}\vspace{0pt}\fase{#1}{#2}\end{minipage}%
+  \begin{minipage}[t]{\dimexpr\linewidth-2.1cm\relax}\vspace{0pt}#3\end{minipage}\par
+  \vspace{#4}}
+\newcommand{\oppgave}[2]{\par\Needspace{12\baselineskip}\vspace{0.6em}%
+  {\fontsize{14}{17}\selectfont\bfseries{\color{m1}#1}\enspace #2}\par\vspace{0.2em}}
+
+\begin{document}
+\begin{minipage}[t]{0.72\linewidth}\vspace{0pt}
+{\sffamily\small\color{dempet}Elevark · 1T · mattelab.no}\par\vspace{0.3em}
+{\fontsize{24}{28}\selectfont\bfseries Kvadratsetningene som arealmodeller}\par\vspace{1em}
+{\sffamily\small Navn: \rule{4.6cm}{0.4pt}\quad Klasse: \rule{1.5cm}{0.4pt}\quad Dato: \rule{1.9cm}{0.4pt}}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.22\linewidth}\vspace{0pt}\raggedleft
+\qrcode[height=2.3cm]{https://mattelab.no/utforskere/kvadratsetningene.html}\par\vspace{0.2em}
+{\sffamily\scriptsize\color{dempet}Utforskeren}
+\end{minipage}
+
+\vspace{1em}
+{\sffamily\small\color{dempet}Utforskeren ligger på \url{https://mattelab.no/utforskere/kvadratsetningene.html}}\par
+Hver oppgave har tre steg. \textbf{Gjett} først, uten å bruke utforskeren. \textbf{Test} så i utforskeren. \textbf{Forklar} til slutt med egne ord hvorfor det blir slik.
+
+\oppgave{1}{Hvorfor ikke bare $a^2 + b^2$?}
+\steg{Gjett}{m1}{Mange skriver $(3 + 2)^2 = 3^2 + 2^2$. Regn ut begge sidene. Er de like?}{2.2cm}
+\steg{Test}{m2}{Velg første kvadratsetning med $a = 3$ og $b = 2$. Hvor mange biter består kvadratet av? Hvor store er de?}{2.6cm}
+\steg{Forklar}{blekk}{Bruk figuren til å forklare hvorfor $(a + b)^2 = a^2 + 2ab + b^2$. Hvilke biter glemmer man når man skriver $a^2 + b^2$?}{3.4cm}
+
+\oppgave{2}{Hoderegning med kvadratsetningene}
+\steg{Gjett}{m1}{Regn ut $51^2$, $49^2$ og $49 \cdot 51$ i hodet, uten kalkulator. Tips: $51 = 50 + 1$ og $49 = 50 - 1$.}{2.2cm}
+\steg{Test}{m2}{Sett $a = 50$ og $b = 1$ i første kvadratsetning, andre kvadratsetning og konjugatsetningen. Sammenlign med svarene dine.}{2.6cm}
+\steg{Forklar}{blekk}{Skriv utregningene med kvadratsetningene. Lag en egen hoderegningsoppgave av samme type, og vis hvordan du løser den.}{3.4cm}
+
+\oppgave{3}{Hvorfor $+\,b^2$ i andre kvadratsetning?}
+\steg{Gjett}{m1}{Hvorfor tror du det står $+\,b^2$ og ikke $-\,b^2$ i $(a - b)^2 = a^2 - 2ab + b^2$?}{2.2cm}
+\steg{Test}{m2}{Velg andre kvadratsetning med $a = 5$ og $b = 2$. Se på hjørnet nederst til høyre. Prøv også $a = 2$ og $b = 5$.}{2.6cm}
+\steg{Forklar}{blekk}{Bruk figuren til å forklare hvorfor $b^2$ må legges til. Hvorfor blir svaret det samme når du bytter om på $a$ og $b$?}{3.4cm}
+
+\oppgave{4}{Konjugatsetningen som flytting}
+\steg{Gjett}{m1}{Fra et kvadrat med side $5$ tar du bort et hjørne med side $3$. Kan resten legges om til et rektangel? Hvilke sider får det?}{2.2cm}
+\steg{Test}{m2}{Velg konjugatsetningen med $a = 5$ og $b = 3$. Finn bitene merket 1 og 2 i begge figurene. Prøv også med $b$ større enn $a$.}{2.6cm}
+\steg{Forklar}{blekk}{Forklar med figuren hvorfor $(a + b)(a - b) = a^2 - b^2$. Hva skjer når $b > a$?}{3.4cm}
+
+\oppgave{5}{Baklengs: faktorisering}
+\steg{Gjett}{m1}{Kan $x^2 + 6x + 9$ skrives som et kvadrat $(x + b)^2$? Hva må $b$ være?}{2.2cm}
+\steg{Test}{m2}{Velg første kvadratsetning med $a = 4$ og $b = 3$. Her spiller $a$ rollen til $x$. Regn ut $x^2 + 6x + 9$ for $x = 4$, og sammenlign med figuren.}{2.6cm}
+\steg{Forklar}{blekk}{Hvordan ser du på $x^2 + 6x + 9$ at det er et fullstendig kvadrat? Faktoriser $x^2 + 10x + 25$ på samme måte.}{3.4cm}
+
+\end{document}

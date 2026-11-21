@@ -72,7 +72,7 @@ for (const navn of SIDER) {
     if (bredde === 360) {
       // Finn elementer som stikker utenfor skjermen (hjelp ved feilsøking)
       const utenfor = await side.evaluate(() => Array.from(document.querySelectorAll("body *")).filter((e) => {
-        const r = e.getBoundingClientRect(); return r.width > 0 && r.right > document.documentElement.clientWidth + 1 && !e.closest(".katex-display, .tabell-rull, .forskrift, .former p, .katex-mathml");
+        const r = e.getBoundingClientRect(); return r.width > 0 && r.right > document.documentElement.clientWidth + 1 && !e.closest(".katex-display, .tabell-rull, .tabell-rull-liten, .forskrift, .former p, .utregning, .likning, .katex-mathml, svg");
       }).slice(0, 5).map((e) => e.tagName + "." + e.className));
       sjekk(utenfor.length === 0, `${navn} @ 360px: ingen elementer utenfor skjermkanten`, utenfor.join(", "));
       await side.screenshot({ path: path.join(RES, navn.replace(/\//g, "_") + "-360.png"), fullPage: true });
@@ -180,14 +180,14 @@ console.log("\n4. Andregradsfunksjonen: verdier og spesialtilfeller");
   // Punkter utenfor tegneområdet (oppgave 6, a = 0,01)
   await settABC("0,01", "2", "1");
   sjekk((await verdi("Bunnpunkt")) === `(${M}100, ${M}99)`, "a = 0,01: bunnpunkt (−100, −99)", await verdi("Bunnpunkt"));
-  sjekk((await verdi("Nullpunkter")) === `x = ≈ ${M}199,5 og x = ≈ ${M}0,5`, "a = 0,01: nullpunkter med ≈", await verdi("Nullpunkter"));
+  sjekk((await verdi("Nullpunkter")) === `x ≈ ${M}199,5 og x ≈ ${M}0,5`, "a = 0,01: nullpunkter med ≈", await verdi("Nullpunkter"));
   sjekk(await side.isVisible("#utenfor"), "punkter utenfor tegneområdet gir melding");
   sjekk((await side.$$(".g-utenfor")).length > 0, "pil ved kanten for punkt utenfor");
   await side.click("#vis-alt");
   sjekk(!(await side.isVisible("#utenfor")), "«Vis hele grafen» viser alle punktene");
 
   // Oppgave 6-tallene, regnet ut i verktoy/fasit/andregrad.py
-  for (const [a, topp, n] of [["0,5", `(${M}2, ${M}1)`, `x = ≈ ${M}3,41 og x = ≈ ${M}0,59`], ["0,1", `(${M}10, ${M}9)`, `x = ≈ ${M}19,49 og x = ≈ ${M}0,51`]]) {
+  for (const [a, topp, n] of [["0,5", `(${M}2, ${M}1)`, `x ≈ ${M}3,41 og x ≈ ${M}0,59`], ["0,1", `(${M}10, ${M}9)`, `x ≈ ${M}19,49 og x ≈ ${M}0,51`]]) {
     await settABC(a, "2", "1");
     sjekk((await verdi("Bunnpunkt")) === topp && (await verdi("Nullpunkter")) === n, `oppgave 6, a = ${a}`, `${await verdi("Bunnpunkt")} ${await verdi("Nullpunkter")}`);
   }
@@ -374,6 +374,354 @@ console.log("\n8. Forsiden");
   const fagkort = await side.$$eval(".fag-kort", (k) => k.map((x) => x.querySelector("h3").textContent.trim()));
   sjekk(fagkort.length === 2 && fagkort[0].startsWith("Matematikk 1T"), "to fagkort", fagkort.join(" | "));
   sjekk(problemer.length === 0, "ingen JS-feil på forsiden", problemer.join(" | "));
+  await kontekst.close();
+}
+
+// ---------------------------------------------------------------- 9. alle utforskerne
+// Forventede tall er regnet ut i verktoy/fasit/*.py.
+console.log("\n9. De andre utforskerne: verdier, spesialtilfeller, oppgavelenker og elevark");
+const M = "−";
+const UTFORSKERE = {
+  "lineaer-funksjon": {
+    oppgaver: 5,
+    verdier: [
+      ["", "Nullpunkt", `x = ${M}2`],
+      ["?modus=punkter&x1=1&y1=2&x2=4&y2=8", "Stigningstall", "a = 2"],
+      ["?modus=punkter&x1=-2&y1=5&x2=2&y2=-1", "Stigningstall", `a = ${M}1,5`],
+      ["?modus=punkter&x1=-2&y1=5&x2=2&y2=-1", "Konstantledd", "b = 2"],
+      ["?modus=ab&a=-2.5&b=20", "Nullpunkt", "x = 8"],
+      ["?modus=ab&a=0&b=3", "Nullpunkt", "Ingen"],
+      ["?modus=punkter&x1=2&y1=1&x2=2&y2=5", "Stigningstall", "Finnes ikke (Δx = 0)"],
+    ],
+    meldinger: [["?modus=punkter&x1=2&y1=1&x2=2&y2=5", "loddrett"], ["?modus=punkter&x1=2&y1=1&x2=2&y2=1", "To like punkter"], ["?modus=ab&a=0&b=3", "vannrett"]],
+  },
+  likningssett: {
+    oppgaver: 5,
+    verdier: [
+      ["", "Løsning", "x = 2 og y = 1"],
+      ["?a1=3&b1=2&c1=6&a2=1&b2=-2&c2=1", "Løsning", "x = 1,75 og y ≈ 0,38"],
+      ["?a1=3&b1=2&c1=590&a2=1&b2=4&c2=480", "Løsning", "x = 140 og y = 85"],
+      ["?a1=1&b1=2&c1=4&a2=1&b2=2&c2=1", "Løsning", "Ingen"],
+      ["?a1=1&b1=2&c1=4&a2=2&b2=4&c2=8", "Løsning", "Uendelig mange"],
+      ["?a1=3&b1=1&c1=3&a2=2&b2=1&c2=1", "Løsning", `x = 2 og y = ${M}3`],
+      ["?a1=2&b1=1&c1=3&a2=2&b2=1&c2=1", "a₁b₂ − a₂b₁", "0"],
+    ],
+    meldinger: [["?a1=1&b1=2&c1=4&a2=1&b2=2&c2=1", "Parallelle"], ["?a1=1&b1=2&c1=4&a2=2&b2=4&c2=8", "Samme linje"], ["?a1=0&b1=0&c1=3&a2=1&b2=1&c2=1", "Ingen punkter"]],
+  },
+  kvadratsetningene: {
+    oppgaver: 5,
+    verdier: [
+      ["", "(a + b)²", "25"],
+      ["", "Vanlig feil: a² + b²", "13 (mangler 2ab = 12)"],
+      ["?modus=sum&a=50&b=1", "(a + b)²", "2601"],
+      ["?modus=diff&a=50&b=1", "(a − b)²", "2401"],
+      ["?modus=konj&a=50&b=1", "(a + b)(a − b)", "2499"],
+      ["?modus=diff&a=5&b=2", "(a − b)²", "9"],
+      ["?modus=diff&a=2&b=5", "(a − b)²", "9"],
+      ["?modus=konj&a=5&b=3", "(a + b)(a − b)", "16"],
+      ["?modus=konj&a=3&b=5", "(a + b)(a − b)", `${M}16`],
+      ["?modus=sum&a=4&b=3", "(a + b)²", "49"],
+    ],
+    meldinger: [["?modus=diff&a=2&b=5", "b > a"], ["?modus=konj&a=3&b=5", "negativ"], ["?modus=sum&a=0&b=0", "Det er ingen figur"]],
+  },
+  "rasjonale-funksjoner": {
+    oppgaver: 5,
+    verdier: [
+      ["", "Loddrett asymptote", "x = 1"],
+      ["", "Vannrett asymptote", "y = 2"],
+      ["", "Nullpunkt", `x = ${M}0,5`],
+      ["?a=0&b=1&c=1&d=0", "Vannrett asymptote", "y = 0"],
+      ["?a=2&b=-4&c=1&d=-2", "Grafen", "y = 2 med et hull i x = 2"],
+      ["?a=15&b=200&c=1&d=0", "Vannrett asymptote", "y = 15"],
+      ["?a=15&b=200&c=1&d=0", "Skjærer y-aksen i", "Ingen (x = 0 er ikke med)"],
+      ["?a=1&b=1&c=0&d=0", "Definert for", "Ingen x (nevneren er alltid 0)"],
+      ["?a=2&b=1&c=0&d=2", "Nullpunkt", `x = ${M}0,5`],
+    ],
+    meldinger: [["?a=2&b=-4&c=1&d=-2", "forkortes"], ["?a=2&b=1&c=0&d=2", "lineær"], ["?a=1&b=1&c=0&d=0", "c = d = 0"]],
+    tekst: [["", "#grensetabell", ["302", `${M}2998`, "3002", "ikke definert"]]],
+  },
+  vekst: {
+    oppgaver: 5,
+    verdier: [
+      ["", "f(10)", "≈ 61,92"],
+      ["", "N(10)", "≈ 49,16"],
+      ["", "Vendepunkt", "t ≈ 16,15, N = 100"],
+      ["?modus=eksp&N0=1000&p=5&t=10", "f(10)", "≈ 1628,89"],
+      ["?modus=eksp&N0=1000&p=5&t=10", "Doblingstid", "T ≈ 14,21"],
+      ["?modus=eksp&N0=10&p=20&t=0", "Doblingstid", "T ≈ 3,8"],
+      ["?modus=eksp&N0=400&p=-15&t=6", "f(6)", "≈ 150,86"],
+      ["?modus=eksp&N0=400&p=-15&t=6", "Halveringstid", "T ≈ 4,27"],
+      ["?modus=begge&N0=10&p=20&K=200&t=20", "f(20)", "≈ 383,38"],
+      ["?modus=begge&N0=10&p=20&K=200&t=20", "N(20)", "≈ 133,73"],
+      ["?modus=logistisk&N0=300&p=20&K=200&t=5", "N(5)", "≈ 230,94"],
+      ["?modus=eksp&N0=10&p=0&t=5", "Dobling/halvering", "Ingen (p = 0)"],
+    ],
+    meldinger: [["?modus=logistisk&N0=300&p=20&K=200&t=5", "over bæreevnen"], ["?modus=eksp&N0=10&p=0&t=5", "p = 0"]],
+  },
+  "sekant-tangent": {
+    oppgaver: 5,
+    verdier: [
+      ["", "Stigningstall sekant", "a = 3"],
+      ["", "Stigningstall tangent", "f′(1) = 2"],
+      ["?fn=x2&x0=1&h=2", "Stigningstall sekant", "a = 4"],
+      ["?fn=x2&x0=1&h=0.01", "Stigningstall sekant", "a = 2,01"],
+      ["?fn=x2&x0=1&h=-0.1", "Stigningstall sekant", "a = 1,9"],
+      ["?fn=kubisk&x0=1&h=0.5", "Stigningstall tangent", "f′(1) = 0"],
+      ["?fn=kubisk&x0=2&h=0.5", "Stigningstall tangent", "f′(2) = 9"],
+      ["?fn=abs&x0=0&h=-0.5", "Stigningstall sekant", `a = ${M}1`],
+      ["?fn=abs&x0=0&h=0.5", "Stigningstall tangent", "Finnes ikke"],
+      ["?fn=rot&x0=0&h=0.01", "Stigningstall sekant", "a = 10"],
+      ["?fn=rot&x0=0.5&h=-1", "Sekant", "Finnes ikke (Q er utenfor definisjonsmengden)"],
+      ["?fn=x2&x0=1&h=0", "Sekant", "Finnes ikke (h = 0)"],
+    ],
+    meldinger: [["?fn=abs&x0=0&h=0.5", "Knekk"], ["?fn=rot&x0=0&h=0.5", "Loddrett tangent"], ["?fn=x2&x0=1&h=0", "h = 0"], ["?fn=rot&x0=-1&h=0.5", "definisjonsmengden"]],
+    tekst: [["?fn=x2&x0=1&h=1", "#tabell", ["2,001", "1,999", "2,1", "1,9"]]],
+  },
+  "funksjon-og-derivert": {
+    oppgaver: 5,
+    verdier: [
+      ["", "Toppunkt", `(${M}1, 2)`],
+      ["", "Bunnpunkt", `(1, ${M}2)`],
+      ["", "f′(2)", "9 (tangentens stigningstall)"],
+      ["?a=1&b=0&c=0&d=0&x0=0", "Terrassepunkt", "(0, 0)"],
+      ["?a=1&b=0&c=3&d=0&x0=0", "Stasjonære punkter", "Ingen (f′(x) ≠ 0 for alle x)"],
+      ["?a=1&b=-3&c=0&d=4&x0=1", "Toppunkt", "(0, 4)"],
+      ["?a=1&b=-3&c=0&d=4&x0=1", "Bunnpunkt", "(2, 0)"],
+      ["?a=1&b=-3&c=0&d=4&x0=1", "Vendepunkt", "(1, 2)"],
+      ["?a=1&b=-3&c=0&d=4&x0=1", `f′(1)`, `${M}3 (tangentens stigningstall)`],
+      ["?a=4&b=-40&c=100&d=0&x0=1", "Toppunkt", "(≈ 1,67, ≈ 74,07)"],
+      ["?a=4&b=-40&c=100&d=0&x0=1", "f′(1)", "32 (tangentens stigningstall)"],
+      ["?a=0&b=1&c=-2&d=0&x0=0", "Bunnpunkt", `(1, ${M}1)`],
+      ["?a=0&b=0&c=0&d=2&x0=0", "Stasjonære punkter", "Alle x (f er konstant)"],
+    ],
+    meldinger: [["?a=1&b=0&c=0&d=0&x0=0", "Terrassepunkt"], ["?a=1&b=0&c=3&d=0&x0=0", "Ingen ekstremalpunkter"], ["?a=0&b=1&c=-2&d=0&x0=0", "andregradsfunksjon"]],
+    tekst: [["", "#fortegn", ["topp", "bunn", "vokser", "avtar"]]],
+  },
+  trekant: {
+    oppgaver: 5,
+    verdier: [
+      ["?modus=SVS&b=5&c=7&A=60", "a", "6,24"],
+      ["?modus=SVS&b=5&c=7&A=60", "Areal", "15,16"],
+      ["?modus=SVS&b=5&c=7&A=90", "a", "8,6"],
+      ["?modus=SSS&a=3&b=4&c=5", "C", "90°"],
+      ["?modus=SSS&a=3&b=4&c=5", "Type", "rettvinklet"],
+      ["?modus=SSS&a=3&b=4&c=5", "A", "36,87°"],
+      ["?modus=SSS&a=2&b=3&c=6", "Trekant", "Finnes ikke"],
+      ["?modus=VSV&A=40&B=75&c=10", "a", "7,09"],
+      ["?modus=VSV&A=40&B=75&c=10", "b", "10,66"],
+      ["?modus=VSV&A=100&B=80&c=10", "Trekant", "Finnes ikke"],
+      ["?modus=SSV&a=6&b=8&A=40", "B", "58,99°"],
+      ["?modus=SSV&a=6&b=8&A=40", "c", "9,22"],
+      ["?modus=SSV&a=6&b=8&A=40&valgt=2", "B", "121,01°"],
+      ["?modus=SSV&a=6&b=8&A=40&valgt=2", "c", "3,04"],
+      ["?modus=SSV&a=9&b=8&A=40", "B", "34,85°"],
+      ["?modus=SSV&a=4&b=8&A=40", "Trekant", "Finnes ikke"],
+      ["?modus=SVS&b=40&c=55&A=110", "Areal", "1033,66"],
+      ["?modus=SSS&a=5&b=5&c=5", "Type", "spissvinklet og likesidet"],
+    ],
+    meldinger: [["?modus=SSV&a=6&b=8&A=40", "To trekanter"], ["?modus=SSV&a=4&b=8&A=40", "sinus kan aldri"], ["?modus=SSS&a=2&b=3&c=6", "trekantulikheten"], ["?modus=SSS&a=2&b=3&c=5", "flat"], ["?modus=VSV&A=100&B=80&c=10", "Vinkelsummen"]],
+  },
+  vektorer: {
+    oppgaver: 5,
+    verdier: [
+      ["", "u · v", "5"],
+      ["", "|w|", "5"],
+      ["", "Vinkel mellom u og v", "θ = 45°"],
+      ["?modus=kombinasjon&u1=3&u2=1&v1=-1&v2=3&s=1&t=1", "Ortogonale?", "Ja (u · v = 0)"],
+      ["?modus=kombinasjon&u1=2&u2=1&v1=6&v2=3&s=1&t=1", "Parallelle?", "Ja (u₁v₂ − u₂v₁ = 0)"],
+      ["?modus=kombinasjon&u1=2&u2=1&v1=6&v2=3&s=1&t=1", "Vinkel mellom u og v", "θ = 0°"],
+      ["?modus=kombinasjon&u1=2&u2=1&v1=-4&v2=-2&s=1&t=1", "Vinkel mellom u og v", "θ = 180°"],
+      ["?modus=kombinasjon&u1=3&u2=1&v1=1&v2=2&s=1.2&t=1.4", "w = su + tv", "[5, 4]"],
+      ["?modus=kombinasjon&u1=0&u2=0&v1=1&v2=2&s=1&t=1", "Vinkel mellom u og v", "Ikke definert"],
+      ["?modus=parameter&x0=1&y0=2&r1=2&r2=1&t=3", "Punkt for t", "(7, 5)"],
+      ["?modus=parameter&x0=1&y0=2&r1=2&r2=1&t=2", "Punkt for t", "(5, 4)"],
+    ],
+    meldinger: [["?modus=kombinasjon&u1=2&u2=1&v1=6&v2=3&s=1&t=1", "Parallelle"], ["?modus=kombinasjon&u1=0&u2=0&v1=1&v2=2&s=1&t=1", "Nullvektor"], ["?modus=parameter&x0=1&y0=2&r1=0&r2=0&t=1", "nullvektoren"]],
+    tekst: [["?modus=parameter&x0=1&y0=2&r1=2&r2=1&t=3", "#formler", ["y=0,5x+1,5"]]],
+  },
+};
+
+for (const [id, oppsett] of Object.entries(UTFORSKERE)) {
+  const { side, kontekst, problemer } = await nySide();
+  const URL_ = BASE + `utforskere/${id}.html`;
+  const verdi = (dt) => side.evaluate((dt) => {
+    const d = Array.from(document.querySelectorAll("#verdier dt")).find((x) => x.textContent === dt);
+    return d ? d.nextElementSibling.textContent.replace(/\s+/g, " ").trim() : null;
+  }, dt);
+  let feilVerdier = [];
+  for (const [sok, dt, forventet] of oppsett.verdier) {
+    await side.goto(URL_ + sok, { waitUntil: "networkidle" });
+    const fikk = await verdi(dt);
+    if (fikk !== forventet) feilVerdier.push(`${sok || "standard"} ${dt}: fikk «${fikk}», ventet «${forventet}»`);
+  }
+  sjekk(feilVerdier.length === 0, `${id}: ${oppsett.verdier.length} verdier stemmer med fasit`, feilVerdier.join(" | "));
+  const feilMeld = [];
+  for (const [sok, tekst] of oppsett.meldinger) {
+    await side.goto(URL_ + sok, { waitUntil: "networkidle" });
+    const m = await side.evaluate(() => { const e = document.getElementById("melding"); return e && !e.hidden ? e.textContent : ""; });
+    if (!m.includes(tekst)) feilMeld.push(`${sok}: mangler «${tekst}»`);
+  }
+  sjekk(feilMeld.length === 0, `${id}: ${oppsett.meldinger.length} spesialtilfeller gir forklarende melding`, feilMeld.join(" | "));
+  for (const [sok, sel, biter] of oppsett.tekst || []) {
+    await side.goto(URL_ + sok, { waitUntil: "networkidle" });
+    const t = (await side.evaluate((s) => { const e = document.querySelector(s); const k = e.cloneNode(true); k.querySelectorAll(".katex-mathml").forEach((m) => m.remove()); return k.textContent.replace(/\s+/g, ""); }, sel));
+    const mangler = biter.filter((b) => !t.includes(b.replace(/\s+/g, "")));
+    sjekk(mangler.length === 0, `${id}: ${sel} viser riktige tall`, mangler.join(", "));
+  }
+
+  // Oppgavelenkene skal sette verdier uten feil, og adressen skal oppdateres
+  await side.goto(URL_, { waitUntil: "networkidle" });
+  const lenker = await side.$$eval("a.oppsettlenke", (l) => l.map((a) => a.getAttribute("href")));
+  let lenkeFeil = [];
+  for (let i = 0; i < lenker.length; i++) {
+    // Lenker som brytes over to linjer har midtpunktet utenfor selve lenken, så vi klikker med JavaScript.
+    await side.locator("a.oppsettlenke").nth(i).evaluate((a) => a.click());
+    await side.waitForTimeout(30);
+    const forventet = new URLSearchParams(lenker[i].split("#")[0].slice(1));
+    const naa = new URLSearchParams(new URL(side.url()).search);
+    for (const [k, val] of forventet) if (k !== "tilpass" && naa.get(k) !== val && Number(naa.get(k)) !== Number(val)) lenkeFeil.push(`${lenker[i]}: ${k}=${naa.get(k)}`);
+  }
+  sjekk(lenker.length > 0 && lenkeFeil.length === 0, `${id}: alle ${lenker.length} oppgavelenker setter verdiene`, lenkeFeil.slice(0, 3).join(" | "));
+
+  // Tastatur: piltast på første synlige glidebryter endrer verdien
+  await side.goto(URL_, { waitUntil: "networkidle" });
+  const glider = side.locator('.glider:not([hidden]) input[type="range"]').first();
+  const tallfelt = side.locator('.glider:not([hidden]) input[type="text"]').first();
+  const før = await tallfelt.inputValue();
+  await glider.focus();
+  await side.keyboard.press("ArrowRight");
+  sjekk((await tallfelt.inputValue()) !== før, `${id}: piltast på glidebryteren endrer verdien`, `${før} → ${await tallfelt.inputValue()}`);
+  await side.waitForTimeout(700);
+  const live = await side.evaluate(() => Array.from(document.querySelectorAll("[aria-live]")).map((e) => e.textContent).join(" "));
+  sjekk(live.length > 5, `${id}: aria-live leser opp endringen`, live);
+
+  // Nedlasting av figuren (SVG)
+  const [nedlasting] = await Promise.all([side.waitForEvent("download"), side.click("#last-ned-svg")]);
+  const svgFil = path.join(RES, `${id}.svg`);
+  await nedlasting.saveAs(svgFil);
+  sjekk(fs.readFileSync(svgFil, "utf8").startsWith("<svg"), `${id}: figuren kan lastes ned som SVG`);
+
+  // Teori lukket, oppgaver og elevark uten fasit
+  sjekk(!(await side.getAttribute("#matematikken", "open")), `${id}: «Matematikken bak» er lukket fra start`);
+  const antall = await side.$$eval(".oppgave", (o) => o.length);
+  sjekk(antall === oppsett.oppgaver, `${id}: ${oppsett.oppgaver} oppgaver`, String(antall));
+  const pdfUrl = await side.getAttribute(".elevark-lenke a[href$='.pdf']", "href");
+  const pdfSvar = await side.request.get(new URL(pdfUrl, side.url()).href);
+  const pdfFil = path.join(RES, `elevark-${id}.pdf`);
+  fs.writeFileSync(pdfFil, await pdfSvar.body());
+  const pdfTekst = execFileSync("pdftotext", ["-layout", pdfFil, "-"]).toString().replace(/\s+/g, " ");
+  const titler = await side.$$eval(".oppgave > h3", (h) => h.map((x) => {
+    const k = x.cloneNode(true); k.querySelectorAll(".katex-mathml, .oppgave-nr").forEach((m) => m.remove());
+    return k.textContent.trim().split(/\s+/)[0];
+  }));
+  sjekk(titler.every((t) => pdfTekst.includes(t)), `${id}: alle oppgavetitlene står i elevarket`, titler.filter((t) => !pdfTekst.includes(t)).join(", "));
+  const steg = (pdfTekst.match(/Gjett|Test|Forklar/g) || []).length;
+  sjekk(steg >= 3 * oppsett.oppgaver, `${id}: elevarket har alle stegene`, String(steg));
+  // Biter av løsningsforslagene (lengste ord-rekke uten formler) skal ikke stå i elevarket
+  const fasitbiter = await side.$$eval(".fasit-innhold p", (ps) => ps.map((p) => {
+    const k = p.cloneNode(true); k.querySelectorAll(".katex").forEach((m) => m.replaceWith("|"));
+    return k.textContent.split("|").map((t) => t.trim()).sort((a, b) => b.length - a.length)[0];
+  }).filter((t) => t && t.split(/\s+/).length >= 4));
+  const lekket = fasitbiter.filter((b) => pdfTekst.includes(b.replace(/\s+/g, " ")));
+  sjekk(fasitbiter.length >= oppsett.oppgaver && lekket.length === 0, `${id}: elevarket inneholder ikke fasit (${fasitbiter.length} biter sjekket)`, lekket.slice(0, 2).join(" | "));
+  sjekk(!pdfTekst.includes("{{") && !pdfTekst.includes("$"), `${id}: ingen plassholdere eller rå formler i elevarket`);
+
+  sjekk(problemer.length === 0, `${id}: ingen JS-feil under testingen`, problemer.join(" | "));
+  await side.screenshot({ path: path.join(RES, `${id}-lys.png`) });
+  await kontekst.close();
+}
+
+// ---------------------------------------------------------------- 10. tilfeldige verdier mot matematikken
+console.log("\n10. Tilfeldige verdier");
+{
+  const { side, kontekst } = await nySide();
+  const sjekkFuzz = async (id, fn, navn) => {
+    await side.goto(BASE + `utforskere/${id}.html`, { waitUntil: "networkidle" });
+    const feil = await side.evaluate(fn);
+    sjekk(feil.length === 0, navn, feil.slice(0, 4).join("; "));
+  };
+  await sjekkFuzz("likningssett", () => {
+    const { los } = window.mattelabLikningssett; const feil = [];
+    const t = () => Math.round((Math.random() * 20 - 10) * 2) / 2;
+    for (let i = 0; i < 3000; i++) {
+      const v = { a1: t(), b1: t(), c1: t(), a2: t(), b2: t(), c2: t() };
+      const r = los(v);
+      if (r.type === "én") {
+        for (const [a, b, c] of [[v.a1, v.b1, v.c1], [v.a2, v.b2, v.c2]]) if (Math.abs(a * r.x + b * r.y - c) > 1e-9 * (1 + Math.abs(c))) feil.push(JSON.stringify(v));
+      } else if (r.det !== 0 && r.grunn !== "tom" && r.grunn !== "en-linje" && r.grunn !== "alle") feil.push("det≠0 men ikke én: " + JSON.stringify(v));
+    }
+    return feil;
+  }, "likningssett: 3000 tilfeldige likningssett, løsningen passer i begge likningene");
+  await sjekkFuzz("rasjonale-funksjoner", () => {
+    const { analyser } = window.mattelabRasjonal; const feil = [];
+    const t = () => Math.round((Math.random() * 20 - 10) * 2) / 2;
+    for (let i = 0; i < 3000; i++) {
+      const [a, b, c, d] = [t(), t(), t(), t()];
+      const r = analyser(a, b, c, d);
+      if (r.type !== "rasjonal") continue;
+      const h = 1e-6;
+      if (Math.sign(r.f(r.xv + h)) !== Math.sign(r.hoyreGrense) || Math.sign(r.f(r.xv - h)) !== Math.sign(r.venstreGrense)) feil.push(`grenser ${a},${b},${c},${d}`);
+      if (Math.abs(r.f(1e7) - r.yv) > 1e-4) feil.push(`asymptote ${a},${b},${c},${d}`);
+      // Nullpunktet er avrundet til 10 desimaler, så vi sjekker telleren relativt til størrelsen
+      if (r.nullpunkt !== undefined && Math.abs(a * r.nullpunkt + b) > 1e-8 * (Math.abs(a) + Math.abs(b))) feil.push(`nullpunkt ${a},${b},${c},${d}`);
+    }
+    return feil;
+  }, "rasjonale funksjoner: 3000 tilfeldige, asymptoter, grenser og nullpunkter stemmer");
+  await sjekkFuzz("funksjon-og-derivert", () => {
+    const { analyser } = window.mattelabDerivert; const feil = [];
+    const t = () => Math.round((Math.random() * 10 - 5) * 2) / 2;
+    for (let i = 0; i < 3000; i++) {
+      const [a, b, c, d] = [t(), t(), t(), t()];
+      const r = analyser(a, b, c, d);
+      for (const p of r.punkter) {
+        if (Math.abs(r.df(p.x)) > 1e-8 * (1 + Math.abs(a) + Math.abs(b) + Math.abs(c))) feil.push(`f'≠0 ${a},${b},${c},${d}`);
+        const e = 1e-3, v = r.f(p.x - e), h = r.f(p.x + e);
+        if (p.type === "toppunkt" && !(v < p.y + 1e-9 && h < p.y + 1e-9)) feil.push(`topp ${a},${b},${c},${d}`);
+        if (p.type === "bunnpunkt" && !(v > p.y - 1e-9 && h > p.y - 1e-9)) feil.push(`bunn ${a},${b},${c},${d}`);
+      }
+    }
+    return feil;
+  }, "funksjon og derivert: 3000 tilfeldige, f′ = 0 i stasjonære punkter og riktig type");
+  await sjekkFuzz("trekant", () => {
+    const { los } = window.mattelabTrekant; const feil = [];
+    const RAD = Math.PI / 180;
+    for (let i = 0; i < 3000; i++) {
+      const b = 0.5 + Math.random() * 10, c = 0.5 + Math.random() * 10, A = 1 + Math.random() * 178;
+      const t = los("SVS", { b, c, A }).losninger[0];
+      if (Math.abs(t.A + t.B + t.C - 180) > 1e-9) feil.push("vinkelsum");
+      const k = [t.a / Math.sin(t.A * RAD), t.b / Math.sin(t.B * RAD), t.c / Math.sin(t.C * RAD)];
+      if (Math.max(...k) - Math.min(...k) > 1e-7 * k[0]) feil.push(`sinussetningen ${b},${c},${A}`);
+      const s = los("SSS", { a: t.a, b: t.b, c: t.c }).losninger[0];
+      if (!s || Math.abs(s.A - A) > 1e-6) feil.push(`SSS tilbake ${b},${c},${A}`);
+      const v = los("VSV", { A: t.A, B: t.B, c: t.c }).losninger[0];
+      if (!v || Math.abs(v.a - t.a) > 1e-7 * t.a) feil.push(`VSV tilbake ${b},${c},${A}`);
+      const q = los("SSV", { a: t.a, b: t.b, A: t.A }).losninger;
+      if (!q.some((x) => Math.abs(x.c - t.c) < 1e-6 * t.c)) feil.push(`SSV finner ikke trekanten ${b},${c},${A}`);
+    }
+    return feil;
+  }, "trekant: 3000 tilfeldige, vinkelsum, sinussetningen og alle fire metodene gir samme trekant");
+  await sjekkFuzz("vektorer", () => {
+    const { prikk, lengde, vinkel } = window.mattelabVektorer; const feil = [];
+    for (let i = 0; i < 3000; i++) {
+      const u = [Math.random() * 10 - 5, Math.random() * 10 - 5], v = [Math.random() * 10 - 5, Math.random() * 10 - 5];
+      const th = vinkel(u, v) * Math.PI / 180;
+      const d = [u[0] - v[0], u[1] - v[1]];
+      // Cosinussetningen: |u − v|² = |u|² + |v|² − 2|u||v|cos θ
+      if (Math.abs(lengde(d) ** 2 - (lengde(u) ** 2 + lengde(v) ** 2 - 2 * lengde(u) * lengde(v) * Math.cos(th))) > 1e-6) feil.push("vinkel");
+      if (Math.abs(prikk(u, u) - lengde(u) ** 2) > 1e-9) feil.push("lengde");
+    }
+    return feil;
+  }, "vektorer: 3000 tilfeldige, vinkelen stemmer med cosinussetningen");
+  await kontekst.close();
+}
+
+// ---------------------------------------------------------------- 11. lærersiden
+console.log("\n11. Lærersiden");
+{
+  const { side, kontekst } = await nySide();
+  await side.goto(BASE + "laerer.html", { waitUntil: "networkidle" });
+  const koblet = await side.$$eval(".km-kobling a", (a) => new Set(a.map((x) => x.getAttribute("href").split("/").pop())).size);
+  sjekk(koblet === 10, "lærersiden lenker til alle 10 utforskerne", String(koblet));
   await kontekst.close();
 }
 

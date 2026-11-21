@@ -1,0 +1,154 @@
+---
+tittel: Kvadratsetningene som arealmodeller
+beskrivelse: Se (a + b)², (a − b)² og (a + b)(a − b) som arealer av kvadrater og rektangler. Bruk setningene til hoderegning og faktorisering.
+type: utforsker
+fag: 1T
+tema: algebra
+ikon: kvadratsetninger
+skript: utforskere/kvadratsetningene.js
+---
+<p class="ingress">Kvadratsetningene er lettere å huske når du ser dem som arealer. Her kan du endre lengdene $a$ og $b$ og se hvordan et kvadrat deles opp i biter.</p>
+
+<figure class="sim sim-bred" id="utforsker" aria-label="Utforsker for kvadratsetningene">
+  <div class="sim-delt">
+    <div class="sim-graf">
+      <svg id="figur" class="figur-svg kun-js"></svg>
+      <div class="noscript-melding kun-uten-js">
+        <p><strong>Utforskeren trenger JavaScript.</strong> Resten av siden, med forklaring og oppgaver, virker uten.</p>
+        <p>Eksempel: Et kvadrat med side $3 + 2$ deles i et kvadrat på $3^2 = 9$, to rektangler på $3 \cdot 2 = 6$ og et kvadrat på $2^2 = 4$. Til sammen er det $9 + 12 + 4 = 25 = 5^2$.</p>
+      </div>
+      <dl class="sim-tall kun-js" id="verdier"></dl>
+    </div>
+    <div class="sim-side-panel kun-js">
+      <div class="sim-styring">
+        <div class="sim-velg">
+          <label for="modus">Setning</label>
+          <select id="modus">
+            <option value="sum">Første kvadratsetning: (a + b)²</option>
+            <option value="diff">Andre kvadratsetning: (a − b)²</option>
+            <option value="konj">Konjugatsetningen: (a + b)(a − b)</option>
+          </select>
+        </div>
+        <div id="glidere" class="glidere"></div>
+      </div>
+      <div class="sim-blokk">
+        <p class="panel-tittel">Setningen</p>
+        <div class="forskrift" id="formel"></div>
+        <p class="panel-tittel ny-del">Med tallene dine</p>
+        <div class="utregning" id="utregning"></div>
+      </div>
+      <div id="melding" class="sim-blokk melding" hidden></div>
+    </div>
+  </div>
+  {{figurverktoy:enkel}}
+  <figcaption class="sim-hint">Dra i glidebryterne, eller skriv et tall i feltet. Lengdene kan ikke være negative. Arealet til hver bit står inne i biten når det er plass. Verdiene står i adressefeltet, så du kan dele oppsettet.</figcaption>
+</figure>
+
+<details class="teori" id="matematikken">
+<summary><span class="teori-tittel">Matematikken bak</span><span class="teori-hint">De tre setningene, bevis med regning og hvorfor arealmodellen stemmer</span></summary>
+<div class="teori-innhold tekst">
+
+<h3>De tre setningene</h3>
+$$(a + b)^2 = a^2 + 2ab + b^2$$
+$$(a - b)^2 = a^2 - 2ab + b^2$$
+$$(a + b)(a - b) = a^2 - b^2$$
+<p>De to første kalles første og andre kvadratsetning. Den tredje kalles konjugatsetningen.</p>
+
+<h3>Bevis med regning</h3>
+<p>Gang ut parentesene. Hvert ledd i den første parentesen ganges med hvert ledd i den andre:</p>
+$$(a + b)^2 = (a + b)(a + b) = a^2 + ab + ba + b^2 = a^2 + 2ab + b^2$$
+<p>På samme måte er</p>
+$$(a + b)(a - b) = a^2 - ab + ba - b^2 = a^2 - b^2$$
+<p>De to midterste leddene forsvinner.</p>
+
+<h3>Arealmodellen</h3>
+<ul>
+  <li><strong>Første kvadratsetning:</strong> Et kvadrat med side $a + b$ består av et kvadrat $a^2$, et kvadrat $b^2$ og <em>to</em> rektangler $ab$. Den vanligste feilen er å glemme rektanglene og skrive $(a + b)^2 = a^2 + b^2$.</li>
+  <li><strong>Andre kvadratsetning:</strong> Start med $a^2$ og ta bort to striper på $ab$. Da har du tatt bort hjørnet $b^2$ to ganger. Derfor må du legge til $b^2$ igjen.</li>
+  <li><strong>Konjugatsetningen:</strong> Ta bort hjørnet $b^2$ fra $a^2$. Flytt den smale biten (merket 2 i utforskeren) til siden. Da får du et rektangel med sider $a + b$ og $a - b$.</li>
+</ul>
+<p>Arealmodellen virker bare for positive lengder. Regnebeviset over virker for alle tall.</p>
+
+<h3>Bruk</h3>
+<p>Setningene brukes begge veier. Fra venstre mot høyre regner du ut parenteser. Fra høyre mot venstre faktoriserer du, for eksempel $x^2 + 6x + 9 = (x + 3)^2$. Det trenger du senere når du løser andregradslikninger og finner toppunktet til en andregradsfunksjon.</p>
+</div>
+</details>
+
+<section class="oppgaver" aria-labelledby="oppgaver-tittel">
+<h2 id="oppgaver-tittel">Oppgaver</h2>
+{{elevark}}
+<p class="del-inngang">Hver oppgave har tre steg. <strong>Gjett</strong> først, uten å bruke utforskeren. <strong>Test</strong> så i utforskeren. <strong>Forklar</strong> til slutt med egne ord hvorfor det blir slik.</p>
+
+<div class="oppgave" id="oppgave-1">
+  <h3><span class="oppgave-nr">1</span>Hvorfor ikke bare $a^2 + b^2$?</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Mange skriver $(3 + 2)^2 = 3^2 + 2^2$. Regn ut begge sidene. Er de like?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?modus=sum&amp;a=3&amp;b=2#utforsker">Velg første kvadratsetning med $a = 3$ og $b = 2$</a>. Hvor mange biter består kvadratet av? Hvor store er de?</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Bruk figuren til å forklare hvorfor $(a + b)^2 = a^2 + 2ab + b^2$. Hvilke biter glemmer man når man skriver $a^2 + b^2$?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>$(3 + 2)^2 = 5^2 = 25$, mens $3^2 + 2^2 = 9 + 4 = 13$. Sidene er ikke like.</p>
+    <p>Kvadratet med side $5$ består av fire biter: $3^2 = 9$, $2^2 = 4$ og to rektangler på $3 \cdot 2 = 6$. Til sammen er det $9 + 6 + 6 + 4 = 25$.</p>
+    <p>Den som skriver $a^2 + b^2$, glemmer de to rektanglene $ab$. Det er derfor leddet $2ab$ er med.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-2">
+  <h3><span class="oppgave-nr">2</span>Hoderegning med kvadratsetningene</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Regn ut $51^2$, $49^2$ og $49 \cdot 51$ i hodet, uten kalkulator. Tips: $51 = 50 + 1$ og $49 = 50 - 1$.</p></div></li>
+  <li><span class="fase test">Test</span><div><p>Sett $a = 50$ og $b = 1$ i <a class="oppsettlenke" href="?modus=sum&amp;a=50&amp;b=1#utforsker">første kvadratsetning</a>, <a class="oppsettlenke" href="?modus=diff&amp;a=50&amp;b=1#utforsker">andre kvadratsetning</a> og <a class="oppsettlenke" href="?modus=konj&amp;a=50&amp;b=1#utforsker">konjugatsetningen</a>. Sammenlign med svarene dine.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Skriv utregningene med kvadratsetningene. Lag en egen hoderegningsoppgave av samme type, og vis hvordan du løser den.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    $$51^2 = (50 + 1)^2 = 2500 + 100 + 1 = 2601$$
+    $$49^2 = (50 - 1)^2 = 2500 - 100 + 1 = 2401$$
+    $$49 \cdot 51 = (50 - 1)(50 + 1) = 2500 - 1 = 2499$$
+    <p>Det lønner seg fordi $50^2$ er lett å regne ut. Et eksempel på en egen oppgave:</p>
+$$98 \cdot 102 = (100 - 2)(100 + 2) = 10\,000 - 4 = 9996$$
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-3">
+  <h3><span class="oppgave-nr">3</span>Hvorfor $+\,b^2$ i andre kvadratsetning?</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Hvorfor tror du det står $+\,b^2$ og ikke $-\,b^2$ i $(a - b)^2 = a^2 - 2ab + b^2$?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?modus=diff&amp;a=5&amp;b=2#utforsker">Velg andre kvadratsetning med $a = 5$ og $b = 2$</a>. Se på hjørnet nederst til høyre. Prøv også $a = 2$ og $b = 5$.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Bruk figuren til å forklare hvorfor $b^2$ må legges til. Hvorfor blir svaret det samme når du bytter om på $a$ og $b$?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>$(5 - 2)^2 = 3^2 = 9$, og $5^2 - 2 \cdot 5 \cdot 2 + 2^2 = 25 - 20 + 4 = 9$.</p>
+    <p>Vi starter med kvadratet $a^2 = 25$ og tar bort to striper på $ab = 10$. Stripene overlapper i hjørnet $b^2 = 4$. Da har vi tatt bort hjørnet to ganger, men det skal bare bort én gang. Derfor legger vi til $b^2$ igjen.</p>
+    <p>Når $a = 2$ og $b = 5$, er $a - b = -3$, og $(-3)^2 = 9$. Et tall og det motsatte tallet har samme kvadrat, så $(a - b)^2 = (b - a)^2$.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-4">
+  <h3><span class="oppgave-nr">4</span>Konjugatsetningen som flytting</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Fra et kvadrat med side $5$ tar du bort et hjørne med side $3$. Kan resten legges om til et rektangel? Hvilke sider får det?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?modus=konj&amp;a=5&amp;b=3#utforsker">Velg konjugatsetningen med $a = 5$ og $b = 3$</a>. Finn bitene merket 1 og 2 i begge figurene. Prøv også med $b$ større enn $a$.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Forklar med figuren hvorfor $(a + b)(a - b) = a^2 - b^2$. Hva skjer når $b > a$?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>Resten har arealet $5^2 - 3^2 = 25 - 9 = 16$. Den smale biten nederst har sidene $a - b = 2$ og $b = 3$. Flytter vi den opp til høyre, får vi et rektangel med sider $a + b = 8$ og $a - b = 2$. Arealet er $8 \cdot 2 = 16$.</p>
+    <p>Når $b > a$, er $a - b$ negativ. Da blir $(a + b)(a - b) = a^2 - b^2$ negativ. Med $a = 3$ og $b = 5$ får vi $9 - 25 = -16$. Et areal kan ikke være negativt, så figuren viser $b^2 - a^2 = 16$ i stedet. Setningen gjelder likevel, fordi regnebeviset virker for alle tall.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-5">
+  <h3><span class="oppgave-nr">5</span>Baklengs: faktorisering</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Kan $x^2 + 6x + 9$ skrives som et kvadrat $(x + b)^2$? Hva må $b$ være?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?modus=sum&amp;a=4&amp;b=3#utforsker">Velg første kvadratsetning med $a = 4$ og $b = 3$</a>. Her spiller $a$ rollen til $x$. Regn ut $x^2 + 6x + 9$ for $x = 4$, og sammenlign med figuren.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Hvordan ser du på $x^2 + 6x + 9$ at det er et fullstendig kvadrat? Faktoriser $x^2 + 10x + 25$ på samme måte.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>Vi sammenligner med $x^2 + 2bx + b^2$. Da må $2b = 6$ og $b^2 = 9$. Begge stemmer med $b = 3$, så $x^2 + 6x + 9 = (x + 3)^2$.</p>
+    <p>Med $x = 4$: $16 + 24 + 9 = 49 = 7^2 = (4 + 3)^2$. Figuren viser de samme bitene: $16$, to ganger $12$ og $9$.</p>
+    <p>Et uttrykk er et fullstendig kvadrat når konstantleddet er kvadratet av halvparten av tallet foran $x$. For $x^2 + 10x + 25$ er halvparten av $10$ lik $5$, og $5^2 = 25$. Altså er $x^2 + 10x + 25 = (x + 5)^2$.</p>
+  </div></details>
+</div>
+</section>
+
+<p class="merknad">For lærere: Se <a href="{{rot}}laerer.html">lærersiden</a> for kobling til kompetansemålene.</p>
