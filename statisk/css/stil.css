@@ -661,3 +661,84 @@ html.tavle .tavle-sporsmal { font-size: clamp(1.7rem, 3.8vw, 2.7rem); }
 .p-pil { fill: var(--m2); font-family: var(--mono); font-size: 14px; }
 .p-valgt { fill: var(--m1); fill-opacity: .12; stroke: var(--m1); stroke-width: 1.5; }
 .p-eksponent { font-size: 15px; }
+
+/* ---------------------------------------------------------------- nye funksjonsutforskere */
+.g-losning { stroke: var(--m1); stroke-width: 7; stroke-linecap: butt; }
+.g-avvik { stroke: var(--m2); stroke-width: 2; stroke-dasharray: 3 3; }
+.fortegnsskjema tr.sum th, .fortegnsskjema tr.sum td { font-weight: 700; border-top: 2px solid var(--blekk); }
+.sim-velg .tall-felt, .data-felt {
+  min-height: 2.75rem; padding: .35rem .5rem; font: inherit; font-family: var(--mono); font-size: 1rem; color: var(--blekk);
+  background: var(--papir); border: 1px solid var(--rute-sterk); border-radius: 4px; width: 100%; max-width: 100%;
+}
+.data-felt { min-height: 9rem; resize: vertical; margin-top: .3rem; }
+.felt-etikett { display: block; font-size: .875rem; color: var(--dempet); }
+#egne-blokk { margin-top: .25rem; }
+
+/* Polynomdivisjon: oppstillingen */
+.divisjon-blokk { border-top: 1px solid var(--rute); }
+.divisjon-knapper { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin-bottom: .75rem; }
+.divisjon-teller { font-family: var(--mono); font-size: .8125rem; color: var(--dempet); }
+.divisjon-rull { overflow-x: auto; overflow-y: hidden; }
+.divisjon { border-collapse: collapse; font-size: 1.05rem; }
+.divisjon td { padding: .15rem .2rem; text-align: right; white-space: nowrap; }
+.divisjon td.strek { border-bottom: 1.5px solid var(--blekk); }
+.divisjon td.divisjon-slutt { text-align: left; padding-left: .6rem; }
+.steg-forklaring { margin-top: .6rem; max-width: 46rem; font-size: .9375rem; }
+.divisjon-resultat { margin-top: .5rem; font-size: 1.05rem; }
+
+/* ---------------------------------------------------------------- undervisningsopplegg */
+.fag-merke.varighet { border-style: solid; color: var(--blekk); }
+.opplegg-merke { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .5rem; }
+.opplegg-merke span { padding: .1rem .55rem; font-family: var(--mono); font-size: .8125rem; border: 1px solid var(--rute-sterk); border-radius: 3px; }
+.opplegg-merke span:first-child { border-left: 3px solid var(--m1); }
+.opplegg-fakta { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); gap: 1rem; margin-top: 1.75rem; }
+.opplegg-fakta > section { padding: .9rem 1.1rem; background: var(--flate); border: 1px solid var(--rute); border-radius: 6px; }
+.opplegg-fakta h2 { font-size: 1.15rem; margin: 0 0 .5rem; }
+.opplegg-fakta ul { margin: 0; padding-left: 1.1rem; }
+.opplegg-fakta li + li { margin-top: .3rem; }
+.maal-sitat { list-style: none; margin: 0; padding: 0 !important; }
+.maal-sitat li + li { margin-top: .6rem; }
+.maal-nr { display: block; font-family: var(--mono); font-size: .75rem; color: var(--dempet); }
+.maal-kilde { margin-top: .6rem; font-size: .8125rem; color: var(--dempet); }
+.ressursliste { list-style: none; padding: 0 !important; }
+.ressursliste li { padding-left: 1.1rem; position: relative; }
+.ressursliste li::before { content: "→"; position: absolute; left: 0; color: var(--m1); }
+.ressurs-type { font-family: var(--mono); font-size: .75rem; color: var(--dempet); }
+
+.opplegg-del { margin-top: clamp(2rem, 5vw, 3rem); }
+.opplegg-del > h2 { margin-bottom: .75rem; }
+/* Tidslinja: delene får bredde etter hvor mange minutter de tar */
+.tidslinje { display: flex; margin: 0 0 1.25rem; padding: 0; list-style: none; border: 1px solid var(--rute-sterk); border-radius: 6px; overflow: hidden; }
+.tidslinje li { flex: var(--min) 1 0; min-width: 0; padding: .45rem .5rem; background: color-mix(in srgb, var(--m1) 8%, var(--flate)); border-right: 1px solid var(--rute-sterk); }
+.tidslinje li:nth-child(even) { background: color-mix(in srgb, var(--m2) 7%, var(--flate)); }
+.tidslinje li:last-child { border-right: 0; }
+.tidslinje-tid { display: block; font-family: var(--mono); font-size: .7rem; color: var(--dempet); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tidslinje-navn { display: block; font-size: .8rem; font-weight: 600; line-height: 1.25; overflow-wrap: anywhere; hyphens: auto; }
+.tidsplan { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; }
+.tidsdel { padding: 1rem 1.15rem; background: var(--flate); border: 1px solid var(--rute); border-left: 4px solid var(--m1); border-radius: 6px; }
+.tidsdel:nth-child(even) { border-left-color: var(--m2); }
+.tidsdel-tid { font-family: var(--mono); font-size: .8125rem; color: var(--dempet); }
+.tidsdel > h3 { margin-top: .15rem; font-size: 1.25rem; }
+.tidsdel-form { margin-top: .25rem; font-size: .875rem; color: var(--dempet); }
+.tidsdel .rolle { display: grid; grid-template-columns: 5.5rem minmax(0, 1fr); gap: .25rem .75rem; margin-top: .6rem; }
+.tidsdel .rolle > strong { font-size: .875rem; }
+.tidsdel .rolle > div > * + * { margin-top: .35rem; }
+.tidsdel .rolle ul { margin: 0; padding-left: 1.1rem; }
+.tidsdel .ressurs { margin-top: .6rem; font-size: .9375rem; }
+.tidsdel details { margin-top: .6rem; }
+.tidsdel details > summary { cursor: pointer; font-size: .9375rem; font-weight: 600; color: var(--m1); }
+.tidsdel details > div { margin-top: .4rem; padding: .6rem .8rem; background: var(--papir); border-radius: 4px; }
+.tidsdel details > div > * + * { margin-top: .35rem; }
+.tidsdel details ul { margin: 0; padding-left: 1.1rem; }
+.fase.a, .fase.b, .fase.c, .fase.d { color: var(--blekk); min-width: 1.8rem; text-align: center; }
+@media (max-width: 640px) {
+  .tidslinje { flex-direction: column; }
+  .tidslinje li { display: flex; gap: .6rem; border-right: 0; border-bottom: 1px solid var(--rute-sterk); }
+  .tidslinje li:last-child { border-bottom: 0; }
+  .tidslinje-tid { flex: none; width: 5.5rem; }
+  .tidsdel .rolle { grid-template-columns: minmax(0, 1fr); }
+}
+@media print {
+  .tidsdel details > div { display: block; }
+  .tidsdel { break-inside: avoid; }
+}

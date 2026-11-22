@@ -1,0 +1,48 @@
+%% Fasit til kortsett fra mattelab.no – laget automatisk av bygg.py.
+%% Kompiler med lualatex.
+\documentclass[11pt,a4paper]{article}
+\usepackage[norsk]{babel}
+\usepackage[a4paper,margin=1.2cm,bottom=1.7cm]{geometry}
+\usepackage{fontspec}
+\usepackage{unicode-math}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{TeX Gyre Heros}[Scale=MatchLowercase]
+\setmathfont{TeX Gyre Pagella Math}
+\usepackage{xcolor}
+\definecolor{blekk}{HTML}{16213A}
+\definecolor{dempet}{HTML}{566077}
+\definecolor{m1}{HTML}{2F4AB0}
+\usepackage{tikz}
+\usepackage{enumitem}
+\usepackage{qrcode}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+\pdfvariable suppressoptionalinfo \numexpr 1+2+4+8+16+32+64+128+256+512\relax
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[L]{\sffamily\footnotesize\color{dempet}mattelab.no · Fire representasjoner av en lineær funksjon · kortsett K9 · fasit}
+\fancyfoot[R]{\sffamily\footnotesize\color{dempet}Side \thepage}
+\begin{document}
+\begin{minipage}[t]{0.8\linewidth}\vspace{0pt}
+{\sffamily\small\color{dempet}Fasit for læreren · kortsett K9 · 1T}\par\vspace{0.25em}
+{\fontsize{20}{24}\selectfont\bfseries Fire representasjoner av en lineær funksjon}\par\vspace{0.5em}
+Finn fire og fire kort som viser samme lineære funksjon: med ord, som uttrykk, som verditabell og som graf. Forklar hvordan du ser stigningstallet og konstantleddet på hvert kort.\par\vspace{0.4em}{\small\color{dempet}Kortene er nummerert i den rekkefølgen de står i utskriften.}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.15\linewidth}\vspace{0pt}\raggedleft
+\qrcode[height=1.9cm]{https://mattelab.no/varierende/fire-representasjoner.html}
+\end{minipage}\par\vspace{0.8em}
+
+\begin{enumerate}[leftmargin=1.6em, itemsep=0.7em]
+\item \begin{minipage}[t]{\linewidth}\textsf{\small K9-05}\quad $\begin{array}{c|cccc} x & 0 & 1 & 2 & 3 \\ \hline f(x) & 1 & 3 & 5 & 7 \end{array}$ \\ \textsf{\small K9-08}\quad \emph{Figur:} Rett linje som stiger. Den skjærer y-aksen i 1 og går gjennom punktet (2, 5). \\ \textsf{\small K9-09}\quad $f(x) = 2x + 1$ \\ \textsf{\small K9-16}\quad Starter på 1. Øker med 2 for hver gang x øker med 1.\end{minipage}
+\item \begin{minipage}[t]{\linewidth}\textsf{\small K9-07}\quad Starter på 2. Øker med 1 for hver gang x øker med 1. \\ \textsf{\small K9-11}\quad \emph{Figur:} Rett linje som stiger. Den skjærer y-aksen i 2 og går gjennom punktet (2, 4). \\ \textsf{\small K9-17}\quad $f(x) = x + 2$ \\ \textsf{\small K9-20}\quad $\begin{array}{c|cccc} x & -1 & 1 & 3 & 5 \\ \hline f(x) & 1 & 3 & 5 & 7 \end{array}$\end{minipage}
+\item \begin{minipage}[t]{\linewidth}\textsf{\small K9-02}\quad $\begin{array}{c|cccc} x & 1 & 2 & 3 & 4 \\ \hline f(x) & 1 & 3 & 5 & 7 \end{array}$ \\ \textsf{\small K9-15}\quad \emph{Figur:} Rett linje som stiger. Den skjærer y-aksen i −1 og går gjennom punktet (2, 3). \\ \textsf{\small K9-21}\quad $f(x) = 2x - 1$ \\ \textsf{\small K9-22}\quad Starter på −1. Øker med 2 for hver gang x øker med 1.\end{minipage}
+\item \begin{minipage}[t]{\linewidth}\textsf{\small K9-01}\quad $\begin{array}{c|cccc} x & 0 & 1 & 2 & 3 \\ \hline f(x) & 3 & 2 & 1 & 0 \end{array}$ \\ \textsf{\small K9-06}\quad Starter på 3. Minker med 1 for hver gang x øker med 1. \\ \textsf{\small K9-10}\quad $f(x) = -x + 3$ \\ \textsf{\small K9-19}\quad \emph{Figur:} Rett linje som synker. Den skjærer y-aksen i 3 og går gjennom punktet (2, 1).\end{minipage}
+\item \begin{minipage}[t]{\linewidth}\textsf{\small K9-03}\quad \emph{Figur:} Rett linje som stiger. Den skjærer y-aksen i −2 og går gjennom punktet (2, −1). \\ \textsf{\small K9-04}\quad Starter på −2. Øker med 1 for hver gang x øker med 2. \\ \textsf{\small K9-13}\quad $\begin{array}{c|cccc} x & 0 & 2 & 4 & 6 \\ \hline f(x) & -2 & -1 & 0 & 1 \end{array}$ \\ \textsf{\small K9-14}\quad $f(x) = 0{,}5x - 2$\end{minipage}
+\item \begin{minipage}[t]{\linewidth}\textsf{\small K9-12}\quad $\begin{array}{c|cccc} x & -1 & 0 & 1 & 2 \\ \hline f(x) & 6 & 4 & 2 & 0 \end{array}$ \\ \textsf{\small K9-18}\quad $f(x) = -2x + 4$ \\ \textsf{\small K9-23}\quad \emph{Figur:} Rett linje som synker. Den skjærer y-aksen i 4 og går gjennom punktet (2, 0). \\ \textsf{\small K9-24}\quad Starter på 4. Minker med 2 for hver gang x øker med 1.\end{minipage}
+\end{enumerate}
+\subsection*{Til læreren}
+Gruppene for 2x + 1 og x + 2 har begge punktet (1, 3) i tabellen. Gruppene for 2x + 1 og 2x − 1 har samme stigningstall. Tabellen for 0,5x − 2 går med steg på 2. Spør: Hvordan ser du stigningstallet i en tabell der x ikke øker med 1? Hvor ser du konstantleddet når 0 ikke står i tabellen?
+\end{document}

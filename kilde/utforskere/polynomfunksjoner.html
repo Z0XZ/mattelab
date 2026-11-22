@@ -1,0 +1,176 @@
+---
+tittel: Polynomfunksjoner
+beskrivelse: Bygg en polynomfunksjon av grad 1 til 4 fra nullpunktene. Se hvordan graden og tallet foran styrer formen, og hva et dobbelt nullpunkt gjør med grafen.
+type: utforsker
+fag: 1T
+tema: funksjoner
+ikon: polynom
+skript: utforskere/polynom.js
+---
+<p class="ingress">En polynomfunksjon kan ofte skrives som et produkt: $f(x) = a(x - r_1)(x - r_2)(x - r_3)$. Da ser du nullpunktene direkte. Her velger du graden, tallet $a$ og nullpunktene. Utforskeren viser grafen, det utvidede uttrykket og et fortegnsskjema.</p>
+
+<figure class="sim sim-bred" id="utforsker" aria-label="Utforsker for polynomfunksjoner">
+  <div class="sim-delt">
+    <div class="sim-graf">
+      <svg id="graf" class="kun-js"></svg>
+      <div class="noscript-melding kun-uten-js">
+        <p><strong>Utforskeren trenger JavaScript.</strong> Resten av siden, med forklaring og oppgaver, virker uten.</p>
+        <p>Eksempel: $f(x) = (x + 2)(x - 1)(x - 3) = x^3 - 2x^2 - 5x + 6$ har nullpunktene $-2$, $1$ og $3$. Grafen kommer nedenfra til venstre og går opp mot høyre.</p>
+      </div>
+      <dl class="sim-tall kun-js" id="verdier"></dl>
+    </div>
+    <div class="sim-side-panel kun-js">
+      <div class="sim-styring">
+        <div class="sim-velg">
+          <label for="grad">Grad</label>
+          <select id="grad">
+            <option value="1">1 (lineær)</option>
+            <option value="2">2 (andregrad)</option>
+            <option value="3">3 (tredjegrad)</option>
+            <option value="4">4 (fjerdegrad)</option>
+          </select>
+        </div>
+        <div id="glidere-a" class="glidere"></div>
+        <div class="panel-gruppe">
+          <p class="panel-tittel">Nullpunktene</p>
+          <div id="glidere-rotter" class="glidere"></div>
+        </div>
+      </div>
+      <div class="sim-blokk">
+        <p class="panel-tittel">Funksjonen</p>
+        <div class="forskrift" id="forskrift"></div>
+        <p class="panel-tittel ny-del">Ganget ut</p>
+        <div class="utregning" id="utvidet"></div>
+        <p class="panel-tittel ny-del">Fortegnsskjema</p>
+        <div id="fortegn" class="tabell-rull-liten"></div>
+      </div>
+      <div id="melding" class="sim-blokk melding" hidden></div>
+    </div>
+  </div>
+  <fieldset class="sim-valg kun-js" id="visvalg">
+    <legend>Vis i grafen</legend>
+    <label class="avkrysning"><input type="checkbox" name="punkter" checked> Nullpunkter og skjæring med y-aksen</label>
+    <label class="avkrysning"><input type="checkbox" name="ekstremal" checked> Topp- og bunnpunkter</label>
+    <label class="avkrysning"><input type="checkbox" name="fortegn"> Fortegn på x-aksen (heltrukket: positiv, stiplet: negativ)</label>
+  </fieldset>
+  {{figurverktoy}}
+  <figcaption class="sim-hint">Velg grad og dra i glidebryterne. Nullpunktene endres med 0,5 om gangen. Legg to nullpunkter oppå hverandre for å få et dobbelt nullpunkt.</figcaption>
+</figure>
+
+<details class="teori" id="matematikken">
+<summary><span class="teori-tittel">Matematikken bak</span><span class="teori-hint">Grad, ledende koeffisient, nullpunkter med multiplisitet og fortegnsskjema</span></summary>
+<div class="teori-innhold tekst">
+
+<h3>Hva er en polynomfunksjon?</h3>
+<p>En polynomfunksjon er en sum av ledd av typen $k \cdot x^n$, der $n$ er et naturlig tall. Den høyeste potensen kalles <strong>graden</strong>. Tallet foran den høyeste potensen kalles den <strong>ledende koeffisienten</strong>.</p>
+$$f(x) = x^3 - 2x^2 - 5x + 6 \qquad \text{har grad } 3 \text{ og ledende koeffisient } 1.$$
+
+<h3>Faktorisert form</h3>
+<p>Har $f$ nullpunktene $r_1, r_2, \ldots, r_n$ og grad $n$, kan vi skrive</p>
+$$f(x) = a(x - r_1)(x - r_2) \cdots (x - r_n)$$
+<p>Ganger vi ut, blir $a$ tallet foran $x^n$. Setter vi inn $x = 0$, får vi konstantleddet: $f(0) = a(-r_1)(-r_2)\cdots(-r_n)$.</p>
+
+<h3>Hvordan grafen ender</h3>
+<p>For store $|x|$ er det leddet $ax^n$ som bestemmer. Derfor gjelder:</p>
+<ul>
+  <li>Graden er <strong>partall</strong>: Grafen går samme vei i begge ender. Opp når $a > 0$, ned når $a < 0$.</li>
+  <li>Graden er <strong>oddetall</strong>: Grafen går motsatt vei i de to endene. Når $a > 0$, kommer den nedenfra til venstre og går opp til høyre.</li>
+</ul>
+
+<h3>Doble nullpunkter</h3>
+<p>Står en faktor i andre potens, som $(x - 1)^2$, er nullpunktet <strong>dobbelt</strong>. Faktoren er aldri negativ. Derfor skifter ikke $f$ fortegn der, og grafen berører x-aksen uten å krysse. Et trippelt nullpunkt gir et terrassepunkt. Da krysser grafen, men flater ut akkurat i nullpunktet.</p>
+
+<h3>Fortegnsskjema</h3>
+<p>Mellom to nabo-nullpunkter har $f$ samme fortegn hele veien, fordi grafen ikke kan bytte side av x-aksen uten å gå gjennom null. Det er nok å regne ut fortegnet i ett punkt i hvert intervall. Fortegnsskjemaet brukes når du skal løse ulikheter som $f(x) > 0$.</p>
+
+<h3>Hvor mange nullpunkter og toppunkter?</h3>
+<p>En polynomfunksjon av grad $n$ har høyst $n$ nullpunkter og høyst $n - 1$ topp- og bunnpunkter til sammen. Den deriverte har nemlig grad $n - 1$, og den har høyst $n - 1$ nullpunkter.</p>
+</div>
+</details>
+
+<section class="oppgaver" aria-labelledby="oppgaver-tittel">
+<h2 id="oppgaver-tittel">Oppgaver</h2>
+{{elevark}}
+<p class="del-inngang">Hver oppgave har tre steg. <strong>Gjett</strong> først, uten å bruke utforskeren. <strong>Test</strong> så i utforskeren. <strong>Forklar</strong> til slutt med egne ord hvorfor det blir slik.</p>
+
+<div class="oppgave" id="oppgave-1">
+  <h3><span class="oppgave-nr">1</span>Hvordan ender grafen?</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Se på $f(x) = a(x + 2)(x - 1)(x - 3)$. Hva tror du skjer med $f(x)$ når $x$ blir veldig stor? Når $x$ blir veldig negativ? Skisser grafen for $a = 1$ og for $a = -1$.</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?grad=3&amp;a=1&amp;r1=-2&amp;r2=1&amp;r3=3#utforsker">Sett grad $3$ med $a = 1$</a>. Dra $a$ over til $-1$. Bytt så til <a class="oppsettlenke" href="?grad=4&amp;a=1&amp;r1=-2&amp;r2=1&amp;r3=3&amp;r4=4#utforsker">grad $4$ med nullpunktet $r_4 = 4$ i tillegg</a>, og gjør det samme.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Hvorfor er det bare graden og fortegnet til $a$ som avgjør hvordan grafen ender?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>Grad $3$ og $a = 1$: Når $x \to \infty$, går $f(x) \to \infty$. Når $x \to -\infty$, går $f(x) \to -\infty$. Med $a = -1$ blir det motsatt.</p>
+    <p>Grad $4$ og $a = 1$: $f(x) \to \infty$ i begge ender. Med $a = -1$ går grafen mot $-\infty$ i begge ender.</p>
+    <p>Ganger vi ut, er det høyeste leddet $ax^n$. For store $|x|$ er det mye større enn alle de andre leddene til sammen. Er $n$ et partall, er $x^n$ positiv for både positive og negative $x$. Er $n$ et oddetall, har $x^n$ samme fortegn som $x$. Fortegnet til $a$ snur alt.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-2">
+  <h3><span class="oppgave-nr">2</span>Fra produkt til sum</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Hvor skjærer grafen til $f(x) = (x + 2)(x - 1)(x - 3)$ y-aksen? Prøv å svare uten å gange ut.</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?grad=3&amp;a=1&amp;r1=-2&amp;r2=1&amp;r3=3#utforsker">Sett opp funksjonen</a>. Les av det utvidede uttrykket og skjæringen med y-aksen. Gang ut for hånd og kontroller.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Vis at konstantleddet er $a \cdot (-r_1)(-r_2)(-r_3)$ for en tredjegradsfunksjon. Hva betyr det når ett av nullpunktene er $0$?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    $$f(0) = (0 + 2)(0 - 1)(0 - 3) = 2 \cdot (-1) \cdot (-3) = 6$$
+    <p>Grafen skjærer y-aksen i $(0, 6)$.</p>
+    <p>Ganget ut:</p>
+    $$(x + 2)(x - 1) = x^2 + x - 2$$
+    $$(x^2 + x - 2)(x - 3) = x^3 - 3x^2 + x^2 - 3x - 2x + 6 = x^3 - 2x^2 - 5x + 6$$
+    <p>Konstantleddet er det vi får når $x = 0$:</p>
+    $$f(0) = a(0 - r_1)(0 - r_2)(0 - r_3) = a(-r_1)(-r_2)(-r_3)$$
+    <p>Er ett nullpunkt $0$, blir konstantleddet $0$, og grafen går gjennom origo.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-3">
+  <h3><span class="oppgave-nr">3</span>Et dobbelt nullpunkt</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Se på $f(x) = (x - 1)^2(x + 2)$. Hva tror du grafen gjør i $x = 1$? Krysser den x-aksen?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?grad=3&amp;a=1&amp;r1=1&amp;r2=1&amp;r3=-2#utforsker">Sett $r_1 = r_2 = 1$ og $r_3 = -2$</a>. Se på fortegnsskjemaet. Dra $r_2$ litt bort fra $1$ og tilbake. Hva skjer med grafen nær $x = 1$?</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Hvorfor skifter ikke $f$ fortegn i $x = 1$? Hvorfor må $(1, 0)$ være et bunnpunkt?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>Grafen berører x-aksen i $x = 1$ uten å krysse. Fortegnsskjemaet viser $f(x) < 0$ når $x < -2$, og $f(x) > 0$ både mellom $-2$ og $1$ og når $x > 1$.</p>
+    <p>Ganget ut er $f(x) = x^3 - 3x + 2$. Toppunktet er $(-1, 4)$ og bunnpunktet er $(1, 0)$.</p>
+    <p>Når $r_2$ flyttes litt bort fra $1$, får grafen to nullpunkter tett ved hverandre, og et lite stykke under x-aksen mellom dem. Når de to nullpunktene smelter sammen, forsvinner dette stykket.</p>
+    <p>Faktoren $(x - 1)^2$ er aldri negativ. Nær $x = 1$ er $x + 2 \approx 3$, altså positiv. Da er $f(x) \geq 0$ rundt $x = 1$, og $f(1) = 0$. Funksjonen har altså sin minste verdi i nærheten der, og $(1, 0)$ er et bunnpunkt.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-4">
+  <h3><span class="oppgave-nr">4</span>Finn uttrykket</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>En tredjegradsfunksjon har nullpunktene $-1$, $2$ og $4$, og grafen skjærer y-aksen i $(0, 4)$. Hva er $a$?</p></div></li>
+  <li><span class="fase test">Test</span><div><p>Sett grad $3$ og nullpunktene $-1$, $2$ og $4$. Dra $a$ til grafen går gjennom $(0, 4)$. Kontroller med <a class="oppsettlenke" href="?grad=3&amp;a=0.5&amp;r1=-1&amp;r2=2&amp;r3=4#utforsker">svaret</a>.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Sett opp en likning for $a$ og løs den. Skriv funksjonen både på faktorisert og utvidet form.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>Funksjonen er $f(x) = a(x + 1)(x - 2)(x - 4)$. Vi setter inn $x = 0$:</p>
+    $$f(0) = a \cdot 1 \cdot (-2) \cdot (-4) = 8a = 4 \quad \Rightarrow \quad a = \frac{1}{2}$$
+    <p>Faktorisert form: $f(x) = 0{,}5(x + 1)(x - 2)(x - 4)$.</p>
+    <p>Utvidet form: $f(x) = 0{,}5x^3 - 2{,}5x^2 + x + 4$.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-5">
+  <h3><span class="oppgave-nr">5</span>Hvor mange topp- og bunnpunkter?</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Hvor mange topp- og bunnpunkter kan en tredjegradsfunksjon ha? Og en fjerdegradsfunksjon? Kan en tredjegradsfunksjon ha ingen?</p></div></li>
+  <li><span class="fase test">Test</span><div><p>Se på <a class="oppsettlenke" href="?grad=3&amp;a=1&amp;r1=-3&amp;r2=0&amp;r3=3#utforsker">$f(x) = x(x - 3)(x + 3)$</a>, <a class="oppsettlenke" href="?grad=3&amp;a=1&amp;r1=1&amp;r2=1&amp;r3=1#utforsker">$g(x) = (x - 1)^3$</a> og <a class="oppsettlenke" href="?grad=4&amp;a=1&amp;r1=-2&amp;r2=-1&amp;r3=1&amp;r4=2#utforsker">$h(x) = (x + 2)(x + 1)(x - 1)(x - 2)$</a>. Skriv ned topp- og bunnpunktene.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Bruk den deriverte til å forklare hvorfor en funksjon av grad $n$ har høyst $n - 1$ topp- og bunnpunkter.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>$f(x) = x^3 - 9x$ har toppunktet $(-\sqrt{3}, 6\sqrt{3}) \approx (-1{,}73,\ 10{,}39)$ og bunnpunktet $(\sqrt{3}, -6\sqrt{3}) \approx (1{,}73,\ -10{,}39)$.</p>
+    <p>$g(x) = (x - 1)^3$ har ingen topp- eller bunnpunkter. Grafen flater ut i $(1, 0)$, men fortsetter oppover. Det er et terrassepunkt.</p>
+    <p>$h(x) = x^4 - 5x^2 + 4$ har toppunktet $(0, 4)$ og bunnpunktene $(\pm\sqrt{2{,}5},\ -2{,}25) \approx (\pm 1{,}58,\ -2{,}25)$.</p>
+    <p>En tredjegradsfunksjon har altså $0$ eller $2$ topp- og bunnpunkter. En fjerdegradsfunksjon har $1$ eller $3$.</p>
+    <p>I et topp- eller bunnpunkt er den deriverte null. Er $f$ av grad $n$, er $f'$ av grad $n - 1$. Et polynom av grad $n - 1$ har høyst $n - 1$ nullpunkter. Da kan $f$ ha høyst $n - 1$ topp- og bunnpunkter.</p>
+  </div></details>
+</div>
+</section>
+
+<p class="merknad">For lærere: Se <a href="{{rot}}laerer.html">lærersiden</a> for kobling til kompetansemålene.</p>

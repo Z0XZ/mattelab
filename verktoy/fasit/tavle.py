@@ -50,3 +50,18 @@ for a, b, c in [(1, -6, 8), (1, 4, -12), (2, -8, 0), (1, -2, -1)]:
     print(f"{a}x² + {b}x + {c} = 0: D = {D}, sqrt(D) = {math.sqrt(D):g}, "
           f"x = {(-b - math.sqrt(D)) / (2 * a):g} og {(-b + math.sqrt(D)) / (2 * a):g}; "
           f"fullført: {a}(x + {p})² + {q}  =>  (x + {p})² = {-q / a}")
+
+
+print("\nHvilken passer ikke inn? Funksjoner")
+from fractions import Fraction as F
+lin = {"A": (2, 3), "B": (2, -5), "C": (-2, 3), "D": (2, 0)}
+print("  1 nullpunkter:", {k: str(F(-b, a)) for k, (a, b) in lin.items()})
+for x in (-3, 0, 2, 3, 5):
+    print(f"  2 x = {x}: x²−4 = {x*x-4}, (x−2)² = {(x-2)**2}, x²+4 = {x*x+4}, (x+2)(x−2) = {(x+2)*(x-2)}")
+fs = {"A": lambda x: 100 * F(105, 100) ** x, "B": lambda x: 100 * F(95, 100) ** x, "C": lambda x: 100 * F(3, 2) ** x, "D": lambda x: 100 + 5 * x}
+for k, f in fs.items():
+    print(f"  3 {k}: f(0..3) =", [float(f(x)) for x in range(4)], " vekstfaktorer:", [round(float(f(x + 1) / f(x)), 4) for x in range(3)])
+print("  5 asymptoter: A 1/(x−2): x = 2, y = 0;  B (x−2)/(x−2) = 1 med hull i 2;  C 2x/(x−2): x = 2, y = 2, f(0) = 0;",
+      " D (x+1)/(x²+1): nevneren ≥ 1, nullpunkt −1, y = 0")
+for x in (-2, -1, 0, 1, 3, 4):
+    print(f"  6 x = {x}: x²−2x−3 = {x*x-2*x-3}, (x+1)(x−3) = {(x+1)*(x-3)}, x²+1 = {x*x+1}")

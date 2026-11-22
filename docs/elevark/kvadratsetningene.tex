@@ -35,6 +35,11 @@
   \noindent\begin{minipage}[t]{2.1cm}\vspace{0pt}\fase{#1}{#2}\end{minipage}%
   \begin{minipage}[t]{\dimexpr\linewidth-2.1cm\relax}\vspace{0pt}#3\end{minipage}\par
   \vspace{#4}}
+\newcommand{\del}[4]{%
+  \par\noindent{\color{rute}\rule{\linewidth}{0.4pt}}\par\nopagebreak
+  \noindent\begin{minipage}[t]{1.1cm}\vspace{0pt}\fase{#1}{#2}\end{minipage}%
+  \begin{minipage}[t]{\dimexpr\linewidth-1.1cm\relax}\vspace{0pt}#3\end{minipage}\par
+  \vspace{#4}}
 \newcommand{\oppgave}[2]{\par\Needspace{12\baselineskip}\vspace{0.6em}%
   {\fontsize{14}{17}\selectfont\bfseries{\color{m1}#1}\enspace #2}\par\vspace{0.2em}}
 

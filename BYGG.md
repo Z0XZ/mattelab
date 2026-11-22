@@ -25,7 +25,8 @@ skript: utforskere/andregrad.js   # relativt til statisk/js/
 ikon: lineaer                # nøkkel i data/ikoner.json (valgfritt, standard er filnavnet)
 meny: utforskere             # hvilket menypunkt som er aktivt (valgfritt)
 oppsett: forside             # bare forsiden: innholdet pakkes ikke inn i <section class="side">
-rekkefolge: 3                # kortsett, øvinger og tavleoppgaver: plass i oversikten (rekkefølgen i faget)
+rekkefolge: 3                # kortsett, øvinger, tavleoppgaver og opplegg: plass i oversikten (rekkefølgen i faget)
+varighet: 90                 # bare undervisningsopplegg: 45, 90 eller 135 minutter
 ---
 <p class="ingress">…</p>
 ```
@@ -51,6 +52,8 @@ Skriv `$…$` for formler i teksten og `$$…$$` for formler på egen linje. For
 | `{{figurverktoy:enkel}}` | Samme uten zoom og vindusknapper, for figurer uten koordinatsystem |
 | `{{fagkort}}` | De to store fagkortene på forsiden, med temaer og antall utforskere |
 | `{{kompetansemaal}}` | Kompetansemålene med koblinger (lærersiden) |
+| `{{maal:1T:3,9}}` | Kompetansemålene med disse numrene, sitert ordrett fra `data/kompetansemaal.json` |
+| `{{liste:opplegg}}` | Undervisningsoppleggene, én blokk per fag, i rekkefølgen fra `rekkefolge` |
 
 ## Kontroller
 
@@ -92,6 +95,27 @@ FASITNOTAT = "Tips til læreren i fasiten."
 - **Rekkefølge:** `kort(..., verdi=…)`. Ingen to kort kan ha samme verdi.
 - **Utskrift:** `docs/kortsett/<navn>.pdf` (A4, 3 × 6 kort med stiplede klippelinjer, kode i hjørnet og en rad blanke kort) og `docs/kortsett/<navn>-fasit.pdf`. LaTeX-kildene ligger ved siden av. Stokkingen er fast (frø = koden), så nummeret på skjermen og på papiret er det samme.
 - Skriptet `kortsett.js` legges til automatisk. Det lager kortbordet: bunken (til venstre, eller som en stripe nederst på mobil) og brettet med plasser eller bokser. Kortene kan dras, eller velges med trykk og legges med et nytt trykk.
+
+## Undervisningsopplegg
+
+Et opplegg (`type: opplegg` i `kilde/opplegg/`) har `varighet:` og en tidsplan:
+
+```html
+<ol class="tidsplan">
+<li class="tidsdel" data-min="10">
+  <h3>Oppstart: …</h3>
+  <p class="tidsdel-form">Hele klassen · tavle</p>
+  <div class="rolle"><strong>Læreren</strong><div>…</div><strong>Elevene</strong><div>…</div></div>
+  <details><summary>Svar og spørsmål</summary><div>…</div></details>
+</li>
+…
+</ol> <!-- /tidsplan -->
+```
+
+- Bygget stopper hvis minuttene ikke summerer til varigheten.
+- Skriptet setter inn klokkeslett («10–25 min») i hver del og lager tidslinja over planen.
+- Oppgavene står i `<section class="oppgaver">` som på utforskerne, men med deloppgaver: `<span class="fase a">a</span>`. Elevarket får «a)», «b)» og så videre.
+- Filnavnet må være unikt på tvers av mappene, fordi elevark og koblinger bruker det. Bygget stopper ved like navn.
 
 ## Tavleoppgaver og øvinger
 

@@ -1,0 +1,67 @@
+---
+tittel: Stigningstall og konstantledd ved regning
+beskrivelse: Finn funksjonsuttrykket til en lineær funksjon fra to punkter, en verditabell eller en tekst. Steg for steg, med tilbakemelding og nye tall hver gang.
+type: ovelse
+fag: 1T
+tema: funksjoner
+ikon: stigningstall
+rekkefolge: 3
+skript: ovelser/stigningstall.js
+---
+<p class="ingress">Når du kjenner to punkter på en rett linje, kan du finne hele funksjonsuttrykket. Her øver du på fremgangsmåten ett steg om gangen: endringene, stigningstallet og konstantleddet. Velg nivå først.</p>
+
+<section class="ovelse" id="ovelse" aria-labelledby="sg-tittel">
+  <h2 id="sg-tittel" class="visuelt-skjult">Øving</h2>
+  <div class="kun-js">
+    <div class="sim-velg ovelse-niva">
+      <label for="sg-niva">Nivå</label>
+      <select id="sg-niva">
+        <option value="1">1: To punkter, stigningstallet er et helt tall</option>
+        <option value="2">2: To punkter, stigningstallet er en brøk</option>
+        <option value="3">3: Fra en verditabell</option>
+        <option value="4">4: Fra en tekst, og bruk modellen</option>
+      </select>
+    </div>
+    <div class="ovelse-oppgave" id="sg-oppgave"></div>
+    <ol class="fk-liste" id="sg-steg" aria-label="Stegene"></ol>
+    <div class="ovelse-tilbake riktig" id="sg-ferdig" aria-live="polite"></div>
+    <div class="ovelse-knapper">
+      <button type="button" class="knapp liten" id="sg-ny" hidden>Ny oppgave</button>
+      <span class="ovelse-poeng" id="sg-poeng"></span>
+    </div>
+    <p class="merknad">Du kan skrive brøk som <code>3/2</code> og desimaltall med komma, for eksempel <code>-1,5</code>. Trykk Enter eller «Sjekk» for å sjekke.</p>
+  </div>
+  <div class="noscript-melding kun-uten-js">
+    <p><strong>Øvingen trenger JavaScript.</strong> Eksempel: Linja gjennom $(1, 2)$ og $(4, 8)$ har $\Delta x = 3$ og $\Delta y = 6$. Da er $a = \frac{6}{3} = 2$. Setter vi inn $(1, 2)$, får vi $2 = 2 \cdot 1 + b$, så $b = 0$ og $f(x) = 2x$.</p>
+  </div>
+</section>
+
+<details class="teori" id="matematikken">
+<summary><span class="teori-tittel">Slik finner du funksjonsuttrykket</span><span class="teori-hint">Metoden steg for steg, og vanlige feil</span></summary>
+<div class="teori-innhold tekst">
+<ol>
+  <li>Regn ut endringene: $\Delta x = x_2 - x_1$ og $\Delta y = y_2 - y_1$. Bruk samme rekkefølge i begge.</li>
+  <li>Stigningstallet er $a = \dfrac{\Delta y}{\Delta x}$.</li>
+  <li>Sett inn ett av punktene i $y = ax + b$, og løs for $b$.</li>
+  <li>Kontroller med det andre punktet.</li>
+</ol>
+<p>Eksempel med punktene $(-2, 5)$ og $(2, -1)$:</p>
+$$a = \frac{-1 - 5}{2 - (-2)} = \frac{-6}{4} = -\frac{3}{2} \qquad -1 = -\frac{3}{2} \cdot 2 + b \;\Rightarrow\; b = 2$$
+<p>Vanlige feil:</p>
+<ul>
+  <li>Å dele $\Delta x$ på $\Delta y$ i stedet for omvendt.</li>
+  <li>Å glemme parentes rundt negative tall: $2 - (-2) = 4$, ikke $0$.</li>
+  <li>Å tro at konstantleddet står i tabellen, selv om $x = 0$ ikke er med.</li>
+</ul>
+</div>
+</details>
+
+<div class="tekst kortsett-bruk">
+<h2>Til læreren</h2>
+<ul>
+  <li>Nivå 1 og 2 trener fremgangsmåten. Nivå 3 krever at elevene ser at $x$ ikke øker med $1$. Nivå 4 kobler tallene til en situasjon og avslutter med en prediksjon.</li>
+  <li>Etter to feil på samme steg kan eleven trykke «Vis svaret». Elever som deler $\Delta x$ på $\Delta y$, eller trekker fra i motsatt rekkefølge, får en egen tilbakemelding.</li>
+  <li>Adressen husker nivået, for eksempel <code>?niva=3</code>. Med <code>&amp;frø=1</code> får alle de samme tallene.</li>
+  <li>Elevene kan kontrollere svaret i <a href="{{rot}}utforskere/lineaer-funksjon.html">utforskeren for lineære funksjoner</a> ved å velge «to punkter».</li>
+</ul>
+</div>

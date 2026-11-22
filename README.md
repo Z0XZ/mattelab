@@ -69,6 +69,11 @@ Se på siden lokalt: `python3 -m http.server --directory docs` og åpne http://l
 | Fullstendig kvadrat | 1T | `fullstendig-kvadrat.html` |
 | abc-formelen og grafen | 1T | `abc-formelen.html` |
 | Faktorisering med produkt og sum | 1T | `faktorisering.html` |
+| Polynomfunksjoner | 1T | `polynomfunksjoner.html` |
+| Potensfunksjoner og rotfunksjoner | 1T | `potensfunksjoner.html` |
+| Polynomdivisjon | 1T | `polynomdivisjon.html` |
+| Andregradsulikheter | 1T | `andregradsulikheter.html` |
+| Modellering og regresjon | 1T | `modellering-og-regresjon.html` |
 
 Hver har en fasitfil i `verktoy/fasit/` med alle tallene i oppgavene og løsningsforslagene.
 
@@ -76,11 +81,15 @@ Hver har en fasitfil i `verktoy/fasit/` med alle tallene i oppgavene og løsning
 
 | Type | Innhold | Kildefiler |
 |---|---|---|
-| Kortsett | K1 brøk, figur, desimaltall og prosent · K2 tekst, uttrykk og figur · K3 potenser med samme verdi · K4 potenser i rekkefølge · K5 kvadratsetningene: finn parene · K6 uttrykk, likning, identitet eller funksjon · K7 velg metode · K8 fire former av samme funksjon | `kilde/varierende/<navn>.html` og `<navn>.py` |
-| Øvinger | Finn feilen: potenser · Fullfør kvadratet trinn for trinn | `kilde/varierende/` og `statisk/js/ovelser/` |
-| Tavleoppgaver | Hvilken passer ikke inn? · Alltid, noen ganger eller aldri? · Hoderegning med kvadratsetningene · Én likning, tre metoder | `kilde/varierende/` |
+| Kortsett | K1 brøk, figur, desimaltall og prosent · K2 tekst, uttrykk og figur · K3 potenser med samme verdi · K4 potenser i rekkefølge · K5 kvadratsetningene: finn parene · K6 uttrykk, likning, identitet eller funksjon · K7 velg metode · K8 fire former av samme funksjon · K9 fire representasjoner av en lineær funksjon · K10 hvilken type funksjon | `kilde/varierende/<navn>.html` og `<navn>.py` |
+| Øvinger | Finn feilen: potenser · Fullfør kvadratet trinn for trinn · Stigningstall og konstantledd ved regning | `kilde/varierende/` og `statisk/js/ovelser/` |
+| Tavleoppgaver | Hvilken passer ikke inn? (brøk og funksjoner) · Alltid, noen ganger eller aldri? · Hoderegning med kvadratsetningene · Én likning, tre metoder | `kilde/varierende/` |
 
 Tallene i tavleoppgavene er regnet ut i `verktoy/fasit/tavle.py`. Kortsettene kontrolleres når nettstedet bygges (se [BYGG.md](BYGG.md)).
+
+## Undervisningsopplegg
+
+Ti opplegg om funksjoner i 1T, fra «Hva er en funksjon?» til repetisjon. Hvert opplegg er én fil i `kilde/opplegg/` med varighet, tidsplan, plan for læreren, tips og oppgaver. Formatet er beskrevet i [BYGG.md](BYGG.md). Tallene i oppgavene er regnet ut i `verktoy/fasit/opplegg.py`.
 
 ## Lage en ny utforsker
 

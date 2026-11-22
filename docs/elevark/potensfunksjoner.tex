@@ -1,0 +1,86 @@
+%% Elevark fra mattelab.no – laget automatisk av bygg.py. Rediger gjerne til eget bruk.
+%% Kompiler med lualatex.
+\documentclass[11pt,a4paper]{article}
+\usepackage[norsk]{babel}
+\usepackage[a4paper,margin=2.2cm,top=2cm,bottom=2.4cm]{geometry}
+\usepackage{fontspec}
+\usepackage{unicode-math}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{TeX Gyre Heros}[Scale=MatchLowercase]
+\setmathfont{TeX Gyre Pagella Math}
+\usepackage{xcolor}
+\definecolor{blekk}{HTML}{16213A}
+\definecolor{dempet}{HTML}{566077}
+\definecolor{rute}{HTML}{CFC9B8}
+\definecolor{m1}{HTML}{2F4AB0}
+\definecolor{m2}{HTML}{99266D}
+\usepackage[most]{tcolorbox}
+\usepackage{qrcode}
+\usepackage{needspace}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+\pdfvariable suppressoptionalinfo \numexpr 1+2+4+8+16+32+64+128+256+512\relax
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.4em}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[L]{\sffamily\footnotesize\color{dempet}mattelab.no · Potensfunksjoner og rotfunksjoner · elevark uten fasit}
+\fancyfoot[R]{\sffamily\footnotesize\color{dempet}Side \thepage}
+
+\newcommand{\fase}[2]{\tcbox[on line, colframe=#2, colback=white, coltext=#2, boxrule=0.6pt, arc=2pt,
+  boxsep=0pt, left=3pt, right=3pt, top=1.5pt, bottom=1.5pt, fontupper=\sffamily\bfseries\footnotesize]{#1}}
+\newcommand{\steg}[4]{%
+  \par\noindent{\color{rute}\rule{\linewidth}{0.4pt}}\par\nopagebreak
+  \noindent\begin{minipage}[t]{2.1cm}\vspace{0pt}\fase{#1}{#2}\end{minipage}%
+  \begin{minipage}[t]{\dimexpr\linewidth-2.1cm\relax}\vspace{0pt}#3\end{minipage}\par
+  \vspace{#4}}
+\newcommand{\del}[4]{%
+  \par\noindent{\color{rute}\rule{\linewidth}{0.4pt}}\par\nopagebreak
+  \noindent\begin{minipage}[t]{1.1cm}\vspace{0pt}\fase{#1}{#2}\end{minipage}%
+  \begin{minipage}[t]{\dimexpr\linewidth-1.1cm\relax}\vspace{0pt}#3\end{minipage}\par
+  \vspace{#4}}
+\newcommand{\oppgave}[2]{\par\Needspace{12\baselineskip}\vspace{0.6em}%
+  {\fontsize{14}{17}\selectfont\bfseries{\color{m1}#1}\enspace #2}\par\vspace{0.2em}}
+
+\begin{document}
+\begin{minipage}[t]{0.72\linewidth}\vspace{0pt}
+{\sffamily\small\color{dempet}Elevark · 1T · mattelab.no}\par\vspace{0.3em}
+{\fontsize{24}{28}\selectfont\bfseries Potensfunksjoner og rotfunksjoner}\par\vspace{1em}
+{\sffamily\small Navn: \rule{4.6cm}{0.4pt}\quad Klasse: \rule{1.5cm}{0.4pt}\quad Dato: \rule{1.9cm}{0.4pt}}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.22\linewidth}\vspace{0pt}\raggedleft
+\qrcode[height=2.3cm]{https://mattelab.no/utforskere/potensfunksjoner.html}\par\vspace{0.2em}
+{\sffamily\scriptsize\color{dempet}Utforskeren}
+\end{minipage}
+
+\vspace{1em}
+{\sffamily\small\color{dempet}Utforskeren ligger på \url{https://mattelab.no/utforskere/potensfunksjoner.html}}\par
+Hver oppgave har tre steg. \textbf{Gjett} først, uten å bruke utforskeren. \textbf{Test} så i utforskeren. \textbf{Forklar} til slutt med egne ord hvorfor det blir slik.
+
+\oppgave{1}{Et punkt som alle deler}
+\steg{Gjett}{m1}{Finnes det et punkt som grafene til $x^2$, $x^3$, $\sqrt{x}$ og $\frac{1}{x}$ har felles? Hvilke av dem går gjennom origo?}{2.2cm}
+\steg{Test}{m2}{Sett $a = 1$ og bla gjennom alle eksponentene i lista. Se etter punktene grafene har felles.}{2.6cm}
+\steg{Forklar}{blekk}{Hvorfor går alle grafene gjennom $(1, 1)$ når $a = 1$? Hvorfor går bare noen av dem gjennom origo?}{3.4cm}
+
+\oppgave{2}{Kvadratroten og kvadratet}
+\steg{Gjett}{m1}{Hvilken er størst når $x = \frac{1}{4}$: $\sqrt{x}$ eller $x^2$? Hva når $x = 4$?}{2.2cm}
+\steg{Test}{m2}{Se på $f(x) = x^{\frac{1}{2}}$ og $f(x) = x^2$ med linja $y = x$ slått på. For hvilke $x$ ligger hver graf over linja?}{2.6cm}
+\steg{Forklar}{blekk}{Forklar med tall hvorfor kvadratroten av et tall mellom $0$ og $1$ er større enn tallet selv.}{3.4cm}
+
+\oppgave{3}{Negative eksponenter}
+\steg{Gjett}{m1}{Hvordan tror du grafen til $f(x) = x^{-1}$ ser ut? Hva med $g(x) = x^{-2}$? Kan $g(x)$ bli negativ?}{2.2cm}
+\steg{Test}{m2}{Sett $b = -1$ og deretter $b = -2$. Regn ut verdien for $x = 0{,}1$, $x = 2$ og $x = 10$ for begge.}{2.6cm}
+\steg{Forklar}{blekk}{Skriv funksjonene som brøker. Forklar ut fra brøkene hvorfor grafene har asymptotene $x = 0$ og $y = 0$.}{3.4cm}
+
+\oppgave{4}{Hvor er funksjonen definert?}
+\steg{Gjett}{m1}{Hvilke av disse kan du regne ut: $(-8)^{\frac{1}{2}}$, $(-8)^{\frac{1}{3}}$ og $0^{-\frac{1}{2}}$?}{2.2cm}
+\steg{Test}{m2}{Se på definisjonsmengden og $f(-8)$ for $b = \frac{1}{2}$, $b = \frac{1}{3}$ og $b = -\frac{1}{2}$.}{2.6cm}
+\steg{Forklar}{blekk}{Hvorfor finnes tredjeroten av et negativt tall, men ikke kvadratroten?}{3.4cm}
+
+\oppgave{5}{Pendelen}
+\steg{Gjett}{m1}{Tiden en pendel bruker på én svingning, er omtrent $T(L) = 2{,}01 \cdot L^{0{,}5}$ sekunder, der $L$ er lengden i meter. Hvor mye lengre må pendelen være for at svingetiden skal bli dobbelt så lang?}{2.2cm}
+\steg{Test}{m2}{Sett $a = 2{,}01$ og $b = \frac{1}{2}$. Finn $T(1)$ og $T(4)$. Finn lengden som gir en svingetid på $3$ sekunder.}{2.6cm}
+\steg{Forklar}{blekk}{Vis med potensregler at $T(4L) = 2 \cdot T(L)$. Løs likningen $T(L) = 3$ ved regning.}{3.4cm}
+
+\end{document}

@@ -1,0 +1,195 @@
+---
+tittel: Modellering og regresjon
+beskrivelse: Elevene velger modell ut fra situasjonen, bruker regresjon og vurderer om modellen er gyldig. Med et lite prosjekt der de samler egne data.
+type: opplegg
+fag: 1T
+tema: vekst, funksjoner
+varighet: 135
+rekkefolge: 8
+ikon: regresjon
+---
+<p class="ingress">Elevene prøver ulike modeller på ferdige datasett og ser at en høy $R^2$ ikke alltid betyr en god modell. Deretter samler de egne data i grupper, lager en modell og presenterer den med en vurdering av hvor langt modellen gjelder.</p>
+
+<div class="opplegg-fakta">
+<section>
+<h2>Mål for økta</h2>
+<ul>
+  <li>Jeg kan velge modelltype ut fra situasjonen og dataene.</li>
+  <li>Jeg kan bruke regresjon og tolke tallene i modellen.</li>
+  <li>Jeg kan vurdere om en modell er gyldig, også utenfor dataene.</li>
+</ul>
+</section>
+<section>
+<h2>Kompetansemål</h2>
+{{maal:1T:3,7}}
+</section>
+<section>
+<h2>Dette trenger du</h2>
+<ul class="ressursliste">
+  <li><a href="{{rot}}utforskere/modellering-og-regresjon.html">Modellering og regresjon</a> <span class="ressurs-type">utforsker</span></li>
+  <li>GeoGebra eller et annet digitalt verktøy med regresjon</li>
+  <li>Utstyr til datainnsamling, se del 5: plastkopper, linjal, snor, en liten vekt og stoppeklokke på mobilen</li>
+  <li>Oppgavene nederst på siden, som elevark</li>
+</ul>
+</section>
+</div>
+
+<section class="opplegg-del" aria-labelledby="plan-tittel">
+<h2 id="plan-tittel">Plan for økta</h2>
+<ol class="tidsplan">
+<li class="tidsdel" data-min="10">
+  <h3>Oppstart: Hvilken modell?</h3>
+  <p class="tidsdel-form">Hele klassen · storskjerm</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div><p>Vis <a href="{{rot}}utforskere/modellering-og-regresjon.html?sett=taxi&amp;modell=lineaer#utforsker">taxidataene</a> og <a href="{{rot}}utforskere/modellering-og-regresjon.html?sett=bakterier&amp;modell=lineaer#utforsker">bakteriedataene</a> med lineær modell. Spør: Passer modellen? Hvilken type ville dere valgt, og hvorfor?</p></div>
+    <strong>Elevene</strong>
+    <div><p>Diskuterer i par og begrunner med situasjonen, ikke bare med punktene.</p></div>
+  </div>
+</li>
+<li class="tidsdel" data-min="15">
+  <h3>Gjennomgang: Modellering i fem steg</h3>
+  <p class="tidsdel-form">Hele klassen · tavle</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div>
+      <p>Skriv stegene på tavla:</p>
+      <ol>
+        <li>Beskriv situasjonen og de variable størrelsene.</li>
+        <li>Samle eller les data.</li>
+        <li>Velg modelltype, og begrunn valget.</li>
+        <li>Lag modellen med regresjon, og tolk tallene.</li>
+        <li>Vurder modellen: Hvor godt passer den, og hvor langt gjelder den?</li>
+      </ol>
+      <p>Forklar avvik og $R^2$ kort. Vis hvordan elevene gjør regresjon i et digitalt verktøy, og hvordan de fører det.</p>
+    </div>
+    <strong>Elevene</strong>
+    <div><p>Noterer stegene. De bruker dem i prosjektet senere i økta.</p></div>
+  </div>
+</li>
+<li class="tidsdel" data-min="30">
+  <h3>Utforsk: Tre datasett</h3>
+  <p class="tidsdel-form">Par · PC</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div><p>Elevene gjør oppgave 1 til 3 i utforskeren. Gå rundt og spør etter begrunnelser for modellvalget.</p></div>
+    <strong>Elevene</strong>
+    <div><p>Prøver flere modeller på hvert datasett, slår på avvikene og skriver inn x-verdier utenfor dataene.</p></div>
+  </div>
+  <p class="ressurs">Ressurs: <a href="{{rot}}utforskere/modellering-og-regresjon.html#oppgave-1">Modellering og regresjon, oppgave 1 til 3</a></p>
+</li>
+<li class="tidsdel" data-min="20">
+  <h3>Felles: Høy $R^2$ er ikke nok</h3>
+  <p class="tidsdel-form">Hele klassen</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div><p>Vis <a href="{{rot}}utforskere/modellering-og-regresjon.html?sett=bil&amp;modell=andregrad&amp;x=15#utforsker">bildataene med andregradsmodell</a>. $R^2$ er nesten like høy som for den eksponentielle modellen, men verdien begynner å øke igjen etter ti år. Spør: Hvilken modell ville dere brukt? Hva betyr det å ekstrapolere?</p></div>
+    <strong>Elevene</strong>
+    <div><p>Begrunner valget med hva som skjer på sikt, og med hva tallene i modellen betyr.</p></div>
+  </div>
+  <details><summary>Det du ser etter</summary><div><p>At elevene bruker situasjonen i begrunnelsen: En bil mister en fast andel av verdien hvert år. Den blir ikke mer verdt av å bli eldre.</p></div></details>
+</li>
+<li class="tidsdel" data-min="35">
+  <h3>Prosjekt: Egne data</h3>
+  <p class="tidsdel-form">Grupper på tre</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div>
+      <p>Gruppene velger én av disse målingene:</p>
+      <ul>
+        <li><strong>Koppestabel:</strong> Høyden på en stabel plastkopper mot antall kopper.</li>
+        <li><strong>Pendel:</strong> Tiden på ti svingninger mot lengden på snora. Del på ti.</li>
+        <li><strong>Brettet ark:</strong> Antall lag papir mot antall brettinger.</li>
+      </ul>
+      <p>Gruppene trenger minst seks målinger.</p>
+    </div>
+    <strong>Elevene</strong>
+    <div><p>Måler, limer inn dataene under «Egne data» i utforskeren, velger modell og svarer på oppgave 2 på elevarket.</p></div>
+  </div>
+  <details><summary>Hva gruppene kan forvente</summary><div>
+    <ul>
+      <li>Koppestabelen er lineær. Konstantleddet er høyden på én kopp minus den delen som stikker opp for hver ny kopp.</li>
+      <li>Pendelen passer med en potensmodell der eksponenten er nær $0{,}5$.</li>
+      <li>Det brettede arket dobles, så antall lag er $2^n$. Det blir vanskelig å brette mer enn seks eller sju ganger. Det er et godt poeng om modellens grenser.</li>
+    </ul>
+  </div></details>
+</li>
+<li class="tidsdel" data-min="20">
+  <h3>Presentasjon</h3>
+  <p class="tidsdel-form">Grupper · storskjerm</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div><p>Hver gruppe får to til tre minutter. Lenken med egne data kan kopieres fra adressefeltet og deles.</p></div>
+    <strong>Elevene</strong>
+    <div><p>Viser modellen, forklarer hva tallene betyr, og sier hvor langt de mener modellen gjelder.</p></div>
+  </div>
+</li>
+<li class="tidsdel" data-min="5">
+  <h3>Avslutning</h3>
+  <p class="tidsdel-form">Hver for seg</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div><p>Exit-lapp: «Gi ett eksempel på en modell som passer godt til dataene, men som ikke bør brukes utenfor dem.»</p></div>
+    <strong>Elevene</strong>
+    <div><p>Skriver og leverer.</p></div>
+  </div>
+</li>
+</ol> <!-- /tidsplan -->
+</section>
+
+<section class="opplegg-del tekst" aria-labelledby="tips-tittel">
+<h2 id="tips-tittel">Tips</h2>
+<ul>
+  <li><strong>Uten utstyr:</strong> Gruppene kan bruke kastet eller pendelen i utforskeren som «egne data» og gjøre resten av prosjektet som beskrevet.</li>
+  <li><strong>Delt på flere økter:</strong> Del etter felles diskusjon (75 minutter). Prosjektet og presentasjonene blir da en egen økt.</li>
+  <li><strong>Pauser:</strong> Tidsplanen har ingen pauser. Legg dem inn der det passer.</li>
+  <li><strong>Om dataene:</strong> Datasettene i utforskeren er tenkte, laget for å øve. Si det til elevene.</li>
+</ul>
+</section>
+
+<section class="oppgaver" aria-labelledby="oppgaver-tittel">
+<h2 id="oppgaver-tittel">Oppgaver</h2>
+{{elevark}}
+<p class="del-inngang">Bruk utforskeren eller et annet digitalt verktøy der det trengs.</p>
+
+<div class="oppgave" id="oppgave-1">
+  <h3><span class="oppgave-nr">1</span>Velg modell</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase a">a</span><div><p>Strømregningen har et fast månedsbeløp og en pris per kWh. Hvilken modell passer for regningen som funksjon av forbruket?</p></div></li>
+  <li><span class="fase b">b</span><div><p>En konto på sosiale medier får $10$ % flere følgere hver uke. Hvilken modell passer?</p></div></li>
+  <li><span class="fase c">c</span><div><p>Arealet av et kvadrat som funksjon av sidelengden. Hvilken modell passer?</p></div></li>
+  <li><span class="fase d">d</span><div><p>Høyden til en ball som blir kastet, som funksjon av tiden. Hvilken modell passer?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>a) Lineær: fast beløp pluss lik økning for hver kWh.</p>
+    <p>b) Eksponentiell med vekstfaktor $1{,}10$: lik prosentvis vekst hver uke.</p>
+    <p>c) Potens eller andregrad: $A(x) = x^2$.</p>
+    <p>d) Andregrad: banen stiger og faller.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-2">
+  <h3><span class="oppgave-nr">2</span>Egne data</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase a">a</span><div><p>Beskriv hva dere målte. Hva er $x$, og hva er $y$? Hvilke enheter brukte dere?</p></div></li>
+  <li><span class="fase b">b</span><div><p>Hvilken modelltype valgte dere, og hvorfor? Skriv modellen og $R^2$.</p></div></li>
+  <li><span class="fase c">c</span><div><p>Hva betyr tallene i modellen i situasjonen deres?</p></div></li>
+  <li><span class="fase d">d</span><div><p>For hvilke $x$ mener dere at modellen gjelder? Begrunn.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>Svarene avhenger av målingene. Se etter at elevene begrunner modellvalget med situasjonen, at de tolker hvert tall i modellen med enhet, og at de setter grenser for modellen.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-3">
+  <h3><span class="oppgave-nr">3</span>Koppestabelen</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase a">a</span><div><p>En gruppe fikk modellen $h(n) = 1{,}2n + 7{,}3$ for høyden i cm av en stabel med $n$ kopper. Hva betyr $1{,}2$ og $7{,}3$?</p></div></li>
+  <li><span class="fase b">b</span><div><p>Hvor høy blir en stabel med $20$ kopper? Hvor høy er én kopp ifølge modellen?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>a) Hver ny kopp gjør stabelen $1{,}2$ cm høyere. $7{,}3$ cm er høyden på én kopp minus den delen som stikker opp for hver kopp.</p>
+    <p>b) $h(20) = 1{,}2 \cdot 20 + 7{,}3 = 31{,}3$ cm. Én kopp: $h(1) = 8{,}5$ cm.</p>
+  </div></details>
+</div>
+</section>

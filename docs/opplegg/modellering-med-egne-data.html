@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Modellering og regresjon – mattelab.no</title>
+<meta name="description" content="Elevene velger modell ut fra situasjonen, bruker regresjon og vurderer om modellen er gyldig. Med et lite prosjekt der de samler egne data.">
+<link rel="icon" href="../statisk/ikon.svg" type="image/svg+xml">
+<script>
+  /* Settes før siden tegnes, så det ikke blinker ved mørk modus. */
+  document.documentElement.classList.add("js");
+  try {
+    var t = localStorage.getItem("mattelab.tema");
+    if (t === "lys" || t === "mork") document.documentElement.dataset.tema = t;
+    if (localStorage.getItem("mattelab.tavle") === "1") document.documentElement.classList.add("tavle");
+  } catch (e) {}
+</script>
+<link rel="stylesheet" href="../statisk/lib/katex/katex.min.css">
+<link rel="stylesheet" href="../statisk/css/stil.css">
+</head>
+<body data-side="modellering-med-egne-data">
+  <a class="hopp" href="#innhold">Hopp til innholdet</a>
+  <header class="topp">
+    <div class="ramme">
+      <a class="logo" href="../index.html">mattelab<span>.no</span></a>
+      <nav aria-label="Hovedmeny"><ul class="meny">
+        <li><a href="../utforskere/index.html">Utforskere</a></li>
+        <li><a href="../varierende/index.html">Varierende undervisning</a></li>
+        <li><a href="../opplegg/index.html" aria-current="page">Undervisningsopplegg</a></li>
+        <li><a href="../laerer.html">For lærere</a></li>
+        <li><a href="../om.html">Om</a></li>
+      </ul></nav>
+      <div class="verktoy">
+        <select id="fagvalg" class="fag-valg" aria-label="Vis innhold for faget" title="Vis innhold for faget" hidden>
+          <option value="">Alle fag</option>
+          <option value="1T">1T</option>
+          <option value="R1">R1</option>
+        </select>
+        <button id="tavleknapp" class="tema-knapp" type="button" aria-pressed="false" aria-label="Tavlemodus: større tekst" title="Tavlemodus: større tekst" hidden>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="1"/><path d="M8 20l4-4 4 4M7 9h6M7 12h4"/></svg>
+        </button>
+        <button id="temaknapp" class="tema-knapp" type="button" aria-label="Bytt mellom lys og mørk modus" hidden>
+          <svg class="ikon-sol" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9L7 7M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg>
+          <svg class="ikon-mane" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+  <main id="innhold">
+<section class="side">
+<div class="ramme">
+<p class="brodsmuler"><a href="../opplegg/index.html">Undervisningsopplegg</a> / <a href="../opplegg/index.html?fag=1T&amp;tema=vekst">1T · Vekst og modellering, Funksjoner</a></p><h1>Modellering og regresjon</h1><p class="opplegg-merke"><span>135 minutter</span><span>1T</span></p><p class="ingress">Elevene prøver ulike modeller på ferdige datasett og ser at en høy <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>R</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">R^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span> ikke alltid betyr en god modell. Deretter samler de egne data i grupper, lager en modell og presenterer den med en vurdering av hvor langt modellen gjelder.</p>
+
+<div class="opplegg-fakta">
+<section>
+<h2>Mål for økta</h2>
+<ul>
+  <li>Jeg kan velge modelltype ut fra situasjonen og dataene.</li>
+  <li>Jeg kan bruke regresjon og tolke tallene i modellen.</li>
+  <li>Jeg kan vurdere om en modell er gyldig, også utenfor dataene.</li>
+</ul>
+</section>
+<section>
+<h2>Kompetansemål</h2>
+<ul class="maal-sitat"><li><span class="maal-nr">1T, mål 3</span> «identifisere variable størrelser i ulike situasjoner, sette opp formler og utforske disse ved hjelp av digitale verktøy»</li><li><span class="maal-nr">1T, mål 7</span> «modellere situasjoner knyttet til ulike temaer, drøfte, presentere og forklare resultatene og argumentere for om modellene er gyldige»</li></ul><p class="maal-kilde">Sitert fra <a href="https://www.udir.no/lk20/mat09-02/kompetansemaal-og-vurdering/">Læreplan i matematikk fellesfag vg1 teoretisk (matematikk T)</a> (Utdanningsdirektoratet). Koblingen til målene er lærerens egen vurdering.</p>
+</section>
+<section>
+<h2>Dette trenger du</h2>
+<ul class="ressursliste">
+  <li><a href="../utforskere/modellering-og-regresjon.html">Modellering og regresjon</a> <span class="ressurs-type">utforsker</span></li>
+  <li>GeoGebra eller et annet digitalt verktøy med regresjon</li>
+  <li>Utstyr til datainnsamling, se del 5: plastkopper, linjal, snor, en liten vekt og stoppeklokke på mobilen</li>
+  <li>Oppgavene nederst på siden, som elevark</li>
+</ul>
+</section>
+</div>
+
+<section class="opplegg-del" aria-labelledby="plan-tittel">
+<h2 id="plan-tittel">Plan for økta</h2>
+<ol class="tidslinje" aria-label="Tidsplanen i korte trekk"><li style="--min: 10"><span class="tidslinje-tid">0–10 min</span><span class="tidslinje-navn">Oppstart: Hvilken modell?</span></li><li style="--min: 15"><span class="tidslinje-tid">10–25 min</span><span class="tidslinje-navn">Gjennomgang: Modellering i fem steg</span></li><li style="--min: 30"><span class="tidslinje-tid">25–55 min</span><span class="tidslinje-navn">Utforsk: Tre datasett</span></li><li style="--min: 20"><span class="tidslinje-tid">55–75 min</span><span class="tidslinje-navn">Felles: Høy <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>R</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">R^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span> er ikke nok</span></li><li style="--min: 35"><span class="tidslinje-tid">75–110 min</span><span class="tidslinje-navn">Prosjekt: Egne data</span></li><li style="--min: 20"><span class="tidslinje-tid">110–130 min</span><span class="tidslinje-navn">Presentasjon</span></li><li style="--min: 5"><span class="tidslinje-tid">130–135 min</span><span class="tidslinje-navn">Avslutning</span></li></ol>
+<ol class="tidsplan">
+<li class="tidsdel" data-min="10"><p class="tidsdel-tid">0–10 min<span class="visuelt-skjult">, 10 minutter</span></p>
+  <h3>Oppstart: Hvilken modell?</h3>
+  <p class="tidsdel-form">Hele klassen · storskjerm</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div><p>Vis <a href="../utforskere/modellering-og-regresjon.html?sett=taxi&amp;modell=lineaer#utforsker">taxidataene</a> og <a href="../utforskere/modellering-og-regresjon.html?sett=bakterier&amp;modell=lineaer#utforsker">bakteriedataene</a> med lineær modell. Spør: Passer modellen? Hvilken type ville dere valgt, og hvorfor?</p></div>
+    <strong>Elevene</strong>
+    <div><p>Diskuterer i par og begrunner med situasjonen, ikke bare med punktene.</p></div>
+  </div>
+</li>
+<li class="tidsdel" data-min="15"><p class="tidsdel-tid">10–25 min<span class="visuelt-skjult">, 15 minutter</span></p>
+  <h3>Gjennomgang: Modellering i fem steg</h3>
+  <p class="tidsdel-form">Hele klassen · tavle</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div>
+      <p>Skriv stegene på tavla:</p>
+      <ol>
+        <li>Beskriv situasjonen og de variable størrelsene.</li>
+        <li>Samle eller les data.</li>
+        <li>Velg modelltype, og begrunn valget.</li>
+        <li>Lag modellen med regresjon, og tolk tallene.</li>
+        <li>Vurder modellen: Hvor godt passer den, og hvor langt gjelder den?</li>
+      </ol>
+      <p>Forklar avvik og <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>R</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">R^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span> kort. Vis hvordan elevene gjør regresjon i et digitalt verktøy, og hvordan de fører det.</p>
+    </div>
+    <strong>Elevene</strong>
+    <div><p>Noterer stegene. De bruker dem i prosjektet senere i økta.</p></div>
+  </div>
+</li>
+<li class="tidsdel" data-min="30"><p class="tidsdel-tid">25–55 min<span class="visuelt-skjult">, 30 minutter</span></p>
+  <h3>Utforsk: Tre datasett</h3>
+  <p class="tidsdel-form">Par · PC</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div><p>Elevene gjør oppgave 1 til 3 i utforskeren. Gå rundt og spør etter begrunnelser for modellvalget.</p></div>
+    <strong>Elevene</strong>
+    <div><p>Prøver flere modeller på hvert datasett, slår på avvikene og skriver inn x-verdier utenfor dataene.</p></div>
+  </div>
+  <p class="ressurs">Ressurs: <a href="../utforskere/modellering-og-regresjon.html#oppgave-1">Modellering og regresjon, oppgave 1 til 3</a></p>
+</li>
+<li class="tidsdel" data-min="20"><p class="tidsdel-tid">55–75 min<span class="visuelt-skjult">, 20 minutter</span></p>
+  <h3>Felles: Høy <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>R</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">R^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span> er ikke nok</h3>
+  <p class="tidsdel-form">Hele klassen</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div><p>Vis <a href="../utforskere/modellering-og-regresjon.html?sett=bil&amp;modell=andregrad&amp;x=15#utforsker">bildataene med andregradsmodell</a>. <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>R</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">R^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span> er nesten like høy som for den eksponentielle modellen, men verdien begynner å øke igjen etter ti år. Spør: Hvilken modell ville dere brukt? Hva betyr det å ekstrapolere?</p></div>
+    <strong>Elevene</strong>
+    <div><p>Begrunner valget med hva som skjer på sikt, og med hva tallene i modellen betyr.</p></div>
+  </div>
+  <details><summary>Det du ser etter</summary><div><p>At elevene bruker situasjonen i begrunnelsen: En bil mister en fast andel av verdien hvert år. Den blir ikke mer verdt av å bli eldre.</p></div></details>
+</li>
+<li class="tidsdel" data-min="35"><p class="tidsdel-tid">75–110 min<span class="visuelt-skjult">, 35 minutter</span></p>
+  <h3>Prosjekt: Egne data</h3>
+  <p class="tidsdel-form">Grupper på tre</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div>
+      <p>Gruppene velger én av disse målingene:</p>
+      <ul>
+        <li><strong>Koppestabel:</strong> Høyden på en stabel plastkopper mot antall kopper.</li>
+        <li><strong>Pendel:</strong> Tiden på ti svingninger mot lengden på snora. Del på ti.</li>
+        <li><strong>Brettet ark:</strong> Antall lag papir mot antall brettinger.</li>
+      </ul>
+      <p>Gruppene trenger minst seks målinger.</p>
+    </div>
+    <strong>Elevene</strong>
+    <div><p>Måler, limer inn dataene under «Egne data» i utforskeren, velger modell og svarer på oppgave 2 på elevarket.</p></div>
+  </div>
+  <details><summary>Hva gruppene kan forvente</summary><div>
+    <ul>
+      <li>Koppestabelen er lineær. Konstantleddet er høyden på én kopp minus den delen som stikker opp for hver ny kopp.</li>
+      <li>Pendelen passer med en potensmodell der eksponenten er nær <span class="nobr"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mo separator="true" lspace="0em" rspace="0em">,</mo><mn>5</mn></mrow><annotation encoding="application/x-tex">0{,}5</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">0</span><span class="mord"><span class="mpunct">,</span></span><span class="mord">5</span></span></span></span>.</span></li>
+      <li>Det brettede arket dobles, så antall lag er <span class="nobr"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mi>n</mi></msup></mrow><annotation encoding="application/x-tex">2^n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6644em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span></span></span></span>.</span> Det blir vanskelig å brette mer enn seks eller sju ganger. Det er et godt poeng om modellens grenser.</li>
+    </ul>
+  </div></details>
+</li>
+<li class="tidsdel" data-min="20"><p class="tidsdel-tid">110–130 min<span class="visuelt-skjult">, 20 minutter</span></p>
+  <h3>Presentasjon</h3>
+  <p class="tidsdel-form">Grupper · storskjerm</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div><p>Hver gruppe får to til tre minutter. Lenken med egne data kan kopieres fra adressefeltet og deles.</p></div>
+    <strong>Elevene</strong>
+    <div><p>Viser modellen, forklarer hva tallene betyr, og sier hvor langt de mener modellen gjelder.</p></div>
+  </div>
+</li>
+<li class="tidsdel" data-min="5"><p class="tidsdel-tid">130–135 min<span class="visuelt-skjult">, 5 minutter</span></p>
+  <h3>Avslutning</h3>
+  <p class="tidsdel-form">Hver for seg</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div><p>Exit-lapp: «Gi ett eksempel på en modell som passer godt til dataene, men som ikke bør brukes utenfor dem.»</p></div>
+    <strong>Elevene</strong>
+    <div><p>Skriver og leverer.</p></div>
+  </div>
+</li>
+</ol>
+</section>
+
+<section class="opplegg-del tekst" aria-labelledby="tips-tittel">
+<h2 id="tips-tittel">Tips</h2>
+<ul>
+  <li><strong>Uten utstyr:</strong> Gruppene kan bruke kastet eller pendelen i utforskeren som «egne data» og gjøre resten av prosjektet som beskrevet.</li>
+  <li><strong>Delt på flere økter:</strong> Del etter felles diskusjon (75 minutter). Prosjektet og presentasjonene blir da en egen økt.</li>
+  <li><strong>Pauser:</strong> Tidsplanen har ingen pauser. Legg dem inn der det passer.</li>
+  <li><strong>Om dataene:</strong> Datasettene i utforskeren er tenkte, laget for å øve. Si det til elevene.</li>
+</ul>
+</section>
+
+<section class="oppgaver" aria-labelledby="oppgaver-tittel">
+<h2 id="oppgaver-tittel">Oppgaver</h2>
+<p class="elevark-lenke"><a class="knapp lys liten" href="../elevark/modellering-med-egne-data.pdf" download>Last ned elevark (PDF)</a> <a class="elevark-tex" href="../elevark/modellering-med-egne-data.tex" download>LaTeX-kilde til eget bruk</a></p>
+<p class="del-inngang">Bruk utforskeren eller et annet digitalt verktøy der det trengs.</p>
+
+<div class="oppgave" id="oppgave-1">
+  <h3><span class="oppgave-nr">1</span>Velg modell</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase a">a</span><div><p>Strømregningen har et fast månedsbeløp og en pris per kWh. Hvilken modell passer for regningen som funksjon av forbruket?</p></div></li>
+  <li><span class="fase b">b</span><div><p>En konto på sosiale medier får <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>10</mn></mrow><annotation encoding="application/x-tex">10</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">10</span></span></span></span> % flere følgere hver uke. Hvilken modell passer?</p></div></li>
+  <li><span class="fase c">c</span><div><p>Arealet av et kvadrat som funksjon av sidelengden. Hvilken modell passer?</p></div></li>
+  <li><span class="fase d">d</span><div><p>Høyden til en ball som blir kastet, som funksjon av tiden. Hvilken modell passer?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>a) Lineær: fast beløp pluss lik økning for hver kWh.</p>
+    <p>b) Eksponentiell med vekstfaktor <span class="nobr"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo separator="true" lspace="0em" rspace="0em">,</mo><mn>10</mn></mrow><annotation encoding="application/x-tex">1{,}10</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">1</span><span class="mord"><span class="mpunct">,</span></span><span class="mord">10</span></span></span></span>:</span> lik prosentvis vekst hver uke.</p>
+    <p>c) Potens eller andregrad: <span class="nobr"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">A(x) = x^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">A</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span>.</span></p>
+    <p>d) Andregrad: banen stiger og faller.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-2">
+  <h3><span class="oppgave-nr">2</span>Egne data</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase a">a</span><div><p>Beskriv hva dere målte. Hva er <span class="nobr"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span></span></span></span>,</span> og hva er <span class="nobr"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi></mrow><annotation encoding="application/x-tex">y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span></span></span></span>?</span> Hvilke enheter brukte dere?</p></div></li>
+  <li><span class="fase b">b</span><div><p>Hvilken modelltype valgte dere, og hvorfor? Skriv modellen og <span class="nobr"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>R</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">R^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span>.</span></p></div></li>
+  <li><span class="fase c">c</span><div><p>Hva betyr tallene i modellen i situasjonen deres?</p></div></li>
+  <li><span class="fase d">d</span><div><p>For hvilke <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span></span></span></span> mener dere at modellen gjelder? Begrunn.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>Svarene avhenger av målingene. Se etter at elevene begrunner modellvalget med situasjonen, at de tolker hvert tall i modellen med enhet, og at de setter grenser for modellen.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-3">
+  <h3><span class="oppgave-nr">3</span>Koppestabelen</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase a">a</span><div><p>En gruppe fikk modellen <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>h</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo>=</mo><mn>1</mn><mo separator="true" lspace="0em" rspace="0em">,</mo><mn>2</mn><mi>n</mi><mo>+</mo><mn>7</mn><mo separator="true" lspace="0em" rspace="0em">,</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">h(n) = 1{,}2n + 7{,}3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">h</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">1</span><span class="mord"><span class="mpunct">,</span></span><span class="mord">2</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">7</span><span class="mord"><span class="mpunct">,</span></span><span class="mord">3</span></span></span></span> for høyden i cm av en stabel med <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span> kopper. Hva betyr <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo separator="true" lspace="0em" rspace="0em">,</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">1{,}2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">1</span><span class="mord"><span class="mpunct">,</span></span><span class="mord">2</span></span></span></span> og <span class="nobr"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>7</mn><mo separator="true" lspace="0em" rspace="0em">,</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">7{,}3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">7</span><span class="mord"><span class="mpunct">,</span></span><span class="mord">3</span></span></span></span>?</span></p></div></li>
+  <li><span class="fase b">b</span><div><p>Hvor høy blir en stabel med <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>20</mn></mrow><annotation encoding="application/x-tex">20</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">20</span></span></span></span> kopper? Hvor høy er én kopp ifølge modellen?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>a) Hver ny kopp gjør stabelen <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo separator="true" lspace="0em" rspace="0em">,</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">1{,}2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">1</span><span class="mord"><span class="mpunct">,</span></span><span class="mord">2</span></span></span></span> cm høyere. <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>7</mn><mo separator="true" lspace="0em" rspace="0em">,</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">7{,}3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">7</span><span class="mord"><span class="mpunct">,</span></span><span class="mord">3</span></span></span></span> cm er høyden på én kopp minus den delen som stikker opp for hver kopp.</p>
+    <p>b) <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>h</mi><mo stretchy="false">(</mo><mn>20</mn><mo stretchy="false">)</mo><mo>=</mo><mn>1</mn><mo separator="true" lspace="0em" rspace="0em">,</mo><mn>2</mn><mo>⋅</mo><mn>20</mn><mo>+</mo><mn>7</mn><mo separator="true" lspace="0em" rspace="0em">,</mo><mn>3</mn><mo>=</mo><mn>31</mn><mo separator="true" lspace="0em" rspace="0em">,</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">h(20) = 1{,}2 \cdot 20 + 7{,}3 = 31{,}3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">h</span><span class="mopen">(</span><span class="mord">20</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">1</span><span class="mord"><span class="mpunct">,</span></span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">20</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">7</span><span class="mord"><span class="mpunct">,</span></span><span class="mord">3</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">31</span><span class="mord"><span class="mpunct">,</span></span><span class="mord">3</span></span></span></span> cm. Én kopp: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>h</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo><mo>=</mo><mn>8</mn><mo separator="true" lspace="0em" rspace="0em">,</mo><mn>5</mn></mrow><annotation encoding="application/x-tex">h(1) = 8{,}5</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">h</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">8</span><span class="mord"><span class="mpunct">,</span></span><span class="mord">5</span></span></span></span> cm.</p>
+  </div></details>
+</div>
+</section>
+</div>
+</section>
+  </main>
+  <footer class="bunn">
+    <div class="ramme">
+      <span>© 2026 mattelab.no</span>
+      <span>Ingen innlogging, informasjonskapsler eller sporing.</span>
+      <span>Søsterside: <a href="https://fysikklab.no">fysikklab.no</a></span>
+    </div>
+  </footer>
+  <script type="module" src="../statisk/js/felles.js"></script>
+
+</body>
+</html>

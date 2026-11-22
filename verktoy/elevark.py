@@ -235,6 +235,11 @@ MAL = r"""%% Elevark fra mattelab.no – laget automatisk av bygg.py. Rediger gj
   \noindent\begin{minipage}[t]{2.1cm}\vspace{0pt}\fase{#1}{#2}\end{minipage}%
   \begin{minipage}[t]{\dimexpr\linewidth-2.1cm\relax}\vspace{0pt}#3\end{minipage}\par
   \vspace{#4}}
+\newcommand{\del}[4]{%
+  \par\noindent{\color{rute}\rule{\linewidth}{0.4pt}}\par\nopagebreak
+  \noindent\begin{minipage}[t]{1.1cm}\vspace{0pt}\fase{#1}{#2}\end{minipage}%
+  \begin{minipage}[t]{\dimexpr\linewidth-1.1cm\relax}\vspace{0pt}#3\end{minipage}\par
+  \vspace{#4}}
 \newcommand{\oppgave}[2]{\par\Needspace{12\baselineskip}\vspace{0.6em}%
   {\fontsize{14}{17}\selectfont\bfseries{\color{m1}#1}\enspace #2}\par\vspace{0.2em}}
 
@@ -246,11 +251,11 @@ MAL = r"""%% Elevark fra mattelab.no – laget automatisk av bygg.py. Rediger gj
 \end{minipage}\hfill
 \begin{minipage}[t]{0.22\linewidth}\vspace{0pt}\raggedleft
 \qrcode[height=2.3cm]{<<URL>>}\par\vspace{0.2em}
-{\sffamily\scriptsize\color{dempet}Utforskeren}
+{\sffamily\scriptsize\color{dempet}<<SIDE>>}
 \end{minipage}
 
 \vspace{1em}
-{\sffamily\small\color{dempet}Utforskeren ligger på \url{<<URL>>}}\par
+{\sffamily\small\color{dempet}<<SIDE>> ligger på \url{<<URL>>}}\par
 <<INNLEDNING>>
 
 <<OPPGAVER>>
@@ -258,19 +263,23 @@ MAL = r"""%% Elevark fra mattelab.no – laget automatisk av bygg.py. Rediger gj
 """
 
 
-def lag_tex(tittel: str, fag: list[str], url: str, html: str) -> str:
+def lag_tex(tittel: str, fag: list[str], url: str, html: str, side: str = "Utforskeren") -> str:
+    """side: hva nettsiden kalles på arket («Utforskeren» eller «Opplegget»)."""
     innledning, oppgaver = les_oppgaver(html)
     deler = []
     for o in oppgaver:
         deler.append(rf"\oppgave{{{o['nr']}}}{{{o['tittel']}}}")
         for s in o["steg"]:
-            navn = s["fase"].capitalize()
-            deler.append(rf"\steg{{{navn}}}{{{FASEFARGE.get(s['fase'], 'blekk')}}}{{{s['tekst']}}}{{{SVARPLASS.get(s['fase'], '2.5cm')}}}")
+            # Undervisningsoppleggene bruker deloppgaver a), b), c) i stedet for Gjett/Test/Forklar
+            navn = s["fase"] + ")" if len(s["fase"]) == 1 else s["fase"].capitalize()
+            makro = "del" if len(s["fase"]) == 1 else "steg"
+            deler.append(rf"\{makro}{{{navn}}}{{{FASEFARGE.get(s['fase'], 'blekk')}}}{{{s['tekst']}}}{{{SVARPLASS.get(s['fase'], '2.5cm')}}}")
         deler.append("")
     erstatt = {
         "<<TITTEL>>": escape(tittel),
         "<<FAG>>": escape(" og ".join(fag)),
         "<<URL>>": url,
+        "<<SIDE>>": side,
         "<<INNLEDNING>>": innledning,
         "<<OPPGAVER>>": "\n".join(deler),
     }

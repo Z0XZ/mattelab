@@ -115,7 +115,7 @@ def elevark(s: dict) -> tuple[bytes, bytes] | None:
         raise Byggefeil(f"{s['kilde']}: har oppgaver, men mangler {{{{elevark}}}} der nedlastingsknappen skal stå")
     url = f"https://{DOMENE}/{s['ut']}"
     try:
-        tex = lag_tex(s["tittel"], s["fag"], url, s["innhold"])
+        tex = lag_tex(s["tittel"], s["fag"], url, s["innhold"], "Opplegget" if s["type"] == "opplegg" else "Utforskeren")
     except Elevarkfeil as e:
         raise Byggefeil(f"{s['kilde']}: elevark: {e}")
     try:
@@ -143,6 +143,59 @@ def lag_kortsett(s: dict, sti: Path) -> None:
         raise Byggefeil(f"{data.relative_to(ROT)}: {e}")
     s["innhold"] = s["innhold"].replace("{{kortsett}}", html_)
     s["filer"] = filer
+
+
+def maal_sitat(km: dict, fag: str, numre: str, kilde: str) -> str:
+    """Kompetansemål sitert ordrett fra data/kompetansemaal.json: {{maal:1T:3,9}}."""
+    if fag not in km["fag"]:
+        raise Byggefeil(f"{kilde}: ukjent fag {fag!r} i {{{{maal:…}}}}")
+    alle = km["fag"][fag]["maal"]
+    deler = []
+    for nr in numre.split(","):
+        i = int(nr)
+        if not 1 <= i <= len(alle):
+            raise Byggefeil(f"{kilde}: {fag} har ikke mål nr. {i}")
+        deler.append(f'<li><span class="maal-nr">{esc(fag)}, mål {i}</span> «{esc(alle[i - 1])}»</li>')
+    return ('<ul class="maal-sitat">' + "".join(deler) + "</ul>"
+            f'<p class="maal-kilde">Sitert fra <a href="{esc(km["fag"][fag]["url"])}">{esc(km["fag"][fag]["laereplan"])}</a> '
+            f'(Utdanningsdirektoratet). Koblingen til målene er lærerens egen vurdering.</p>')
+
+
+TIDSPLAN = re.compile(r'<ol class="tidsplan">(.*?)</ol>\s*<!-- /tidsplan -->', re.S)
+TIDSDEL = re.compile(r'<li class="tidsdel" data-min="(\d+)">\s*<h3>(.*?)</h3>', re.S)
+
+
+def lag_tidsplan(s: dict) -> None:
+    """Undervisningsopplegg: sjekk at delene i tidsplanen summerer til varigheten,
+    sett inn klokkeslett («0–10 min») i hver del, og lag tidslinja over planen."""
+    if s.get("varighet") not in ("45", "90", "135"):
+        raise Byggefeil(f"{s['kilde']}: undervisningsopplegg må ha varighet: 45, 90 eller 135")
+    m = TIDSPLAN.search(s["innhold"])
+    if not m:
+        raise Byggefeil(f"{s['kilde']}: mangler <ol class=\"tidsplan\"> … </ol> <!-- /tidsplan -->")
+    deler = TIDSDEL.findall(m.group(1))
+    if not deler or len(deler) != m.group(1).count("<li class=\"tidsdel\""):
+        raise Byggefeil(f"{s['kilde']}: hver del i tidsplanen må være <li class=\"tidsdel\" data-min=\"…\"><h3>…</h3>")
+    total = sum(int(d) for d, _ in deler)
+    if total != int(s["varighet"]):
+        raise Byggefeil(f"{s['kilde']}: delene i tidsplanen er {total} minutter til sammen, men varigheten er {s['varighet']}")
+    start = 0
+    linje = []
+
+    def merk(t):
+        nonlocal start
+        lengde = int(t.group(1))
+        tid = f"{start}–{start + lengde} min"
+        navn = re.sub(r"<[^>]+>", "", t.group(2)).strip()
+        linje.append(f'<li style="--min: {lengde}"><span class="tidslinje-tid">{tid}</span>'
+                     f'<span class="tidslinje-navn">{navn}</span></li>')
+        start += lengde
+        return (f'<li class="tidsdel" data-min="{lengde}"><p class="tidsdel-tid">{tid}'
+                f'<span class="visuelt-skjult">, {lengde} minutter</span></p>\n  <h3>{t.group(2)}</h3>')
+
+    ny = TIDSDEL.sub(merk, m.group(1))
+    tidslinje = ('<ol class="tidslinje" aria-label="Tidsplanen i korte trekk">' + "".join(linje) + "</ol>")
+    s["innhold"] = s["innhold"][:m.start()] + tidslinje + f'\n<ol class="tidsplan">{ny}</ol>' + s["innhold"][m.end():]
 
 
 
@@ -250,6 +303,8 @@ def fagklasse(fag: str) -> str:
 
 def fag_merker(r: dict) -> str:
     deler = [f'<span class="fag-merke {fagklasse(f)}">{esc(f)}</span>' for f in r["fag"]]
+    if r.get("varighet"):
+        deler.append(f'<span class="fag-merke varighet">{esc(r["varighet"])} min</span>')
     if r.get("planlagt"):
         deler.append('<span class="fag-merke kommer">Kommer</span>')
     return '<span class="fag-merker">' + "".join(deler) + "</span>"
@@ -261,7 +316,8 @@ def ikon(nokkel: str, ikoner: dict) -> str:
 
 
 def kort(r: dict, temanavn: dict, ikoner: dict, rot: str) -> str:
-    sok = " ".join([r["tittel"], r["beskrivelse"], *r["fag"], *(temanavn[t] for t in r["tema"])]).lower()
+    sok = " ".join([r["tittel"], r["beskrivelse"], *r["fag"], *(temanavn[t] for t in r["tema"]),
+                    f'{r["varighet"]} min' if r.get("varighet") else ""]).lower()
     attr = f'data-fag="{esc(" ".join(r["fag"]))}" data-tema="{esc(" ".join(r["tema"]))}" data-tekst="{esc(sok)}"'
     innhold = (ikon(r.get("ikon") or r["id"], ikoner)
                + f'<span class="sim-kort-tekst"><span class="sim-kort-tittel">{esc(r["tittel"])}</span>'
@@ -295,12 +351,27 @@ def liste(ressurser: list[dict], typ: str, temaer: list[dict], temanavn: dict, i
         her = [r for r in valgte if r["tema"][0] == t["id"]]
         if not her:
             continue
-        her.sort(key=lambda r: (bool(r.get("planlagt")), r["tittel"].lower()))
+        # Undervisningsopplegg står i rekkefølgen de er tenkt brukt (feltet «rekkefolge»)
+        her.sort(key=lambda r: (bool(r.get("planlagt")), int(r.get("rekkefolge") or 99), r["tittel"].lower()))
         ut.append(f'<div class="tema-blokk" data-blokk="{esc(t["id"])}"><h2>{esc(t["navn"])}</h2>'
                   f'<ul class="sim-kort-liste">' + "".join(kort(r, temanavn, ikoner, rot) for r in her) + "</ul></div>")
     if any(r.get("planlagt") for r in valgte):
         ut.append('<p class="merknad">Kort med stiplet kant er planlagt, men ikke laget ennå.</p>')
     return "\n".join(ut)
+
+
+def liste_opplegg(ressurser: list[dict], fagliste: list[dict], temanavn: dict, ikoner: dict, rot: str) -> str:
+    """Undervisningsoppleggene: én blokk per fag, i den rekkefølgen de er tenkt brukt (feltet «rekkefolge»)."""
+    valgte = [r for r in ressurser if r["type"] == "opplegg"]
+    ut = []
+    for f in fagliste:
+        her = [r for r in valgte if r["fag"][0] == f["id"]]
+        if not her:
+            continue
+        her.sort(key=lambda r: (bool(r.get("planlagt")), int(r.get("rekkefolge") or 99), r["tittel"].lower()))
+        ut.append(f'<div class="tema-blokk" data-blokk="{esc(f["id"])}"><h2>{esc(f["langt"])}</h2>'
+                  f'<ul class="sim-kort-liste">' + "".join(kort(r, temanavn, ikoner, rot) for r in her) + "</ul></div>")
+    return "\n".join(ut) or '<p class="merknad">Det er ingen her ennå.</p>'
 
 
 def liste_varierende(ressurser: list[dict], temaer: list[dict], temanavn: dict, ikoner: dict, rot: str) -> str:
@@ -395,12 +466,20 @@ def bygg_alt() -> dict[str, bytes]:
         side = {**hode, "id": sti.stem, "ut": ut, "innhold": innhold, "kilde": str(navn), "filer": {}}
         if hode["type"] == "kortsett":
             lag_kortsett(side, sti)
+        if hode["type"] == "opplegg":
+            lag_tidsplan(side)
         # Kortsett og tavleoppgaver har felles skript som legges til automatisk
         felles = {"kortsett": "kortsett.js", "tavle": "tavle.js"}.get(hode["type"])
         if felles and felles not in side["skript"]:
             side["skript"] = side["skript"] + [felles]
         sider.append(side)
 
+    # Navnet brukes i elevark, kortsett og koblinger, så det må være unikt på tvers av mappene
+    sett: dict[str, str] = {}
+    for s in sider:
+        if s["id"] != "index" and s["id"] in sett:
+            raise Byggefeil(f"{s['kilde']}: samme filnavn som {sett[s['id']]}. Gi en av dem et annet navn.")
+        sett[s["id"]] = s["kilde"]
     ressurser = [s for s in sider if s["type"] in TYPE_NAVN]
     for p in planlagt:
         for t in p["tema"]:
@@ -439,6 +518,9 @@ def bygg_alt() -> dict[str, bytes]:
             topp = (f'<p class="brodsmuler"><a href="{til}">{esc(oversikt)}</a> / '
                     f'<a href="{filter_url}">{esc(fagtekst)} · {esc(tematekst)}</a></p>'
                     f'<h1>{esc(s["tittel"])}</h1>')
+            if s.get("varighet"):
+                topp += (f'<p class="opplegg-merke"><span>{esc(s["varighet"])} minutter</span>'
+                         f'<span>{esc(fagtekst)}</span></p>')
             innhold = topp + innhold
         if s.get("oppsett") != "forside":
             klasse = "side sim-side" if s["type"] == "utforsker" else "side"
@@ -446,7 +528,7 @@ def bygg_alt() -> dict[str, bytes]:
         erstatt = {
             "{{filter}}": filterpanel(tema_data["temaer"], tema_data["fag"]),
             "{{liste:utforsker}}": liste(ressurser, "utforsker", tema_data["temaer"], temanavn, ikoner, rot),
-            "{{liste:opplegg}}": liste(ressurser, "opplegg", tema_data["temaer"], temanavn, ikoner, rot),
+            "{{liste:opplegg}}": liste_opplegg(ressurser, tema_data["fag"], temanavn, ikoner, rot),
             "{{liste:varierende}}": liste_varierende(ressurser, tema_data["temaer"], temanavn, ikoner, rot),
             "{{fagkort}}": fagkort(tema_data["fag"], tema_data["temaer"], ressurser, rot),
             "{{elevark}}": (f'<p class="elevark-lenke"><a class="knapp lys liten" href="{rot}elevark/{s["id"]}.pdf" download>'
@@ -459,6 +541,7 @@ def bygg_alt() -> dict[str, bytes]:
         for k, v in erstatt.items():
             innhold = innhold.replace(k, v)
         innhold = re.sub(r"\{\{figurverktoy(?::(\w+))?\}\}", lambda m: figurverktoy(m.group(1) or ""), innhold)
+        innhold = re.sub(r"\{\{maal:(\w+):([\d,]+)\}\}", lambda m: maal_sitat(km, m.group(1), m.group(2), s["kilde"]), innhold)
         aktiv = s.get("meny") or TYPE_MENY.get(s["type"], s["id"])
         meny = "\n".join(
             f'        <li><a href="{rot}{url}"{" aria-current=\"page\"" if mid == aktiv else ""}>{esc(tekst)}</a></li>'

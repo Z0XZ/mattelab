@@ -1,0 +1,78 @@
+%% Fasit til kortsett fra mattelab.no – laget automatisk av bygg.py.
+%% Kompiler med lualatex.
+\documentclass[11pt,a4paper]{article}
+\usepackage[norsk]{babel}
+\usepackage[a4paper,margin=1.2cm,bottom=1.7cm]{geometry}
+\usepackage{fontspec}
+\usepackage{unicode-math}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{TeX Gyre Heros}[Scale=MatchLowercase]
+\setmathfont{TeX Gyre Pagella Math}
+\usepackage{xcolor}
+\definecolor{blekk}{HTML}{16213A}
+\definecolor{dempet}{HTML}{566077}
+\definecolor{m1}{HTML}{2F4AB0}
+\usepackage{tikz}
+\usepackage{enumitem}
+\usepackage{qrcode}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+\pdfvariable suppressoptionalinfo \numexpr 1+2+4+8+16+32+64+128+256+512\relax
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[L]{\sffamily\footnotesize\color{dempet}mattelab.no · Hvilken type funksjon? · kortsett K10 · fasit}
+\fancyfoot[R]{\sffamily\footnotesize\color{dempet}Side \thepage}
+\begin{document}
+\begin{minipage}[t]{0.8\linewidth}\vspace{0pt}
+{\sffamily\small\color{dempet}Fasit for læreren · kortsett K10 · 1T}\par\vspace{0.25em}
+{\fontsize{20}{24}\selectfont\bfseries Hvilken type funksjon?}\par\vspace{0.5em}
+Sorter kortene etter funksjonstype. Noen kort passer i to bokser. Begrunn valget, og se etter kjennetegn i uttrykket, grafen eller situasjonen.\par\vspace{0.4em}{\small\color{dempet}Kortene er nummerert i den rekkefølgen de står i utskriften.}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.15\linewidth}\vspace{0pt}\raggedleft
+\qrcode[height=1.9cm]{https://mattelab.no/varierende/funksjonstyper.html}
+\end{minipage}\par\vspace{0.8em}
+
+\subsection*{Lineær}
+\begin{itemize}[leftmargin=1.2em, itemsep=0.35em]
+\item \textsf{\small K10-01}\quad Prisen øker med 4 kr for hver kilometer.
+\item \textsf{\small K10-05}\quad \emph{Figur:} Rett linje som synker. Den skjærer y-aksen i 2 og x-aksen i 4.
+\item \textsf{\small K10-08}\quad $f(x) = 3x - 2$
+\end{itemize}
+\subsection*{Polynom av grad 2 eller mer}
+\begin{itemize}[leftmargin=1.2em, itemsep=0.35em]
+\item \textsf{\small K10-02}\quad Arealet av et kvadrat med side x. \emph{(også: Potens eller rot)}\\{\small\color{dempet}$A(x) = x^2$. Både et andregradspolynom og en potensfunksjon.}
+\item \textsf{\small K10-09}\quad \emph{Figur:} Graf som kommer nedenfra, har et toppunkt og et bunnpunkt og går opp igjen. Den skjærer x-aksen tre ganger: i −2, 0 og 2.\\{\small\color{dempet}Tre nullpunkter og to vendinger: et tredjegradspolynom, her $x(x - 2)(x + 2)$.}
+\item \textsf{\small K10-13}\quad $f(x) = x^3 - 4x$
+\item \textsf{\small K10-16}\quad $f(x) = 2^x - x^2$ \emph{(også: Eksponential)}\\{\small\color{dempet}Egentlig ingen av boksene: $2^x - x^2$ er en sum av en eksponentialfunksjon og et polynom. Både eksponential og polynom godtas. Fint kort å diskutere i klassen.}
+\item \textsf{\small K10-17}\quad $f(x) = 1{,}5x^2$ \emph{(også: Potens eller rot)}\\{\small\color{dempet}Både og: et andregradspolynom med bare ett ledd, og en potensfunksjon $a \cdot x^b$ med $b = 2$.}
+\end{itemize}
+\subsection*{Eksponential}
+\begin{itemize}[leftmargin=1.2em, itemsep=0.35em]
+\item \textsf{\small K10-04}\quad \emph{Figur:} Graf som ligger over x-aksen hele veien. Den nærmer seg x-aksen til venstre, går gjennom (0, 1) og vokser stadig raskere til høyre.\\{\small\color{dempet}Grafen ligger over x-aksen og nærmer seg den til venstre. Det er typisk for $a \cdot b^x$ med $b > 1$.}
+\item \textsf{\small K10-06}\quad $f(x) = 500 \cdot 0{,}8^x$\\{\small\color{dempet}Vekstfaktoren $0{,}8$ er mindre enn $1$, så funksjonen avtar med $20$ \% for hver enhet. Den er likevel eksponential.}
+\item \textsf{\small K10-07}\quad $f(x) = 2 \cdot 1{,}5^x$
+\item \textsf{\small K10-11}\quad Verdien øker med 4 \% hvert år.
+\item \textsf{\small K10-16}\quad $f(x) = 2^x - x^2$ \emph{(også: Polynom av grad 2 eller mer)}\\{\small\color{dempet}Egentlig ingen av boksene: $2^x - x^2$ er en sum av en eksponentialfunksjon og et polynom. Både eksponential og polynom godtas. Fint kort å diskutere i klassen.}
+\end{itemize}
+\subsection*{Potens eller rot}
+\begin{itemize}[leftmargin=1.2em, itemsep=0.35em]
+\item \textsf{\small K10-02}\quad Arealet av et kvadrat med side x. \emph{(også: Polynom av grad 2 eller mer)}\\{\small\color{dempet}$A(x) = x^2$. Både et andregradspolynom og en potensfunksjon.}
+\item \textsf{\small K10-10}\quad \emph{Figur:} Graf som starter i origo og bare finnes for x ≥ 0. Den vokser, men stadig langsommere.\\{\small\color{dempet}Grafen starter i origo og finnes bare for $x \geq 0$, som $2\sqrt{x}$.}
+\item \textsf{\small K10-12}\quad $f(x) = \sqrt{x}$\\{\small\color{dempet}$\sqrt{x} = x^{0{,}5}$. Eksponenten er ikke et helt tall, så det er ikke et polynom.}
+\item \textsf{\small K10-15}\quad Tiden det tar å kjøre 100 km med farten x. \emph{(også: Rasjonal)}\\{\small\color{dempet}$t(x) = \frac{100}{x} = 100 \cdot x^{-1}$. Både en potensfunksjon og en rasjonal funksjon.}
+\item \textsf{\small K10-17}\quad $f(x) = 1{,}5x^2$ \emph{(også: Polynom av grad 2 eller mer)}\\{\small\color{dempet}Både og: et andregradspolynom med bare ett ledd, og en potensfunksjon $a \cdot x^b$ med $b = 2$.}
+\item \textsf{\small K10-18}\quad $f(x) = \dfrac{3}{x}$ \emph{(også: Rasjonal)}\\{\small\color{dempet}Både og: $\frac{3}{x} = 3 \cdot x^{-1}$ er en potensfunksjon, og en brøk med polynomer i teller og nevner.}
+\end{itemize}
+\subsection*{Rasjonal}
+\begin{itemize}[leftmargin=1.2em, itemsep=0.35em]
+\item \textsf{\small K10-03}\quad \emph{Figur:} Graf med to grener. Den har en loddrett asymptote i x = 2 og en vannrett asymptote i y = 1.\\{\small\color{dempet}To asymptoter og to grener er typisk for en rasjonal funksjon, her $1 + \frac{2}{x - 2} = \frac{x}{x - 2}$.}
+\item \textsf{\small K10-14}\quad $f(x) = \dfrac{x + 1}{x - 2}$
+\item \textsf{\small K10-15}\quad Tiden det tar å kjøre 100 km med farten x. \emph{(også: Potens eller rot)}\\{\small\color{dempet}$t(x) = \frac{100}{x} = 100 \cdot x^{-1}$. Både en potensfunksjon og en rasjonal funksjon.}
+\item \textsf{\small K10-18}\quad $f(x) = \dfrac{3}{x}$ \emph{(også: Potens eller rot)}\\{\small\color{dempet}Både og: $\frac{3}{x} = 3 \cdot x^{-1}$ er en potensfunksjon, og en brøk med polynomer i teller og nevner.}
+\end{itemize}
+\subsection*{Til læreren}
+Kortene med $x^2$, $\frac{3}{x}$, kvadratarealet og kjøretiden passer i to bokser, og $2^x - x^2$ passer egentlig ikke i noen. Spør: Hvordan ser du forskjell på $2^x$ og $x^2$ i uttrykket? Hva er forskjellen på en eksponentialgraf og en potensgraf for negative $x$? Er en lineær funksjon også et polynom?
+\end{document}

@@ -1,0 +1,77 @@
+%% Elevark fra mattelab.no – laget automatisk av bygg.py. Rediger gjerne til eget bruk.
+%% Kompiler med lualatex.
+\documentclass[11pt,a4paper]{article}
+\usepackage[norsk]{babel}
+\usepackage[a4paper,margin=2.2cm,top=2cm,bottom=2.4cm]{geometry}
+\usepackage{fontspec}
+\usepackage{unicode-math}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{TeX Gyre Heros}[Scale=MatchLowercase]
+\setmathfont{TeX Gyre Pagella Math}
+\usepackage{xcolor}
+\definecolor{blekk}{HTML}{16213A}
+\definecolor{dempet}{HTML}{566077}
+\definecolor{rute}{HTML}{CFC9B8}
+\definecolor{m1}{HTML}{2F4AB0}
+\definecolor{m2}{HTML}{99266D}
+\usepackage[most]{tcolorbox}
+\usepackage{qrcode}
+\usepackage{needspace}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+\pdfvariable suppressoptionalinfo \numexpr 1+2+4+8+16+32+64+128+256+512\relax
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.4em}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[L]{\sffamily\footnotesize\color{dempet}mattelab.no · Hva er en funksjon? · elevark uten fasit}
+\fancyfoot[R]{\sffamily\footnotesize\color{dempet}Side \thepage}
+
+\newcommand{\fase}[2]{\tcbox[on line, colframe=#2, colback=white, coltext=#2, boxrule=0.6pt, arc=2pt,
+  boxsep=0pt, left=3pt, right=3pt, top=1.5pt, bottom=1.5pt, fontupper=\sffamily\bfseries\footnotesize]{#1}}
+\newcommand{\steg}[4]{%
+  \par\noindent{\color{rute}\rule{\linewidth}{0.4pt}}\par\nopagebreak
+  \noindent\begin{minipage}[t]{2.1cm}\vspace{0pt}\fase{#1}{#2}\end{minipage}%
+  \begin{minipage}[t]{\dimexpr\linewidth-2.1cm\relax}\vspace{0pt}#3\end{minipage}\par
+  \vspace{#4}}
+\newcommand{\del}[4]{%
+  \par\noindent{\color{rute}\rule{\linewidth}{0.4pt}}\par\nopagebreak
+  \noindent\begin{minipage}[t]{1.1cm}\vspace{0pt}\fase{#1}{#2}\end{minipage}%
+  \begin{minipage}[t]{\dimexpr\linewidth-1.1cm\relax}\vspace{0pt}#3\end{minipage}\par
+  \vspace{#4}}
+\newcommand{\oppgave}[2]{\par\Needspace{12\baselineskip}\vspace{0.6em}%
+  {\fontsize{14}{17}\selectfont\bfseries{\color{m1}#1}\enspace #2}\par\vspace{0.2em}}
+
+\begin{document}
+\begin{minipage}[t]{0.72\linewidth}\vspace{0pt}
+{\sffamily\small\color{dempet}Elevark · 1T · mattelab.no}\par\vspace{0.3em}
+{\fontsize{24}{28}\selectfont\bfseries Hva er en funksjon?}\par\vspace{1em}
+{\sffamily\small Navn: \rule{4.6cm}{0.4pt}\quad Klasse: \rule{1.5cm}{0.4pt}\quad Dato: \rule{1.9cm}{0.4pt}}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.22\linewidth}\vspace{0pt}\raggedleft
+\qrcode[height=2.3cm]{https://mattelab.no/opplegg/hva-er-en-funksjon.html}\par\vspace{0.2em}
+{\sffamily\scriptsize\color{dempet}Opplegget}
+\end{minipage}
+
+\vspace{1em}
+{\sffamily\small\color{dempet}Opplegget ligger på \url{https://mattelab.no/opplegg/hva-er-en-funksjon.html}}\par
+Oppgavene kan løses uten hjelpemidler. Bruk gjerne utforskeren for lineære funksjoner til å kontrollere svarene.
+
+\oppgave{1}{Funksjon eller ikke?}
+\del{a)}{blekk}{Hver elev i klassen kobles til høyden sin. Er dette en funksjon? Begrunn.}{2.5cm}
+\del{b)}{blekk}{Hver høyde kobles til elevene i klassen som har den høyden. Er dette en funksjon? Begrunn.}{2.5cm}
+\del{c)}{blekk}{En tabell har x-verdiene $1, 2, 2, 3$ og y-verdiene $4, 5, 6, 7$. Kan tabellen vise en funksjon?}{2.5cm}
+
+\oppgave{2}{Treningssenteret}
+\del{a)}{blekk}{Et treningssenter tar $300$ kr i innmelding og $250$ kr per måned. Skriv et uttrykk for prisen $K(x)$ etter $x$ måneder.}{2.5cm}
+\del{b)}{blekk}{Lag en verditabell for $x = 0, 1, 2, 3, 4$.}{2.5cm}
+\del{c)}{blekk}{Tegn grafen. Hvor ser du $300$ og $250$ på grafen?}{2.5cm}
+\del{d)}{blekk}{Forklar med ord hva stigningstallet og konstantleddet betyr her.}{2.5cm}
+
+\oppgave{3}{Fra tabell til uttrykk}
+\del{a)}{blekk}{En lineær funksjon har verdiene $f(2) = 7$, $f(4) = 11$ og $f(6) = 15$. Finn stigningstallet og konstantleddet.}{2.5cm}
+\del{b)}{blekk}{Regn ut $f(10)$.}{2.5cm}
+\del{c)}{blekk}{For hvilken $x$ er $f(x) = 51$?}{2.5cm}
+
+\end{document}

@@ -8,7 +8,13 @@
     ],
     "3": [
       "lineaer-funksjon",
-      "vekst"
+      "vekst",
+      "hva-er-en-funksjon",
+      "stigningstall-ved-regning",
+      "stigningstall-og-konstantledd",
+      "fire-representasjoner",
+      "modellering-og-regresjon",
+      "modellering-med-egne-data"
     ],
     "4": [
       "likningssett",
@@ -16,13 +22,16 @@
       "fullstendig-kvadrat",
       "velg-metode",
       "en-likning-tre-metoder",
-      "fullfor-kvadratet"
+      "fullfor-kvadratet",
+      "andregradsulikheter",
+      "likningssystemer-og-ulikheter"
     ],
     "5": [
       "kvadratsetningene",
       "uttrykk-likning-identitet-funksjon",
       "identiteter",
-      "alltid-noen-ganger-aldri"
+      "alltid-noen-ganger-aldri",
+      "hva-er-en-funksjon"
     ],
     "6": [
       "andregradsfunksjonen",
@@ -34,19 +43,39 @@
       "fire-former",
       "identiteter",
       "hoderegning-kvadratsetningene",
-      "fullfor-kvadratet"
+      "fullfor-kvadratet",
+      "andregradsulikheter",
+      "andregradsfunksjoner",
+      "likningssystemer-og-ulikheter"
     ],
     "7": [
       "lineaer-funksjon",
-      "vekst"
+      "vekst",
+      "modellering-og-regresjon",
+      "modellering-med-egne-data",
+      "eksponentialfunksjoner"
     ],
     "9": [
       "andregradsfunksjonen",
       "rasjonale-funksjoner",
-      "vekst"
+      "vekst",
+      "polynomfunksjoner",
+      "potensfunksjoner",
+      "funksjonstyper",
+      "hvilken-passer-ikke-inn-funksjoner",
+      "andregradsfunksjoner",
+      "polynomer-fra-nullpunkter",
+      "eksponentialfunksjoner",
+      "potens-og-rotfunksjoner",
+      "rasjonale-funksjoner-og-polynomdivisjon",
+      "repetisjon-funksjoner"
     ],
     "10": [
       "sekant-tangent"
+    ],
+    "11": [
+      "polynomdivisjon",
+      "rasjonale-funksjoner-og-polynomdivisjon"
     ],
     "12": [
       "trekant"

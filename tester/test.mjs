@@ -72,7 +72,7 @@ for (const navn of SIDER) {
     if (bredde === 360) {
       // Finn elementer som stikker utenfor skjermen (hjelp ved feilsøking)
       const utenfor = await side.evaluate(() => Array.from(document.querySelectorAll("body *")).filter((e) => {
-        const r = e.getBoundingClientRect(); return r.width > 0 && r.right > document.documentElement.clientWidth + 1 && !e.closest(".katex-display, .tabell-rull, .tabell-rull-liten, .forskrift, .former p, .utregning, .likning, .katex-mathml, svg, .kort-bunke");
+        const r = e.getBoundingClientRect(); return r.width > 0 && r.right > document.documentElement.clientWidth + 1 && !e.closest(".katex-display, .tabell-rull, .divisjon-rull, .tabell-rull-liten, .forskrift, .former p, .utregning, .likning, .katex-mathml, svg, .kort-bunke");
       }).slice(0, 5).map((e) => e.tagName + "." + e.className));
       sjekk(utenfor.length === 0, `${navn} @ 360px: ingen elementer utenfor skjermkanten`, utenfor.join(", "));
       await side.screenshot({ path: path.join(RES, navn.replace(/\//g, "_") + "-360.png"), fullPage: true });
@@ -317,7 +317,7 @@ console.log("\n6. Uten JavaScript");
   sjekk(await side.isVisible("#oppgave-1 details ul"), "løsningsforslag kan åpnes uten JS");
   await side.goto(BASE + "utforskere/index.html");
   const kort = await side.$$eval(".sim-kort-liste > li", (k) => k.filter((x) => x.offsetParent).length);
-  sjekk(kort === 16, "oversikten viser alle 16 utforskere", String(kort));
+  sjekk(kort === 21, "oversikten viser alle 21 utforskere", String(kort));
   await kontekst.close();
 }
 
@@ -337,12 +337,12 @@ console.log("\n7. Filter og fagvalg");
   sjekk(menyLenke.includes("fag=R1"), "menylenken tar med fagvalget", menyLenke);
   await side.selectOption("#fagvalg", "");
   await side.goto(BASE + "utforskere/index.html");
-  sjekk((await synlige()) === 16, "«Alle fag» viser alle", String(await synlige()));
+  sjekk((await synlige()) === 21, "«Alle fag» viser alle", String(await synlige()));
   await side.click('.filter-knapp[data-tema="derivasjon"]');
   sjekk((await synlige()) === 2, "tema Derivasjon viser 2", String(await synlige()));
   sjekk(side.url().includes("tema=derivasjon"), "temavalget står i adressen", side.url());
   sjekk((await side.getAttribute('.filter-knapp[data-tema="derivasjon"]', "aria-pressed")) === "true", "temaknappen har aria-pressed");
-  sjekk((await side.textContent(".filter-antall")) === "Viser 2 av 16", "antall treff vises", await side.textContent(".filter-antall"));
+  sjekk((await side.textContent(".filter-antall")) === "Viser 2 av 21", "antall treff vises", await side.textContent(".filter-antall"));
   await side.click('.filter-knapp[data-tema=""]');
   await side.fill("#filter-sok", "toppunkt");
   sjekk((await synlige()) === 1, "søk «toppunkt» gir 1 treff", String(await synlige()));
@@ -350,7 +350,7 @@ console.log("\n7. Filter og fagvalg");
   await side.fill("#filter-sok", "finnesikke");
   sjekk(await side.isVisible(".filter-tom"), "melding ved ingen treff");
   await side.click(".filter-tom button");
-  sjekk((await synlige()) === 16, "«Vis alt» nullstiller filteret");
+  sjekk((await synlige()) === 21, "«Vis alt» nullstiller filteret");
   await side.click('.filter-knapp[data-fag="1T"]');
   sjekk((await side.inputValue("#fagvalg")) === "1T", "fagknapp i filteret oppdaterer menyen");
   sjekk(problemer.length === 0, "ingen JS-feil i filteret", problemer.join(" | "));
@@ -623,6 +623,91 @@ const UTFORSKERE = {
       ["?a=0&b=2&c=1", "Løsninger", `x = ${M}0,5`],
     ],
     meldinger: [["?a=1&b=-2&c=3", "b² − 4ac < 0"], ["?a=1&b=-2&c=1", "b² − 4ac = 0"], ["?a=0&b=2&c=1", "a = 0"]],
+  },  polynomfunksjoner: {
+    oppgaver: 5,
+    verdier: [
+      ["", "Skjærer y-aksen i", "(0, 6)"],
+      ["", "Nullpunkter", `x = ${M}2, x = 1, x = 3`],
+      ["", "Topp- og bunnpunkter", `topp ≈ (${M}0,79, 8,21), bunn ≈ (2,12, ${M}4,06)`],
+      ["?grad=3&a=1&r1=1&r2=1&r3=-2", "Nullpunkter", `x = ${M}2, x = 1 (dobbelt)`],
+      ["?grad=3&a=1&r1=1&r2=1&r3=-2", "Topp- og bunnpunkter", `topp ≈ (${M}1, 4), bunn ≈ (1, 0)`],
+      ["?grad=3&a=0.5&r1=-1&r2=2&r3=4", "Skjærer y-aksen i", "(0, 4)"],
+      ["?grad=3&a=1&r1=1&r2=1&r3=1", "Topp- og bunnpunkter", "Ingen"],
+      ["?grad=4&a=1&r1=-2&r2=-1&r3=1&r4=2", "Topp- og bunnpunkter", `bunn ≈ (${M}1,58, ${M}2,25), topp ≈ (0, 4), bunn ≈ (1,58, ${M}2,25)`],
+      ["?grad=4&a=-1&r1=-2&r2=1&r3=3&r4=4", "Når x → −∞", `f(x) → ${M}∞`],
+      ["?grad=4&a=-1&r1=-2&r2=1&r3=3&r4=4", "Skjærer y-aksen i", "(0, 24)"],
+    ],
+    meldinger: [["?grad=3&a=1&r1=1&r2=1&r3=-2", "berører"], ["?grad=3&a=1&r1=1&r2=1&r3=1", "terrassepunkt"], ["?grad=2&a=0&r1=1&r2=2", "a = 0"], ["?grad=1&a=2&r1=3", "lineær"]],
+    tekst: [["", "#fortegn", [`x<${M}2`, `${M}2<x<1`, "1<x<3", "x>3"]], ["", "#utvidet", ["f(x)=x3−2x2−5x+6"]]],
+  },
+  potensfunksjoner: {
+    oppgaver: 5,
+    verdier: [
+      ["", "Definert for", "x ≥ 0"],
+      ["", "f(4)", "2"],
+      ["?a=1&b=1/3", "f(−8)", `${M}2`],
+      ["?a=1&b=1/3", "Definert for", "alle x"],
+      ["?a=1&b=-1/2", "Definert for", "x > 0"],
+      ["?a=1&b=-1/2", "f(4)", "0,5"],
+      ["?a=1&b=-2", "f(4)", "0,0625"],
+      ["?a=1&b=-2", "Asymptoter", "x = 0 og y = 0"],
+      ["?a=2.01&b=1/2", "f(4)", "4,02"],
+      ["?a=-1&b=2", "For x > 0", "avtar"],
+    ],
+    meldinger: [["?a=1&b=1/2", "Kvadratrot"], ["?a=1&b=1/3", "Tredjerot"], ["?a=1&b=-1", "Negativ eksponent"], ["?a=0&b=2", "a = 0"]],
+  },
+  polynomdivisjon: {
+    oppgaver: 5,
+    verdier: [
+      ["", "Svar (kvotient)", `x² − x − 6`],
+      ["", "Rest", "0"],
+      ["?c3=0&c2=1&c1=3&c0=5&r=2", "Svar (kvotient)", "x + 5"],
+      ["?c3=0&c2=1&c1=3&c0=5&r=2", "Rest", "15"],
+      ["?c3=0&c2=1&c1=3&c0=5&r=2", "P(2)", "15"],
+      ["?c3=1&c2=0&c1=-7&c0=6&r=1", "Svar (kvotient)", `x² + x − 6`],
+      ["?c3=0&c2=1&c1=1&c0=-1&r=1", "Asymptoter", "x = 1 og y = x + 2"],
+      ["?c3=0&c2=1&c1=1&c0=-1&r=1", "Rest", "1"],
+    ],
+    meldinger: [["", "går opp"], ["?c3=0&c2=1&c1=3&c0=5&r=2", "Restteoremet"], ["?c3=0&c2=0&c1=0&c0=4&r=1", "er et tall"]],
+    tekst: [["?c3=1&c2=0&c1=-7&c0=6&r=1", "#oppstilling", ["(x3+0x2−7x+6):(x−1)=x2+x−6", "−(x3−x2)", "−(−6x+6)"]]],
+  },
+  andregradsulikheter: {
+    oppgaver: 5,
+    verdier: [
+      ["", "Løsning", `x < ${M}1 eller x > 3`],
+      ["", "Som intervall", `⟨←, ${M}1⟩ ∪ ⟨3, →⟩`],
+      ["?a=1&b=-2&c=-3&rel=le", "Som intervall", `[${M}1, 3]`],
+      ["?a=-1&b=1&c=6&rel=ge", "Løsning", `${M}2 ≤ x ≤ 3`],
+      ["?a=1&b=2&c=5&rel=gt", "Løsning", "alle x"],
+      ["?a=1&b=2&c=5&rel=lt", "Som intervall", "∅"],
+      ["?a=1&b=-4&c=4&rel=le", "Løsning", "x = 2"],
+      ["?a=1&b=-4&c=4&rel=gt", "Løsning", "x < 2 eller x > 2"],
+      ["?a=-5&b=20&c=-15&rel=gt", "Løsning", "1 < x < 3"],
+      ["?a=0&b=-2&c=4&rel=ge", "Som intervall", "⟨←, 2]"],
+    ],
+    meldinger: [["?a=1&b=2&c=5&rel=gt", "Ingen nullpunkter"], ["?a=1&b=-4&c=4&rel=le", "Ett nullpunkt"], ["?a=0&b=-2&c=4&rel=ge", "snur"]],
+    tekst: [["?a=-1&b=1&c=6&rel=ge", "#fortegn", ["a=−1", "f(x)−0+0−"]]],
+  },
+  "modellering-og-regresjon": {
+    oppgaver: 5,
+    utenGlider: true,
+    verdier: [
+      ["", "R²", "0,9995"],
+      ["?sett=taxi&modell=lineaer&x=30", "f(30)", "≈ 667,4"],
+      ["?sett=bakterier&modell=lineaer", "R²", "0,896"],
+      ["?sett=bakterier&modell=eksponentiell&x=8", "f(8)", "≈ 3128"],
+      ["?sett=bakterier&modell=eksponentiell", "Vekstfaktor", "1,507 (+50,71 % per enhet)"],
+      ["?sett=bil&modell=eksponentiell&x=9", "f(9)", "≈ 92,91"],
+      ["?sett=bil&modell=andregrad&x=15", "f(15)", "≈ 176,4"],
+      ["?sett=kast&modell=andregrad&x=5", "f(5)", `≈ ${M}36,11`],
+      ["?sett=kast&modell=lineaer", "R²", "0,2244"],
+      ["?sett=pendel&modell=potens&x=4", "R²", "0,9998"],
+      ["?sett=pendel&modell=potens&x=4", "f(4)", "≈ 4,007"],
+      ["?sett=bil&modell=potens", "Modell", "Ingen"],
+      ["?sett=egne&modell=lineaer&data=1_2~2_4~3_6", "R²", "1"],
+    ],
+    meldinger: [["?sett=kast&modell=andregrad&x=5", "Utenfor dataene"], ["?sett=bil&modell=potens", "positive x"], ["?sett=egne&modell=eksponentiell&data=1_-2~2_4~3_6", "større enn 0"]],
+    tekst: [["", "#forskrift", ["f(x)=18,97x+98,33"]], ["?sett=bakterier&modell=eksponentiell", "#forskrift", ["f(x)=117,5⋅1,507x"]], ["?sett=kast&modell=andregrad", "#forskrift", ["f(x)=−4,905x2+17x+1,512"]], ["?sett=pendel&modell=potens", "#forskrift", ["f(x)=2,005⋅x0,4993"]]],
   },
 };
 
@@ -670,6 +755,13 @@ for (const [id, oppsett] of Object.entries(UTFORSKERE)) {
 
   // Tastatur: piltast på første synlige glidebryter endrer verdien
   await side.goto(URL_, { waitUntil: "networkidle" });
+  if (oppsett.utenGlider) {
+    // Utforskere med nedtrekkslister i stedet for glidebrytere: endring i lista leses opp
+    await side.selectOption("#modell", "andregrad");
+    await side.waitForTimeout(700);
+    const live = await side.evaluate(() => Array.from(document.querySelectorAll("[aria-live]")).map((e) => e.textContent).join(" "));
+    sjekk(live.includes("Andregrad"), `${id}: aria-live leser opp endringen`, live);
+  } else {
   const glider = side.locator('.glider:not([hidden]) input[type="range"]').first();
   const tallfelt = side.locator('.glider:not([hidden]) input[type="text"]').first();
   const før = await tallfelt.inputValue();
@@ -679,6 +771,7 @@ for (const [id, oppsett] of Object.entries(UTFORSKERE)) {
   await side.waitForTimeout(700);
   const live = await side.evaluate(() => Array.from(document.querySelectorAll("[aria-live]")).map((e) => e.textContent).join(" "));
   sjekk(live.length > 5, `${id}: aria-live leser opp endringen`, live);
+  }
 
   // Nedlasting av figuren (SVG)
   const [nedlasting] = await Promise.all([side.waitForEvent("download"), side.click("#last-ned-svg")]);
@@ -913,6 +1006,93 @@ console.log("\n10. Tilfeldige verdier");
     if (utenFeil < 300 || utenFeil > 900) feil.push(`andel uten feil: ${utenFeil}/3000`);
     return feil;
   })).length === 0, "finn feilen: 3000 tilfeldige oppgaver, feilen står i riktig steg og synes");
+  await sjekkFuzz("polynomfunksjoner", () => {
+    const { analyser } = window.mattelabPolynom; const feil = [];
+    const t = () => Math.round((Math.random() * 12 - 6) * 2) / 2;
+    for (let i = 0; i < 2000; i++) {
+      const n = 1 + Math.floor(Math.random() * 4);
+      const a = Math.round((Math.random() * 6 - 3) * 10) / 10 || 1;
+      const rotter = Array.from({ length: n }, t);
+      const r = analyser(a, rotter);
+      const prod = (x) => a * rotter.reduce((s, q) => s * (x - q), 1);
+      for (const x of [-2.3, 0.7, 3.1]) if (Math.abs(r.f(x) - prod(x)) > 1e-7 * (1 + Math.abs(prod(x)))) feil.push(`utvidet ${a} ${rotter}`);
+      for (const iv of r.intervaller) {
+        const m = !Number.isFinite(iv.fra) ? iv.til - 0.5 : !Number.isFinite(iv.til) ? iv.fra + 0.5 : (iv.fra + iv.til) / 2;
+        if (Math.sign(prod(m)) !== iv.fortegn) feil.push(`fortegn ${a} ${rotter}`);
+      }
+      // I topp- og bunnpunktene er den deriverte null
+      for (const e of r.ekstremal) {
+        const h = 1e-5, d = (prod(e.x + h) - prod(e.x - h)) / (2 * h);
+        if (Math.abs(d) > 1e-3 * (1 + Math.abs(a) * 100)) feil.push(`ekstremal ${a} ${rotter} x=${e.x} f'=${d}`);
+      }
+      if (n % 2 === 1 && r.hoyre === r.venstre) feil.push(`ender ${a} ${rotter}`);
+    }
+    return feil;
+  }, "polynomfunksjoner: 2000 tilfeldige, utvidet form, fortegn, topp- og bunnpunkter og ender stemmer");
+  await sjekkFuzz("polynomdivisjon", () => {
+    const { analyser } = window.mattelabPolynomdivisjon; const feil = [];
+    const t = (k) => Math.round(Math.random() * 2 * k - k);
+    for (let i = 0; i < 3000; i++) {
+      const v = { c3: t(5), c2: t(10), c1: t(10), c0: t(10), r: t(5) };
+      const r = analyser(v);
+      const P = (x) => v.c3 * x ** 3 + v.c2 * x ** 2 + v.c1 * x + v.c0;
+      const Q = (x) => r.kvotient.reduce((s, c, j) => s + c * x ** j, 0);
+      for (const x of [-1.7, 0.3, 2.9]) if (Math.abs(P(x) - ((x - v.r) * Q(x) + r.restTall)) > 1e-8 * (1 + Math.abs(P(x)))) feil.push(JSON.stringify(v));
+      if (r.restTall !== P(v.r)) feil.push("restteoremet " + JSON.stringify(v));
+    }
+    return feil;
+  }, "polynomdivisjon: 3000 tilfeldige, P(x) = (x − r)Q(x) + R og R = P(r)");
+  await sjekkFuzz("andregradsulikheter", () => {
+    const { los } = window.mattelabUlikheter; const feil = [];
+    const t = () => Math.round((Math.random() * 10 - 5) * 2) / 2;
+    const rel = ["gt", "ge", "lt", "le"];
+    const oppfylt = (y, q) => (q === "gt" ? y > 0 : q === "ge" ? y >= 0 : q === "lt" ? y < 0 : y <= 0);
+    for (let i = 0; i < 1500; i++) {
+      const [a, b, c] = [t(), t(), t()], q = rel[i % 4];
+      const L = los(a, b, c, q);
+      const med = (x) => L.deler.some((d) => ("punkt" in d ? Math.abs(d.punkt - x) < 1e-12
+        : (x > d.fra || (d.fraMed && x === d.fra)) && (x < d.til || (d.tilMed && x === d.til))));
+      // Tilfeldige punkter, og nullpunktene selv
+      const punkter = [...Array.from({ length: 40 }, () => Math.random() * 30 - 15), ...L.null_];
+      for (const x of punkter) {
+        const y = a * x * x + b * x + c;
+        if (Math.abs(y) < 1e-9 && !L.null_.includes(x)) continue;
+        if (oppfylt(L.null_.includes(x) ? 0 : y, q) !== med(x)) { feil.push(`${a},${b},${c} ${q} x=${x}`); break; }
+      }
+    }
+    return feil;
+  }, "andregradsulikheter: 1500 tilfeldige, løsningsmengden stemmer i tilfeldige punkter og i nullpunktene");
+  await sjekkFuzz("modellering-og-regresjon", () => {
+    const { tilpass } = window.mattelabRegresjon; const feil = [];
+    const xs = [0.5, 1, 2, 3, 4.5, 6];
+    for (let i = 0; i < 300; i++) {
+      const a = Math.round(Math.random() * 40 + 1) / 10, b = Math.round(Math.random() * 30 - 15) / 10, c = Math.round(Math.random() * 20 - 10) / 10;
+      const sjekkModell = (navn, f, k) => {
+        const m = tilpass(navn, xs, xs.map(f));
+        if (!m.ok || Object.entries(k).some(([n, v]) => Math.abs(m.k[n] - v) > 1e-6 * (1 + Math.abs(v))) || Math.abs(m.r2 - 1) > 1e-9) feil.push(`${navn} ${a} ${b} ${c}`);
+      };
+      sjekkModell("lineaer", (x) => a * x + b, { a, b });
+      sjekkModell("andregrad", (x) => a * x * x + b * x + c, { a, b, c });
+      sjekkModell("eksponentiell", (x) => a * (1 + Math.abs(b) / 10) ** x, { a, b: 1 + Math.abs(b) / 10 });
+      sjekkModell("potens", (x) => a * x ** b, { a, b });
+    }
+    return feil;
+  }, "regresjon: 300 tilfeldige eksakte data, alle fire modellene finner tallene igjen og R² = 1");
+  await sjekkFuzz("potensfunksjoner", () => {
+    const { analyser, EKSPONENTER } = window.mattelabPotensfunksjon; const feil = [];
+    for (const bt of Object.keys(EKSPONENTER)) {
+      const [p, q] = EKSPONENTER[bt];
+      for (const a of [-2, 0.5, 3]) {
+        const r = analyser(a, bt);
+        for (const x of [0.25, 1, 2.5, 9]) if (Math.abs(r.f(x) - a * x ** (p / q)) > 1e-9 * (1 + Math.abs(a * x ** (p / q)))) feil.push(`${bt} ${a} x=${x}`);
+        // Negative x: bare definert når nevneren er odde, og f(−x) = ±f(x) etter telleren
+        const fm = r.f(-8), fp = r.f(8);
+        if (q % 2 === 0 ? !Number.isNaN(fm) : Math.abs(fm - (p % 2 === 0 ? fp : -fp)) > 1e-9 * (1 + Math.abs(fp))) feil.push(`negativ x ${bt} ${a}`);
+        if (Number.isFinite(r.f(0)) === (p < 0)) feil.push(`x = 0 ${bt}`);
+      }
+    }
+    return feil;
+  }, "potensfunksjoner: verdier, negative x og x = 0 stemmer for alle eksponentene");
   await kontekst.close();
 }
 
@@ -1136,7 +1316,104 @@ console.log("\n14. Øvinger: riktige og gale svar");
     const ferdig = await side.textContent("#fk-ferdig");
     sjekk(ferdig.includes("Ferdig"), `fullfør kvadratet nivå ${niva}: riktige svar gjennom alle stegene gir «Ferdig»`, ferdig);
   }
+  // Stigningstall og konstantledd: riktige svar gjennom alle stegene på alle nivåene
+  for (const niva of [1, 2, 3, 4]) {
+    for (const fro of [3, 8]) {
+      await side.goto(BASE + `varierende/stigningstall-og-konstantledd.html?niva=${niva}&frø=${fro * 13 + niva}`, { waitUntil: "networkidle" });
+      const o = await side.evaluate(() => window.mattelabStigningstall.gjeldende());
+      if (fro === 3) {
+        // Δx og Δy byttet om, eller Δx/Δy i stedet for Δy/Δx, gir egne tilbakemeldinger
+        if (niva !== 3) {
+          const f = side.locator(".fk-steg:last-child input[type=text]");
+          await f.nth(0).fill(String(-o.dx)); await f.nth(1).fill(String(-o.dy));
+          await side.click(".fk-steg:last-child .fk-sjekk");
+          sjekk((await side.textContent(".fk-steg:last-child .ovelse-tilbake")).includes("motsatt rekkefølge"), `stigningstall nivå ${niva}: motsatt rekkefølge gir egen tilbakemelding`);
+        } else {
+          await side.fill(".fk-steg:last-child input[type=text]", "1000");
+          await side.click(".fk-steg:last-child .fk-sjekk");
+          sjekk((await side.textContent(".fk-steg:last-child .ovelse-tilbake")).includes("Ikke riktig"), `stigningstall nivå ${niva}: galt svar gir hint`);
+        }
+      }
+      for (const s of o.svar) {
+        const felt = side.locator(".fk-steg:last-child input[type=text]");
+        // Skriv svaret som brøk når det trengs (for eksempel 2/3), ellers med desimalkomma
+        const somTekst = (x) => { const n = [1, 2, 3, 4].find((d) => Math.abs(Math.round(x * d) - x * d) < 1e-9); return n === 1 || !n ? String(x).replace(".", ",") : `${Math.round(x * n)}/${n}`; };
+        for (let j = 0; j < s.length; j++) await felt.nth(j).fill(somTekst(s[j]));
+        await side.click(".fk-steg:last-child .fk-sjekk");
+      }
+      const ferdig = await side.textContent("#sg-ferdig");
+      const ok = ferdig.includes("Ferdig") && o.svar.every((s) => s.every(Number.isFinite));
+      sjekk(ok, `stigningstall nivå ${niva} (frø ${fro * 13 + niva}): riktige svar gir «Ferdig», a = ${o.a}, b = ${o.b}`, ferdig);
+    }
+  }
+  // Oppgavene er laget baklengs: punktene ligger på linja
+  const baklengs = await side.evaluate(() => {
+    const { lagOppgave } = window.mattelabStigningstall; const feil = [];
+    let s = 1;
+    const r = { tall: () => { s = (s * 16807) % 2147483647; return s / 2147483647; } };
+    r.heltall = (a, b) => a + Math.floor(r.tall() * (b - a + 1)); r.velg = (l) => l[Math.floor(r.tall() * l.length)];
+    for (let i = 0; i < 2000; i++) {
+      const o = lagOppgave(1 + (i % 4), r);
+      if (Math.abs(o.a * o.x1 + o.b - o.y1) > 1e-9 || Math.abs(o.a * o.x2 + o.b - o.y2) > 1e-9 || o.dx === 0) feil.push(JSON.stringify(o));
+      if (o.niva === 3 && o.tabellY.some((y, k) => Math.abs(y - (o.a * o.tabellX[k] + o.b)) > 1e-9)) feil.push("tabell");
+      if (o.niva <= 2 && !Number.isInteger(o.y1)) feil.push("y ikke heltall: " + JSON.stringify(o));
+    }
+    return feil;
+  });
+  sjekk(baklengs.length === 0, "stigningstall: 2000 tilfeldige oppgaver, punktene og tabellene ligger på linja", baklengs.slice(0, 2).join(" | "));
   sjekk(problemer.length === 0, "øvingene: ingen JS-feil", problemer.join(" | "));
+  await kontekst.close();
+}
+
+// ---------------------------------------------------------------- 15. undervisningsopplegg
+console.log("\n15. Undervisningsopplegg: tidsplan, kompetansemål og elevark");
+{
+  const km = JSON.parse(fs.readFileSync(path.join(ROT, "data", "kompetansemaal.json"), "utf8"));
+  const alleMaal = Object.values(km.fag).flatMap((f) => f.maal);
+  const opplegg = SIDER.filter((s) => s.startsWith("opplegg/") && !s.endsWith("index.html"));
+  sjekk(opplegg.length === 10, "det finnes ti undervisningsopplegg", String(opplegg.length));
+  for (const navn of opplegg) {
+    const id = navn.split("/").pop().replace(".html", "");
+    const { side, kontekst, problemer } = await nySide();
+    await side.goto(BASE + navn, { waitUntil: "networkidle" });
+    const info = await side.evaluate(() => {
+      const deler = Array.from(document.querySelectorAll(".tidsdel"));
+      return {
+        varighet: Number(document.querySelector(".opplegg-merke span").textContent.replace(/\D/g, "")),
+        minutter: deler.map((d) => Number(d.dataset.min)),
+        tider: deler.map((d) => d.querySelector(".tidsdel-tid").textContent),
+        linje: document.querySelectorAll(".tidslinje li").length,
+        maal: Array.from(document.querySelectorAll(".maal-sitat li")).map((l) => l.textContent.replace(/^.*?mål \d+\s*/, "").replace(/^«|»$/g, "")),
+        lukket: Array.from(document.querySelectorAll(".tidsdel details, details.fasit")).every((d) => !d.open),
+      };
+    });
+    const sum = info.minutter.reduce((a, b) => a + b, 0);
+    sjekk([45, 90, 135].includes(info.varighet) && sum === info.varighet, `${id}: delene er ${sum} minutter, som er varigheten`, `${info.varighet}`);
+    sjekk(info.linje === info.minutter.length && info.tider.at(-1).startsWith(`${info.varighet - info.minutter.at(-1)}–${info.varighet} min`), `${id}: tidslinja og klokkeslettene stemmer`, info.tider.join(", "));
+    sjekk(info.maal.length > 0 && info.maal.every((m) => alleMaal.includes(m)), `${id}: kompetansemålene er sitert ordrett`, info.maal.filter((m) => !alleMaal.includes(m)).join(" | "));
+    sjekk(info.lukket, `${id}: svar og løsningsforslag er lukket fra start`);
+    // Elevarket: alle oppgavetitlene og deloppgavene, men ingen fasit
+    const pdfUrl = await side.getAttribute(".elevark-lenke a[href$='.pdf']", "href");
+    const pdfFil = path.join(RES, `opplegg-${id}.pdf`);
+    fs.writeFileSync(pdfFil, await (await side.request.get(new URL(pdfUrl, side.url()).href)).body());
+    const pdfTekst = execFileSync("pdftotext", ["-layout", pdfFil, "-"]).toString().replace(/\s+/g, " ");
+    const titler = await side.$$eval(".oppgave > h3", (h) => h.map((x) => { const k = x.cloneNode(true); k.querySelectorAll(".katex-mathml, .oppgave-nr").forEach((m) => m.remove()); return k.textContent.trim().split(/\s+/)[0]; }));
+    sjekk(titler.every((t) => pdfTekst.includes(t)) && pdfTekst.includes("a)") && pdfTekst.includes("Opplegget ligger på"), `${id}: elevarket har oppgavene med deloppgaver a), b) …`, titler.filter((t) => !pdfTekst.includes(t)).join(", "));
+    const fasitbiter = await side.$$eval(".fasit-innhold p", (ps) => ps.map((p) => {
+      const k = p.cloneNode(true); k.querySelectorAll(".katex").forEach((m) => m.replaceWith("|"));
+      return k.textContent.split("|").map((t) => t.trim()).sort((a, b) => b.length - a.length)[0];
+    }).filter((t) => t && t.split(/\s+/).length >= 4));
+    const lekket = fasitbiter.filter((b) => pdfTekst.includes(b.replace(/\s+/g, " ")));
+    sjekk(lekket.length === 0, `${id}: elevarket inneholder ikke fasit (${fasitbiter.length} biter sjekket)`, lekket.slice(0, 2).join(" | "));
+    sjekk(problemer.length === 0, `${id}: ingen JS-feil`, problemer.join(" | "));
+    await kontekst.close();
+  }
+  // Oversikten står i rekkefølgen fra «rekkefolge»
+  const { side, kontekst } = await nySide();
+  await side.goto(BASE + "opplegg/index.html", { waitUntil: "networkidle" });
+  const titler = await side.$$eval(".sim-kort-tittel", (t) => t.map((x) => x.textContent));
+  sjekk(titler[0] === "Hva er en funksjon?" && titler.at(-1) === "Repetisjon av funksjoner", "oversikten over opplegg står i undervisningsrekkefølge", titler.join(" · "));
+  sjekk((await side.$$eval(".fag-merke.varighet", (m) => m.length)) === 10, "hvert opplegg viser varigheten på kortet");
   await kontekst.close();
 }
 

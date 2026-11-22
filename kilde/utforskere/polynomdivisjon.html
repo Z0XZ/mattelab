@@ -1,0 +1,171 @@
+---
+tittel: Polynomdivisjon
+beskrivelse: Del et polynom på (x − r) steg for steg. Se at resten er P(r), finn faktorer og nullpunkter, og se skrå asymptoter i grafen til brøken.
+type: utforsker
+fag: 1T
+tema: algebra, funksjoner
+ikon: polynomdivisjon
+skript: utforskere/polynomdivisjon.js
+---
+<p class="ingress">Polynomdivisjon fungerer som vanlig oppstilt divisjon med tall. Du deler det høyeste leddet, ganger tilbake og trekker fra, til det som står igjen har lavere grad enn divisoren. Her kan du gå gjennom stegene ett om gangen og se hva svaret betyr for grafen.</p>
+
+<figure class="sim sim-bred" id="utforsker" aria-label="Utforsker for polynomdivisjon">
+  <div class="sim-delt">
+    <div class="sim-graf">
+      <svg id="graf" class="kun-js"></svg>
+      <div class="noscript-melding kun-uten-js">
+        <p><strong>Utforskeren trenger JavaScript.</strong> Resten av siden, med forklaring og oppgaver, virker uten.</p>
+        <p>Eksempel: $(x^3 - 2x^2 - 5x + 6) : (x - 1) = x^2 - x - 6$. Divisjonen går opp, så $x - 1$ er en faktor, og $x = 1$ er et nullpunkt.</p>
+      </div>
+      <dl class="sim-tall kun-js" id="verdier"></dl>
+    </div>
+    <div class="sim-side-panel kun-js">
+      <div class="sim-styring">
+        <div class="panel-gruppe">
+          <p class="panel-tittel">Telleren $P(x)$: tallene foran</p>
+          <div id="glidere-teller" class="glidere"></div>
+        </div>
+        <div class="panel-gruppe">
+          <p class="panel-tittel">Divisoren $x - r$</p>
+          <div id="glidere-nevner" class="glidere"></div>
+        </div>
+      </div>
+      <div class="sim-blokk">
+        <p class="panel-tittel">Brøken</p>
+        <div class="forskrift" id="forskrift"></div>
+      </div>
+      <div id="melding" class="sim-blokk melding" hidden></div>
+    </div>
+  </div>
+  <div class="sim-blokk divisjon-blokk kun-js" aria-labelledby="divisjon-tittel">
+    <p class="panel-tittel" id="divisjon-tittel">Oppstillingen</p>
+    <div class="divisjon-knapper">
+      <button type="button" class="knapp lys liten" id="fra-start">Fra start</button>
+      <button type="button" class="knapp lys liten" id="forrige-steg"><span aria-hidden="true">←</span> Forrige steg</button>
+      <button type="button" class="knapp liten" id="neste-steg">Neste steg <span aria-hidden="true">→</span></button>
+      <button type="button" class="knapp lys liten" id="alle-steg">Vis alle stegene</button>
+      <span class="divisjon-teller" id="steg-teller"></span>
+    </div>
+    <div class="divisjon-rull" id="oppstilling"></div>
+    <p class="steg-forklaring" id="steg-forklaring" aria-live="polite"></p>
+    <div class="utregning divisjon-resultat" id="resultat"></div>
+  </div>
+  <fieldset class="sim-valg kun-js" id="visvalg">
+    <legend>Vis i grafen</legend>
+    <label class="avkrysning"><input type="checkbox" name="kvotient" checked> Asymptotene, også kvotienten som skrå asymptote (stiplet)</label>
+    <label class="avkrysning"><input type="checkbox" name="punkt" checked> Punktet (r, P(r))</label>
+  </fieldset>
+  {{figurverktoy}}
+  <figcaption class="sim-hint">Grafen viser brøken $\frac{P(x)}{x - r}$. Velg tallene i telleren og verdien av $r$. Bruk knappene for å gå gjennom divisjonen ett steg om gangen.</figcaption>
+</figure>
+
+<details class="teori" id="matematikken">
+<summary><span class="teori-tittel">Matematikken bak</span><span class="teori-hint">Fremgangsmåten, restteoremet, faktorisering og skrå asymptoter</span></summary>
+<div class="teori-innhold tekst">
+
+<h3>Fremgangsmåten</h3>
+<ol>
+  <li>Del det høyeste leddet i det som står igjen på $x$. Det blir neste ledd i svaret.</li>
+  <li>Gang hele divisoren $x - r$ med dette leddet.</li>
+  <li>Trekk resultatet fra. Det høyeste leddet forsvinner.</li>
+  <li>Gjenta til det som står igjen, bare er et tall. Det tallet er resten.</li>
+</ol>
+<p>Mangler et ledd i telleren, for eksempel $x^2$ i $x^3 - 7x + 6$, er det lurt å skrive $0x^2$, så leddene står riktig under hverandre.</p>
+
+<h3>Resultatet</h3>
+<p>Kaller vi svaret $Q(x)$ og resten $R$, er</p>
+$$\frac{P(x)}{x - r} = Q(x) + \frac{R}{x - r} \qquad \text{eller} \qquad P(x) = (x - r) \cdot Q(x) + R$$
+
+<h3>Restteoremet</h3>
+<p>Setter vi $x = r$ inn i den siste likningen, blir $(x - r) \cdot Q(x) = 0$. Da står det $P(r) = R$. Resten er altså verdien av polynomet i $r$. Du kan finne resten uten å dele.</p>
+<p>Spesielt gjelder: $P(r) = 0$ betyr at divisjonen går opp, og at $x - r$ er en faktor i $P(x)$. Slik kan du faktorisere et tredjegradspolynom når du har funnet ett nullpunkt. Er alle tallene i $P(x)$ heltall og tallet foran $x^3$ er $1$, er heltallige nullpunkter alltid divisorer i konstantleddet.</p>
+
+<h3>Asymptoter</h3>
+<p>Når $x$ blir stor, går $\frac{R}{x - r}$ mot $0$. Da ligger grafen til brøken nær grafen til $Q(x)$. Er $Q(x)$ lineær, kalles den en <strong>skrå asymptote</strong>. Er $R \neq 0$, er $x = r$ en loddrett asymptote. Er $R = 0$, har grafen bare et hull i $x = r$.</p>
+</div>
+</details>
+
+<section class="oppgaver" aria-labelledby="oppgaver-tittel">
+<h2 id="oppgaver-tittel">Oppgaver</h2>
+{{elevark}}
+<p class="del-inngang">Hver oppgave har tre steg. <strong>Gjett</strong> først, uten å bruke utforskeren. <strong>Test</strong> så i utforskeren. <strong>Forklar</strong> til slutt med egne ord hvorfor det blir slik.</p>
+
+<div class="oppgave" id="oppgave-1">
+  <h3><span class="oppgave-nr">1</span>En divisjon som går opp</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Regn ut $(x^3 - 2x^2 - 5x + 6) : (x - 1)$ for hånd. Hva blir første ledd i svaret?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?c3=1&amp;c2=-2&amp;c1=-5&amp;c0=6&amp;r=1#utforsker">Sett opp divisjonen</a>. Trykk «Fra start» og gå gjennom stegene. Sammenlign med din egen utregning.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Bruk svaret til å faktorisere $x^3 - 2x^2 - 5x + 6$ helt. Hvilke nullpunkter har polynomet?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>Første ledd er $x^2$, fordi $x^3 : x = x^2$. Stegene:</p>
+    <ul>
+      <li>$x^2(x - 1) = x^3 - x^2$. Igjen står $-x^2 - 5x + 6$.</li>
+      <li>$-x(x - 1) = -x^2 + x$. Igjen står $-6x + 6$.</li>
+      <li>$-6(x - 1) = -6x + 6$. Igjen står $0$.</li>
+    </ul>
+    <p>Svaret er $x^2 - x - 6$, og divisjonen går opp. Videre er $x^2 - x - 6 = (x - 3)(x + 2)$, fordi $-3 \cdot 2 = -6$ og $-3 + 2 = -1$. Da er</p>
+    $$x^3 - 2x^2 - 5x + 6 = (x - 1)(x - 3)(x + 2)$$
+    <p>Nullpunktene er $x = -2$, $x = 1$ og $x = 3$.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-2">
+  <h3><span class="oppgave-nr">2</span>Resten</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Hva blir resten når $P(x) = x^2 + 3x + 5$ deles på $x - 2$? Regn ut $P(2)$ også.</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?c3=0&amp;c2=1&amp;c1=3&amp;c0=5&amp;r=2#utforsker">Sett opp divisjonen</a>. Les av resten og $P(2)$. Endre $r$ og konstantleddet noen ganger. Hva ser du?</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Start med $P(x) = (x - r) \cdot Q(x) + R$. Forklar hvorfor resten alltid er $P(r)$.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>$(x^2 + 3x + 5) : (x - 2) = x + 5$ med rest $15$. Og $P(2) = 4 + 6 + 5 = 15$.</p>
+    <p>Resten og $P(r)$ er alltid like.</p>
+    <p>Setter vi $x = r$ inn i $P(x) = (x - r) \cdot Q(x) + R$, får vi $P(r) = 0 \cdot Q(r) + R = R$.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-3">
+  <h3><span class="oppgave-nr">3</span>Finn et nullpunkt og faktoriser</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>$P(x) = x^3 - 7x + 6$. Prøv deg fram med $x = \pm 1$, $\pm 2$, $\pm 3$ og $\pm 6$. Hvilke av dem gir $P(x) = 0$?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?c3=1&amp;c2=0&amp;c1=-7&amp;c0=6&amp;r=1#utforsker">Sett opp $P(x) : (x - 1)$</a>. Legg merke til leddet $0x^2$. Dra $r$ og se når resten blir $0$.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Faktoriser $P(x)$ helt. Hvorfor er det nok å prøve divisorene i $6$?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>$P(1) = 0$, $P(2) = 0$ og $P(-3) = 0$. De andre gir $P(-1) = P(-2) = P(3) = 12$, $P(6) = 180$ og $P(-6) = -168$.</p>
+    <p>$(x^3 - 7x + 6) : (x - 1) = x^2 + x - 6$, og $x^2 + x - 6 = (x + 3)(x - 2)$. Altså er</p>
+    $$x^3 - 7x + 6 = (x - 1)(x - 2)(x + 3)$$
+    <p>Ganger vi ut $(x - r_1)(x - r_2)(x - r_3)$, blir konstantleddet $-r_1 r_2 r_3$. Er nullpunktene heltall, må hvert av dem derfor dele $6$.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-4">
+  <h3><span class="oppgave-nr">4</span>En skrå asymptote</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Hvordan tror du grafen til $f(x) = \frac{x^2 + x - 1}{x - 1}$ ser ut for store $x$?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?c3=0&amp;c2=1&amp;c1=1&amp;c0=-1&amp;r=1#utforsker">Sett opp brøken</a>. Les av svaret og resten. Zoom ut og se på grafen og den stiplede linja.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Skriv $f(x)$ som et polynom pluss en brøk. Forklar hvorfor grafen nærmer seg linja $y = x + 2$.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>$(x^2 + x - 1) : (x - 1) = x + 2$ med rest $1$. Altså er</p>
+    $$f(x) = x + 2 + \frac{1}{x - 1}$$
+    <p>Når $x$ blir stor, går $\frac{1}{x - 1}$ mot $0$. Da blir $f(x)$ nesten lik $x + 2$, og grafen nærmer seg linja. For eksempel er $f(11) = 13{,}1$, mens $11 + 2 = 13$. Linja $y = x + 2$ er en skrå asymptote, og $x = 1$ er en loddrett asymptote.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-5">
+  <h3><span class="oppgave-nr">5</span>En ulikhet</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>For hvilke $x$ er $x^3 - 2x^2 - 5x + 6 > 0$? Bruk faktoriseringen fra oppgave 1.</p></div></li>
+  <li><span class="fase test">Test</span><div><p>Se på grafen til polynomet i <a href="polynomfunksjoner.html?grad=3&amp;a=1&amp;r1=-2&amp;r2=1&amp;r3=3#utforsker">utforskeren for polynomfunksjoner</a>. Slå på fortegnet på x-aksen og sammenlign med svaret ditt.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Lag et fortegnsskjema med én linje for hver faktor. Forklar hvordan du finner fortegnet til produktet.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    $$x^3 - 2x^2 - 5x + 6 = (x + 2)(x - 1)(x - 3)$$
+    <p>Ulikheten er oppfylt når $-2 < x < 1$ eller $x > 3$.</p>
+    <p>Fortegnsskjema: Faktoren $x + 2$ er negativ når $x < -2$ og positiv ellers. $x - 1$ skifter fortegn i $1$, og $x - 3$ i $3$. Produktet er positivt når et partall av faktorene er negative. Testpunkter gir det samme: $P(-3) = -24$, $P(0) = 6$, $P(2) = -4$ og $P(4) = 18$.</p>
+  </div></details>
+</div>
+</section>
+
+<p class="merknad">For lærere: Se <a href="{{rot}}laerer.html">lærersiden</a> for kobling til kompetansemålene.</p>

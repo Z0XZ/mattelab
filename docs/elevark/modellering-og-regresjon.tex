@@ -1,0 +1,86 @@
+%% Elevark fra mattelab.no – laget automatisk av bygg.py. Rediger gjerne til eget bruk.
+%% Kompiler med lualatex.
+\documentclass[11pt,a4paper]{article}
+\usepackage[norsk]{babel}
+\usepackage[a4paper,margin=2.2cm,top=2cm,bottom=2.4cm]{geometry}
+\usepackage{fontspec}
+\usepackage{unicode-math}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{TeX Gyre Heros}[Scale=MatchLowercase]
+\setmathfont{TeX Gyre Pagella Math}
+\usepackage{xcolor}
+\definecolor{blekk}{HTML}{16213A}
+\definecolor{dempet}{HTML}{566077}
+\definecolor{rute}{HTML}{CFC9B8}
+\definecolor{m1}{HTML}{2F4AB0}
+\definecolor{m2}{HTML}{99266D}
+\usepackage[most]{tcolorbox}
+\usepackage{qrcode}
+\usepackage{needspace}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+\pdfvariable suppressoptionalinfo \numexpr 1+2+4+8+16+32+64+128+256+512\relax
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.4em}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[L]{\sffamily\footnotesize\color{dempet}mattelab.no · Modellering og regresjon · elevark uten fasit}
+\fancyfoot[R]{\sffamily\footnotesize\color{dempet}Side \thepage}
+
+\newcommand{\fase}[2]{\tcbox[on line, colframe=#2, colback=white, coltext=#2, boxrule=0.6pt, arc=2pt,
+  boxsep=0pt, left=3pt, right=3pt, top=1.5pt, bottom=1.5pt, fontupper=\sffamily\bfseries\footnotesize]{#1}}
+\newcommand{\steg}[4]{%
+  \par\noindent{\color{rute}\rule{\linewidth}{0.4pt}}\par\nopagebreak
+  \noindent\begin{minipage}[t]{2.1cm}\vspace{0pt}\fase{#1}{#2}\end{minipage}%
+  \begin{minipage}[t]{\dimexpr\linewidth-2.1cm\relax}\vspace{0pt}#3\end{minipage}\par
+  \vspace{#4}}
+\newcommand{\del}[4]{%
+  \par\noindent{\color{rute}\rule{\linewidth}{0.4pt}}\par\nopagebreak
+  \noindent\begin{minipage}[t]{1.1cm}\vspace{0pt}\fase{#1}{#2}\end{minipage}%
+  \begin{minipage}[t]{\dimexpr\linewidth-1.1cm\relax}\vspace{0pt}#3\end{minipage}\par
+  \vspace{#4}}
+\newcommand{\oppgave}[2]{\par\Needspace{12\baselineskip}\vspace{0.6em}%
+  {\fontsize{14}{17}\selectfont\bfseries{\color{m1}#1}\enspace #2}\par\vspace{0.2em}}
+
+\begin{document}
+\begin{minipage}[t]{0.72\linewidth}\vspace{0pt}
+{\sffamily\small\color{dempet}Elevark · 1T · mattelab.no}\par\vspace{0.3em}
+{\fontsize{24}{28}\selectfont\bfseries Modellering og regresjon}\par\vspace{1em}
+{\sffamily\small Navn: \rule{4.6cm}{0.4pt}\quad Klasse: \rule{1.5cm}{0.4pt}\quad Dato: \rule{1.9cm}{0.4pt}}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.22\linewidth}\vspace{0pt}\raggedleft
+\qrcode[height=2.3cm]{https://mattelab.no/utforskere/modellering-og-regresjon.html}\par\vspace{0.2em}
+{\sffamily\scriptsize\color{dempet}Utforskeren}
+\end{minipage}
+
+\vspace{1em}
+{\sffamily\small\color{dempet}Utforskeren ligger på \url{https://mattelab.no/utforskere/modellering-og-regresjon.html}}\par
+Hver oppgave har tre steg. \textbf{Gjett} først, uten å bruke utforskeren. \textbf{Test} så i utforskeren. \textbf{Forklar} til slutt med egne ord. Dataene er tenkte, laget for å øve.
+
+\oppgave{1}{Taxituren}
+\steg{Gjett}{m1}{En taxitur på $2$ km koster $138$ kr, og en tur på $20$ km koster $476$ kr. Omtrent hvor mye koster hver kilometer? Hva er startprisen?}{2.2cm}
+\steg{Test}{m2}{Velg taxidataene med lineær modell. Les av modellen, $R^2$ og prisen for $30$ km.}{2.6cm}
+\steg{Forklar}{blekk}{Hva betyr $a$ og $b$ i modellen? Hvorfor er en lineær modell et rimelig valg her?}{3.4cm}
+
+\oppgave{2}{Bakteriene}
+\steg{Gjett}{m1}{Se på tallene i bakteriekulturen. Øker antallet med omtrent like mye eller med like mange prosent hver time?}{2.2cm}
+\steg{Test}{m2}{Prøv lineær modell og eksponentiell modell. Slå på avvikene. Sammenlign $R^2$ og hva modellene sier om $x = 8$.}{2.6cm}
+\steg{Forklar}{blekk}{Hva betyr vekstfaktoren i den eksponentielle modellen? Hva sier modellen om antallet etter ett døgn, og er det troverdig?}{3.4cm}
+
+\oppgave{3}{Verdien av en bil}
+\steg{Gjett}{m1}{En bil koster omtrent $400\,000$ kr som ny. Hvor mange prosent tror du verdien synker hvert år? Når er den verdt under $100\,000$ kr?}{2.2cm}
+\steg{Test}{m2}{Prøv eksponentiell modell og andregradsmodell. Skriv inn større x-verdier og se hva modellene sier.}{2.6cm}
+\steg{Forklar}{blekk}{Begge modellene har $R^2$ nær $1$. Hvilken vil du bruke? Begrunn svaret med hva som skjer når $x$ blir stor.}{3.4cm}
+
+\oppgave{4}{Kastet}
+\steg{Gjett}{m1}{Se på høydene i kastet. Hvilken modelltype passer? Omtrent når er ballen på det høyeste, og når treffer den bakken?}{2.2cm}
+\steg{Test}{m2}{Velg andregradsmodell. Sammenlign med lineær modell. Skriv inn $x = 5$ i andregradsmodellen.}{2.6cm}
+\steg{Forklar}{blekk}{Finn toppunktet og nullpunktet til modellen ved regning. For hvilke $t$ gir modellen mening?}{3.4cm}
+
+\oppgave{5}{Pendelen}
+\steg{Gjett}{m1}{Lengden på en pendel blir fire ganger så stor. Hva tror du skjer med svingetiden?}{2.2cm}
+\steg{Test}{m2}{Velg pendeldataene med potensmodell. Les av eksponenten. Prøv også andregradsmodellen, og sammenlign hva de to sier om $x = 4$.}{2.6cm}
+\steg{Forklar}{blekk}{Eksponenten er nesten $0{,}5$. Hva betyr det? Bruk svaret til å forklare hva som skjer når lengden blir fire ganger så stor.}{3.4cm}
+
+\end{document}

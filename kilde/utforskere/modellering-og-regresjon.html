@@ -1,0 +1,176 @@
+---
+tittel: Modellering og regresjon
+beskrivelse: Tilpass en lineær, andregrads-, eksponentiell eller potensmodell til data. Sammenlign modellene, se avvikene og vurder om modellen gjelder utenfor dataene.
+type: utforsker
+fag: 1T
+tema: vekst, funksjoner
+ikon: regresjon
+skript: utforskere/regresjon.js
+---
+<p class="ingress">Regresjon betyr å finne den funksjonen av en bestemt type som passer best til noen datapunkter. Det er du som må velge typen. Den bør passe til situasjonen, ikke bare til punktene. Her kan du prøve fire modelltyper på fem datasett, eller lime inn dine egne data.</p>
+
+<figure class="sim sim-bred" id="utforsker" aria-label="Utforsker for regresjon">
+  <div class="sim-delt">
+    <div class="sim-graf">
+      <svg id="graf" class="kun-js"></svg>
+      <div class="noscript-melding kun-uten-js">
+        <p><strong>Utforskeren trenger JavaScript.</strong> Resten av siden, med forklaring og oppgaver, virker uten.</p>
+        <p>Eksempel: For taxidataene gir lineær regresjon omtrent $f(x) = 18{,}97x + 98{,}33$. En tur koster altså omtrent $98$ kr i start og $19$ kr per kilometer.</p>
+      </div>
+      <dl class="sim-tall kun-js" id="verdier"></dl>
+    </div>
+    <div class="sim-side-panel kun-js">
+      <div class="sim-styring">
+        <div class="sim-velg">
+          <label for="datasett">Datasett</label>
+          <select id="datasett">
+            <option value="taxi">Taxitur: pris og lengde</option>
+            <option value="kast">Kast: høyde og tid</option>
+            <option value="bakterier">Bakterier i en kultur</option>
+            <option value="bil">Verdien av en bil</option>
+            <option value="pendel">Pendel: svingetid og lengde</option>
+            <option value="egne">Egne data</option>
+          </select>
+        </div>
+        <p class="steg-tekst" id="enheter"></p>
+        <div id="egne-blokk" hidden>
+          <label class="felt-etikett" for="egne-data">Egne data: ett punkt per linje, x og y skilt med mellomrom</label>
+          <textarea id="egne-data" class="data-felt" rows="7" spellcheck="false"></textarea>
+        </div>
+        <div class="sim-velg">
+          <label for="modell">Modell</label>
+          <select id="modell">
+            <option value="lineaer">Lineær: ax + b</option>
+            <option value="andregrad">Andregrad: ax² + bx + c</option>
+            <option value="eksponentiell">Eksponentiell: a · bˣ</option>
+            <option value="potens">Potens: a · xᵇ</option>
+          </select>
+        </div>
+        <div class="sim-velg">
+          <label for="x-prediksjon">Regn ut modellen for x =</label>
+          <input type="text" id="x-prediksjon" inputmode="decimal" autocomplete="off" class="tall-felt">
+        </div>
+      </div>
+      <div class="sim-blokk">
+        <p class="panel-tittel">Modellen</p>
+        <div class="forskrift" id="forskrift"></div>
+        <p class="panel-tittel ny-del">Data og avvik</p>
+        <div id="tabell" class="tabell-rull-liten"></div>
+      </div>
+      <div id="melding" class="sim-blokk melding" hidden></div>
+    </div>
+  </div>
+  <fieldset class="sim-valg kun-js" id="visvalg">
+    <legend>Vis i grafen</legend>
+    <label class="avkrysning"><input type="checkbox" name="avvik"> Avvikene mellom punktene og modellen</label>
+  </fieldset>
+  {{figurverktoy}}
+  <figcaption class="sim-hint">Velg datasett og modell. Skriv en x-verdi for å regne ut modellen der. Med egne data havner punktene i adressefeltet, så du kan dele lenken.</figcaption>
+</figure>
+
+<details class="teori" id="matematikken">
+<summary><span class="teori-tittel">Matematikken bak</span><span class="teori-hint">Minste kvadraters metode, R², valg av modell og ekstrapolering</span></summary>
+<div class="teori-innhold tekst">
+
+<h3>Minste kvadraters metode</h3>
+<p>For hvert punkt er <strong>avviket</strong> forskjellen mellom målt verdi og modellverdi: $y_i - f(x_i)$. Regresjon finner tallene i modellen som gjør summen av avvikene i andre potens så liten som mulig. Vi kvadrerer for at positive og negative avvik ikke skal oppheve hverandre.</p>
+
+<h3>Eksponential- og potensmodeller</h3>
+<p>For $f(x) = a \cdot b^x$ bruker utforskeren at $\ln f(x) = \ln a + x \ln b$ er lineær i $x$. Den finner derfor den beste linja gjennom punktene $(x, \ln y)$. For $f(x) = a \cdot x^b$ bruker den punktene $(\ln x, \ln y)$. Andre digitale verktøy kan bruke en annen metode og gi litt andre tall.</p>
+
+<h3>R² – hvor godt passer modellen?</h3>
+$$R^2 = 1 - \frac{\text{summen av avvikene i andre}}{\text{summen av } (y_i - \bar{y})^2}$$
+<p>$R^2 = 1$ betyr at alle punktene ligger på grafen. Jo nærmere $1$, desto bedre passer modellen til <em>punktene</em>. Men en høy $R^2$ betyr ikke at modellen gir mening. En andregradsmodell passer nesten alltid bedre enn en lineær, fordi den har ett tall mer å justere.</p>
+
+<h3>Velg modell ut fra situasjonen</h3>
+<ul>
+  <li><strong>Lineær:</strong> Like stor økning for hver enhet. For eksempel fast pris per kilometer.</li>
+  <li><strong>Andregrad:</strong> Bane som stiger og faller, eller areal.</li>
+  <li><strong>Eksponentiell:</strong> Lik prosentvis endring for hver enhet. For eksempel vekst i en bakteriekultur eller verdifall.</li>
+  <li><strong>Potens:</strong> Sammenhenger som $y = a \cdot x^b$ fra fysikk og geometri, for eksempel svingetiden til en pendel.</li>
+</ul>
+
+<h3>Ekstrapolering</h3>
+<p>Å bruke modellen utenfor området der vi har data, kalles å ekstrapolere. Det er ofte nyttig, men risikabelt. Ingen bakteriekultur vokser eksponentielt for alltid, og en andregradsmodell for verdien av en bil vil etter hvert gi økende verdi.</p>
+</div>
+</details>
+
+<section class="oppgaver" aria-labelledby="oppgaver-tittel">
+<h2 id="oppgaver-tittel">Oppgaver</h2>
+{{elevark}}
+<p class="del-inngang">Hver oppgave har tre steg. <strong>Gjett</strong> først, uten å bruke utforskeren. <strong>Test</strong> så i utforskeren. <strong>Forklar</strong> til slutt med egne ord. Dataene er tenkte, laget for å øve.</p>
+
+<div class="oppgave" id="oppgave-1">
+  <h3><span class="oppgave-nr">1</span>Taxituren</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>En taxitur på $2$ km koster $138$ kr, og en tur på $20$ km koster $476$ kr. Omtrent hvor mye koster hver kilometer? Hva er startprisen?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?sett=taxi&amp;modell=lineaer&amp;x=30#utforsker">Velg taxidataene med lineær modell</a>. Les av modellen, $R^2$ og prisen for $30$ km.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Hva betyr $a$ og $b$ i modellen? Hvorfor er en lineær modell et rimelig valg her?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>Grovt overslag: $\frac{476 - 138}{20 - 2} \approx 18{,}8$ kr per km, og startpris omtrent $138 - 2 \cdot 18{,}8 \approx 100$ kr.</p>
+    <p>Lineær regresjon gir $f(x) = 18{,}97x + 98{,}33$ med $R^2 = 0{,}9995$. En tur på $30$ km koster omtrent $f(30) \approx 667$ kr.</p>
+    <p>$a \approx 19$ er prisen per kilometer, og $b \approx 98$ er startprisen. Taxier tar som regel en fast startpris og en fast pris per kilometer. Da øker prisen like mye for hver kilometer, og det passer med en lineær modell.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-2">
+  <h3><span class="oppgave-nr">2</span>Bakteriene</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Se på tallene i bakteriekulturen. Øker antallet med omtrent like mye eller med like mange prosent hver time?</p></div></li>
+  <li><span class="fase test">Test</span><div><p>Prøv <a class="oppsettlenke" href="?sett=bakterier&amp;modell=lineaer&amp;x=8#utforsker">lineær modell</a> og <a class="oppsettlenke" href="?sett=bakterier&amp;modell=eksponentiell&amp;x=8#utforsker">eksponentiell modell</a>. Slå på avvikene. Sammenlign $R^2$ og hva modellene sier om $x = 8$.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Hva betyr vekstfaktoren i den eksponentielle modellen? Hva sier modellen om antallet etter ett døgn, og er det troverdig?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>Økningen blir større og større (50, 100, 130, 230, 260, 490), men forholdet mellom to tall som følger etter hverandre er omtrent det samme, rundt $1{,}5$. Det tyder på lik prosentvis vekst.</p>
+    <p>Lineær modell: $f(x) = 199{,}3x - 46{,}43$ med $R^2 = 0{,}896$. Den gir $f(8) \approx 1548$. Avvikene har et tydelig mønster: punktene ligger over linja i endene og under i midten.</p>
+    <p>Eksponentiell modell: $f(x) = 117{,}5 \cdot 1{,}507^x$ med $R^2 = 0{,}999$. Den gir $f(8) \approx 3128$.</p>
+    <p>Vekstfaktoren $1{,}507$ betyr at antallet øker med omtrent $51$ % per time. Etter ett døgn gir modellen $f(24) \approx 2{,}2$ millioner. Det er usikkert. Næring og plass tar slutt, og veksten flater ut. Da passer en logistisk modell bedre.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-3">
+  <h3><span class="oppgave-nr">3</span>Verdien av en bil</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>En bil koster omtrent $400\,000$ kr som ny. Hvor mange prosent tror du verdien synker hvert år? Når er den verdt under $100\,000$ kr?</p></div></li>
+  <li><span class="fase test">Test</span><div><p>Prøv <a class="oppsettlenke" href="?sett=bil&amp;modell=eksponentiell&amp;x=9#utforsker">eksponentiell modell</a> og <a class="oppsettlenke" href="?sett=bil&amp;modell=andregrad&amp;x=15#utforsker">andregradsmodell</a>. Skriv inn større x-verdier og se hva modellene sier.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Begge modellene har $R^2$ nær $1$. Hvilken vil du bruke? Begrunn svaret med hva som skjer når $x$ blir stor.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>Eksponentiell modell: $f(x) = 399{,}8 \cdot 0{,}8503^x$ (tusen kr), med $R^2 = 0{,}9976$. Vekstfaktoren $0{,}8503$ betyr at verdien synker med omtrent $15$ % per år.</p>
+    <p>Verdien er under $100\,000$ kr når $399{,}8 \cdot 0{,}8503^x < 100$. Det gir $x > \frac{\ln(100/399{,}8)}{\ln 0{,}8503} \approx 8{,}5$ år.</p>
+    <p>Andregradsmodell: $f(x) = 2{,}992x^2 - 59{,}72x + 399$, med $R^2 = 0{,}9967$. Den har et bunnpunkt rundt $x = 10$. Etter det gir den økende verdi, og $f(15) \approx 176$. Det er urimelig for en bil som blir eldre.</p>
+    <p>Den eksponentielle modellen er bedre. Den bygger på at verdien synker med en fast prosent hvert år. Den nærmer seg $0$, men blir aldri negativ.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-4">
+  <h3><span class="oppgave-nr">4</span>Kastet</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Se på høydene i kastet. Hvilken modelltype passer? Omtrent når er ballen på det høyeste, og når treffer den bakken?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?sett=kast&amp;modell=andregrad#utforsker">Velg andregradsmodell</a>. Sammenlign med <a class="oppsettlenke" href="?sett=kast&amp;modell=lineaer#utforsker">lineær modell</a>. Skriv inn $x = 5$ i andregradsmodellen.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Finn toppunktet og nullpunktet til modellen ved regning. For hvilke $t$ gir modellen mening?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>Andregradsmodell: $h(t) = -4{,}905t^2 + 17t + 1{,}512$ med $R^2 = 0{,}9992$. Den lineære modellen har $R^2 = 0{,}2244$ og passer dårlig.</p>
+    <p>Toppunktet er i $t = -\frac{b}{2a} = \frac{17}{2 \cdot 4{,}905} \approx 1{,}73$ s, der $h \approx 16{,}2$ m. Ballen treffer bakken når $h(t) = 0$, som gir $t \approx 3{,}55$ s.</p>
+    <p>Modellen gir $h(5) \approx -36$ m. Det er umulig, for ballen ligger på bakken. Modellen gir bare mening fra kastet til ballen lander, $0 \leq t \leq 3{,}55$.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-5">
+  <h3><span class="oppgave-nr">5</span>Pendelen</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Lengden på en pendel blir fire ganger så stor. Hva tror du skjer med svingetiden?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?sett=pendel&amp;modell=potens&amp;x=4#utforsker">Velg pendeldataene med potensmodell</a>. Les av eksponenten. Prøv også andregradsmodellen, og sammenlign hva de to sier om $x = 4$.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Eksponenten er nesten $0{,}5$. Hva betyr det? Bruk svaret til å forklare hva som skjer når lengden blir fire ganger så stor.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>Potensmodell: $T(L) = 2{,}005 \cdot L^{0{,}4993}$ med $R^2 = 0{,}9998$. Den gir $T(4) \approx 4{,}01$ s.</p>
+    <p>Andregradsmodellen har også høy $R^2 = 0{,}9977$, men den har et toppunkt. For lengder over omtrent $2{,}8$ m gir den kortere svingetid, og $T(4) \approx 2{,}58$ s. Det stemmer ikke med fysikken.</p>
+    <p>Med eksponent $0{,}5$ er $T \approx 2 \cdot \sqrt{L}$. Blir lengden fire ganger så stor, blir svingetiden $\sqrt{4} = 2$ ganger så lang. Se også <a href="potensfunksjoner.html">utforskeren for potensfunksjoner</a>.</p>
+  </div></details>
+</div>
+</section>
+
+<p class="merknad">For lærere: Se <a href="{{rot}}laerer.html">lærersiden</a> for kobling til kompetansemålene.</p>

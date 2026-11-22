@@ -1,0 +1,174 @@
+---
+tittel: Potensfunksjoner og rotfunksjoner
+beskrivelse: Se grafen til f(x) = a · xᵇ for heltallige, negative og brøkeksponenter. Kvadratrot og tredjerot som potenser, definisjonsmengde og asymptoter.
+type: utforsker
+fag: 1T
+tema: funksjoner, potenser
+ikon: potensfunksjoner
+skript: utforskere/potensfunksjon.js
+---
+<p class="ingress">En potensfunksjon har formen $f(x) = a \cdot x^b$. Variabelen står i grunntallet, ikke i eksponenten som i en eksponentialfunksjon. Eksponenten kan være negativ eller en brøk. Da får vi blant annet $\frac{1}{x}$ og rotfunksjonen $\sqrt{x} = x^{\frac{1}{2}}$.</p>
+
+<figure class="sim sim-bred" id="utforsker" aria-label="Utforsker for potensfunksjoner">
+  <div class="sim-delt">
+    <div class="sim-graf">
+      <svg id="graf" class="kun-js"></svg>
+      <div class="noscript-melding kun-uten-js">
+        <p><strong>Utforskeren trenger JavaScript.</strong> Resten av siden, med forklaring og oppgaver, virker uten.</p>
+        <p>Eksempel: $f(x) = x^{\frac{1}{2}} = \sqrt{x}$ er bare definert for $x \geq 0$. Grafen starter i origo, går gjennom $(1, 1)$ og $(4, 2)$, og vokser stadig langsommere.</p>
+      </div>
+      <dl class="sim-tall kun-js" id="verdier"></dl>
+    </div>
+    <div class="sim-side-panel kun-js">
+      <div class="sim-styring">
+        <div class="sim-velg">
+          <label for="eksponent">Eksponenten <i>b</i></label>
+          <select id="eksponent">
+            <option value="-2">−2</option>
+            <option value="-1">−1</option>
+            <option value="-1/2">−1/2</option>
+            <option value="1/3">1/3 (tredjerot)</option>
+            <option value="1/2">1/2 (kvadratrot)</option>
+            <option value="1">1</option>
+            <option value="3/2">3/2</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+          </select>
+        </div>
+        <div id="glidere" class="glidere"></div>
+      </div>
+      <div class="sim-blokk">
+        <p class="panel-tittel">Funksjonen</p>
+        <div class="forskrift" id="forskrift"></div>
+        <div id="rotform-blokk">
+          <p class="panel-tittel ny-del">Skrevet på en annen måte</p>
+          <div class="utregning" id="rotform"></div>
+        </div>
+      </div>
+      <div id="melding" class="sim-blokk melding" hidden></div>
+    </div>
+  </div>
+  <fieldset class="sim-valg kun-js" id="visvalg">
+    <legend>Vis i grafen</legend>
+    <label class="avkrysning"><input type="checkbox" name="punkter" checked> Punktene for x = 0, 1 og −1</label>
+    <label class="avkrysning"><input type="checkbox" name="asymptoter" checked> Asymptoter (stiplet)</label>
+    <label class="avkrysning"><input type="checkbox" name="linje"> Linja y = x (stiplet)</label>
+  </fieldset>
+  {{figurverktoy}}
+  <figcaption class="sim-hint">Velg eksponenten i lista og dra i glidebryteren for a. Verdiene står i adressefeltet, så du kan dele oppsettet.</figcaption>
+</figure>
+
+<details class="teori" id="matematikken">
+<summary><span class="teori-tittel">Matematikken bak</span><span class="teori-hint">Potens og rot, negative eksponenter, definisjonsmengde og forskjellen fra eksponentialfunksjoner</span></summary>
+<div class="teori-innhold tekst">
+
+<h3>Potensfunksjon eller eksponentialfunksjon?</h3>
+<p>I en <strong>potensfunksjon</strong> står $x$ i grunntallet: $f(x) = a \cdot x^b$. I en <strong>eksponentialfunksjon</strong> står $x$ i eksponenten: $g(x) = a \cdot b^x$. Funksjonene $x^2$ og $2^x$ ligner på navn, men vokser helt ulikt.</p>
+
+<h3>Rot som potens</h3>
+<p>Potensreglene gir $\left(x^{\frac{1}{2}}\right)^2 = x^{\frac{1}{2} \cdot 2} = x$. Derfor er $x^{\frac{1}{2}}$ det positive tallet som opphøyd i andre blir $x$. Det er $\sqrt{x}$. På samme måte er $x^{\frac{1}{3}} = \sqrt[3]{x}$ og $x^{\frac{3}{2}} = x\sqrt{x}$.</p>
+
+<h3>Negative eksponenter</h3>
+<p>$x^{-1} = \frac{1}{x}$ og $x^{-2} = \frac{1}{x^2}$. Vi kan ikke dele på null, så $x = 0$ er ikke med. Når $x$ nærmer seg $0$, blir verdiene veldig store. Når $x$ blir stor, går verdiene mot $0$. Grafen har derfor asymptotene $x = 0$ og $y = 0$.</p>
+
+<h3>Definisjonsmengde</h3>
+<ul>
+  <li>Positive heltall som eksponent: alle $x$.</li>
+  <li>Negative heltall: alle $x$ unntatt $0$.</li>
+  <li>Kvadratrot i eksponenten (nevner $2$): bare $x \geq 0$. Er eksponenten også negativ, må $x > 0$.</li>
+  <li>Tredjerot (nevner $3$): alle $x$, fordi for eksempel $\sqrt[3]{-8} = -2$.</li>
+</ul>
+
+<h3>Felles punkt</h3>
+<p>Uansett eksponent er $1^b = 1$. Derfor går grafen til $f(x) = a \cdot x^b$ alltid gjennom $(1, a)$. Er $b > 0$, går den også gjennom origo.</p>
+</div>
+</details>
+
+<section class="oppgaver" aria-labelledby="oppgaver-tittel">
+<h2 id="oppgaver-tittel">Oppgaver</h2>
+{{elevark}}
+<p class="del-inngang">Hver oppgave har tre steg. <strong>Gjett</strong> først, uten å bruke utforskeren. <strong>Test</strong> så i utforskeren. <strong>Forklar</strong> til slutt med egne ord hvorfor det blir slik.</p>
+
+<div class="oppgave" id="oppgave-1">
+  <h3><span class="oppgave-nr">1</span>Et punkt som alle deler</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Finnes det et punkt som grafene til $x^2$, $x^3$, $\sqrt{x}$ og $\frac{1}{x}$ har felles? Hvilke av dem går gjennom origo?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?a=1&amp;b=2#utforsker">Sett $a = 1$</a> og bla gjennom alle eksponentene i lista. Se etter punktene grafene har felles.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Hvorfor går alle grafene gjennom $(1, 1)$ når $a = 1$? Hvorfor går bare noen av dem gjennom origo?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>Alle grafene går gjennom $(1, 1)$. De med positiv eksponent ($\frac{1}{3}$, $\frac{1}{2}$, $1$, $\frac{3}{2}$, $2$ og $3$) går også gjennom origo.</p>
+    <p>Et hvilket som helst antall faktorer $1$ ganget sammen gir $1$, og roten av $1$ er $1$. Derfor er $1^b = 1$ for alle $b$, og $f(1) = a \cdot 1 = a$.</p>
+    <p>Er $b > 0$, er $0^b = 0$. Er $b < 0$, betyr $0^b$ å dele på null, som ikke går. Da er ikke $x = 0$ med.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-2">
+  <h3><span class="oppgave-nr">2</span>Kvadratroten og kvadratet</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Hvilken er størst når $x = \frac{1}{4}$: $\sqrt{x}$ eller $x^2$? Hva når $x = 4$?</p></div></li>
+  <li><span class="fase test">Test</span><div><p>Se på <a class="oppsettlenke" href="?a=1&amp;b=1/2#utforsker">$f(x) = x^{\frac{1}{2}}$</a> og <a class="oppsettlenke" href="?a=1&amp;b=2#utforsker">$f(x) = x^2$</a> med linja $y = x$ slått på. For hvilke $x$ ligger hver graf over linja?</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Forklar med tall hvorfor kvadratroten av et tall mellom $0$ og $1$ er større enn tallet selv.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>Når $x = \frac{1}{4}$, er $\sqrt{x} = \frac{1}{2}$ og $x^2 = \frac{1}{16}$. Da er kvadratroten størst. Når $x = 4$, er $\sqrt{x} = 2$ og $x^2 = 16$. Da er kvadratet størst.</p>
+    <p>For $0 < x < 1$ ligger $\sqrt{x}$ over linja $y = x$, og $x^2$ ligger under. For $x > 1$ er det omvendt. De tre grafene møtes i $(0, 0)$ og $(1, 1)$.</p>
+    <p>Når vi ganger et tall mellom $0$ og $1$ med seg selv, blir det mindre: $\frac{1}{2} \cdot \frac{1}{2} = \frac{1}{4}$. Kvadratroten går motsatt vei. Derfor er $\sqrt{\frac{1}{4}} = \frac{1}{2}$, som er større enn $\frac{1}{4}$.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-3">
+  <h3><span class="oppgave-nr">3</span>Negative eksponenter</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Hvordan tror du grafen til $f(x) = x^{-1}$ ser ut? Hva med $g(x) = x^{-2}$? Kan $g(x)$ bli negativ?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?a=1&amp;b=-1#utforsker">Sett $b = -1$</a> og deretter <a class="oppsettlenke" href="?a=1&amp;b=-2#utforsker">$b = -2$</a>. Regn ut verdien for $x = 0{,}1$, $x = 2$ og $x = 10$ for begge.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Skriv funksjonene som brøker. Forklar ut fra brøkene hvorfor grafene har asymptotene $x = 0$ og $y = 0$.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>$f(x) = x^{-1} = \frac{1}{x}$ har en gren i første kvadrant og en i tredje. $g(x) = x^{-2} = \frac{1}{x^2}$ har begge grenene over x-aksen, fordi $x^2 > 0$ når $x \neq 0$. Den blir aldri negativ.</p>
+    <div class="tabell-rull">
+    <table class="tabell">
+      <caption>Verdier av $\frac{1}{x}$ og $\frac{1}{x^2}$</caption>
+      <thead><tr><th scope="col">$x$</th><th scope="col">$0{,}1$</th><th scope="col">$2$</th><th scope="col">$10$</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">$\frac{1}{x}$</th><td>$10$</td><td>$0{,}5$</td><td>$0{,}1$</td></tr>
+        <tr><th scope="row">$\frac{1}{x^2}$</th><td>$100$</td><td>$0{,}25$</td><td>$0{,}01$</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p>Når $x$ nærmer seg $0$, deler vi $1$ på et tall som blir mindre og mindre. Svaret blir større og større, så grafen nærmer seg y-aksen. Når $x$ blir stor, deler vi på et stort tall, og svaret går mot $0$. Da nærmer grafen seg x-aksen.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-4">
+  <h3><span class="oppgave-nr">4</span>Hvor er funksjonen definert?</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Hvilke av disse kan du regne ut: $(-8)^{\frac{1}{2}}$, $(-8)^{\frac{1}{3}}$ og $0^{-\frac{1}{2}}$?</p></div></li>
+  <li><span class="fase test">Test</span><div><p>Se på definisjonsmengden og $f(-8)$ for <a class="oppsettlenke" href="?a=1&amp;b=1/2#utforsker">$b = \frac{1}{2}$</a>, <a class="oppsettlenke" href="?a=1&amp;b=1/3#utforsker">$b = \frac{1}{3}$</a> og <a class="oppsettlenke" href="?a=1&amp;b=-1/2#utforsker">$b = -\frac{1}{2}$</a>.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Hvorfor finnes tredjeroten av et negativt tall, men ikke kvadratroten?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>$(-8)^{\frac{1}{2}} = \sqrt{-8}$ finnes ikke blant de reelle tallene. $(-8)^{\frac{1}{3}} = \sqrt[3]{-8} = -2$, fordi $(-2)^3 = -8$. $0^{-\frac{1}{2}} = \frac{1}{\sqrt{0}}$ betyr å dele på null, og det går ikke.</p>
+    <p>Definisjonsmengder: $x^{\frac{1}{2}}$ er definert for $x \geq 0$, $x^{\frac{1}{3}}$ for alle $x$, og $x^{-\frac{1}{2}}$ for $x > 0$.</p>
+    <p>Et tall i andre potens blir aldri negativt, fordi minus ganger minus er pluss. Derfor finnes det ikke noe tall som opphøyd i andre gir $-8$. Et tall i tredje potens beholder fortegnet sitt, så $(-2)^3 = -8$.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-5">
+  <h3><span class="oppgave-nr">5</span>Pendelen</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Tiden en pendel bruker på én svingning, er omtrent $T(L) = 2{,}01 \cdot L^{0{,}5}$ sekunder, der $L$ er lengden i meter. Hvor mye lengre må pendelen være for at svingetiden skal bli dobbelt så lang?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?a=2.01&amp;b=1/2&amp;tilpass=1#utforsker">Sett $a = 2{,}01$ og $b = \frac{1}{2}$</a>. Finn $T(1)$ og $T(4)$. Finn lengden som gir en svingetid på $3$ sekunder.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Vis med potensregler at $T(4L) = 2 \cdot T(L)$. Løs likningen $T(L) = 3$ ved regning.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>$T(1) = 2{,}01$ s og $T(4) = 2{,}01 \cdot 2 = 4{,}02$ s. Pendelen må være fire ganger så lang for å bruke dobbelt så lang tid.</p>
+    $$T(4L) = 2{,}01 \cdot (4L)^{0{,}5} = 2{,}01 \cdot 4^{0{,}5} \cdot L^{0{,}5} = 2 \cdot T(L)$$
+    <p>Svingetid $3$ sekunder:</p>
+    $$2{,}01 \cdot \sqrt{L} = 3 \quad \Rightarrow \quad \sqrt{L} = \frac{3}{2{,}01} \quad \Rightarrow \quad L = \left(\frac{3}{2{,}01}\right)^2 \approx 2{,}23$$
+    <p>Pendelen må være omtrent $2{,}23$ meter lang.</p>
+  </div></details>
+</div>
+</section>
+
+<p class="merknad">For lærere: Se <a href="{{rot}}laerer.html">lærersiden</a> for kobling til kompetansemålene.</p>

@@ -1,0 +1,143 @@
+---
+tittel: Eksponentialfunksjoner
+beskrivelse: Vekstfaktor, prosentvis endring og forskjellen på lineær og eksponentiell vekst. Kort økt med utforsker, tavleoppgave og oppgaver.
+type: opplegg
+fag: 1T
+tema: vekst, funksjoner
+varighet: 45
+rekkefolge: 5
+ikon: vekst
+---
+<p class="ingress">Elevene ser forskjellen på å legge til det samme hver gang og å gange med det samme hver gang. De lærer sammenhengen mellom prosent og vekstfaktor, og bruker modellen $f(x) = a \cdot b^x$.</p>
+
+<div class="opplegg-fakta">
+<section>
+<h2>Mål for økta</h2>
+<ul>
+  <li>Jeg kan forklare forskjellen på lineær og eksponentiell vekst.</li>
+  <li>Jeg kan gå fra prosent til vekstfaktor og tilbake.</li>
+  <li>Jeg kan sette opp og bruke en modell $a \cdot b^x$.</li>
+</ul>
+</section>
+<section>
+<h2>Kompetansemål</h2>
+{{maal:1T:7,9}}
+</section>
+<section>
+<h2>Dette trenger du</h2>
+<ul class="ressursliste">
+  <li><a href="{{rot}}utforskere/vekst.html">Eksponentiell og logistisk vekst</a> <span class="ressurs-type">utforsker</span></li>
+  <li><a href="{{rot}}varierende/hvilken-passer-ikke-inn-funksjoner.html#t3">Hvilken passer ikke inn? Funksjoner</a> <span class="ressurs-type">tavleoppgave 3</span></li>
+  <li>Oppgavene nederst på siden</li>
+</ul>
+</section>
+</div>
+
+<section class="opplegg-del" aria-labelledby="plan-tittel">
+<h2 id="plan-tittel">Plan for økta</h2>
+<ol class="tidsplan">
+<li class="tidsdel" data-min="5">
+  <h3>Oppstart: Hvilken vil du ha?</h3>
+  <p class="tidsdel-form">Hele klassen</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div><p>Spør: Vil du heller ha $1000$ kr hver dag i $30$ dager, eller $1$ øre den første dagen, $2$ øre den andre, $4$ øre den tredje og så videre? Elevene stemmer før dere regner.</p></div>
+    <strong>Elevene</strong>
+    <div><p>Stemmer, og regner ut hvor mye de får den siste dagen.</p></div>
+  </div>
+  <details><summary>Svar</summary><div><p>Med $1000$ kr per dag blir det $30\,000$ kr. Med dobling får du $2^{29}$ øre den siste dagen, som er over $5{,}3$ millioner kroner. Til sammen blir det over $10{,}7$ millioner kroner.</p></div></details>
+</li>
+<li class="tidsdel" data-min="10">
+  <h3>Gjennomgang: Vekstfaktor</h3>
+  <p class="tidsdel-form">Hele klassen · tavle</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div>
+      <p>Lineær vekst: det samme tallet legges til. Eksponentiell vekst: det samme tallet ganges med. Vis sammenhengen mellom prosent og vekstfaktor:</p>
+      $$\text{økning på } p\,\% \;\Rightarrow\; b = 1 + \frac{p}{100} \qquad \text{nedgang på } p\,\% \;\Rightarrow\; b = 1 - \frac{p}{100}$$
+      <p>Vis eksempelet «penger i banken» i <a href="{{rot}}utforskere/vekst.html#oppgave-1">utforskeren for vekst</a>.</p>
+    </div>
+    <strong>Elevene</strong>
+    <div><p>Skriver ned regelen og lager to egne eksempler.</p></div>
+  </div>
+</li>
+<li class="tidsdel" data-min="20">
+  <h3>Utforsk og diskuter</h3>
+  <p class="tidsdel-form">Par · PC, så hele klassen</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div><p>Elevene gjør oppgave 1 og 2 i utforskeren. De siste fem minuttene viser du tavleoppgave 3 og tar en samtale.</p></div>
+    <strong>Elevene</strong>
+    <div><p>Gjetter, tester og forklarer. I tavleoppgaven begrunner de hvilken funksjon som ikke passer inn.</p></div>
+  </div>
+  <p class="ressurs">Ressurser: <a href="{{rot}}utforskere/vekst.html#oppgave-1">Vekst, oppgave 1 og 2</a> og <a href="{{rot}}varierende/hvilken-passer-ikke-inn-funksjoner.html#t3">tavleoppgave 3</a></p>
+  <details><summary>Typiske feil</summary><div>
+    <ul>
+      <li>Å tro at $15$ % nedgang gir vekstfaktoren $0{,}15$.</li>
+      <li>Å tro at $5$ % vekst i $10$ år er $50$ % til sammen. Riktig er $1{,}05^{10} \approx 1{,}63$, altså $63$ %.</li>
+    </ul>
+  </div></details>
+</li>
+<li class="tidsdel" data-min="10">
+  <h3>Oppgaver</h3>
+  <p class="tidsdel-form">Hver for seg</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div><p>Del ut elevarket. Oppgave 3 kan brukes som exit-lapp.</p></div>
+    <strong>Elevene</strong>
+    <div><p>Løser oppgavene.</p></div>
+  </div>
+</li>
+</ol> <!-- /tidsplan -->
+</section>
+
+<section class="opplegg-del tekst" aria-labelledby="tips-tittel">
+<h2 id="tips-tittel">Tips</h2>
+<ul>
+  <li><strong>Har du 90 minutter?</strong> Fortsett med oppgave 3 til 5 i utforskeren, der logistisk vekst og bæreevne kommer inn.</li>
+  <li><strong>Elever som står fast:</strong> Lag en tabell år for år, og gang med vekstfaktoren for hver rad.</li>
+  <li><strong>Elever som er raske:</strong> Hvor lang tid tar det før bilen i oppgave 2 er verdt halvparten? Løs med et digitalt verktøy.</li>
+</ul>
+</section>
+
+<section class="oppgaver" aria-labelledby="oppgaver-tittel">
+<h2 id="oppgaver-tittel">Oppgaver</h2>
+{{elevark}}
+<p class="del-inngang">Du kan bruke kalkulator.</p>
+
+<div class="oppgave" id="oppgave-1">
+  <h3><span class="oppgave-nr">1</span>Prosent og vekstfaktor</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase a">a</span><div><p>Finn vekstfaktoren for en økning på $8$ % og en nedgang på $15$ %.</p></div></li>
+  <li><span class="fase b">b</span><div><p>Hvor mange prosent endring er vekstfaktorene $1{,}035$ og $0{,}7$?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>a) $1{,}08$ og $0{,}85$.</p>
+    <p>b) $1{,}035$ er en økning på $3{,}5$ %. $0{,}7$ er en nedgang på $30$ %.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-2">
+  <h3><span class="oppgave-nr">2</span>Verdien av en bil</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase a">a</span><div><p>En bil koster $350\,000$ kr. Den taper $12$ % av verdien hvert år. Sett opp en modell for verdien $V(t)$ etter $t$ år.</p></div></li>
+  <li><span class="fase b">b</span><div><p>Hva er bilen verdt etter $5$ år?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>a) $V(t) = 350\,000 \cdot 0{,}88^t$.</p>
+    <p>b) $V(5) = 350\,000 \cdot 0{,}88^5 \approx 184\,706$ kr.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-3">
+  <h3><span class="oppgave-nr">3</span>Lineær eller eksponentiell?</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase a">a</span><div><p>Tre størrelser måles hvert år. A: $2, 6, 18, 54$. B: $2, 6, 10, 14$. C: $100, 90, 81, 72{,}9$. Hvilke vokser eller avtar lineært, og hvilke eksponentielt?</p></div></li>
+  <li><span class="fase b">b</span><div><p>Skriv en modell for hver av dem.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>a) A ganges med $3$ hvert år, så den er eksponentiell. B øker med $4$ hvert år, så den er lineær. C ganges med $0{,}9$ hvert år, så den er eksponentiell og avtar med $10$ % per år.</p>
+    <p>b) $A(x) = 2 \cdot 3^x$, $B(x) = 4x + 2$ og $C(x) = 100 \cdot 0{,}9^x$, der $x$ er antall år.</p>
+  </div></details>
+</div>
+</section>

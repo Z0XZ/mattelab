@@ -293,6 +293,80 @@ class Parabel:
         return T
 
 
+
+class Graf:
+    """Graf til en vilkårlig funksjon i et lite rutenett.
+
+    f: funksjonen med flyttall (None eller unntak der den ikke er definert).
+    verdi: den samme funksjonen med eksakte tall (Fraction), til kontroll av fasiten. Valgfri.
+    beskrivelse: tekst til skjermleser og fasit.
+    sy: hvor mye y-aksen klemmes sammen, så figuren får plass på kortet.
+    ytall: skriv tall på y-aksen også (for eksempel for å lese av konstantleddet).
+    punkter: punkter som markeres, [(x, y), …].
+    """
+
+    def __init__(self, f, beskrivelse: str, verdi=None, xmin=-5, xmax=5, ymin=-5, ymax=5,
+                 sy=0.6, ytall=False, punkter=(), xtall=True, steg=1, tekst=0.5):
+        self.f, self._verdi, self._beskrivelse = f, verdi, beskrivelse
+        self.vindu = (xmin, xmax, ymin, ymax)
+        self.sy, self.ytall, self.xtall, self.punkter, self.steg = sy, ytall, xtall, list(punkter), steg
+        self.tekst = tekst
+
+    @property
+    def verdi(self):
+        return self._verdi
+
+    @property
+    def beskrivelse(self) -> str:
+        return self._beskrivelse
+
+    def _y(self, x):
+        try:
+            y = self.f(x)
+        except (ZeroDivisionError, ValueError, OverflowError):
+            return None
+        return None if y is None or isinstance(y, complex) else y
+
+    def tegning(self) -> Tegning:
+        xmin, xmax, ymin, ymax = self.vindu
+        sy, st = self.sy, self.steg
+        T = Tegning()
+        for i in range(xmin, xmax + 1):
+            T.linje([(i, ymin * sy), (i, ymax * sy)], "rute")
+        for j in range(ymin, ymax + 1):
+            T.linje([(xmin, j * sy), (xmax, j * sy)], "rute")
+        if ymin <= 0 <= ymax:
+            T.linje([(xmin, 0), (xmax, 0)], "akse")
+        if xmin <= 0 <= xmax:
+            T.linje([(0, ymin * sy), (0, ymax * sy)], "akse")
+        if self.xtall:
+            for i in range(xmin + 1, xmax):
+                # Med tall på y-aksen hoppes −steg over, så tallene ikke kolliderer ved origo
+                if i and i % st == 0 and not (self.ytall and i == -st):
+                    T.tekst(i, -self.tekst - 0.1, _n(i), self.tekst)
+        if self.ytall:
+            for j in range(ymin + 1, ymax):
+                if j and j % st == 0:
+                    T.tekst(-0.2, j * sy, _n(j), self.tekst, "hoyre")
+        biter, bit = [], []
+        N = 400
+        for k in range(N + 1):
+            x = xmin + (xmax - xmin) * k / N
+            y = self._y(x)
+            if y is not None and ymin - 0.01 <= y <= ymax + 0.01:
+                bit.append((x, max(ymin, min(ymax, y)) * sy))
+            elif bit:
+                biter.append(bit); bit = []
+        if bit:
+            biter.append(bit)
+        for b in biter:
+            if len(b) > 1:
+                T.linje(b, "graf")
+        for x, y in self.punkter:
+            T.punkt(x, y * sy)
+        return T
+
+
 def _n(x) -> str:
     """Tall med ekte minustegn og desimalkomma."""
     if isinstance(x, Fraction) and x.denominator != 1:
