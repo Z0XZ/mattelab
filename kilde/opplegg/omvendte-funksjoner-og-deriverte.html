@@ -1,0 +1,146 @@
+---
+tittel: Omvendte funksjoner og deriverte
+beskrivelse: Omvendt funksjon som speiling om y = x, og den deriverte av den omvendte funksjonen som det omvendte stigningstallet.
+type: opplegg
+fag: R1
+tema: derivasjon
+varighet: 45
+rekkefolge: 7
+ikon: omvendt
+---
+<p class="ingress">Elevene kjenner allerede paret $e^x$ og $\ln x$. Her ser de at grafen til en omvendt funksjon er speilet om $y = x$, at stigningstallene blir omvendte, og at en vannrett tangent blir loddrett.</p>
+
+<div class="opplegg-fakta">
+<section>
+<h2>Mål for økta</h2>
+<ul>
+  <li>Jeg kan finne den omvendte funksjonen til en enkel funksjon.</li>
+  <li>Jeg kan forklare at grafen til den omvendte funksjonen er speilet om $y = x$.</li>
+  <li>Jeg kan bruke $g'(f(a)) = \frac{1}{f'(a)}$.</li>
+</ul>
+</section>
+<section>
+<h2>Kompetansemål</h2>
+{{maal:R1:10}}
+</section>
+<section>
+<h2>Dette trenger du</h2>
+<ul class="ressursliste">
+  <li><a href="{{rot}}utforskere/omvendte-funksjoner.html">Omvendte funksjoner og deriverte</a> <span class="ressurs-type">utforsker, oppgave 2–4</span></li>
+</ul>
+</section>
+</div>
+
+<section class="opplegg-del" aria-labelledby="plan-tittel">
+<h2 id="plan-tittel">Plan for økta</h2>
+<ol class="tidsplan">
+<li class="tidsdel" data-min="5">
+  <h3>Oppstart: Gjør det motsatte</h3>
+  <p class="tidsdel-form">Hele klassen · tavle</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div><p>Skriv $f(x) = 2x + 1$. Spør: Hvilken funksjon tar oss tilbake fra $f(x)$ til $x$? Hva med $e^x$? Og $x^2$?</p></div>
+    <strong>Elevene</strong>
+    <div><p>Foreslår omvendte funksjoner, og diskuterer hvorfor $x^2$ er et problem: Både $2$ og $-2$ gir $4$.</p></div>
+  </div>
+</li>
+<li class="tidsdel" data-min="15">
+  <h3>Utforsk: Speiling og stigningstall</h3>
+  <p class="tidsdel-form">Par · PC</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div><p>Elevene gjør oppgave 2, 3 og 4 i utforskeren. Oppgave 1 om $\ln x$ ble gjort i økta om eksponential- og logaritmefunksjoner.</p></div>
+    <strong>Elevene</strong>
+    <div><p>Gjetter, tester og forklarer. De skal finne sammenhengen mellom stigningstallene i P og Q.</p></div>
+  </div>
+  <p class="ressurs">Ressurs: <a href="{{rot}}utforskere/omvendte-funksjoner.html#oppgave-2">Omvendte funksjoner og deriverte, oppgave 2–4</a></p>
+</li>
+<li class="tidsdel" data-min="10">
+  <h3>Felles: Den deriverte av den omvendte funksjonen</h3>
+  <p class="tidsdel-form">Hele klassen · tavle</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div>
+      <p>Speilingen bytter om $\Delta x$ og $\Delta y$. Med $b = f(a)$ er derfor</p>
+      $$g'(b) = \frac{1}{f'(a)}$$
+      <p>Vis det også med kjerneregelen: Deriver $f(g(x)) = x$ på begge sider, og få $f'(g(x)) \cdot g'(x) = 1$. Bruk det på $\sqrt{x}$ som omvendt funksjon til $x^2$.</p>
+    </div>
+    <strong>Elevene</strong>
+    <div><p>Kontrollerer at regelen gir $(\sqrt{x})' = \frac{1}{2\sqrt{x}}$.</p></div>
+  </div>
+</li>
+<li class="tidsdel" data-min="10">
+  <h3>Oppgaver</h3>
+  <p class="tidsdel-form">Hver for seg</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div><p>Del ut elevarket. Oppgave 3 er for dem som blir ferdige.</p></div>
+    <strong>Elevene</strong>
+    <div><p>Løser oppgave 1 og 2.</p></div>
+  </div>
+</li>
+<li class="tidsdel" data-min="5">
+  <h3>Exit-lapp</h3>
+  <p class="tidsdel-form">Hele klassen</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div><p>Exit-lapp: «Grafen til $f$ går gjennom $(2, 5)$ med stigningstall $4$. Hvilket punkt og hvilket stigningstall vet du for den omvendte funksjonen?»</p></div>
+    <strong>Elevene</strong>
+    <div><p>Svarer på exit-lappen.</p></div>
+  </div>
+  <details><summary>Svar til exit-lappen</summary><div><p>Grafen til den omvendte funksjonen går gjennom $(5, 2)$ med stigningstall $\frac{1}{4}$.</p></div></details>
+</li>
+</ol> <!-- /tidsplan -->
+</section>
+
+<section class="opplegg-del tekst" aria-labelledby="tips-tittel">
+<h2 id="tips-tittel">Tips</h2>
+<ul>
+  <li><strong>Har du 90 minutter?</strong> Ta med oppgave 1 i utforskeren, og la elevene lage egne funksjonspar som de bytter med hverandre.</li>
+  <li><strong>Elever som står fast:</strong> La dem bytte om x og y i en verditabell for $f$, og tegne punktene. Da ser de speilingen.</li>
+  <li><strong>Elever som er raske:</strong> Oppgave 3 på elevarket, der de må begrense definisjonsmengden selv.</li>
+  <li><strong>Tidligere økter:</strong> <a href="{{rot}}opplegg/derivasjon-av-eksponential-og-logaritmefunksjoner.html">Derivasjon av eksponential- og logaritmefunksjoner</a>.</li>
+</ul>
+</section>
+
+<section class="oppgaver" aria-labelledby="oppgaver-tittel">
+<h2 id="oppgaver-tittel">Oppgaver</h2>
+{{elevark}}
+<p class="del-inngang">Løs oppgavene uten hjelpemidler.</p>
+
+<div class="oppgave" id="oppgave-1">
+  <h3><span class="oppgave-nr">1</span>Uten å finne uttrykket</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase a">a</span><div><p>La $f(x) = x^3 + x$. Forklar hvorfor $f$ har en omvendt funksjon $g$.</p></div></li>
+  <li><span class="fase b">b</span><div><p>Regn ut $f(1)$ og $f'(1)$. Bruk svarene til å finne $g(2)$ og $g'(2)$.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>a) $f'(x) = 3x^2 + 1 > 0$ for alle $x$, så $f$ vokser hele tiden. Da gir hver y-verdi nøyaktig én x-verdi.</p>
+    <p>b) $f(1) = 2$ og $f'(1) = 4$. Da er $g(2) = 1$ og $g'(2) = \frac{1}{4}$.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-2">
+  <h3><span class="oppgave-nr">2</span>Finn den omvendte funksjonen</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase a">a</span><div><p>Finn den omvendte funksjonen $g$ til $f(x) = e^{2x}$.</p></div></li>
+  <li><span class="fase b">b</span><div><p>Finn $g'(x)$ på to måter: ved å derivere $g$ direkte, og med $g'(f(a)) = \frac{1}{f'(a)}$ når $a = 0$.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>a) $y = e^{2x}$ gir $2x = \ln y$ og $x = \frac{1}{2}\ln y$. Altså er $g(x) = \frac{1}{2}\ln x$ for $x > 0$.</p>
+    <p>b) Direkte: $g'(x) = \frac{1}{2x}$, så $g'(1) = \frac{1}{2}$. Med regelen: $f(0) = 1$ og $f'(0) = 2e^0 = 2$, så $g'(1) = \frac{1}{2}$. Begge gir det samme.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-3">
+  <h3><span class="oppgave-nr">3</span>Begrens definisjonsmengden</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase a">a</span><div><p>$f(x) = (x - 1)^2$ har ikke en omvendt funksjon for alle $x$. Velg en definisjonsmengde slik at den har det, og finn $g$.</p></div></li>
+  <li><span class="fase b">b</span><div><p>Finn $g'(4)$ på to måter. Hvor er ikke $g$ deriverbar?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>a) For $x \geq 1$ er $f$ voksende. $y = (x - 1)^2$ gir $x = 1 + \sqrt{y}$. Altså er $g(x) = 1 + \sqrt{x}$ for $x \geq 0$.</p>
+    <p>b) Direkte: $g'(x) = \frac{1}{2\sqrt{x}}$, så $g'(4) = \frac{1}{4}$. Med regelen: $g(4) = 3$ og $f'(3) = 2(3 - 1) = 4$, så $g'(4) = \frac{1}{4}$. I $x = 0$ er tangenten til $g$ loddrett, fordi $f'(1) = 0$. Der er ikke $g$ deriverbar.</p>
+  </div></details>
+</div>
+</section>

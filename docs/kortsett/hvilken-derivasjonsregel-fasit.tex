@@ -1,0 +1,69 @@
+%% Fasit til kortsett fra mattelab.no – laget automatisk av bygg.py.
+%% Kompiler med lualatex.
+\documentclass[11pt,a4paper]{article}
+\usepackage[norsk]{babel}
+\usepackage[a4paper,margin=1.2cm,bottom=1.7cm]{geometry}
+\usepackage{fontspec}
+\usepackage{unicode-math}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{TeX Gyre Heros}[Scale=MatchLowercase]
+\setmathfont{TeX Gyre Pagella Math}
+\usepackage{xcolor}
+\definecolor{blekk}{HTML}{16213A}
+\definecolor{dempet}{HTML}{566077}
+\definecolor{m1}{HTML}{2F4AB0}
+\usepackage{tikz}
+\usepackage{enumitem}
+\usepackage{qrcode}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+\pdfvariable suppressoptionalinfo \numexpr 1+2+4+8+16+32+64+128+256+512\relax
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[L]{\sffamily\footnotesize\color{dempet}mattelab.no · Hvilken derivasjonsregel? · kortsett K14 · fasit}
+\fancyfoot[R]{\sffamily\footnotesize\color{dempet}Side \thepage}
+\begin{document}
+\begin{minipage}[t]{0.8\linewidth}\vspace{0pt}
+{\sffamily\small\color{dempet}Fasit for læreren · kortsett K14 · R1}\par\vspace{0.25em}
+{\fontsize{20}{24}\selectfont\bfseries Hvilken derivasjonsregel?}\par\vspace{0.5em}
+Sorter funksjonene etter hvilken regel du trenger for å derivere dem. Noen kort passer i to bokser. Deriver gjerne funksjonene etterpå.\par\vspace{0.4em}{\small\color{dempet}Kortene er nummerert i den rekkefølgen de står i utskriften.}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.15\linewidth}\vspace{0pt}\raggedleft
+\qrcode[height=1.9cm]{https://mattelab.no/varierende/hvilken-derivasjonsregel.html}
+\end{minipage}\par\vspace{0.8em}
+
+\subsection*{Bare grunnreglene: potens, sum, eksponential og ln x}
+\begin{itemize}[leftmargin=1.2em, itemsep=0.35em]
+\item \textsf{\small K14-02}\quad $f(x) = 2^x$\\{\small\color{dempet}$(a^x)' = a^x \ln a$, så $f'(x) = 2^x \ln 2$. Ikke $x \cdot 2^{x-1}$: x står i eksponenten.}
+\item \textsf{\small K14-04}\quad $f(x) = \sqrt{x}$\\{\small\color{dempet}$\sqrt{x} = x^{\frac{1}{2}}$, så potensregelen holder.}
+\item \textsf{\small K14-09}\quad $f(x) = (x^2 + 3x)(2x - 1)$ \emph{(også: Produktregelen)}\\{\small\color{dempet}Produktregelen, eller gang ut først og bruk grunnreglene. Begge gir $6x^2 + 10x - 3$.}
+\item \textsf{\small K14-10}\quad $f(x) = x^3 - 4e^x + 2\ln x$\\{\small\color{dempet}Mange regler i samme uttrykk, men bare grunnregler og sumregelen. Ingen kjerne, produkt eller brøk.}
+\item \textsf{\small K14-12}\quad $f(x) = \dfrac{5}{x^2}$ \emph{(også: Brøkregelen)}\\{\small\color{dempet}Begge går: $5x^{-2}$ med potensregelen, eller brøkregelen. Potensregelen er raskest: $f'(x) = -\frac{10}{x^3}$.}
+\item \textsf{\small K14-14}\quad $f(x) = 3x^4 - 2x + 7$
+\end{itemize}
+\subsection*{Kjerneregelen}
+\begin{itemize}[leftmargin=1.2em, itemsep=0.35em]
+\item \textsf{\small K14-01}\quad $f(x) = \ln(x^2 + 1)$
+\item \textsf{\small K14-05}\quad $f(x) = \sqrt{4x + 1}$
+\item \textsf{\small K14-11}\quad $f(x) = x(x^2 + 1)^3$ \emph{(også: Produktregelen)}\\{\small\color{dempet}Både og: produktregelen, og kjerneregelen for $(x^2 + 1)^3$.}
+\item \textsf{\small K14-13}\quad $f(x) = e^{2x}$\\{\small\color{dempet}Eksponenten $2x$ er en kjerne. $f'(x) = 2e^{2x}$, ikke $e^{2x}$.}
+\item \textsf{\small K14-15}\quad $f(x) = (3x - 1)^5$
+\end{itemize}
+\subsection*{Produktregelen}
+\begin{itemize}[leftmargin=1.2em, itemsep=0.35em]
+\item \textsf{\small K14-03}\quad $f(x) = x \ln x$
+\item \textsf{\small K14-06}\quad $f(x) = x^2 e^x$
+\item \textsf{\small K14-07}\quad $f(x) = \dfrac{e^x}{x}$ \emph{(også: Brøkregelen)}\\{\small\color{dempet}Brøkregelen, eller produktregelen med $e^x \cdot x^{-1}$. Svaret er $\frac{(x - 1)e^x}{x^2}$ uansett.}
+\item \textsf{\small K14-09}\quad $f(x) = (x^2 + 3x)(2x - 1)$ \emph{(også: Bare grunnreglene: potens, sum, eksponential og ln x)}\\{\small\color{dempet}Produktregelen, eller gang ut først og bruk grunnreglene. Begge gir $6x^2 + 10x - 3$.}
+\item \textsf{\small K14-11}\quad $f(x) = x(x^2 + 1)^3$ \emph{(også: Kjerneregelen)}\\{\small\color{dempet}Både og: produktregelen, og kjerneregelen for $(x^2 + 1)^3$.}
+\end{itemize}
+\subsection*{Brøkregelen}
+\begin{itemize}[leftmargin=1.2em, itemsep=0.35em]
+\item \textsf{\small K14-07}\quad $f(x) = \dfrac{e^x}{x}$ \emph{(også: Produktregelen)}\\{\small\color{dempet}Brøkregelen, eller produktregelen med $e^x \cdot x^{-1}$. Svaret er $\frac{(x - 1)e^x}{x^2}$ uansett.}
+\item \textsf{\small K14-08}\quad $f(x) = \dfrac{x + 1}{x - 2}$
+\item \textsf{\small K14-12}\quad $f(x) = \dfrac{5}{x^2}$ \emph{(også: Bare grunnreglene: potens, sum, eksponential og ln x)}\\{\small\color{dempet}Begge går: $5x^{-2}$ med potensregelen, eller brøkregelen. Potensregelen er raskest: $f'(x) = -\frac{10}{x^3}$.}
+\end{itemize}
+\end{document}

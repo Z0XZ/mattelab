@@ -113,7 +113,14 @@
     "5": [
       "funksjon-og-derivert",
       "stigningstallfunksjonen",
-      "grafen-til-den-deriverte"
+      "grafen-til-den-deriverte",
+      "derivasjonsregler",
+      "hvilken-derivasjonsregel",
+      "funksjon-utregning-svar",
+      "finn-feilen-derivasjon",
+      "derivasjon-av-polynomer-og-kjerneregelen",
+      "derivasjon-av-eksponential-og-logaritmefunksjoner",
+      "produktregelen-og-brokregelen"
     ],
     "8": [
       "vekst"
@@ -123,6 +130,12 @@
       "kontinuitet-og-deriverbarhet",
       "alltid-noen-ganger-aldri-derivasjon",
       "nar-finnes-den-deriverte"
+    ],
+    "10": [
+      "omvendte-funksjoner",
+      "omvendte-funksjoner-og-deriverte",
+      "derivasjon-av-eksponential-og-logaritmefunksjoner",
+      "derivasjonsregler"
     ],
     "11": [
       "vektorer"

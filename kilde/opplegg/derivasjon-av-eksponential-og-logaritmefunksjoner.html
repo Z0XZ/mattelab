@@ -1,0 +1,176 @@
+---
+tittel: Derivasjon av eksponential- og logaritmefunksjoner
+beskrivelse: eˣ er sin egen deriverte, ln x får vi ved speiling, og kjerneregelen gir resten. Med vekstmodeller som anvendelse.
+type: opplegg
+fag: R1
+tema: derivasjon
+varighet: 90
+rekkefolge: 5
+ikon: omvendt
+---
+<p class="ingress">Elevene ser at $e^x$ er sin egen deriverte, og bruker speiling om $y = x$ til å finne $(\ln x)' = \frac{1}{x}$. Med kjerneregelen kan de så derivere $e^{kx}$, $a^x$ og $\ln(u)$, og bruke det på vekstmodeller.</p>
+
+<div class="opplegg-fakta">
+<section>
+<h2>Mål for økta</h2>
+<ul>
+  <li>Jeg kan derivere $e^x$, $e^{kx}$, $a^x$ og $\ln x$.</li>
+  <li>Jeg kan forklare hvorfor $(\ln x)' = \frac{1}{x}$.</li>
+  <li>Jeg kan tolke den deriverte av en vekstmodell som en momentan vekstfart.</li>
+</ul>
+</section>
+<section>
+<h2>Kompetansemål</h2>
+{{maal:R1:5,10}}
+</section>
+<section>
+<h2>Dette trenger du</h2>
+<ul class="ressursliste">
+  <li><a href="{{rot}}utforskere/stigningstallfunksjonen.html?fn=eksp&amp;x0=-1">Stigningstallfunksjonen</a> <span class="ressurs-type">utforsker, oppgave 3</span></li>
+  <li><a href="{{rot}}utforskere/omvendte-funksjoner.html">Omvendte funksjoner og deriverte</a> <span class="ressurs-type">utforsker, oppgave 1</span></li>
+  <li><a href="{{rot}}varierende/derivasjonsregler.html?niva=3">Derivasjonsregler</a> <span class="ressurs-type">øving, nivå 3</span></li>
+  <li><a href="{{rot}}varierende/finn-feilen-derivasjon.html">Finn feilen i derivasjonen</a> <span class="ressurs-type">tavleoppgave 4, 5 og 7</span></li>
+  <li>Lommeregner til oppgave 2</li>
+</ul>
+</section>
+</div>
+
+<section class="opplegg-del" aria-labelledby="plan-tittel">
+<h2 id="plan-tittel">Plan for økta</h2>
+<ol class="tidsplan">
+<li class="tidsdel" data-min="10">
+  <h3>Oppstart: En funksjon som er sin egen deriverte</h3>
+  <p class="tidsdel-form">Hele klassen · storskjerm</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div><p>Vis $e^x$ i <a href="{{rot}}utforskere/stigningstallfunksjonen.html?fn=eksp&amp;x0=-1">Stigningstallfunksjonen</a>. Spør før du lager sporet: Hvordan tror dere grafen til $f'$ ser ut? Lag sporet, og se at det havner oppå grafen.</p></div>
+    <strong>Elevene</strong>
+    <div><p>Gjetter, og sammenligner $f(x_0)$ og $f'(x_0)$ i noen punkter.</p></div>
+  </div>
+</li>
+<li class="tidsdel" data-min="15">
+  <h3>Felles: $e^{kx}$ og $a^x$</h3>
+  <p class="tidsdel-form">Hele klassen · tavle</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div>
+      <p>Med kjerneregelen er $(e^{kx})' = ke^{kx}$. Skriv $a^x = e^{x \ln a}$, og deriver:</p>
+      $$(a^x)' = \left(e^{x \ln a}\right)' = \ln a \cdot e^{x \ln a} = a^x \ln a$$
+    </div>
+    <strong>Elevene</strong>
+    <div><p>Deriverer $3e^{-2x}$ og $5 \cdot 1{,}04^x$ i par.</p></div>
+  </div>
+  <details><summary>Svar</summary><div><p>$\left(3e^{-2x}\right)' = -6e^{-2x}$ og $\left(5 \cdot 1{,}04^x\right)' = 5 \cdot 1{,}04^x \ln 1{,}04$.</p></div></details>
+</li>
+<li class="tidsdel" data-min="20">
+  <h3>Utforsk: Den deriverte av $\ln x$</h3>
+  <p class="tidsdel-form">Par · PC</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div><p>Elevene gjør oppgave 1 i utforskeren for omvendte funksjoner. Ta en kort felles oppsummering: Speilingen bytter $\Delta x$ og $\Delta y$, så stigningstallet blir $\frac{1}{e^a} = \frac{1}{x}$.</p></div>
+    <strong>Elevene</strong>
+    <div><p>Gjetter, tester og forklarer. Par som blir ferdige, gjør oppgave 2.</p></div>
+  </div>
+  <p class="ressurs">Ressurs: <a href="{{rot}}utforskere/omvendte-funksjoner.html#oppgave-1">Omvendte funksjoner og deriverte, oppgave 1</a></p>
+</li>
+<li class="tidsdel" data-min="15">
+  <h3>Øving: Eksponential og logaritme</h3>
+  <p class="tidsdel-form">Hver for seg · PC</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div><p>Elevene gjør nivå 3 i øvingen.</p></div>
+    <strong>Elevene</strong>
+    <div><p>Løser oppgaver til de har fem riktige uten «Vis svaret».</p></div>
+  </div>
+  <p class="ressurs">Ressurs: <a href="{{rot}}varierende/derivasjonsregler.html?niva=3">Derivasjonsregler, nivå 3</a></p>
+</li>
+<li class="tidsdel" data-min="10">
+  <h3>Finn feilen</h3>
+  <p class="tidsdel-form">Hele klassen · storskjerm</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div><p>Vis <a href="{{rot}}varierende/finn-feilen-derivasjon.html#t4">tavleoppgave 4</a>, <a href="{{rot}}varierende/finn-feilen-derivasjon.html#t5">5</a> og <a href="{{rot}}varierende/finn-feilen-derivasjon.html#t7">7</a>. Feilene i 5 og 7 er den samme: potensregelen brukt når x står i eksponenten.</p></div>
+    <strong>Elevene</strong>
+    <div><p>Finner og retter feilene.</p></div>
+  </div>
+</li>
+<li class="tidsdel" data-min="10">
+  <h3>Anvendelse: Bakterievekst</h3>
+  <p class="tidsdel-form">Par · lommeregner</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div><p>Antall bakterier etter $t$ timer er $N(t) = 500e^{0{,}3t}$. Spør: Hvor fort vokser kulturen etter 5 timer? Hva er enheten?</p></div>
+    <strong>Elevene</strong>
+    <div><p>Deriverer, regner ut $N'(5)$ og tolker svaret.</p></div>
+  </div>
+  <details><summary>Svar</summary><div><p>$N'(t) = 150e^{0{,}3t}$, så $N'(5) = 150e^{1{,}5} \approx 672$. Etter 5 timer vokser kulturen med omtrent 672 bakterier per time.</p></div></details>
+</li>
+<li class="tidsdel" data-min="10">
+  <h3>Oppsummering og exit-lapp</h3>
+  <p class="tidsdel-form">Hele klassen</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div><p>Skriv opp reglene for $e^x$, $a^x$ og $\ln x$. Del ut elevarket til lekse. Exit-lapp: «Deriver $\ln(x^2 + 1)$.»</p></div>
+    <strong>Elevene</strong>
+    <div><p>Svarer på exit-lappen.</p></div>
+  </div>
+  <details><summary>Svar til exit-lappen</summary><div><p>$\frac{1}{x^2 + 1} \cdot 2x = \frac{2x}{x^2 + 1}$.</p></div></details>
+</li>
+</ol> <!-- /tidsplan -->
+</section>
+
+<section class="opplegg-del tekst" aria-labelledby="tips-tittel">
+<h2 id="tips-tittel">Tips</h2>
+<ul>
+  <li><strong>Har du bare 45 minutter?</strong> Bruk oppstarten, utforskeren for $\ln x$ og øvingen.</li>
+  <li><strong>Elever som står fast:</strong> Be dem skrive kjernen først, og så $u'$, før de deriverer.</li>
+  <li><strong>Elever som er raske:</strong> Vis at $(\ln x)' = \frac{1}{x}$ ved å derivere begge sider av $e^{\ln x} = x$.</li>
+  <li><strong>Neste økt:</strong> <a href="{{rot}}opplegg/produktregelen-og-brokregelen.html">Produktregelen og brøkregelen</a>.</li>
+</ul>
+</section>
+
+<section class="oppgaver" aria-labelledby="oppgaver-tittel">
+<h2 id="oppgaver-tittel">Oppgaver</h2>
+{{elevark}}
+<p class="del-inngang">Oppgave 1 og 3 skal løses uten hjelpemidler. I oppgave 2 kan du bruke lommeregner.</p>
+
+<div class="oppgave" id="oppgave-1">
+  <h3><span class="oppgave-nr">1</span>Deriver</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase a">a</span><div><p>$f(x) = 5e^{2x}$</p></div></li>
+  <li><span class="fase b">b</span><div><p>$g(x) = \ln(4x)$</p></div></li>
+  <li><span class="fase c">c</span><div><p>$h(x) = 3 \cdot 2^x$. Regn også ut $h'(0)$ med to desimaler.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>a) $f'(x) = 5 \cdot 2e^{2x} = 10e^{2x}$.</p>
+    <p>b) $g'(x) = \frac{4}{4x} = \frac{1}{x}$. Det stemmer med at $\ln(4x) = \ln 4 + \ln x$.</p>
+    <p>c) $h'(x) = 3 \cdot 2^x \ln 2$, så $h'(0) = 3\ln 2 \approx 2{,}08$.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-2">
+  <h3><span class="oppgave-nr">2</span>Teen blir kald igjen</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase a">a</span><div><p>Temperaturen i en kopp te er $T(t) = 20 + 60e^{-0{,}1t}$ grader etter $t$ minutter. Finn $T'(t)$.</p></div></li>
+  <li><span class="fase b">b</span><div><p>Regn ut $T'(5)$, og forklar hva tallet betyr.</p></div></li>
+  <li><span class="fase c">c</span><div><p>Når synker temperaturen med 1 grad per minutt?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>a) $T'(t) = 60 \cdot (-0{,}1)e^{-0{,}1t} = -6e^{-0{,}1t}$.</p>
+    <p>b) $T'(5) = -6e^{-0{,}5} \approx -3{,}64$. Etter 5 minutter synker temperaturen med omtrent $3{,}6$ grader per minutt.</p>
+    <p>c) $-6e^{-0{,}1t} = -1$ gir $e^{-0{,}1t} = \frac{1}{6}$, så $t = 10\ln 6 \approx 17{,}9$ minutter.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-3">
+  <h3><span class="oppgave-nr">3</span>Et bunnpunkt</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase a">a</span><div><p>La $f(x) = x - \ln x$ for $x > 0$. Finn $f'(x)$.</p></div></li>
+  <li><span class="fase b">b</span><div><p>Vis at grafen har et bunnpunkt, og finn det.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>a) $f'(x) = 1 - \frac{1}{x}$.</p>
+    <p>b) $f'(x) = 0$ når $x = 1$. For $0 < x < 1$ er $\frac{1}{x} > 1$, så $f'(x) < 0$. For $x > 1$ er $f'(x) > 0$. Altså har $f$ et bunnpunkt i $(1, f(1)) = (1, 1)$.</p>
+  </div></details>
+</div>
+</section>

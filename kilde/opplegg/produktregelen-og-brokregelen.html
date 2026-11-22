@@ -1,0 +1,166 @@
+---
+tittel: Produktregelen og brøkregelen
+beskrivelse: Hvorfor den deriverte av et produkt ikke er produktet av de deriverte. Produkt- og brøkregelen, sortering etter regel, og øving med blandede oppgaver.
+type: opplegg
+fag: R1
+tema: derivasjon
+varighet: 90
+rekkefolge: 6
+ikon: hvilken-regel
+---
+<p class="ingress">Elevene oppdager at $(uv)' \neq u'v'$ med et enkelt moteksempel. Produktregelen begrunnes med arealet av et rektangel. Brøkregelen kommer etterpå. Til slutt sorterer elevene funksjoner etter hvilken regel de trenger, og øver blandet.</p>
+
+<div class="opplegg-fakta">
+<section>
+<h2>Mål for økta</h2>
+<ul>
+  <li>Jeg kan bruke produktregelen og brøkregelen.</li>
+  <li>Jeg kan se hvilken regel en funksjon trenger.</li>
+  <li>Jeg kan bruke den deriverte til å finne topp- og bunnpunkter for funksjoner med $e^x$ og $\ln x$.</li>
+</ul>
+</section>
+<section>
+<h2>Kompetansemål</h2>
+{{maal:R1:5}}
+</section>
+<section>
+<h2>Dette trenger du</h2>
+<ul class="ressursliste">
+  <li><a href="{{rot}}varierende/finn-feilen-derivasjon.html#t2">Finn feilen i derivasjonen</a> <span class="ressurs-type">tavleoppgave 2 og 3</span></li>
+  <li><a href="{{rot}}varierende/hvilken-derivasjonsregel.html">Hvilken derivasjonsregel?</a> <span class="ressurs-type">kortsett</span></li>
+  <li><a href="{{rot}}varierende/derivasjonsregler.html?niva=4">Derivasjonsregler</a> <span class="ressurs-type">øving, nivå 4, 5 og 6</span></li>
+  <li><a href="{{rot}}varierende/funksjon-utregning-svar.html">Funksjon, utregning og svar</a> <span class="ressurs-type">kortsett, til de raske eller lekse</span></li>
+</ul>
+</section>
+</div>
+
+<section class="opplegg-del" aria-labelledby="plan-tittel">
+<h2 id="plan-tittel">Plan for økta</h2>
+<ol class="tidsplan">
+<li class="tidsdel" data-min="10">
+  <h3>Oppstart: Er $(uv)' = u'v'$?</h3>
+  <p class="tidsdel-form">Hele klassen · tavle</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div><p>Spør: Hvis den deriverte av en sum er summen av de deriverte, er den deriverte av et produkt produktet av de deriverte? Test med $x \cdot x = x^2$. Vis så <a href="{{rot}}varierende/finn-feilen-derivasjon.html#t2">tavleoppgave 2</a>.</p></div>
+    <strong>Elevene</strong>
+    <div><p>Tester påstanden med $x \cdot x$, og finner feilen i tavleoppgaven.</p></div>
+  </div>
+  <details><summary>Svar</summary><div><p>$u'v' = 1 \cdot 1 = 1$, men $(x^2)' = 2x$. Påstanden holder ikke. Med $u'v + uv' = x + x = 2x$ stemmer det.</p></div></details>
+</li>
+<li class="tidsdel" data-min="15">
+  <h3>Felles: Produktregelen</h3>
+  <p class="tidsdel-form">Hele klassen · tavle</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div>
+      <p>Tegn et rektangel med sider $u$ og $v$. Når $x$ øker litt, vokser sidene med $\Delta u$ og $\Delta v$. Arealet vokser med to tynne strimler, $\Delta u \cdot v$ og $u \cdot \Delta v$, og en liten rute $\Delta u \cdot \Delta v$ som forsvinner når vi deler på $\Delta x$ og lar $\Delta x \to 0$.</p>
+      $$(uv)' = u'v + uv'$$
+      <p>Eksempel: $(xe^x)' = 1 \cdot e^x + x \cdot e^x = (x + 1)e^x$.</p>
+    </div>
+    <strong>Elevene</strong>
+    <div><p>Deriverer $x^2 \ln x$ i par.</p></div>
+  </div>
+  <details><summary>Svar</summary><div>$$(x^2 \ln x)' = 2x \ln x + x^2 \cdot \frac{1}{x} = 2x \ln x + x$$</div></details>
+</li>
+<li class="tidsdel" data-min="15">
+  <h3>Felles: Brøkregelen</h3>
+  <p class="tidsdel-form">Hele klassen · tavle</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div>
+      $$\left(\frac{u}{v}\right)' = \frac{u'v - uv'}{v^2}$$
+      <p>Regn $\frac{x}{x + 1}$ sammen. Vis så <a href="{{rot}}varierende/finn-feilen-derivasjon.html#t3">tavleoppgave 3</a>, der rekkefølgen i telleren er byttet.</p>
+    </div>
+    <strong>Elevene</strong>
+    <div><p>Finner feilen i tavleoppgaven, og kontrollerer fortegnet med grafen.</p></div>
+  </div>
+  <details><summary>Svar</summary><div><p>$\left(\frac{x}{x + 1}\right)' = \frac{1 \cdot (x + 1) - x \cdot 1}{(x + 1)^2} = \frac{1}{(x + 1)^2}$.</p></div></details>
+</li>
+<li class="tidsdel" data-min="20">
+  <h3>Kortsett: Hvilken regel?</h3>
+  <p class="tidsdel-form">Par · utskrevne kort eller skjerm</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div><p>Elevene sorterer uten å derivere. Etterpå deriverer hver elev ett kort fra hver boks. Spør etter kortene som passer i to bokser.</p></div>
+    <strong>Elevene</strong>
+    <div><p>Sorterer, begrunner og deriverer fire kort.</p></div>
+  </div>
+  <p class="ressurs">Ressurs: <a href="{{rot}}varierende/hvilken-derivasjonsregel.html">Hvilken derivasjonsregel?</a></p>
+</li>
+<li class="tidsdel" data-min="20">
+  <h3>Øving: Produkt, brøk og blandet</h3>
+  <p class="tidsdel-form">Hver for seg · PC</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div><p>Elevene gjør nivå 4 og 5, og så nivå 6 med blandede oppgaver. Gi kortsettet «Funksjon, utregning og svar» til dem som blir ferdige.</p></div>
+    <strong>Elevene</strong>
+    <div><p>Løser oppgaver, og skriver $u$, $v$, $u'$ og $v'$ på papir.</p></div>
+  </div>
+  <p class="ressurs">Ressurs: <a href="{{rot}}varierende/derivasjonsregler.html?niva=4">Derivasjonsregler, nivå 4–6</a></p>
+</li>
+<li class="tidsdel" data-min="10">
+  <h3>Oppsummering og exit-lapp</h3>
+  <p class="tidsdel-form">Hele klassen</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div><p>Oppsummer: Se på det ytterste i uttrykket for å velge regel. Del ut elevarket til lekse. Exit-lapp: «Deriver $x\ln x$ og $\frac{x}{x + 1}$.»</p></div>
+    <strong>Elevene</strong>
+    <div><p>Svarer på exit-lappen.</p></div>
+  </div>
+  <details><summary>Svar til exit-lappen</summary><div><p>$(x \ln x)' = \ln x + 1$ og $\left(\frac{x}{x + 1}\right)' = \frac{1}{(x + 1)^2}$.</p></div></details>
+</li>
+</ol> <!-- /tidsplan -->
+</section>
+
+<section class="opplegg-del tekst" aria-labelledby="tips-tittel">
+<h2 id="tips-tittel">Tips</h2>
+<ul>
+  <li><strong>Har du bare 45 minutter?</strong> Ta oppstarten, produktregelen og nivå 4 i øvingen. Brøkregelen tar du neste økt.</li>
+  <li><strong>Elever som står fast:</strong> La dem skrive $u = \ldots$, $v = \ldots$, $u' = \ldots$ og $v' = \ldots$ i fire ruter før de setter sammen.</li>
+  <li><strong>Elever som er raske:</strong> Vis brøkregelen fra produktregelen ved å skrive $\frac{u}{v} = u \cdot v^{-1}$.</li>
+  <li><strong>Neste økt:</strong> <a href="{{rot}}opplegg/omvendte-funksjoner-og-deriverte.html">Omvendte funksjoner og deriverte</a>.</li>
+</ul>
+</section>
+
+<section class="oppgaver" aria-labelledby="oppgaver-tittel">
+<h2 id="oppgaver-tittel">Oppgaver</h2>
+{{elevark}}
+<p class="del-inngang">Løs oppgavene uten hjelpemidler.</p>
+
+<div class="oppgave" id="oppgave-1">
+  <h3><span class="oppgave-nr">1</span>Produktregelen</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase a">a</span><div><p>Deriver $f(x) = x^2 e^x$, og skriv svaret på faktorisert form.</p></div></li>
+  <li><span class="fase b">b</span><div><p>Finn topp- og bunnpunktene til $f$.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>a) $f'(x) = 2xe^x + x^2 e^x = x(x + 2)e^x$.</p>
+    <p>b) $e^x > 0$, så $f'(x) = 0$ når $x = 0$ eller $x = -2$. Fortegnet til $x(x + 2)$ er positivt for $x < -2$, negativt mellom $-2$ og $0$, og positivt for $x > 0$. Toppunktet er $(-2, 4e^{-2}) \approx (-2, 0{,}54)$, og bunnpunktet er $(0, 0)$.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-2">
+  <h3><span class="oppgave-nr">2</span>Brøkregelen</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase a">a</span><div><p>Deriver $g(x) = \frac{2x - 1}{x + 2}$.</p></div></li>
+  <li><span class="fase b">b</span><div><p>Forklar hvorfor $g$ vokser på hvert intervall der den er definert.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>a) $g'(x) = \frac{2(x + 2) - (2x - 1) \cdot 1}{(x + 2)^2} = \frac{5}{(x + 2)^2}$.</p>
+    <p>b) Telleren er $5$, og nevneren er et kvadrat, som er positivt når $x \neq -2$. Da er $g'(x) > 0$ for alle $x \neq -2$, og $g$ vokser på hvert av intervallene $x < -2$ og $x > -2$.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-3">
+  <h3><span class="oppgave-nr">3</span>Et bunnpunkt med $\ln x$</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase a">a</span><div><p>Deriver $h(x) = x \ln x$ for $x > 0$.</p></div></li>
+  <li><span class="fase b">b</span><div><p>Finn bunnpunktet. Gi koordinatene eksakt og med to desimaler.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>a) $h'(x) = 1 \cdot \ln x + x \cdot \frac{1}{x} = \ln x + 1$.</p>
+    <p>b) $\ln x + 1 = 0$ gir $x = e^{-1} = \frac{1}{e}$. Til venstre er $\ln x < -1$, så $h' < 0$. Til høyre er $h' > 0$. Bunnpunktet er $\left(\frac{1}{e}, -\frac{1}{e}\right) \approx (0{,}37, -0{,}37)$.</p>
+  </div></details>
+</div>
+</section>

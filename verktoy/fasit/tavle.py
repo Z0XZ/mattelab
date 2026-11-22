@@ -82,3 +82,22 @@ for a, b in ((0, 2), (-1, 4), (F(1, 2), 3)):
 g = lambda x: x ** 3 - 3 * x
 print("  6 x³−3x, tangent i (1, −2) er y = −2:", "f(1) =", g(1), " f(−2) =", g(-2))
 print("  7 x² + 1 > 0, men f′(−1) = 2 · (−1) =", 2 * -1)
+
+
+print("\nFinn feilen: derivasjon (riktige svar kontrollert numerisk)")
+import math
+riktige = {
+    "1 (2x+1)³ → 6(2x+1)²": (lambda x: (2 * x + 1) ** 3, lambda x: 6 * (2 * x + 1) ** 2),
+    "2 x²eˣ → (x² + 2x)eˣ": (lambda x: x * x * math.exp(x), lambda x: (x * x + 2 * x) * math.exp(x)),
+    "3 (x+1)/(x−1) → −2/(x−1)²": (lambda x: (x + 1) / (x - 1), lambda x: -2 / (x - 1) ** 2),
+    "4 ln(3x) → 1/x": (lambda x: math.log(3 * x), lambda x: 1 / x),
+    "5 e^(x²) → 2x e^(x²)": (lambda x: math.exp(x * x), lambda x: 2 * x * math.exp(x * x)),
+    "6 3/x² → −6/x³": (lambda x: 3 / x ** 2, lambda x: -6 / x ** 3),
+    "7 2ˣ → 2ˣ ln 2": (lambda x: 2 ** x, lambda x: 2 ** x * math.log(2)),
+    "8 √(x²+9) → x/√(x²+9)": (lambda x: math.sqrt(x * x + 9), lambda x: x / math.sqrt(x * x + 9)),
+}
+for navn, (f, d) in riktige.items():
+    ok = all(abs((f(x + 1e-6) - f(x - 1e-6)) / 2e-6 - d(x)) < 1e-4 * (1 + abs(d(x))) for x in (1.7, 2.6, 4.1))
+    print(f"  {navn}: {'stemmer' if ok else 'FEIL'}")
+print("  3: u'v − uv' = (x − 1) − (x + 1) = −2")
+print("  4: ln(3x) = ln 3 + ln x, så den deriverte er 1/x. Kjerneregel: 3 · 1/(3x) = 1/x")

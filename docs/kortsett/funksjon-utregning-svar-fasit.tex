@@ -1,0 +1,49 @@
+%% Fasit til kortsett fra mattelab.no – laget automatisk av bygg.py.
+%% Kompiler med lualatex.
+\documentclass[11pt,a4paper]{article}
+\usepackage[norsk]{babel}
+\usepackage[a4paper,margin=1.2cm,bottom=1.7cm]{geometry}
+\usepackage{fontspec}
+\usepackage{unicode-math}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{TeX Gyre Heros}[Scale=MatchLowercase]
+\setmathfont{TeX Gyre Pagella Math}
+\usepackage{xcolor}
+\definecolor{blekk}{HTML}{16213A}
+\definecolor{dempet}{HTML}{566077}
+\definecolor{m1}{HTML}{2F4AB0}
+\usepackage{tikz}
+\usepackage{enumitem}
+\usepackage{qrcode}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+\pdfvariable suppressoptionalinfo \numexpr 1+2+4+8+16+32+64+128+256+512\relax
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[L]{\sffamily\footnotesize\color{dempet}mattelab.no · Funksjon, utregning og svar · kortsett K15 · fasit}
+\fancyfoot[R]{\sffamily\footnotesize\color{dempet}Side \thepage}
+\begin{document}
+\begin{minipage}[t]{0.8\linewidth}\vspace{0pt}
+{\sffamily\small\color{dempet}Fasit for læreren · kortsett K15 · R1}\par\vspace{0.25em}
+{\fontsize{20}{24}\selectfont\bfseries Funksjon, utregning og svar}\par\vspace{0.5em}
+Finn tre og tre kort som hører sammen: en funksjon, utregningen av den deriverte med en regel, og den forenklede deriverte. Skriv ved hver gruppe hvilken regel som er brukt.\par\vspace{0.4em}{\small\color{dempet}Kortene er nummerert i den rekkefølgen de står i utskriften.}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.15\linewidth}\vspace{0pt}\raggedleft
+\qrcode[height=1.9cm]{https://mattelab.no/varierende/funksjon-utregning-svar.html}
+\end{minipage}\par\vspace{0.8em}
+
+\begin{enumerate}[leftmargin=1.6em, itemsep=0.7em]
+\item \begin{minipage}[t]{\linewidth}\textsf{\small K15-02}\quad $f'(x) = 2x \cdot e^x + x^2 \cdot e^x$ \\ \textsf{\small K15-06}\quad $f'(x) = x(x + 2)e^x$ \\ \textsf{\small K15-08}\quad $f(x) = x^2 e^x$\end{minipage}
+\item \begin{minipage}[t]{\linewidth}\textsf{\small K15-04}\quad $f'(x) = 6(2x + 1)^2$ \\ \textsf{\small K15-15}\quad $f'(x) = 3(2x + 1)^2 \cdot 2$ \\ \textsf{\small K15-16}\quad $f(x) = (2x + 1)^3$\end{minipage}
+\item \begin{minipage}[t]{\linewidth}\textsf{\small K15-03}\quad $f(x) = \dfrac{x}{x + 1}$ \\ \textsf{\small K15-09}\quad $f'(x) = \dfrac{1 \cdot (x + 1) - x \cdot 1}{(x + 1)^2}$ \\ \textsf{\small K15-14}\quad $f'(x) = \dfrac{1}{(x + 1)^2}$\end{minipage}
+\item \begin{minipage}[t]{\linewidth}\textsf{\small K15-01}\quad $f(x) = \ln(x^2 + 1)$ \\ \textsf{\small K15-07}\quad $f'(x) = \dfrac{1}{x^2 + 1} \cdot 2x$ \\ \textsf{\small K15-21}\quad $f'(x) = \dfrac{2x}{x^2 + 1}$\end{minipage}
+\item \begin{minipage}[t]{\linewidth}\textsf{\small K15-10}\quad $f'(x) = 1 \cdot \ln x + x \cdot \dfrac{1}{x}$ \\ \textsf{\small K15-19}\quad $f(x) = x \ln x$ \\ \textsf{\small K15-20}\quad $f'(x) = \ln x + 1$\end{minipage}
+\item \begin{minipage}[t]{\linewidth}\textsf{\small K15-11}\quad $f'(x) = -2x e^{-x^2}$ \\ \textsf{\small K15-12}\quad $f'(x) = e^{-x^2} \cdot (-2x)$ \\ \textsf{\small K15-17}\quad $f(x) = e^{-x^2}$\end{minipage}
+\item \begin{minipage}[t]{\linewidth}\textsf{\small K15-05}\quad $f(x) = \dfrac{e^x}{x}$ \\ \textsf{\small K15-13}\quad $f'(x) = \dfrac{(x - 1)e^x}{x^2}$ \\ \textsf{\small K15-18}\quad $f'(x) = \dfrac{e^x \cdot x - e^x \cdot 1}{x^2}$\end{minipage}
+\end{enumerate}
+\subsection*{Til læreren}
+Reglene: $x^2 e^x$ og $x \ln x$ med produktregelen, $(2x + 1)^3$, $\ln(x^2 + 1)$ og $e^{-x^2}$ med kjerneregelen, $\frac{x}{x + 1}$ og $\frac{e^x}{x}$ med brøkregelen. Fellene: Flere svar inneholder $e^x$, og to har $(x + 1)$ i nevneren. Spør: Hvordan kan du se på svaret hvilken regel som er brukt? Hvorfor forsvinner x i telleren for $\frac{x}{x + 1}$?
+\end{document}

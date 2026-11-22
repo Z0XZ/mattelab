@@ -1,0 +1,71 @@
+---
+tittel: Finn feilen i derivasjonen
+beskrivelse: Åtte utregninger med én typisk feil hver: glemt indre derivert, produkt av deriverte, byttet rekkefølge i brøkregelen og flere.
+type: tavle
+fag: R1
+tema: derivasjon
+rekkefolge: 9
+---
+<p class="ingress">Hver utregning har én feil. Elevene skal finne den, forklare hva som er galt og rette den. Feilene er de vi ofte ser i elevarbeid med derivasjonsreglene.</p>
+
+<div class="tekst slik-brukes">
+<p><strong>Slik kan du bruke oppgavene:</strong> Vis én utregning om gangen. Elevene finner feilen alene først, og forklarer så for sidemannen. Spør: Hvordan kunne du ha oppdaget feilen selv? Et godt svar er å sette inn et tall og sammenligne med stigningstallet til grafen.</p>
+</div>
+
+<section class="tavle-ramme" aria-label="Tavleoppgaver">
+  {{tavlestyring}}
+  <ol class="tavle-liste">
+  <li class="tavle-kort">
+    <div class="tavle-sporsmal">Finn feilen: $$f(x) = (2x + 1)^3 \qquad f'(x) = 3(2x + 1)^2$$</div>
+    <details class="tavle-svar"><summary>Vis forslag</summary><div class="tavle-svar-innhold">
+      <p><strong>Glemt den indre deriverte.</strong> Kjernen er $u = 2x + 1$ med $u' = 2$. Riktig er $f'(x) = 3(2x + 1)^2 \cdot 2 = 6(2x + 1)^2$.</p>
+    </div></details>
+  </li>
+  <li class="tavle-kort">
+    <div class="tavle-sporsmal">Finn feilen: $$f(x) = x^2 e^x \qquad f'(x) = 2x \cdot e^x = 2xe^x$$</div>
+    <details class="tavle-svar"><summary>Vis forslag</summary><div class="tavle-svar-innhold">
+      <p><strong>Produktregelen har to ledd.</strong> Her er $u = x^2$ og $v = e^x$, og leddet $u \cdot v' = x^2 e^x$ mangler. Riktig er $f'(x) = 2xe^x + x^2 e^x = (x^2 + 2x)e^x$.</p>
+    </div></details>
+  </li>
+  <li class="tavle-kort">
+    <div class="tavle-sporsmal">Finn feilen: $$f(x) = \frac{x + 1}{x - 1} \qquad f'(x) = \frac{(x + 1) \cdot 1 - 1 \cdot (x - 1)}{(x - 1)^2} = \frac{2}{(x - 1)^2}$$</div>
+    <details class="tavle-svar"><summary>Vis forslag</summary><div class="tavle-svar-innhold">
+      <p><strong>Byttet rekkefølge i telleren.</strong> Brøkregelen er $\frac{u'v - uv'}{v^2}$, med $u'v$ først. Riktig er $\frac{1 \cdot (x - 1) - (x + 1) \cdot 1}{(x - 1)^2} = \frac{-2}{(x - 1)^2}$. Feilen gir riktig tall, men feil fortegn.</p>
+      <p>Kontroll: $f$ avtar på begge sider av $x = 1$, så $f'$ må være negativ.</p>
+    </div></details>
+  </li>
+  <li class="tavle-kort">
+    <div class="tavle-sporsmal">Finn feilen: $$f(x) = \ln(3x) \qquad f'(x) = \frac{1}{3x}$$</div>
+    <details class="tavle-svar"><summary>Vis forslag</summary><div class="tavle-svar-innhold">
+      <p><strong>Glemt den indre deriverte.</strong> $(\ln u)' = \frac{u'}{u} = \frac{3}{3x} = \frac{1}{x}$.</p>
+      <p>Det er ikke tilfeldig at svaret blir det samme som for $\ln x$: $\ln(3x) = \ln 3 + \ln x$, og $\ln 3$ er en konstant.</p>
+    </div></details>
+  </li>
+  <li class="tavle-kort">
+    <div class="tavle-sporsmal">Finn feilen: $$f(x) = e^{x^2} \qquad f'(x) = x^2 e^{x^2 - 1}$$</div>
+    <details class="tavle-svar"><summary>Vis forslag</summary><div class="tavle-svar-innhold">
+      <p><strong>Potensregelen brukt på en eksponentialfunksjon.</strong> Her står x i eksponenten, så $(x^n)' = nx^{n-1}$ gjelder ikke. Bruk $(e^u)' = e^u \cdot u'$. Riktig er $f'(x) = 2x e^{x^2}$.</p>
+    </div></details>
+  </li>
+  <li class="tavle-kort">
+    <div class="tavle-sporsmal">Finn feilen: $$f(x) = \frac{3}{x^2} = 3x^{-2} \qquad f'(x) = -6x^{-1} = -\frac{6}{x}$$</div>
+    <details class="tavle-svar"><summary>Vis forslag</summary><div class="tavle-svar-innhold">
+      <p><strong>Feil ny eksponent.</strong> Eksponenten skal bli én mindre: $-2 - 1 = -3$, ikke $-1$. Riktig er $f'(x) = -6x^{-3} = -\frac{6}{x^3}$.</p>
+    </div></details>
+  </li>
+  <li class="tavle-kort">
+    <div class="tavle-sporsmal">Finn feilen: $$f(x) = 2^x \qquad f'(x) = x \cdot 2^{x - 1}$$</div>
+    <details class="tavle-svar"><summary>Vis forslag</summary><div class="tavle-svar-innhold">
+      <p><strong>Potensregelen brukt på en eksponentialfunksjon.</strong> Grunntallet er fast og eksponenten varierer. Riktig er $(a^x)' = a^x \ln a$, så $f'(x) = 2^x \ln 2$.</p>
+      <p>Kontroll: I $x = 0$ gir feil svar $0$, men grafen til $2^x$ stiger der.</p>
+    </div></details>
+  </li>
+  <li class="tavle-kort">
+    <div class="tavle-sporsmal">Finn feilen: $$f(x) = \sqrt{x^2 + 9} \qquad f'(x) = \frac{1}{2\sqrt{x^2 + 9}}$$</div>
+    <details class="tavle-svar"><summary>Vis forslag</summary><div class="tavle-svar-innhold">
+      <p><strong>Glemt den indre deriverte.</strong> Kjernen $u = x^2 + 9$ har $u' = 2x$. Riktig er $f'(x) = \frac{2x}{2\sqrt{x^2 + 9}} = \frac{x}{\sqrt{x^2 + 9}}$.</p>
+      <p>Kontroll: $f$ har bunnpunkt i $x = 0$, så $f'(0)$ må være $0$. Det feile svaret gir $\frac{1}{6}$.</p>
+    </div></details>
+  </li>
+  </ol>
+</section>

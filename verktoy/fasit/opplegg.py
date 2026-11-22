@@ -116,3 +116,46 @@ print("  oppgave 1: stigning venstre 2·1 = 2, høyre 2")
 print("  oppgave 2: x² i 2 =", 2 ** 2, " 3·2 − 2 =", 3 * 2 - 2, " stigning 4 og 3")
 P = lambda t: 25 * math.ceil(t / 0.5) if t > 0 else 0
 print("  oppgave 3: P(0,5), P(0,6), P(1), P(1,2) =", [P(t) for t in (0.5, 0.6, 1, 1.2)])
+
+
+def numd(f, x, h=1e-6):
+    return (f(x + h) - f(x - h)) / (2 * h)
+
+
+print("\n== R1 Derivasjon av polynomer og kjerneregelen")
+f = lambda x: 2 * x ** 3 - 5 * x ** 2 + 4 * x - 1
+print("  oppgave 1: f′(x) = 6x² − 10x + 4, nullpunkter 1 og 2/3:", [6 * F(x) ** 2 - 10 * F(x) + 4 for x in (1, F(2, 3))], " numerisk f′(2) =", round(numd(f, 2), 6))
+g = lambda x: 4 / x + 6 * math.sqrt(x)
+print("  oppgave 2: g′(4) = −4/16 + 3/2 =", -F(4, 16) + F(3, 2), " numerisk", round(numd(g, 4), 6))
+h = lambda x: (x * x - 4 * x) ** 3
+print("  oppgave 3: h′ = 3(x² − 4x)²(2x − 4), null i 0, 2, 4:", [round(numd(h, x), 6) for x in (0, 2, 4)])
+print("    h(1) =", h(1), " h′(1) =", 3 * (1 - 4) ** 2 * (2 - 4), " b =", h(1) - (-54) * 1, " numerisk", round(numd(h, 1), 4))
+print("  oppstart: (2x + 1)² = 4x² + 4x + 1 → 8x + 4, kjerne 2(2x + 1) · 2 = 8x + 4")
+k = lambda x: (x * x - 3) ** 4
+print("  exit: ((x² − 3)⁴)′ = 8x(x² − 3)³, x = 2:", 8 * 2 * (4 - 3) ** 3, " numerisk", round(numd(k, 2), 4))
+
+print("\n== R1 Derivasjon av eksponential- og logaritmefunksjoner")
+N = lambda t: 500 * math.exp(0.3 * t)
+print(f"  bakterier: N′(5) = 150 e^1,5 = {150 * math.exp(1.5):.2f}, numerisk {numd(N, 5):.2f}")
+print(f"  oppgave 1c: h′(0) = 3 ln 2 = {3 * math.log(2):.4f}")
+T = lambda t: 20 + 60 * math.exp(-0.1 * t)
+print(f"  oppgave 2: T′(5) = −6 e^(−0,5) = {-6 * math.exp(-0.5):.4f}, numerisk {numd(T, 5):.4f}, T(0) = {T(0)}")
+print(f"  oppgave 2c: T′(t) = −1 når e^(−0,1t) = 1/6, t = 10 ln 6 = {10 * math.log(6):.4f}")
+q = lambda x: x - math.log(x)
+print("  oppgave 3: f(x) = x − ln x, f′(1) =", round(numd(q, 1), 6), " f(1) =", q(1), " f′(0,5) =", round(numd(q, 0.5), 4), " f′(2) =", round(numd(q, 2), 4))
+
+print("\n== R1 Produktregelen og brøkregelen")
+p = lambda x: x * x * math.exp(x)
+print(f"  oppgave 1: f′(0) = {numd(p, 0):.6f}, f′(−2) = {numd(p, -2):.6f}, f(−2) = 4e^(−2) = {p(-2):.4f}")
+print(f"    fortegn: f′(−3) = {numd(p, -3):.4f}, f′(−1) = {numd(p, -1):.4f}, f′(1) = {numd(p, 1):.4f}")
+r = lambda x: (2 * x - 1) / (x + 2)
+print("  oppgave 2: g′(x) = 5/(x + 2)², x = 0:", F(5, 4), " numerisk", round(numd(r, 0), 6))
+s = lambda x: x * math.log(x)
+print(f"  oppgave 3: h′(1/e) = {numd(s, 1 / math.e):.6f}, h(1/e) = {s(1 / math.e):.4f}, 1/e = {1 / math.e:.4f}")
+print("  oppstart: x · x: u′v′ = 1, men (x²)′ = 2x. u′v + uv′ = x + x = 2x")
+
+print("\n== R1 Omvendte funksjoner og deriverte")
+print("  oppgave 1: f(x) = x³ + x: f(1) =", 1 + 1, " f′(1) =", 3 + 1, " g′(2) =", F(1, 4))
+print("  oppgave 2: f(x) = e^(2x), g(x) = ½ ln x: g(f(x)) =", 0.5 * math.log(math.exp(2 * 0.7)), "(x = 0,7)", " g′(1) =", round(numd(lambda x: 0.5 * math.log(x), 1), 6))
+gg = lambda x: 1 + math.sqrt(x)
+print("  oppgave 3: g(x) = 1 + √x: g(4) =", gg(4), " f′(3) = 2(3 − 1) =", 2 * (3 - 1), " g′(4) =", round(numd(gg, 4), 6))

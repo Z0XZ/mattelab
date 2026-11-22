@@ -1,0 +1,132 @@
+---
+tittel: Omvendte funksjoner og deriverte
+beskrivelse: Speil grafen til f om linja y = x og få den omvendte funksjonen. Tangentene speiles også, og stigningstallene blir omvendte. Slik finner vi den deriverte av ln x.
+type: utforsker
+fag: R1
+tema: derivasjon, funksjoner
+ikon: omvendt
+skript: utforskere/omvendt.js
+---
+<p class="ingress">Den omvendte funksjonen $g$ gjør det motsatte av $f$: Er $f(a) = b$, er $g(b) = a$. Grafen til $g$ er grafen til $f$ speilet om linja $y = x$. Her ser du at tangentene også speiles, og at stigningstallene da blir omvendte av hverandre.</p>
+
+<figure class="sim sim-bred" id="utforsker" aria-label="Utforsker for omvendte funksjoner">
+  <div class="sim-delt">
+    <div class="sim-graf">
+      <svg id="graf" class="kun-js"></svg>
+      <div class="noscript-melding kun-uten-js">
+        <p><strong>Utforskeren trenger JavaScript.</strong> Resten av siden, med forklaring og oppgaver, virker uten.</p>
+        <p>Eksempel: $f(x) = e^x$ går gjennom $P = (1, e)$ med stigningstall $e$. Den omvendte funksjonen $\ln x$ går gjennom $Q = (e, 1)$ med stigningstall $\frac{1}{e}$.</p>
+      </div>
+      <dl class="sim-tall kun-js" id="verdier"></dl>
+    </div>
+    <div class="sim-side-panel kun-js">
+      <div class="sim-styring">
+        <div class="sim-velg">
+          <label for="par">Funksjonspar</label>
+          <select id="par">
+            <option value="eksp">eˣ og ln x</option>
+            <option value="kvadrat">x² (x ≥ 0) og √x</option>
+            <option value="kubikk">x³ og ∛x</option>
+            <option value="lineaer">2x + 1 og (x − 1)/2</option>
+          </select>
+        </div>
+        <div id="glidere" class="glidere"></div>
+      </div>
+      <div class="sim-blokk">
+        <p class="panel-tittel">Funksjonen og den omvendte</p>
+        <div id="forskrift" class="former"></div>
+        <p class="panel-tittel ny-del">De deriverte</p>
+        <div id="derivert" class="former"></div>
+      </div>
+      <div id="melding" class="sim-blokk melding" hidden></div>
+    </div>
+  </div>
+  <fieldset class="sim-valg kun-js" id="visvalg">
+    <legend>Vis i grafen</legend>
+    <label class="avkrysning"><input type="checkbox" name="tangenter" checked> Tangentene i P og Q (tynne, mørke)</label>
+    <label class="avkrysning"><input type="checkbox" name="speil" checked> Linja y = x og speilingen fra P til Q (stiplet)</label>
+  </fieldset>
+  {{figurverktoy}}
+  <figcaption class="sim-hint">Grafen til f er blå, grafen til den omvendte funksjonen g er plomme. Tangentene er tynne og mørke. Verdiene står i adressefeltet, så du kan dele oppsettet.</figcaption>
+</figure>
+
+<details class="teori" id="matematikken">
+<summary><span class="teori-tittel">Matematikken bak</span><span class="teori-hint">Omvendt funksjon, speiling og den deriverte av den omvendte funksjonen</span></summary>
+<div class="teori-innhold tekst">
+
+<h3>Omvendt funksjon</h3>
+<p>En funksjon $f$ har en omvendt funksjon $g$ når hver y-verdi kommer fra nøyaktig én x-verdi. Da er</p>
+$$g(f(x)) = x \qquad \text{og} \qquad f(g(x)) = x$$
+<p>Eksempler: $e^x$ og $\ln x$, og $x^2$ og $\sqrt{x}$ når vi bare ser på $x \geq 0$. Definisjonsmengden til $g$ er verdimengden til $f$.</p>
+
+<h3>Speiling om $y = x$</h3>
+<p>Ligger $(a, b)$ på grafen til $f$, ligger $(b, a)$ på grafen til $g$. Å bytte om koordinatene er det samme som å speile om linja $y = x$.</p>
+
+<h3>Den deriverte av den omvendte funksjonen</h3>
+<p>En linje med stigningstall $k$ speilet om $y = x$ får stigningstall $\frac{1}{k}$, fordi $\Delta x$ og $\Delta y$ bytter plass. Derfor er</p>
+$$g'(b) = \frac{1}{f'(a)} \qquad \text{der } b = f(a)$$
+<p>Er $f'(a) = 0$, blir tangenten til $g$ loddrett, og $g$ er ikke deriverbar i $b$.</p>
+
+<h3>Eksempel: $\ln x$</h3>
+<p>Med $f(x) = e^x$ og $g(x) = \ln x$ er $b = e^a$ og $f'(a) = e^a = b$. Da er $g'(b) = \frac{1}{b}$. Altså er $(\ln x)' = \frac{1}{x}$.</p>
+<p>Det samme følger av kjerneregelen: Deriver begge sider av $e^{\ln x} = x$. Da får vi $e^{\ln x} \cdot (\ln x)' = 1$, så $(\ln x)' = \frac{1}{e^{\ln x}} = \frac{1}{x}$.</p>
+</div>
+</details>
+
+<section class="oppgaver" aria-labelledby="oppgaver-tittel">
+<h2 id="oppgaver-tittel">Oppgaver</h2>
+{{elevark}}
+<p class="del-inngang">Hver oppgave har tre steg. <strong>Gjett</strong> først, uten å bruke utforskeren. <strong>Test</strong> så i utforskeren. <strong>Forklar</strong> til slutt med egne ord hvorfor det blir slik.</p>
+
+<div class="oppgave" id="oppgave-1">
+  <h3><span class="oppgave-nr">1</span>Den deriverte av $\ln x$</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Grafen til $e^x$ har stigningstall $e \approx 2{,}72$ i $P = (1, e)$. Hva tror du stigningstallet til $\ln x$ er i det speilede punktet $Q$?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?par=eksp&amp;a=1#utforsker">Velg $e^x$ og $\ln x$ med $a = 1$</a>. Prøv også $a = 0$ og $a = -1$. Sammenlign stigningstallet i $Q$ med $\frac{1}{x}$, der $x$ er førstekoordinaten til $Q$.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Bruk speilingen til å forklare at $(\ln x)' = \frac{1}{x}$.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>I $Q = (e, 1)$ er stigningstallet $\frac{1}{e} \approx 0{,}37$. Med $a = 0$ er $Q = (1, 0)$ og stigningstallet $1$. Med $a = -1$ er $Q \approx (0{,}37, -1)$ og stigningstallet $e \approx 2{,}72$. Hver gang er stigningstallet $\frac{1}{x}$.</p>
+    <p>Speilingen bytter om $\Delta x$ og $\Delta y$, så stigningstallet i $Q$ er $\frac{1}{f'(a)} = \frac{1}{e^a}$. Men $e^a$ er nettopp førstekoordinaten til $Q$. Altså er stigningstallet til $\ln x$ lik $\frac{1}{x}$.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-2">
+  <h3><span class="oppgave-nr">2</span>Kvadratroten</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>$f(x) = x^2$ har $f'(2) = 4$. Hva er stigningstallet til $\sqrt{x}$ i $x = 4$?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?par=kvadrat&amp;a=2#utforsker">Velg $x^2$ og $\sqrt{x}$ med $a = 2$</a>. Dra så $a$ ned mot $0$.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Hvorfor er ikke $\sqrt{x}$ deriverbar i $x = 0$?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>Stigningstallet er $\frac{1}{4}$. Det stemmer med $(\sqrt{x})' = \frac{1}{2\sqrt{x}} = \frac{1}{2 \cdot 2} = \frac{1}{4}$.</p>
+    <p>Når $a = 0$, er tangenten til $x^2$ vannrett, fordi $f'(0) = 0$. Speilet blir den loddrett. En loddrett linje har ikke noe stigningstall, så $\sqrt{x}$ er ikke deriverbar i $0$.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-3">
+  <h3><span class="oppgave-nr">3</span>Tredjeroten</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>$f(x) = x^3$ har en omvendt funksjon for alle $x$. Har $\sqrt[3]{x}$ en tangent i alle punkter? Hva skjer i origo?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?par=kubikk&amp;a=1#utforsker">Velg $x^3$ og $\sqrt[3]{x}$ med $a = 1$</a>. Prøv $a = 2$ og $a = 0$.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Finn stigningstallet til $\sqrt[3]{x}$ i $x = 8$ uten utforskeren.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>Med $a = 1$ er begge stigningstallene knyttet sammen ved $3 \cdot \frac{1}{3} = 1$. I origo er $f'(0) = 0$, så tangenten til $\sqrt[3]{x}$ er loddrett der. $\sqrt[3]{x}$ er kontinuerlig i $0$, men ikke deriverbar.</p>
+    <p>$x = 8$ svarer til $a = 2$, fordi $2^3 = 8$. Da er $f'(2) = 3 \cdot 2^2 = 12$, og stigningstallet til $\sqrt[3]{x}$ i $8$ er $\frac{1}{12}$.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-4">
+  <h3><span class="oppgave-nr">4</span>Lineære funksjoner</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase gjett">Gjett</span><div><p>Hva er den omvendte funksjonen til $f(x) = 2x + 1$? Hva er stigningstallet?</p></div></li>
+  <li><span class="fase test">Test</span><div><p><a class="oppsettlenke" href="?par=lineaer&amp;a=0#utforsker">Velg $2x + 1$ med $a = 0$</a>, og dra $a$ fram og tilbake.</p></div></li>
+  <li><span class="fase forklar">Forklar</span><div><p>Vis at $g(f(x)) = x$. Hvor skjærer grafene hverandre?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>Vi løser $y = 2x + 1$ for $x$: $x = \frac{y - 1}{2}$. Den omvendte funksjonen er $g(x) = \frac{x - 1}{2}$, med stigningstall $\frac{1}{2}$ overalt.</p>
+    <p>$g(f(x)) = \frac{(2x + 1) - 1}{2} = x$. Grafene skjærer hverandre på linja $y = x$, der $2x + 1 = x$. Det gir $x = -1$, altså i $(-1, -1)$. Der er $P$ og $Q$ samme punkt.</p>
+  </div></details>
+</div>
+</section>

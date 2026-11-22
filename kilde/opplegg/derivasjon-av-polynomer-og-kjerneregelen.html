@@ -1,0 +1,180 @@
+---
+tittel: Derivasjon av polynomer og kjerneregelen
+beskrivelse: Potens-, konstant- og sumregelen fra mønstre elevene allerede har sett, og deretter kjerneregelen. Med øving som retter seg selv og en tavleoppgave om typiske feil.
+type: opplegg
+fag: R1
+tema: derivasjon
+varighet: 90
+rekkefolge: 4
+ikon: derivasjonsregler
+---
+<p class="ingress">Elevene har funnet $f'(x)$ med definisjonen for noen enkle funksjoner. Nå samler de mønstrene til regler: potensregelen, konstant faktor og sum. Etter det kommer kjerneregelen, som trengs når noe annet enn $x$ står inni en potens.</p>
+
+<div class="opplegg-fakta">
+<section>
+<h2>Mål for økta</h2>
+<ul>
+  <li>Jeg kan derivere polynomer og potenser, også med negativ eksponent og kvadratrot.</li>
+  <li>Jeg kan bruke kjerneregelen på uttrykk som $(2x + 1)^5$ og $\sqrt{x^2 + 9}$.</li>
+  <li>Jeg kan bruke den deriverte til å finne vannrette tangenter.</li>
+</ul>
+</section>
+<section>
+<h2>Kompetansemål</h2>
+{{maal:R1:4,5}}
+</section>
+<section>
+<h2>Dette trenger du</h2>
+<ul class="ressursliste">
+  <li><a href="{{rot}}utforskere/stigningstallfunksjonen.html?fn=fjerde&amp;x0=-3">Stigningstallfunksjonen</a> <span class="ressurs-type">utforsker, til oppstarten</span></li>
+  <li><a href="{{rot}}varierende/derivasjonsregler.html?niva=1">Derivasjonsregler</a> <span class="ressurs-type">øving, nivå 1 og 2</span></li>
+  <li><a href="{{rot}}varierende/finn-feilen-derivasjon.html">Finn feilen i derivasjonen</a> <span class="ressurs-type">tavleoppgave 1, 6 og 8</span></li>
+</ul>
+</section>
+</div>
+
+<section class="opplegg-del" aria-labelledby="plan-tittel">
+<h2 id="plan-tittel">Plan for økta</h2>
+<ol class="tidsplan">
+<li class="tidsdel" data-min="10">
+  <h3>Oppstart: Finn mønsteret</h3>
+  <p class="tidsdel-form">Hele klassen · tavle</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div>
+      <p>Skriv opp det klassen har funnet før: $(x^2)' = 2x$, $(x^3)' = 3x^2$, $(2x^2)' = 4x$ og $(3x - 1)' = 3$. Spør: Hva tror dere $(x^4)'$ og $(x^{10})'$ er? Hva med $(5x^3 + x^2)'$?</p>
+      <p>Vis <a href="{{rot}}utforskere/stigningstallfunksjonen.html?fn=fjerde&amp;x0=-3">Stigningstallfunksjonen</a> med $\frac{1}{4}x^4 - 2x^2$, og kryss av for fasit: $f'(x) = x^3 - 4x$.</p>
+    </div>
+    <strong>Elevene</strong>
+    <div><p>Gjetter regler i par, og kontrollerer mot $\frac{1}{4}x^4 - 2x^2$.</p></div>
+  </div>
+</li>
+<li class="tidsdel" data-min="15">
+  <h3>Felles: Potens-, konstant- og sumregelen</h3>
+  <p class="tidsdel-form">Hele klassen · tavle</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div>
+      $$(x^n)' = nx^{n-1} \qquad (k \cdot f)' = k \cdot f' \qquad (f + g)' = f' + g'$$
+      <p>Vis at potensregelen også gjelder for $\frac{1}{x} = x^{-1}$ og $\sqrt{x} = x^{\frac{1}{2}}$. Sammenlign med $-\frac{1}{x^2}$ fra kortsettet om definisjonen. Regn ett eksempel: $f(x) = 2x^3 - 6x + \frac{4}{x}$.</p>
+    </div>
+    <strong>Elevene</strong>
+    <div><p>Skriver ned reglene og eksempelet.</p></div>
+  </div>
+  <details><summary>Svar til eksempelet</summary><div><p>$f'(x) = 6x^2 - 6 - \frac{4}{x^2}$.</p></div></details>
+</li>
+<li class="tidsdel" data-min="15">
+  <h3>Øving: Potens- og sumregelen</h3>
+  <p class="tidsdel-form">Hver for seg · PC</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div><p>Elevene gjør nivå 1 i øvingen. Gå rundt og se etter elever som glemmer å gange med eksponenten.</p></div>
+    <strong>Elevene</strong>
+    <div><p>Løser oppgaver til de har fem riktige uten «Vis svaret».</p></div>
+  </div>
+  <p class="ressurs">Ressurs: <a href="{{rot}}varierende/derivasjonsregler.html?niva=1">Derivasjonsregler, nivå 1</a></p>
+</li>
+<li class="tidsdel" data-min="15">
+  <h3>Felles: Kjerneregelen</h3>
+  <p class="tidsdel-form">Hele klassen · tavle</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div>
+      <p>Deriver $(2x + 1)^2$ på to måter. Ganger vi ut, får vi $4x^2 + 4x + 1$ og $f'(x) = 8x + 4$. Med potensregelen rett på får vi $2(2x + 1) = 4x + 2$. Det er halvparten! Hva mangler?</p>
+      <p>Innfør kjerneregelen: $f'(x) = g'(u) \cdot u'$. Her er $u = 2x + 1$, og $u' = 2$. Kjernen endrer seg dobbelt så fort som $x$.</p>
+    </div>
+    <strong>Elevene</strong>
+    <div><p>Deriverer $(3x - 2)^4$ og $\sqrt{x^2 + 9}$ i par, og markerer kjernen.</p></div>
+  </div>
+  <details><summary>Svar</summary><div>
+    <p>$\left((3x - 2)^4\right)' = 4(3x - 2)^3 \cdot 3 = 12(3x - 2)^3$ og $\left(\sqrt{x^2 + 9}\right)' = \frac{1}{2\sqrt{x^2 + 9}} \cdot 2x = \frac{x}{\sqrt{x^2 + 9}}$.</p>
+  </div></details>
+</li>
+<li class="tidsdel" data-min="15">
+  <h3>Øving: Kjerneregelen</h3>
+  <p class="tidsdel-form">Hver for seg · PC</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div><p>Elevene gjør nivå 2 i øvingen. Elever som glemmer den indre deriverte, får en egen tilbakemelding.</p></div>
+    <strong>Elevene</strong>
+    <div><p>Løser oppgaver, og skriver kjernen og den indre deriverte på papir for hver oppgave.</p></div>
+  </div>
+  <p class="ressurs">Ressurs: <a href="{{rot}}varierende/derivasjonsregler.html?niva=2">Derivasjonsregler, nivå 2</a></p>
+</li>
+<li class="tidsdel" data-min="10">
+  <h3>Finn feilen</h3>
+  <p class="tidsdel-form">Hele klassen · storskjerm</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div><p>Vis <a href="{{rot}}varierende/finn-feilen-derivasjon.html#t1">tavleoppgave 1</a>, <a href="{{rot}}varierende/finn-feilen-derivasjon.html#t6">6</a> og <a href="{{rot}}varierende/finn-feilen-derivasjon.html#t8">8</a>. La elevene finne feilen alene først.</p></div>
+    <strong>Elevene</strong>
+    <div><p>Finner feilen, forklarer den og retter utregningen.</p></div>
+  </div>
+</li>
+<li class="tidsdel" data-min="10">
+  <h3>Oppsummering og exit-lapp</h3>
+  <p class="tidsdel-form">Hele klassen</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div><p>Oppsummer reglene. Del ut elevarket til lekse. Exit-lapp: «Deriver $f(x) = (x^2 - 3)^4$. Hva er kjernen?»</p></div>
+    <strong>Elevene</strong>
+    <div><p>Svarer på exit-lappen.</p></div>
+  </div>
+  <details><summary>Svar til exit-lappen</summary><div><p>Kjernen er $u = x^2 - 3$ med $u' = 2x$. $f'(x) = 4(x^2 - 3)^3 \cdot 2x = 8x(x^2 - 3)^3$.</p></div></details>
+</li>
+</ol> <!-- /tidsplan -->
+</section>
+
+<section class="opplegg-del tekst" aria-labelledby="tips-tittel">
+<h2 id="tips-tittel">Tips</h2>
+<ul>
+  <li><strong>Har du bare 45 minutter?</strong> Ta potensreglene i én økt og kjerneregelen i neste.</li>
+  <li><strong>Elever som står fast:</strong> La dem skrive om alle ledd til potenser av $x$ før de deriverer: $\frac{4}{x} = 4x^{-1}$ og $\sqrt{x} = x^{\frac{1}{2}}$.</li>
+  <li><strong>Elever som er raske:</strong> Vis at $(x^3)' = 3x^2$ med definisjonen, og oppgave 3 på elevarket.</li>
+  <li><strong>Neste økt:</strong> <a href="{{rot}}opplegg/derivasjon-av-eksponential-og-logaritmefunksjoner.html">Derivasjon av eksponential- og logaritmefunksjoner</a>.</li>
+</ul>
+</section>
+
+<section class="oppgaver" aria-labelledby="oppgaver-tittel">
+<h2 id="oppgaver-tittel">Oppgaver</h2>
+{{elevark}}
+<p class="del-inngang">Løs oppgavene uten hjelpemidler.</p>
+
+<div class="oppgave" id="oppgave-1">
+  <h3><span class="oppgave-nr">1</span>Vannrette tangenter</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase a">a</span><div><p>Deriver $f(x) = 2x^3 - 5x^2 + 4x - 1$.</p></div></li>
+  <li><span class="fase b">b</span><div><p>For hvilke $x$ har grafen vannrett tangent?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>a) $f'(x) = 6x^2 - 10x + 4$.</p>
+    <p>b) $6x^2 - 10x + 4 = 0$ gir $3x^2 - 5x + 2 = 0$. Med abc-formelen: $x = \frac{5 \pm 1}{6}$, altså $x = 1$ eller $x = \frac{2}{3}$.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-2">
+  <h3><span class="oppgave-nr">2</span>Potenser som ikke ser ut som potenser</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase a">a</span><div><p>Deriver $g(x) = \frac{4}{x} + 6\sqrt{x}$.</p></div></li>
+  <li><span class="fase b">b</span><div><p>Regn ut $g'(4)$.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>a) $g(x) = 4x^{-1} + 6x^{\frac{1}{2}}$, så $g'(x) = -4x^{-2} + 3x^{-\frac{1}{2}} = -\frac{4}{x^2} + \frac{3}{\sqrt{x}}$.</p>
+    <p>b) $g'(4) = -\frac{4}{16} + \frac{3}{2} = -\frac{1}{4} + \frac{3}{2} = \frac{5}{4}$.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-3">
+  <h3><span class="oppgave-nr">3</span>Kjerneregelen</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase a">a</span><div><p>Deriver $h(x) = (x^2 - 4x)^3$.</p></div></li>
+  <li><span class="fase b">b</span><div><p>Finn alle $x$ der $h'(x) = 0$.</p></div></li>
+  <li><span class="fase c">c</span><div><p>Finn likningen til tangenten i punktet der $x = 1$.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>a) Kjernen er $u = x^2 - 4x$ med $u' = 2x - 4$. Da er $h'(x) = 3(x^2 - 4x)^2(2x - 4)$.</p>
+    <p>b) $h'(x) = 0$ når $x^2 - 4x = 0$ eller $2x - 4 = 0$. Det gir $x = 0$, $x = 4$ og $x = 2$.</p>
+    <p>c) $h(1) = (1 - 4)^3 = -27$ og $h'(1) = 3 \cdot 9 \cdot (-2) = -54$. Tangenten: $-27 = -54 \cdot 1 + b$, så $b = 27$. Tangenten er $y = -54x + 27$.</p>
+  </div></details>
+</div>
+</section>

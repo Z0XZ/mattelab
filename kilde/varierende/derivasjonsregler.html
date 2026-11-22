@@ -1,0 +1,71 @@
+---
+tittel: Derivasjonsregler
+beskrivelse: Deriver polynomer, kjerner, eksponential- og logaritmefunksjoner, produkter og brøker. Fyll inn tallene i en mal for f′, med egne tilbakemeldinger på typiske feil.
+type: ovelse
+fag: R1
+tema: derivasjon
+ikon: derivasjonsregler
+rekkefolge: 6
+skript: ovelser/derivasjonsregler.js
+---
+<p class="ingress">Her øver du på derivasjonsreglene én om gangen, og til slutt blandet. Du får en funksjon og en mal for den deriverte med tomme bokser. Fyll inn tallene. Glemmer du den indre deriverte eller et ledd i produktregelen, får du beskjed om det.</p>
+
+<section class="ovelse" id="ovelse" aria-labelledby="dr-tittel">
+  <h2 id="dr-tittel" class="visuelt-skjult">Øving</h2>
+  <div class="kun-js">
+    <div class="sim-velg ovelse-niva">
+      <label for="dr-niva">Nivå</label>
+      <select id="dr-niva">
+        <option value="1">1: Potens- og sumregelen</option>
+        <option value="2">2: Kjerneregelen</option>
+        <option value="3">3: Eksponential- og logaritmefunksjoner</option>
+        <option value="4">4: Produktregelen</option>
+        <option value="5">5: Brøkregelen</option>
+        <option value="6">6: Blandet</option>
+      </select>
+    </div>
+    <div class="ovelse-oppgave" id="dr-oppgave"></div>
+    <div id="dr-svar"></div>
+    <div class="ovelse-knapper">
+      <button type="button" class="knapp liten" id="dr-ny" hidden>Ny oppgave</button>
+      <span class="ovelse-poeng" id="dr-poeng"></span>
+    </div>
+    <p class="merknad">Svarene er hele tall eller halve. Skriv brøk som <code>3/2</code> eller desimaltall med komma. Trykk Enter eller «Sjekk» for å sjekke.</p>
+  </div>
+  <div class="noscript-melding kun-uten-js">
+    <p><strong>Øvingen trenger JavaScript.</strong> Eksempel: $f(x) = (3x - 1)^4$ har kjernen $u = 3x - 1$ med $u' = 3$. Da er $f'(x) = 4(3x - 1)^3 \cdot 3 = 12(3x - 1)^3$.</p>
+  </div>
+</section>
+
+<details class="teori" id="matematikken">
+<summary><span class="teori-tittel">Reglene</span><span class="teori-hint">Potens, sum, kjerne, eksponential, logaritme, produkt og brøk</span></summary>
+<div class="teori-innhold tekst">
+<h3>Potens- og sumregelen</h3>
+$$(x^n)' = n x^{n-1} \qquad (k \cdot f)' = k \cdot f' \qquad (f + g)' = f' + g'$$
+<p>Regelen gjelder også for negative og brøk-eksponenter: $\frac{1}{x} = x^{-1}$ og $\sqrt{x} = x^{\frac{1}{2}}$.</p>
+<h3>Eksponential- og logaritmefunksjoner</h3>
+$$(e^x)' = e^x \qquad (a^x)' = a^x \ln a \qquad (\ln x)' = \frac{1}{x}$$
+<h3>Kjerneregelen</h3>
+<p>Er $f(x) = g(u)$ der $u$ er en funksjon av $x$, er</p>
+$$f'(x) = g'(u) \cdot u'$$
+<p>Deriver den ytre funksjonen med kjernen urørt, og gang med den deriverte av kjernen. Eksempler: $\left(e^{3x}\right)' = 3e^{3x}$ og $\left(\ln(x^2 + 1)\right)' = \frac{2x}{x^2 + 1}$.</p>
+<h3>Produkt- og brøkregelen</h3>
+$$(uv)' = u'v + uv' \qquad \left(\frac{u}{v}\right)' = \frac{u'v - uv'}{v^2}$$
+<p>Vanlige feil:</p>
+<ul>
+  <li>Å glemme den indre deriverte: $\left((2x + 1)^3\right)' \neq 3(2x + 1)^2$.</li>
+  <li>Å derivere et produkt faktor for faktor: $(x e^x)' \neq 1 \cdot e^x$.</li>
+  <li>Å bytte rekkefølgen i telleren i brøkregelen. Da får svaret feil fortegn.</li>
+</ul>
+</div>
+</details>
+
+<div class="tekst kortsett-bruk">
+<h2>Til læreren</h2>
+<ul>
+  <li>Malen med bokser lar eleven fokusere på regelen, ikke på å skrive om svaret. Be elevene skrive hele utregningen på papir.</li>
+  <li>Elever som glemmer den indre deriverte, tar produktet av de deriverte eller bytter rekkefølge i brøkregelen, får en egen tilbakemelding. Etter to feil kan eleven trykke «Vis svaret».</li>
+  <li>Adressen husker nivået, for eksempel <code>?niva=4</code>. Med <code>&amp;frø=1</code> får alle de samme oppgavene.</li>
+  <li>Se også kortsettene <a href="{{rot}}varierende/hvilken-derivasjonsregel.html">Hvilken regel?</a> og <a href="{{rot}}varierende/funksjon-utregning-svar.html">Funksjon, utregning og svar</a>.</li>
+</ul>
+</div>
