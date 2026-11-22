@@ -1,0 +1,145 @@
+---
+tittel: Når finnes den deriverte?
+beskrivelse: Kontinuitet og deriverbarhet med knekk, sprang og loddrette tangenter. Kortsett, utforsker og oppgaver med delt forskrift.
+type: opplegg
+fag: R1
+tema: derivasjon
+varighet: 45
+rekkefolge: 3
+ikon: kontinuitet
+---
+<p class="ingress">Ikke alle funksjoner har en deriverte i alle punkter. Her undersøker elevene to måter det kan gå galt på: Grafen gjør et sprang, eller den har en knekk. De lærer at en deriverbar funksjon alltid er kontinuerlig, men ikke omvendt.</p>
+
+<div class="opplegg-fakta">
+<section>
+<h2>Mål for økta</h2>
+<ul>
+  <li>Jeg kan avgjøre om en funksjon er kontinuerlig i et punkt ved å se på grenseverdiene fra venstre og høyre.</li>
+  <li>Jeg kan gi eksempler på funksjoner som ikke er deriverbare i et punkt.</li>
+  <li>Jeg kan forklare at en deriverbar funksjon er kontinuerlig, men at det motsatte ikke alltid gjelder.</li>
+</ul>
+</section>
+<section>
+<h2>Kompetansemål</h2>
+{{maal:R1:4,9}}
+</section>
+<section>
+<h2>Dette trenger du</h2>
+<ul class="ressursliste">
+  <li><a href="{{rot}}varierende/alltid-noen-ganger-aldri-derivasjon.html">Alltid, noen ganger eller aldri? Derivasjon</a> <span class="ressurs-type">tavleoppgave 1 og 2</span></li>
+  <li><a href="{{rot}}utforskere/sekant-tangent.html?fn=abs&amp;x0=0&amp;h=1">Sekant som blir tangent, med |x|</a> <span class="ressurs-type">utforsker</span></li>
+  <li><a href="{{rot}}varierende/kontinuitet-og-deriverbarhet.html">Kontinuerlig, knekk eller sprang?</a> <span class="ressurs-type">kortsett</span></li>
+</ul>
+</section>
+</div>
+
+<section class="opplegg-del" aria-labelledby="plan-tittel">
+<h2 id="plan-tittel">Plan for økta</h2>
+<ol class="tidsplan">
+<li class="tidsdel" data-min="5">
+  <h3>Oppstart: To påstander</h3>
+  <p class="tidsdel-form">Hele klassen · storskjerm</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div><p>Vis <a href="{{rot}}varierende/alltid-noen-ganger-aldri-derivasjon.html#t1">tavleoppgave 1</a> og <a href="{{rot}}varierende/alltid-noen-ganger-aldri-derivasjon.html#t2">tavleoppgave 2</a> etter hverandre. La elevene stemme, men vent med svaret.</p></div>
+    <strong>Elevene</strong>
+    <div><p>Stemmer, og skriver ned et eksempel som støtter svaret.</p></div>
+  </div>
+</li>
+<li class="tidsdel" data-min="10">
+  <h3>Felles: Knekk og loddrett tangent</h3>
+  <p class="tidsdel-form">Hele klassen · storskjerm</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div>
+      <p>Vis $|x|$ i <a href="{{rot}}utforskere/sekant-tangent.html?fn=abs&amp;x0=0&amp;h=1">Sekant som blir tangent</a>. La $h$ gå mot $0$ fra høyre, og så fra venstre. Stigningstallet er $1$ fra høyre og $-1$ fra venstre. Velg så $\sqrt{x}$ i $x_0 = 0$, der tangenten er loddrett.</p>
+      <p>Definer kontinuitet: $f$ er kontinuerlig i $a$ når</p>
+      $$\lim_{x \to a^-} f(x) = \lim_{x \to a^+} f(x) = f(a)$$
+    </div>
+    <strong>Elevene</strong>
+    <div><p>Skisserer de to grafene og skriver ned definisjonen.</p></div>
+  </div>
+</li>
+<li class="tidsdel" data-min="20">
+  <h3>Kortsett: Kontinuerlig, knekk eller sprang?</h3>
+  <p class="tidsdel-form">Par · utskrevne kort eller skjerm</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div><p>Regn ut det første kortet med delt forskrift sammen med klassen. Gå så rundt og spør etter grenseverdier og stigningstall fra hver side.</p></div>
+    <strong>Elevene</strong>
+    <div><p>Sorterer tretten kort i tre bokser, og begrunner hvert valg med regning eller med grafen.</p></div>
+  </div>
+  <p class="ressurs">Ressurs: <a href="{{rot}}varierende/kontinuitet-og-deriverbarhet.html">Kontinuerlig, knekk eller sprang?</a></p>
+  <details><summary>Spørsmål og typiske feil</summary><div>
+    <ul>
+      <li>Mange tror at en delt forskrift alltid gir en knekk. Kortet med $x^2$ og $2x - 1$ viser at grafen kan være glatt.</li>
+      <li>Spør: Kan en funksjon ha et sprang og likevel være deriverbar i punktet? Hvorfor ikke?</li>
+    </ul>
+  </div></details>
+</li>
+<li class="tidsdel" data-min="10">
+  <h3>Oppsummering og exit-lapp</h3>
+  <p class="tidsdel-form">Hele klassen</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div><p>Gå tilbake til de to påstandene fra starten. Oppsummer: deriverbar ⇒ kontinuerlig, men ikke omvendt. Exit-lapp: «Tegn en graf som er kontinuerlig i $x = 2$, men ikke deriverbar der.» Del ut elevarket til lekse.</p></div>
+    <strong>Elevene</strong>
+    <div><p>Svarer på exit-lappen.</p></div>
+  </div>
+</li>
+</ol> <!-- /tidsplan -->
+</section>
+
+<section class="opplegg-del tekst" aria-labelledby="tips-tittel">
+<h2 id="tips-tittel">Tips</h2>
+<ul>
+  <li><strong>Har du 90 minutter?</strong> La elevene gjøre oppgave 5 i <a href="{{rot}}utforskere/stigningstallfunksjonen.html">Stigningstallfunksjonen</a> etter felles gjennomgang, og elevarket i timen.</li>
+  <li><strong>Elever som står fast:</strong> Be dem tegne grafen til hver del av en delt forskrift i samme koordinatsystem, med blyant, og se hva som skjer i $x = 1$.</li>
+  <li><strong>Elever som er raske:</strong> Oppgave 1 på elevarket, der de selv velger konstanten som gjør funksjonen kontinuerlig.</li>
+  <li><strong>Tidligere økter:</strong> <a href="{{rot}}opplegg/fra-vekstfart-til-den-deriverte.html">Fra vekstfart til den deriverte</a> og <a href="{{rot}}opplegg/tangenten-og-definisjonen.html">Tangenten og definisjonen av den deriverte</a>.</li>
+</ul>
+</section>
+
+<section class="oppgaver" aria-labelledby="oppgaver-tittel">
+<h2 id="oppgaver-tittel">Oppgaver</h2>
+{{elevark}}
+<p class="del-inngang">Løs oppgavene uten hjelpemidler. Tegn gjerne grafen.</p>
+
+<div class="oppgave" id="oppgave-1">
+  <h3><span class="oppgave-nr">1</span>Velg konstanten</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase a">a</span><div><p>Funksjonen $f$ er gitt ved $f(x) = x^2 + 1$ for $x < 1$ og $f(x) = 2x + k$ for $x \geq 1$. Bestem $k$ slik at $f$ er kontinuerlig i $x = 1$.</p></div></li>
+  <li><span class="fase b">b</span><div><p>Er $f$ deriverbar i $x = 1$ for denne verdien av $k$? Begrunn svaret.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>a) Fra venstre går $f$ mot $1^2 + 1 = 2$. Fra høyre er verdien $2 \cdot 1 + k = 2 + k$. Vi trenger $2 + k = 2$, så $k = 0$.</p>
+    <p>b) Stigningstallet til $x^2 + 1$ er $2x$, som er $2$ i $x = 1$. Stigningstallet til $2x$ er $2$. Stigningstallene er like fra begge sider, så $f$ er deriverbar i $x = 1$, og $f'(1) = 2$.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-2">
+  <h3><span class="oppgave-nr">2</span>Kontinuerlig, men ikke deriverbar</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase a">a</span><div><p>Funksjonen $g$ er gitt ved $g(x) = x^2$ for $x \leq 2$ og $g(x) = 3x - 2$ for $x > 2$. Vis at $g$ er kontinuerlig i $x = 2$.</p></div></li>
+  <li><span class="fase b">b</span><div><p>Forklar hvorfor $g$ ikke er deriverbar i $x = 2$.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>a) $g(2) = 2^2 = 4$. Fra høyre går $g$ mot $3 \cdot 2 - 2 = 4$. Grenseverdiene og funksjonsverdien er like, så $g$ er kontinuerlig i $x = 2$.</p>
+    <p>b) Fra venstre er stigningstallet $2 \cdot 2 = 4$. Fra høyre er det $3$. Stigningstallene er ulike, så grafen har en knekk i $(2, 4)$, og $g'(2)$ finnes ikke.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-3">
+  <h3><span class="oppgave-nr">3</span>Parkering</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase a">a</span><div><p>En parkering koster $25$ kr per påbegynte halvtime. La $P(t)$ være prisen når du står parkert i $t$ timer. Finn $P(0{,}5)$, $P(0{,}6)$, $P(1)$ og $P(1{,}2)$.</p></div></li>
+  <li><span class="fase b">b</span><div><p>Skisser grafen til $P$ for $0 < t \leq 2$. For hvilke $t$ er $P$ ikke kontinuerlig?</p></div></li>
+  <li><span class="fase c">c</span><div><p>Hva er $P'(t)$ der den finnes? Hva betyr det for parkeringen?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>a) $P(0{,}5) = 25$, $P(0{,}6) = 50$, $P(1) = 50$ og $P(1{,}2) = 75$ kr.</p>
+    <p>b) Grafen er en trapp. Hvert trinn er en vannrett strek med fylt prikk i høyre ende og åpen sirkel i venstre ende. $P$ er ikke kontinuerlig i $t = 0{,}5$, $t = 1$ og $t = 1{,}5$, der prisen hopper med $25$ kr.</p>
+    <p>c) $P'(t) = 0$ mellom hoppene, fordi grafen er vannrett der. Prisen endrer seg ikke så lenge du er inne i samme halvtime. I hoppene finnes ikke den deriverte.</p>
+  </div></details>
+</div>
+</section>

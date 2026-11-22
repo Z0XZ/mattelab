@@ -90,22 +90,39 @@
   "R1": {
     "2": [
       "sekant-tangent",
-      "rasjonale-funksjoner"
+      "rasjonale-funksjoner",
+      "stigningstallfunksjonen",
+      "grafen-til-den-deriverte",
+      "fra-vekstfart-til-den-deriverte",
+      "tangenten-og-definisjonen"
     ],
     "3": [
       "rasjonale-funksjoner"
     ],
     "4": [
-      "sekant-tangent"
+      "sekant-tangent",
+      "stigningstallfunksjonen",
+      "definisjonen-av-den-deriverte",
+      "tangentlikning",
+      "kontinuitet-og-deriverbarhet",
+      "alltid-noen-ganger-aldri-derivasjon",
+      "fra-vekstfart-til-den-deriverte",
+      "tangenten-og-definisjonen",
+      "nar-finnes-den-deriverte"
     ],
     "5": [
-      "funksjon-og-derivert"
+      "funksjon-og-derivert",
+      "stigningstallfunksjonen",
+      "grafen-til-den-deriverte"
     ],
     "8": [
       "vekst"
     ],
     "9": [
-      "rasjonale-funksjoner"
+      "rasjonale-funksjoner",
+      "kontinuitet-og-deriverbarhet",
+      "alltid-noen-ganger-aldri-derivasjon",
+      "nar-finnes-den-deriverte"
     ],
     "11": [
       "vektorer"

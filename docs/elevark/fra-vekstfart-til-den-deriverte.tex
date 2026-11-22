@@ -1,0 +1,75 @@
+%% Elevark fra mattelab.no – laget automatisk av bygg.py. Rediger gjerne til eget bruk.
+%% Kompiler med lualatex.
+\documentclass[11pt,a4paper]{article}
+\usepackage[norsk]{babel}
+\usepackage[a4paper,margin=2.2cm,top=2cm,bottom=2.4cm]{geometry}
+\usepackage{fontspec}
+\usepackage{unicode-math}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{TeX Gyre Heros}[Scale=MatchLowercase]
+\setmathfont{TeX Gyre Pagella Math}
+\usepackage{xcolor}
+\definecolor{blekk}{HTML}{16213A}
+\definecolor{dempet}{HTML}{566077}
+\definecolor{rute}{HTML}{CFC9B8}
+\definecolor{m1}{HTML}{2F4AB0}
+\definecolor{m2}{HTML}{99266D}
+\usepackage[most]{tcolorbox}
+\usepackage{qrcode}
+\usepackage{needspace}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+\pdfvariable suppressoptionalinfo \numexpr 1+2+4+8+16+32+64+128+256+512\relax
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.4em}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[L]{\sffamily\footnotesize\color{dempet}mattelab.no · Fra vekstfart til den deriverte · elevark uten fasit}
+\fancyfoot[R]{\sffamily\footnotesize\color{dempet}Side \thepage}
+
+\newcommand{\fase}[2]{\tcbox[on line, colframe=#2, colback=white, coltext=#2, boxrule=0.6pt, arc=2pt,
+  boxsep=0pt, left=3pt, right=3pt, top=1.5pt, bottom=1.5pt, fontupper=\sffamily\bfseries\footnotesize]{#1}}
+\newcommand{\steg}[4]{%
+  \par\noindent{\color{rute}\rule{\linewidth}{0.4pt}}\par\nopagebreak
+  \noindent\begin{minipage}[t]{2.1cm}\vspace{0pt}\fase{#1}{#2}\end{minipage}%
+  \begin{minipage}[t]{\dimexpr\linewidth-2.1cm\relax}\vspace{0pt}#3\end{minipage}\par
+  \vspace{#4}}
+\newcommand{\del}[4]{%
+  \par\noindent{\color{rute}\rule{\linewidth}{0.4pt}}\par\nopagebreak
+  \noindent\begin{minipage}[t]{1.1cm}\vspace{0pt}\fase{#1}{#2}\end{minipage}%
+  \begin{minipage}[t]{\dimexpr\linewidth-1.1cm\relax}\vspace{0pt}#3\end{minipage}\par
+  \vspace{#4}}
+\newcommand{\oppgave}[2]{\par\Needspace{12\baselineskip}\vspace{0.6em}%
+  {\fontsize{14}{17}\selectfont\bfseries{\color{m1}#1}\enspace #2}\par\vspace{0.2em}}
+
+\begin{document}
+\begin{minipage}[t]{0.72\linewidth}\vspace{0pt}
+{\sffamily\small\color{dempet}Elevark · R1 · mattelab.no}\par\vspace{0.3em}
+{\fontsize{24}{28}\selectfont\bfseries Fra vekstfart til den deriverte}\par\vspace{1em}
+{\sffamily\small Navn: \rule{4.6cm}{0.4pt}\quad Klasse: \rule{1.5cm}{0.4pt}\quad Dato: \rule{1.9cm}{0.4pt}}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.22\linewidth}\vspace{0pt}\raggedleft
+\qrcode[height=2.3cm]{https://mattelab.no/opplegg/fra-vekstfart-til-den-deriverte.html}\par\vspace{0.2em}
+{\sffamily\scriptsize\color{dempet}Opplegget}
+\end{minipage}
+
+\vspace{1em}
+{\sffamily\small\color{dempet}Opplegget ligger på \url{https://mattelab.no/opplegg/fra-vekstfart-til-den-deriverte.html}}\par
+Oppgave 1 skal løses uten hjelpemidler. I oppgave 2 og 3 kan du bruke lommeregner.
+
+\oppgave{1}{Ballen}
+\del{a)}{blekk}{En ball faller $s(t) = 5t^2$ meter på $t$ sekunder. Finn gjennomsnittsfarten fra $t = 1$ til $t = 3$.}{2.5cm}
+\del{b)}{blekk}{Regn ut $\frac{s(3 + h) - s(3)}{h}$ for $h = 0{,}1$ og $h = 0{,}01$. Hva tror du farten er når $t = 3$?}{2.5cm}
+\del{c)}{blekk}{Vis at $\frac{s(3 + h) - s(3)}{h} = 30 + 5h$. Hva er $s'(3)$?}{2.5cm}
+
+\oppgave{2}{Teen blir kald}
+\del{a)}{blekk}{Temperaturen i en kopp te er $T(t) = 20 + 60 \cdot 0{,}9^t$ grader etter $t$ minutter. Finn den gjennomsnittlige vekstfarten de første fem minuttene.}{2.5cm}
+\del{b)}{blekk}{Anslå den momentane vekstfarten når $t = 5$. Bruk $h = 0{,}01$.}{2.5cm}
+\del{c)}{blekk}{Hva betyr fortegnet og enheten i svaret ditt? Hvorfor er svaret i b mindre i tallverdi enn svaret i a?}{2.5cm}
+
+\oppgave{3}{Finn et mønster}
+\del{a)}{blekk}{La $f(x) = x^3$. Anslå $f'(1)$ og $f'(2)$ med $h = 0{,}001$.}{2.5cm}
+\del{b)}{blekk}{Gjett et uttrykk for $f'(x)$. Kontroller gjetningen din i Stigningstallfunksjonen med $x^3 - 3x$: Hva skjer med uttrykket når vi trekker fra $3x$?}{2.5cm}
+
+\end{document}

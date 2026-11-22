@@ -1,0 +1,48 @@
+%% Fasit til kortsett fra mattelab.no – laget automatisk av bygg.py.
+%% Kompiler med lualatex.
+\documentclass[11pt,a4paper]{article}
+\usepackage[norsk]{babel}
+\usepackage[a4paper,margin=1.2cm,bottom=1.7cm]{geometry}
+\usepackage{fontspec}
+\usepackage{unicode-math}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{TeX Gyre Heros}[Scale=MatchLowercase]
+\setmathfont{TeX Gyre Pagella Math}
+\usepackage{xcolor}
+\definecolor{blekk}{HTML}{16213A}
+\definecolor{dempet}{HTML}{566077}
+\definecolor{m1}{HTML}{2F4AB0}
+\usepackage{tikz}
+\usepackage{enumitem}
+\usepackage{qrcode}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+\pdfvariable suppressoptionalinfo \numexpr 1+2+4+8+16+32+64+128+256+512\relax
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[L]{\sffamily\footnotesize\color{dempet}mattelab.no · Grafen til funksjonen og den deriverte · kortsett K11 · fasit}
+\fancyfoot[R]{\sffamily\footnotesize\color{dempet}Side \thepage}
+\begin{document}
+\begin{minipage}[t]{0.8\linewidth}\vspace{0pt}
+{\sffamily\small\color{dempet}Fasit for læreren · kortsett K11 · R1}\par\vspace{0.25em}
+{\fontsize{20}{24}\selectfont\bfseries Grafen til funksjonen og den deriverte}\par\vspace{0.5em}
+Finn tre og tre kort som hører sammen: grafen til en funksjon f, grafen til den deriverte $f'$ og en beskrivelse av f med ord. Forklar hvordan du ser på grafen til $f'$ hvor f vokser og avtar.\par\vspace{0.4em}{\small\color{dempet}Kortene er nummerert i den rekkefølgen de står i utskriften.}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.15\linewidth}\vspace{0pt}\raggedleft
+\qrcode[height=1.9cm]{https://mattelab.no/varierende/grafen-til-den-deriverte.html}
+\end{minipage}\par\vspace{0.8em}
+
+\begin{enumerate}[leftmargin=1.6em, itemsep=0.7em]
+\item \begin{minipage}[t]{\linewidth}\textsf{\small K11-01}\quad f avtar fram til x = 1 og vokser etterpå. Bunnpunkt i x = 1. \\ \textsf{\small K11-02}\quad \emph{Figur:} Rett linje som stiger. Den skjærer x-aksen i 1. \\ \textsf{\small K11-04}\quad \emph{Figur:} Parabel med bunnpunkt i (1, −1). Den skjærer x-aksen i 0 og 2.\end{minipage}
+\item \begin{minipage}[t]{\linewidth}\textsf{\small K11-05}\quad \emph{Figur:} Rett linje som synker. Den skjærer x-aksen i 1. \\ \textsf{\small K11-09}\quad \emph{Figur:} Parabel med toppunkt i (1, 2). Den skjærer y-aksen i 1. \\ \textsf{\small K11-17}\quad f vokser fram til x = 1 og avtar etterpå. Toppunkt i x = 1.\end{minipage}
+\item \begin{minipage}[t]{\linewidth}\textsf{\small K11-03}\quad f har toppunkt i x = −1 og bunnpunkt i x = 1. \\ \textsf{\small K11-06}\quad \emph{Figur:} Tredjegradsgraf som kommer nedenfra, har toppunkt i (−1, 2) og bunnpunkt i (1, −2), og går opp igjen. \\ \textsf{\small K11-10}\quad \emph{Figur:} Parabel som åpner seg oppover, med bunnpunkt i (0, −3). Den skjærer x-aksen i −1 og 1.\end{minipage}
+\item \begin{minipage}[t]{\linewidth}\textsf{\small K11-12}\quad \emph{Figur:} Tredjegradsgraf som kommer ovenfra, har bunnpunkt i (−1, −2) og toppunkt i (1, 2), og går ned igjen. \\ \textsf{\small K11-13}\quad \emph{Figur:} Parabel som åpner seg nedover, med toppunkt i (0, 3). Den skjærer x-aksen i −1 og 1. \\ \textsf{\small K11-16}\quad f har bunnpunkt i x = −1 og toppunkt i x = 1.\end{minipage}
+\item \begin{minipage}[t]{\linewidth}\textsf{\small K11-07}\quad \emph{Figur:} Parabel med bunnpunkt i origo. Den rører x-aksen i 0, men går ikke under. \\ \textsf{\small K11-11}\quad f vokser overalt, men har vannrett tangent i x = 0. \\ \textsf{\small K11-15}\quad \emph{Figur:} Tredjegradsgraf som vokser hele tiden og flater ut i origo.\end{minipage}
+\item \begin{minipage}[t]{\linewidth}\textsf{\small K11-08}\quad \emph{Figur:} Vannrett linje i høyden ½, over x-aksen. \\ \textsf{\small K11-14}\quad \emph{Figur:} Rett linje som stiger. Den skjærer y-aksen i −1 og x-aksen i 2. \\ \textsf{\small K11-18}\quad f vokser like raskt overalt.\end{minipage}
+\end{enumerate}
+\subsection*{Til læreren}
+Gruppene med x² − 2x og −x² + 2x + 1 har begge $f'(1) = 0$, men den ene har bunnpunkt og den andre toppunkt. Det samme gjelder x³ − 3x og −x³ + 3x i x = −1 og x = 1. Elevene må se på fortegnet til $f'$, ikke bare nullpunktene. Spør: Hvordan ser du på grafen til $f'$ at f har et toppunkt og ikke et bunnpunkt? Hva betyr det at grafen til $f'$ rører x-aksen uten å krysse den?
+\end{document}

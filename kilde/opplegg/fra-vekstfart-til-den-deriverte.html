@@ -1,0 +1,186 @@
+---
+tittel: Fra vekstfart til den deriverte
+beskrivelse: Første økt om derivasjon. Fra gjennomsnittlig til momentan vekstfart, tangenten som grense for sekanter, og stigningstallfunksjonen.
+type: opplegg
+fag: R1
+tema: derivasjon
+varighet: 90
+rekkefolge: 1
+ikon: stigningstallfunksjon
+---
+<p class="ingress">Elevene kjenner gjennomsnittlig vekstfart fra før. Her spør vi hvor fort noe endrer seg <em>i et øyeblikk</em>. Svaret er stigningstallet til tangenten: den deriverte. Til slutt ser elevene at stigningstallet selv er en funksjon av $x$.</p>
+
+<div class="opplegg-fakta">
+<section>
+<h2>Mål for økta</h2>
+<ul>
+  <li>Jeg kan forklare forskjellen på gjennomsnittlig og momentan vekstfart.</li>
+  <li>Jeg kan anslå den deriverte i et punkt med en sekant der $h$ er liten.</li>
+  <li>Jeg kan forklare at $f'(a)$ er stigningstallet til tangenten i $(a, f(a))$.</li>
+  <li>Jeg kan skissere grafen til $f'$ når jeg ser grafen til $f$.</li>
+</ul>
+</section>
+<section>
+<h2>Kompetansemål</h2>
+{{maal:R1:2,4}}
+</section>
+<section>
+<h2>Dette trenger du</h2>
+<ul class="ressursliste">
+  <li><a href="{{rot}}utforskere/sekant-tangent.html">Sekant som blir tangent</a> <span class="ressurs-type">utforsker</span></li>
+  <li><a href="{{rot}}utforskere/stigningstallfunksjonen.html">Stigningstallfunksjonen</a> <span class="ressurs-type">utforsker</span></li>
+  <li><a href="{{rot}}varierende/grafen-til-den-deriverte.html">Grafen til funksjonen og den deriverte</a> <span class="ressurs-type">kortsett</span></li>
+  <li>Lommeregner eller CAS til oppgave 2</li>
+</ul>
+</section>
+</div>
+
+<section class="opplegg-del" aria-labelledby="plan-tittel">
+<h2 id="plan-tittel">Plan for økta</h2>
+<ol class="tidsplan">
+<li class="tidsdel" data-min="10">
+  <h3>Oppstart: Hvor fort faller ballen?</h3>
+  <p class="tidsdel-form">Hele klassen · tavle</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div>
+      <p>En ball slippes fra et høyt tårn. Etter $t$ sekunder har den falt $s(t) = 5t^2$ meter. Spør: Hvor fort faller ballen akkurat når $t = 2$?</p>
+      <p>Skriv opp forslagene uten å kommentere dem. Be så elevene regne ut gjennomsnittsfarten fra $t = 0$ til $t = 2$, fra $1$ til $2$ og fra $1{,}9$ til $2$.</p>
+    </div>
+    <strong>Elevene</strong>
+    <div><p>Gjetter først. Regner så ut gjennomsnittsfartene i par, og ser etter et mønster.</p></div>
+  </div>
+  <details><summary>Svar og samtale</summary><div>
+    <p>Gjennomsnittsfartene er $10$, $15$ og $19{,}5$ m/s. Fra $2$ til $2{,}1$ er den $20{,}5$ m/s. Jo kortere intervall, jo nærmere $20$ m/s kommer vi, fra begge sider.</p>
+    <p>Mange elever svarer $10$ m/s, altså $\frac{s(2)}{2}$. Det er gjennomsnittet for hele turen, ikke farten i øyeblikket.</p>
+  </div></details>
+</li>
+<li class="tidsdel" data-min="15">
+  <h3>Felles: Momentan vekstfart og tangenten</h3>
+  <p class="tidsdel-form">Hele klassen · tavle</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div>
+      <p>Tegn grafen til $s$ med sekanten fra $t = 2$ til $t = 2 + h$. Gjennomsnittsfarten er stigningstallet til sekanten:</p>
+      $$\frac{s(2 + h) - s(2)}{h}$$
+      <p>Når $h$ blir liten, blir sekanten til en tangent. Stigningstallet til tangenten kaller vi den deriverte, $s'(2)$. Det er den momentane vekstfarten.</p>
+    </div>
+    <strong>Elevene</strong>
+    <div><p>Skriver ned begrepene gjennomsnittlig vekstfart, momentan vekstfart, sekant, tangent og den deriverte, med en skisse.</p></div>
+  </div>
+  <details><summary>Hvis det er tid</summary><div>
+    <p>Vis at $\frac{5(2 + h)^2 - 20}{h} = 20 + 5h$. Da ser elevene hvorfor svaret går mot $20$ når $h \to 0$. Den formelle definisjonen kommer i neste økt.</p>
+  </div></details>
+</li>
+<li class="tidsdel" data-min="20">
+  <h3>Utforsk: Sekant som blir tangent</h3>
+  <p class="tidsdel-form">Par · PC</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div><p>Elevene gjør oppgave 1, 2 og 3 i utforskeren. Minn dem på å gjette før de tester. Gå rundt og spør: Hvorfor kan vi ikke bare sette $h = 0$?</p></div>
+    <strong>Elevene</strong>
+    <div><p>Gjetter, tester og skriver en forklaring for hver oppgave. Par som blir ferdige, gjør oppgave 4.</p></div>
+  </div>
+  <p class="ressurs">Ressurs: <a href="{{rot}}utforskere/sekant-tangent.html#oppgave-1">Sekant som blir tangent, oppgave 1–3</a></p>
+</li>
+<li class="tidsdel" data-min="15">
+  <h3>Utforsk: Stigningstallet som funksjon</h3>
+  <p class="tidsdel-form">Par · PC</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div><p>Overgang: «Tangenten har ett stigningstall i hvert punkt. Hva skjer om vi samler alle?» Elevene gjør oppgave 1 og 2 i utforskeren. De skal skissere grafen til $f'$ på papir før de lager sporet.</p></div>
+    <strong>Elevene</strong>
+    <div><p>Skisserer, lager sporet og sammenligner. Krysser av for fasit til slutt.</p></div>
+  </div>
+  <p class="ressurs">Ressurs: <a href="{{rot}}utforskere/stigningstallfunksjonen.html#oppgave-1">Stigningstallfunksjonen, oppgave 1 og 2</a></p>
+  <details><summary>Det du ser etter</summary><div>
+    <p>At elevene kobler toppunkt og bunnpunkt på grafen til $f$ med nullpunkter på grafen til $f'$, og at de ser på fortegnet til $f'$ mellom nullpunktene.</p>
+  </div></details>
+</li>
+<li class="tidsdel" data-min="20">
+  <h3>Kortsett: Grafen til funksjonen og den deriverte</h3>
+  <p class="tidsdel-form">Par · utskrevne kort eller skjerm</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div><p>Del ut bare grafene først. Når et par har koblet $f$ og $f'$, får de beskrivelsene. Ta en kort samtale til slutt om parene der $f'$ har de samme nullpunktene.</p></div>
+    <strong>Elevene</strong>
+    <div><p>Kobler graf, derivertgraf og beskrivelse for seks funksjoner, og begrunner hvert valg.</p></div>
+  </div>
+  <p class="ressurs">Ressurs: <a href="{{rot}}varierende/grafen-til-den-deriverte.html">Grafen til funksjonen og den deriverte</a></p>
+  <details><summary>Spørsmål og typiske feil</summary><div>
+    <ul>
+      <li>Mange tror at grafen til $f'$ skal ligne på grafen til $f$. Spør: Hva er stigningstallet i toppunktet? Hvor ligger det punktet på grafen til $f'$?</li>
+      <li>Spør om $\frac{1}{3}x^3$: $f'(0) = 0$. Er det et toppunkt eller bunnpunkt der?</li>
+    </ul>
+  </div></details>
+</li>
+<li class="tidsdel" data-min="10">
+  <h3>Oppsummering og exit-lapp</h3>
+  <p class="tidsdel-form">Hele klassen</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div><p>Oppsummer: $f'(a)$ er stigningstallet til tangenten i $a$, og den momentane vekstfarten. Del ut elevarket til lekse. Exit-lapp: «Hva er forskjellen på gjennomsnittlig og momentan vekstfart? Forklar med ballen.»</p></div>
+    <strong>Elevene</strong>
+    <div><p>Svarer på exit-lappen.</p></div>
+  </div>
+</li>
+</ol> <!-- /tidsplan -->
+</section>
+
+<section class="opplegg-del tekst" aria-labelledby="tips-tittel">
+<h2 id="tips-tittel">Tips</h2>
+<ul>
+  <li><strong>Har du bare 45 minutter?</strong> Bruk oppstarten, felles gjennomgang og kortsettet. Utforskerne kan elevene gjøre hjemme.</li>
+  <li><strong>Elever som står fast:</strong> Be dem holde en linjal som tangent mot grafen og flytte den langs grafen. Peker linjalen opp, ned eller vannrett?</li>
+  <li><strong>Elever som er raske:</strong> Oppgave 3, 4 og 5 i <a href="{{rot}}utforskere/stigningstallfunksjonen.html">Stigningstallfunksjonen</a>, med $e^x$, $\ln x$ og $|x|$.</li>
+  <li><strong>Neste økt:</strong> <a href="{{rot}}opplegg/tangenten-og-definisjonen.html">Tangenten og definisjonen av den deriverte</a>.</li>
+</ul>
+</section>
+
+<section class="oppgaver" aria-labelledby="oppgaver-tittel">
+<h2 id="oppgaver-tittel">Oppgaver</h2>
+{{elevark}}
+<p class="del-inngang">Oppgave 1 skal løses uten hjelpemidler. I oppgave 2 og 3 kan du bruke lommeregner.</p>
+
+<div class="oppgave" id="oppgave-1">
+  <h3><span class="oppgave-nr">1</span>Ballen</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase a">a</span><div><p>En ball faller $s(t) = 5t^2$ meter på $t$ sekunder. Finn gjennomsnittsfarten fra $t = 1$ til $t = 3$.</p></div></li>
+  <li><span class="fase b">b</span><div><p>Regn ut $\frac{s(3 + h) - s(3)}{h}$ for $h = 0{,}1$ og $h = 0{,}01$. Hva tror du farten er når $t = 3$?</p></div></li>
+  <li><span class="fase c">c</span><div><p>Vis at $\frac{s(3 + h) - s(3)}{h} = 30 + 5h$. Hva er $s'(3)$?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>a) $\frac{s(3) - s(1)}{3 - 1} = \frac{45 - 5}{2} = 20$ m/s.</p>
+    <p>b) Med $h = 0{,}1$ får vi $\frac{48{,}05 - 45}{0{,}1} = 30{,}5$. Med $h = 0{,}01$ får vi $30{,}05$. Farten ser ut til å være $30$ m/s.</p>
+    <p>c) Vi regner ut telleren:</p>
+    $$5(3 + h)^2 - 45 = 5(9 + 6h + h^2) - 45 = 30h + 5h^2$$
+    <p>Deler vi på $h$, får vi $30 + 5h$. Når $h \to 0$, går dette mot $30$. Altså er $s'(3) = 30$ m/s.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-2">
+  <h3><span class="oppgave-nr">2</span>Teen blir kald</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase a">a</span><div><p>Temperaturen i en kopp te er $T(t) = 20 + 60 \cdot 0{,}9^t$ grader etter $t$ minutter. Finn den gjennomsnittlige vekstfarten de første fem minuttene.</p></div></li>
+  <li><span class="fase b">b</span><div><p>Anslå den momentane vekstfarten når $t = 5$. Bruk $h = 0{,}01$.</p></div></li>
+  <li><span class="fase c">c</span><div><p>Hva betyr fortegnet og enheten i svaret ditt? Hvorfor er svaret i b mindre i tallverdi enn svaret i a?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>a) $T(0) = 80$ og $T(5) \approx 55{,}43$. Gjennomsnittlig vekstfart: $\frac{55{,}43 - 80}{5} \approx -4{,}91$ grader per minutt.</p>
+    <p>b) $\frac{T(5{,}01) - T(5)}{0{,}01} \approx -3{,}73$ grader per minutt.</p>
+    <p>c) Minustegnet betyr at temperaturen synker. Enheten er grader per minutt. Teen kjøles raskest i starten, når den er varmest. Etter fem minutter går det langsommere, så tallverdien er mindre enn gjennomsnittet for de første fem minuttene.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-3">
+  <h3><span class="oppgave-nr">3</span>Finn et mønster</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase a">a</span><div><p>La $f(x) = x^3$. Anslå $f'(1)$ og $f'(2)$ med $h = 0{,}001$.</p></div></li>
+  <li><span class="fase b">b</span><div><p>Gjett et uttrykk for $f'(x)$. Kontroller gjetningen din i <a href="{{rot}}utforskere/stigningstallfunksjonen.html">Stigningstallfunksjonen</a> med $x^3 - 3x$: Hva skjer med uttrykket når vi trekker fra $3x$?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>a) $f'(1) \approx 3{,}003$ og $f'(2) \approx 12{,}006$. Svarene er nær $3$ og $12$.</p>
+    <p>b) $3 = 3 \cdot 1^2$ og $12 = 3 \cdot 2^2$. Et godt forslag er $f'(x) = 3x^2$. I utforskeren er den deriverte av $x^3 - 3x$ lik $3x^2 - 3$. Leddet $-3x$ har stigningstall $-3$ overalt, så det trekker $3$ fra den deriverte.</p>
+  </div></details>
+</div>
+</section>

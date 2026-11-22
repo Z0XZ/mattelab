@@ -1,0 +1,70 @@
+---
+tittel: Likningen til tangenten
+beskrivelse: Finn tangeringspunktet, stigningstallet og konstantleddet. Fra et gitt punkt og stigningstall til tangent med gitt stigningstall. Steg for steg, med nye tall hver gang.
+type: ovelse
+fag: R1
+tema: derivasjon
+ikon: tangentlikning
+rekkefolge: 2
+skript: ovelser/tangentlikning.js
+---
+<p class="ingress">Tangenten i et punkt er en rett linje. Den går gjennom punktet $(x_0, f(x_0))$ og har stigningstallet $f'(x_0)$. Her øver du på fremgangsmåten ett steg om gangen. Uttrykket for $f'(x)$ står i oppgaven, så du trenger ikke derivasjonsreglene ennå.</p>
+
+<section class="ovelse" id="ovelse" aria-labelledby="tl-tittel">
+  <h2 id="tl-tittel" class="visuelt-skjult">Øving</h2>
+  <div class="kun-js">
+    <div class="sim-velg ovelse-niva">
+      <label for="tl-niva">Nivå</label>
+      <select id="tl-niva">
+        <option value="1">1: Punktet og stigningstallet er gitt</option>
+        <option value="2">2: Andregradsfunksjon</option>
+        <option value="3">3: Tredjegradsfunksjon</option>
+        <option value="4">4: Tangent med gitt stigningstall</option>
+      </select>
+    </div>
+    <div class="ovelse-oppgave" id="tl-oppgave"></div>
+    <ol class="fk-liste" id="tl-steg" aria-label="Stegene"></ol>
+    <div class="ovelse-tilbake riktig" id="tl-ferdig" aria-live="polite"></div>
+    <div class="ovelse-knapper">
+      <button type="button" class="knapp liten" id="tl-ny" hidden>Ny oppgave</button>
+      <span class="ovelse-poeng" id="tl-poeng"></span>
+    </div>
+    <p class="merknad">Svarene er hele tall. Du kan skrive negative tall med vanlig bindestrek, for eksempel <code>-4</code>. Trykk Enter eller «Sjekk» for å sjekke.</p>
+  </div>
+  <div class="noscript-melding kun-uten-js">
+    <p><strong>Øvingen trenger JavaScript.</strong> Eksempel: $f(x) = x^2 - 3x$ og $f'(x) = 2x - 3$. I $x = 2$ er $f(2) = -2$ og $f'(2) = 1$. Tangenten $y = x + b$ går gjennom $(2, -2)$, så $-2 = 2 + b$ og $b = -4$. Tangenten er $y = x - 4$.</p>
+  </div>
+</section>
+
+<details class="teori" id="matematikken">
+<summary><span class="teori-tittel">Slik finner du tangenten</span><span class="teori-hint">Metoden steg for steg, ettpunktsformelen og vanlige feil</span></summary>
+<div class="teori-innhold tekst">
+<ol>
+  <li>Finn tangeringspunktet: $y_0 = f(x_0)$.</li>
+  <li>Finn stigningstallet: $a = f'(x_0)$.</li>
+  <li>Sett inn punktet i $y = ax + b$, og løs for $b$.</li>
+</ol>
+<p>Du kan også bruke ettpunktsformelen direkte:</p>
+$$y - f(x_0) = f'(x_0)(x - x_0)$$
+<p>Eksempel med $f(x) = x^2 - 3x$, $f'(x) = 2x - 3$ og $x_0 = 2$:</p>
+$$f(2) = 4 - 6 = -2 \qquad f'(2) = 4 - 3 = 1 \qquad y - (-2) = 1 \cdot (x - 2) \;\Rightarrow\; y = x - 4$$
+<p>Skal tangenten ha et bestemt stigningstall $k$, løser du først $f'(x) = k$. Løsningen er $x_0$.</p>
+<p>Vanlige feil:</p>
+<ul>
+  <li>Å sette $x_0$ inn i $f'(x)$ når du skal finne y-koordinaten, eller inn i $f(x)$ når du skal finne stigningstallet.</li>
+  <li>Å bruke uttrykket $f'(x)$ som stigningstall. Tangenten har ett tall som stigningstall: $f'(x_0)$.</li>
+  <li>Fortegnsfeil når $x_0$ er negativ: $-2 \cdot (-3) = 6$.</li>
+</ul>
+</div>
+</details>
+
+<div class="tekst kortsett-bruk">
+<h2>Til læreren</h2>
+<ul>
+  <li>Nivå 1 trener bare den siste delen: linja gjennom et punkt med kjent stigningstall. Nivå 2 og 3 tar hele fremgangsmåten. Nivå 4 snur problemet: Eleven må finne punktet selv.</li>
+  <li>Uttrykket for $f'(x)$ står i oppgaven. Når klassen har lært derivasjonsreglene, kan du be elevene dekke det til og derivere selv.</li>
+  <li>Elever som setter inn i feil funksjon, eller får feil fortegn på $b$, får en egen tilbakemelding. Etter to feil på samme steg kan eleven trykke «Vis svaret».</li>
+  <li>Adressen husker nivået, for eksempel <code>?niva=3</code>. Med <code>&amp;frø=1</code> får alle de samme tallene.</li>
+  <li>Elevene kan kontrollere tangenten i <a href="{{rot}}utforskere/funksjon-og-derivert.html">Funksjonen og den deriverte</a>. Den viser tangenten i $x_0$ for tredjegradsfunksjoner.</li>
+</ul>
+</div>

@@ -1,0 +1,175 @@
+---
+tittel: Tangenten og definisjonen av den deriverte
+beskrivelse: Den deriverte som grenseverdi, regnet ut med h. Deretter likningen til tangenten, med kortsett og øving med nye tall.
+type: opplegg
+fag: R1
+tema: derivasjon
+varighet: 90
+rekkefolge: 2
+ikon: definisjon-derivert
+---
+<p class="ingress">I forrige økt anslo elevene den deriverte med små verdier av $h$. Nå regner de den ut eksakt med definisjonen. Når de kjenner $f'(a)$, kan de finne likningen til tangenten.</p>
+
+<div class="opplegg-fakta">
+<section>
+<h2>Mål for økta</h2>
+<ul>
+  <li>Jeg kan bruke definisjonen av den deriverte på enkle funksjoner.</li>
+  <li>Jeg kan forklare hvorfor vi forkorter med $h$ før vi lar $h$ gå mot $0$.</li>
+  <li>Jeg kan finne likningen til tangenten i et punkt.</li>
+</ul>
+</section>
+<section>
+<h2>Kompetansemål</h2>
+{{maal:R1:2,4}}
+</section>
+<section>
+<h2>Dette trenger du</h2>
+<ul class="ressursliste">
+  <li><a href="{{rot}}varierende/alltid-noen-ganger-aldri-derivasjon.html#t6">Alltid, noen ganger eller aldri? Derivasjon</a> <span class="ressurs-type">tavleoppgave 6</span></li>
+  <li><a href="{{rot}}varierende/definisjonen-av-den-deriverte.html">Definisjonen av den deriverte</a> <span class="ressurs-type">kortsett</span></li>
+  <li><a href="{{rot}}varierende/tangentlikning.html">Likningen til tangenten</a> <span class="ressurs-type">øving</span></li>
+  <li><a href="{{rot}}utforskere/sekant-tangent.html">Sekant som blir tangent</a> <span class="ressurs-type">utforsker, til gjennomgangen</span></li>
+</ul>
+</section>
+</div>
+
+<section class="opplegg-del" aria-labelledby="plan-tittel">
+<h2 id="plan-tittel">Plan for økta</h2>
+<ol class="tidsplan">
+<li class="tidsdel" data-min="10">
+  <h3>Oppstart: Hva er en tangent?</h3>
+  <p class="tidsdel-form">Hele klassen · storskjerm</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div><p>Vis <a href="{{rot}}varierende/alltid-noen-ganger-aldri-derivasjon.html#t6">tavleoppgave 6</a>: «Tangenten skjærer grafen bare i tangeringspunktet.» La elevene stemme med fingrene, og hør argumenter fra begge sider.</p></div>
+    <strong>Elevene</strong>
+    <div><p>Stemmer, og prøver å tegne et moteksempel.</p></div>
+  </div>
+  <details><summary>Det du ser etter</summary><div>
+    <p>Mange har lært at tangenten «bare berører» grafen, fra sirkelen. Moteksempelet $x^3 - 3x$ viser at det ikke holder for andre grafer. Poenget: Tangenten er linja med samme stigningstall som grafen i punktet. Det er derfor vi trenger den deriverte.</p>
+  </div></details>
+</li>
+<li class="tidsdel" data-min="20">
+  <h3>Felles: Definisjonen og et eksempel</h3>
+  <p class="tidsdel-form">Hele klassen · tavle</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div>
+      <p>Skriv definisjonen, og koble den til sekanten fra forrige økt:</p>
+      $$f'(x) = \lim_{h \to 0} \frac{f(x + h) - f(x)}{h}$$
+      <p>Regn ut $f'(x)$ for $f(x) = x^2$ i tre steg: differansen $2xh + h^2$, kvotienten $2x + h$ og grensen $2x$. Finn så tangenten i $x = 1$: Punktet er $(1, 1)$ og stigningstallet $f'(1) = 2$, så $y = 2x - 1$.</p>
+    </div>
+    <strong>Elevene</strong>
+    <div><p>Skriver ned eksempelet. Regner så $f(x) = x^2 + x$ selv, og sammenligner med sidemannen.</p></div>
+  </div>
+  <details><summary>Svar til elevenes eksempel</summary><div>
+    <p>For $x^2 + x$ er differansen $2xh + h^2 + h$. Kvotienten er $2x + h + 1$, og $f'(x) = 2x + 1$.</p>
+    <p>Vis gjerne i <a href="{{rot}}utforskere/sekant-tangent.html?fn=x2&amp;x0=1&amp;h=1">Sekant som blir tangent</a> at stigningstallet til sekanten er $2 + h$ når $x_0 = 1$.</p>
+  </div></details>
+</li>
+<li class="tidsdel" data-min="25">
+  <h3>Kortsett: Definisjonen av den deriverte</h3>
+  <p class="tidsdel-form">Par · utskrevne kort eller skjerm</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div><p>Del ut bare funksjonene og de deriverte først. La elevene gjette parene, og så kontrollere med definisjonen og de to andre kortene. Gå rundt og still spørsmål.</p></div>
+    <strong>Elevene</strong>
+    <div><p>Regner ut differansen og kvotienten på kladdepapir, og finner fire og fire kort som hører sammen.</p></div>
+  </div>
+  <p class="ressurs">Ressurs: <a href="{{rot}}varierende/definisjonen-av-den-deriverte.html">Definisjonen av den deriverte</a></p>
+  <details><summary>Spørsmål og typiske feil</summary><div>
+    <ul>
+      <li>Å glemme å trekke fra $f(x)$, slik at $x^2$ blir stående igjen i differansen.</li>
+      <li>Å sette $h = 0$ før de har forkortet, og få $\frac{0}{0}$.</li>
+      <li>Spør: Hvorfor forsvinner alle ledd uten $h$ når vi trekker fra $f(x)$?</li>
+    </ul>
+  </div></details>
+</li>
+<li class="tidsdel" data-min="25">
+  <h3>Øving: Likningen til tangenten</h3>
+  <p class="tidsdel-form">Hver for seg · PC</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div><p>Elevene starter på nivå 1 og går videre når de har klart to oppgaver uten «Vis svaret». Gi elevarket til dem som blir ferdige.</p></div>
+    <strong>Elevene</strong>
+    <div><p>Løser oppgaver i øvingen. Nivå 4 er for dem som vil ha en utfordring.</p></div>
+  </div>
+  <p class="ressurs">Ressurs: <a href="{{rot}}varierende/tangentlikning.html">Likningen til tangenten</a></p>
+  <details><summary>Typiske feil</summary><div>
+    <ul>
+      <li>Å sette $x_0$ inn i $f'(x)$ for å finne y-koordinaten. Øvingen gir en egen tilbakemelding på dette.</li>
+      <li>Å bruke uttrykket $f'(x)$ som stigningstall i stedet for tallet $f'(x_0)$.</li>
+    </ul>
+  </div></details>
+</li>
+<li class="tidsdel" data-min="10">
+  <h3>Oppsummering og exit-lapp</h3>
+  <p class="tidsdel-form">Hele klassen</p>
+  <div class="rolle">
+    <strong>Læreren</strong>
+    <div><p>Gå gjennom stegene for tangenten: punktet, stigningstallet og konstantleddet. Exit-lapp: «Bruk definisjonen til å finne $f'(x)$ når $f(x) = 3x^2$.»</p></div>
+    <strong>Elevene</strong>
+    <div><p>Svarer på exit-lappen.</p></div>
+  </div>
+  <details><summary>Svar til exit-lappen</summary><div>
+    <p>$3(x + h)^2 - 3x^2 = 6xh + 3h^2$. Kvotienten er $6x + 3h$, og $f'(x) = 6x$.</p>
+  </div></details>
+</li>
+</ol> <!-- /tidsplan -->
+</section>
+
+<section class="opplegg-del tekst" aria-labelledby="tips-tittel">
+<h2 id="tips-tittel">Tips</h2>
+<ul>
+  <li><strong>Har du bare 45 minutter?</strong> Bruk felles gjennomgang og kortsettet. Øvingen passer som lekse.</li>
+  <li><strong>Elever som står fast:</strong> Gi dem bare gruppene med $3x - 1$ og $x^2$ først. Der er regningen kortest.</li>
+  <li><strong>Elever som er raske:</strong> Gruppen med $\frac{1}{x}$ i kortsettet, og oppgave 3 på elevarket.</li>
+  <li><strong>Neste økt:</strong> <a href="{{rot}}opplegg/nar-finnes-den-deriverte.html">Når finnes den deriverte?</a> om kontinuitet og deriverbarhet.</li>
+</ul>
+</section>
+
+<section class="oppgaver" aria-labelledby="oppgaver-tittel">
+<h2 id="oppgaver-tittel">Oppgaver</h2>
+{{elevark}}
+<p class="del-inngang">Løs oppgavene uten hjelpemidler.</p>
+
+<div class="oppgave" id="oppgave-1">
+  <h3><span class="oppgave-nr">1</span>Definisjonen</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase a">a</span><div><p>La $f(x) = x^2 - 2x$. Vis at $f(x + h) - f(x) = 2xh + h^2 - 2h$.</p></div></li>
+  <li><span class="fase b">b</span><div><p>Bruk definisjonen til å finne $f'(x)$.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>a) Vi regner ut:</p>
+    $$(x + h)^2 - 2(x + h) - (x^2 - 2x) = x^2 + 2xh + h^2 - 2x - 2h - x^2 + 2x = 2xh + h^2 - 2h$$
+    <p>b) Vi deler på $h$ og får $2x + h - 2$. Når $h \to 0$, går dette mot $2x - 2$. Altså er $f'(x) = 2x - 2$.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-2">
+  <h3><span class="oppgave-nr">2</span>Tangenten</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase a">a</span><div><p>Fortsatt med $f(x) = x^2 - 2x$: Finn likningen til tangenten i punktet der $x = 3$.</p></div></li>
+  <li><span class="fase b">b</span><div><p>I hvilket punkt er tangenten vannrett?</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>a) $f(3) = 9 - 6 = 3$ og $f'(3) = 6 - 2 = 4$. Tangenten $y = 4x + b$ går gjennom $(3, 3)$, så $3 = 12 + b$ og $b = -9$. Tangenten er $y = 4x - 9$.</p>
+    <p>b) Vannrett tangent når $f'(x) = 0$, altså $2x - 2 = 0$ og $x = 1$. Punktet er $(1, f(1)) = (1, -1)$. Det er bunnpunktet.</p>
+  </div></details>
+</div>
+
+<div class="oppgave" id="oppgave-3">
+  <h3><span class="oppgave-nr">3</span>En brøk</h3>
+  <ol class="oppgaveliste">
+  <li><span class="fase a">a</span><div><p>La $g(x) = \frac{1}{x}$. Vis at $\frac{g(x + h) - g(x)}{h} = -\frac{1}{x(x + h)}$, og finn $g'(x)$.</p></div></li>
+  <li><span class="fase b">b</span><div><p>Finn likningen til tangenten i punktet der $x = 2$.</p></div></li>
+  </ol>
+  <details class="fasit"><summary>Løsningsforslag</summary><div class="fasit-innhold">
+    <p>a) Vi skriver brøkene på felles nevner:</p>
+    $$\frac{1}{x + h} - \frac{1}{x} = \frac{x - (x + h)}{x(x + h)} = \frac{-h}{x(x + h)}$$
+    <p>Deler vi på $h$, får vi $-\frac{1}{x(x + h)}$. Når $h \to 0$, går dette mot $-\frac{1}{x^2}$. Altså er $g'(x) = -\frac{1}{x^2}$.</p>
+    <p>b) $g(2) = \frac{1}{2}$ og $g'(2) = -\frac{1}{4}$. Da er $\frac{1}{2} = -\frac{1}{4} \cdot 2 + b$, så $b = 1$. Tangenten er $y = -\frac{1}{4}x + 1$.</p>
+  </div></details>
+</div>
+</section>

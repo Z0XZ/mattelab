@@ -65,3 +65,20 @@ print("  5 asymptoter: A 1/(x−2): x = 2, y = 0;  B (x−2)/(x−2) = 1 med hul
       " D (x+1)/(x²+1): nevneren ≥ 1, nullpunkt −1, y = 0")
 for x in (-2, -1, 0, 1, 3, 4):
     print(f"  6 x = {x}: x²−2x−3 = {x*x-2*x-3}, (x+1)(x−3) = {(x+1)*(x-3)}, x²+1 = {x*x+1}")
+
+
+print("\nAlltid, noen ganger eller aldri? Derivasjon")
+h = F(1, 10 ** 6)
+print("  2 |x| i 0: sekant fra høyre", (abs(h) - 0) / h, " fra venstre", (abs(-h) - 0) / -h)
+d = lambda x: 3 * x ** 2
+print("  3 x³: f′(0) =", d(0), " f(−0,1), f(0), f(0,1) =", [float(F(x) ** 3) for x in (F(-1, 10), 0, F(1, 10))])
+print("  4 −|x|: f(0) = 0 er størst, sekant fra høyre", (-abs(h)) / h, " fra venstre", (-abs(-h)) / -h)
+f = lambda x: F(x) ** 3
+print("  5 x³ fra 0 til 2: gjennomsnitt", (f(2) - f(0)) / 2, " f′(1) =", 3 * 1 ** 2)
+q = lambda x: 3 * F(x) ** 2 - 2 * F(x) + 5
+dq = lambda x: 6 * F(x) - 2
+for a, b in ((0, 2), (-1, 4), (F(1, 2), 3)):
+    print(f"     andregrad 3x²−2x+5 fra {a} til {b}: gjennomsnitt {(q(b) - q(a)) / (b - a)}, f′(midt) = {dq(F(a + b) / 2)}")
+g = lambda x: x ** 3 - 3 * x
+print("  6 x³−3x, tangent i (1, −2) er y = −2:", "f(1) =", g(1), " f(−2) =", g(-2))
+print("  7 x² + 1 > 0, men f′(−1) = 2 · (−1) =", 2 * -1)

@@ -742,3 +742,7 @@ html.tavle .tavle-sporsmal { font-size: clamp(1.7rem, 3.8vw, 2.7rem); }
   .tidsdel details > div { display: block; }
   .tidsdel { break-inside: avoid; }
 }
+
+/* ---------------------------------------------------------------- Derivasjon (R1) */
+.knapperad { display: flex; flex-wrap: wrap; gap: .5rem; }
+.kf-hul { fill: var(--flate); stroke: var(--m1); stroke-width: 2; }

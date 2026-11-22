@@ -75,3 +75,44 @@ print("== Repetisjon")
 print("  (2, 5) og (6, −3):", linje((2, 5), (6, -3)))
 print("  −x³ + 4x = −x(x − 2)(x + 2), nullpunkter −2, 0, 2:", [-x ** 3 + 4 * x for x in (-2, 0, 2)])
 print("  (x − 1)(x + 3) < 0: −3 < x < 1")
+
+
+# ================================================================ R1: derivasjon
+print("\n== R1 Fra vekstfart til den deriverte")
+s = lambda t: 5 * F(t) ** 2
+for a, b in ((0, 2), (1, 2), (F(19, 10), 2), (2, F(21, 10))):
+    print(f"  ballen s = 5t², fra {a} til {b}: {float((s(b) - s(a)) / (b - a))} m/s")
+print("  oppgave 1a: fra 1 til 3:", (s(3) - s(1)) / 2)
+for h in (F(1, 10), F(1, 100)):
+    print(f"  oppgave 1b: h = {h}: {float((s(3 + h) - s(3)) / h)}  (30 + 5h = {float(30 + 5 * h)})")
+T = lambda t: 20 + 60 * 0.9 ** t
+print(f"  oppgave 2a: T(0) = {T(0)}, T(5) = {T(5):.4f}, gjennomsnitt {(T(5) - T(0)) / 5:.4f} °C/min")
+for h in (0.1, 0.01, 0.001):
+    print(f"  oppgave 2b: h = {h}: {(T(5 + h) - T(5)) / h:.4f}")
+print(f"  eksakt T′(5) = 60 · 0,9⁵ · ln 0,9 = {60 * 0.9 ** 5 * math.log(0.9):.4f}")
+c = lambda x: F(x) ** 3
+for x in (1, 2):
+    h = F(1, 1000)
+    print(f"  oppgave 3: x³, h = 0,001 i x = {x}: {float((c(x + h) - c(x)) / h):.4f}  (3x² = {3 * x * x})")
+
+print("\n== R1 Tangenten og definisjonen")
+f = lambda x: F(x) ** 2 - 2 * F(x)
+X, H = F(3, 7), F(1, 5)
+print("  oppgave 1: differanse 2xh + h² − 2h stemmer:", f(X + H) - f(X) == 2 * X * H + H ** 2 - 2 * H)
+print("  oppgave 2: f(3) =", f(3), " f′(3) = 2·3 − 2 =", 2 * 3 - 2, " b =", f(3) - 4 * 3)
+g = lambda x: 1 / F(x)
+print("  oppgave 3: (1/(x+h) − 1/x)/h = −1/(x(x+h)):", (g(X + H) - g(X)) / H == -1 / (X * (X + H)))
+print("  oppgave 3b: g(2) =", g(2), " g′(2) = −1/4, b =", g(2) - F(-1, 4) * 2)
+e = lambda x: F(x) ** 2 + F(x)
+print("  felles: x² + x, kvotient 2x + h + 1:", (e(X + H) - e(X)) / H == 2 * X + H + 1)
+q = lambda x: 3 * F(x) ** 2
+print("  exit: 3x², kvotient 6x + 3h:", (q(X + H) - q(X)) / H == 6 * X + 3 * H)
+print("  oppgave 2b: f(1) =", f(1))
+
+print("\n== R1 Når finnes den deriverte?")
+for k in range(-2, 3):
+    print(f"  oppgave 1: k = {k}: venstre 1² + 1 = 2, høyre 2 + k = {2 + k}")
+print("  oppgave 1: stigning venstre 2·1 = 2, høyre 2")
+print("  oppgave 2: x² i 2 =", 2 ** 2, " 3·2 − 2 =", 3 * 2 - 2, " stigning 4 og 3")
+P = lambda t: 25 * math.ceil(t / 0.5) if t > 0 else 0
+print("  oppgave 3: P(0,5), P(0,6), P(1), P(1,2) =", [P(t) for t in (0.5, 0.6, 1, 1.2)])

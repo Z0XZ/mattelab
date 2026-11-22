@@ -21,6 +21,7 @@ TIKZ_STIL = {
     "akse": "draw=black!75, line width=0.5pt",
     "graf": "draw=black, line width=1.3pt",
     "punkt": "fill=black",
+    "hul": "fill=white, draw=black, line width=0.9pt",
 }
 
 
@@ -126,7 +127,7 @@ class Tegning:
             elif f[0] == "tekst":
                 _, x, y, st, storrelse, anker = f
                 a = {"midt": "", "venstre": ", anchor=west", "hoyre": ", anchor=east"}[anker]
-                ut.append(rf"\node[font=\sffamily\fontsize{{5.5}}{{6}}\selectfont, inner sep=0pt{a}] at {P(x, y)} {{{st.replace('−', '$-$')}}};")
+                ut.append(rf"\node[font=\sffamily\fontsize{{5.5}}{{6}}\selectfont, inner sep=0pt{a}] at {P(x, y)} {{{st.replace('−', '$-$').replace('′', "'")}}};")
         return "\n".join(ut)
 
 
@@ -303,14 +304,19 @@ class Graf:
     sy: hvor mye y-aksen klemmes sammen, så figuren får plass på kortet.
     ytall: skriv tall på y-aksen også (for eksempel for å lese av konstantleddet).
     punkter: punkter som markeres, [(x, y), …].
+    navn: kort navn øverst til venstre, for eksempel «f» eller «f′».
+    brudd: x-verdier der grafen deles, for funksjoner med sprang. hule: punkter som tegnes som åpne sirkler.
     """
 
     def __init__(self, f, beskrivelse: str, verdi=None, xmin=-5, xmax=5, ymin=-5, ymax=5,
-                 sy=0.6, ytall=False, punkter=(), xtall=True, steg=1, tekst=0.5):
+                 sy=0.6, ytall=False, punkter=(), xtall=True, steg=1, tekst=0.5, navn="", brudd=(), hule=()):
         self.f, self._verdi, self._beskrivelse = f, verdi, beskrivelse
         self.vindu = (xmin, xmax, ymin, ymax)
         self.sy, self.ytall, self.xtall, self.punkter, self.steg = sy, ytall, xtall, list(punkter), steg
         self.tekst = tekst
+        # navn: skrives øverst til venstre, for eksempel «f» eller «f′».
+        # brudd: x-verdier der grafen deles (sprang), hule: punkter som tegnes som åpne sirkler.
+        self.navn, self.brudd, self.hule = navn, sorted(brudd), list(hule)
 
     @property
     def verdi(self):
@@ -348,22 +354,32 @@ class Graf:
             for j in range(ymin + 1, ymax):
                 if j and j % st == 0:
                     T.tekst(-0.2, j * sy, _n(j), self.tekst, "hoyre")
-        biter, bit = [], []
+        biter = []
         N = 400
-        for k in range(N + 1):
-            x = xmin + (xmax - xmin) * k / N
-            y = self._y(x)
-            if y is not None and ymin - 0.01 <= y <= ymax + 0.01:
-                bit.append((x, max(ymin, min(ymax, y)) * sy))
-            elif bit:
-                biter.append(bit); bit = []
-        if bit:
-            biter.append(bit)
+        # Hvert intervall mellom bruddene tegnes for seg. Endepunktene regnes ut like innenfor,
+        # så en stykkevis funksjon gir den ensidige grenseverdien og ingen loddrett strek.
+        grenser = [xmin] + [x for x in self.brudd if xmin < x < xmax] + [xmax]
+        for a, b in zip(grenser, grenser[1:]):
+            bit = []
+            n = max(2, round(N * (b - a) / (xmax - xmin)))
+            for k in range(n + 1):
+                x = a + (b - a) * k / n
+                y = self._y(min(b - 1e-9, max(a + 1e-9, x)) if (a, b) != (xmin, xmax) else x)
+                if y is not None and ymin - 0.01 <= y <= ymax + 0.01:
+                    bit.append((x, max(ymin, min(ymax, y)) * sy))
+                elif bit:
+                    biter.append(bit); bit = []
+            if bit:
+                biter.append(bit)
         for b in biter:
             if len(b) > 1:
                 T.linje(b, "graf")
         for x, y in self.punkter:
             T.punkt(x, y * sy)
+        for x, y in self.hule:
+            T.sirkel(x, y * sy, 0.2, "hul")
+        if self.navn:
+            T.tekst(xmin + 0.2, ymax * sy - self.tekst, self.navn, self.tekst * 1.4, "venstre")
         return T
 
 

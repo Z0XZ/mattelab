@@ -317,7 +317,7 @@ console.log("\n6. Uten JavaScript");
   sjekk(await side.isVisible("#oppgave-1 details ul"), "løsningsforslag kan åpnes uten JS");
   await side.goto(BASE + "utforskere/index.html");
   const kort = await side.$$eval(".sim-kort-liste > li", (k) => k.filter((x) => x.offsetParent).length);
-  sjekk(kort === 21, "oversikten viser alle 21 utforskere", String(kort));
+  sjekk(kort === 22, "oversikten viser alle 22 utforskere", String(kort));
   await kontekst.close();
 }
 
@@ -327,7 +327,7 @@ console.log("\n7. Filter og fagvalg");
   const { side, kontekst, problemer } = await nySide();
   const synlige = () => side.$$eval(".sim-kort-liste > li", (k) => k.filter((x) => !x.hidden).length);
   await side.goto(BASE + "utforskere/index.html?fag=R1", { waitUntil: "networkidle" });
-  sjekk((await synlige()) === 5, "?fag=R1 viser 5 utforskere", String(await synlige()));
+  sjekk((await synlige()) === 6, "?fag=R1 viser 6 utforskere", String(await synlige()));
   sjekk((await side.inputValue("#fagvalg")) === "R1", "?fag=R1 setter fagvalget i menyen");
   sjekk((await side.getAttribute('.filter-knapp[data-fag="R1"]', "aria-pressed")) === "true", "R1-knappen i filteret er valgt");
   sjekk(await side.isHidden('.tema-blokk[data-blokk="algebra"]'), "temablokker uten treff skjules");
@@ -337,12 +337,12 @@ console.log("\n7. Filter og fagvalg");
   sjekk(menyLenke.includes("fag=R1"), "menylenken tar med fagvalget", menyLenke);
   await side.selectOption("#fagvalg", "");
   await side.goto(BASE + "utforskere/index.html");
-  sjekk((await synlige()) === 21, "«Alle fag» viser alle", String(await synlige()));
+  sjekk((await synlige()) === 22, "«Alle fag» viser alle", String(await synlige()));
   await side.click('.filter-knapp[data-tema="derivasjon"]');
-  sjekk((await synlige()) === 2, "tema Derivasjon viser 2", String(await synlige()));
+  sjekk((await synlige()) === 3, "tema Derivasjon viser 3", String(await synlige()));
   sjekk(side.url().includes("tema=derivasjon"), "temavalget står i adressen", side.url());
   sjekk((await side.getAttribute('.filter-knapp[data-tema="derivasjon"]', "aria-pressed")) === "true", "temaknappen har aria-pressed");
-  sjekk((await side.textContent(".filter-antall")) === "Viser 2 av 21", "antall treff vises", await side.textContent(".filter-antall"));
+  sjekk((await side.textContent(".filter-antall")) === "Viser 3 av 22", "antall treff vises", await side.textContent(".filter-antall"));
   await side.click('.filter-knapp[data-tema=""]');
   await side.fill("#filter-sok", "toppunkt");
   sjekk((await synlige()) === 1, "søk «toppunkt» gir 1 treff", String(await synlige()));
@@ -350,7 +350,7 @@ console.log("\n7. Filter og fagvalg");
   await side.fill("#filter-sok", "finnesikke");
   sjekk(await side.isVisible(".filter-tom"), "melding ved ingen treff");
   await side.click(".filter-tom button");
-  sjekk((await synlige()) === 21, "«Vis alt» nullstiller filteret");
+  sjekk((await synlige()) === 22, "«Vis alt» nullstiller filteret");
   await side.click('.filter-knapp[data-fag="1T"]');
   sjekk((await side.inputValue("#fagvalg")) === "1T", "fagknapp i filteret oppdaterer menyen");
   sjekk(problemer.length === 0, "ingen JS-feil i filteret", problemer.join(" | "));
@@ -708,6 +708,22 @@ const UTFORSKERE = {
     ],
     meldinger: [["?sett=kast&modell=andregrad&x=5", "Utenfor dataene"], ["?sett=bil&modell=potens", "positive x"], ["?sett=egne&modell=eksponentiell&data=1_-2~2_4~3_6", "større enn 0"]],
     tekst: [["", "#forskrift", ["f(x)=18,97x+98,33"]], ["?sett=bakterier&modell=eksponentiell", "#forskrift", ["f(x)=117,5⋅1,507x"]], ["?sett=kast&modell=andregrad", "#forskrift", ["f(x)=−4,905x2+17x+1,512"]], ["?sett=pendel&modell=potens", "#forskrift", ["f(x)=2,005⋅x0,4993"]]],
+  },
+  "stigningstallfunksjonen": {
+    oppgaver: 5,
+    verdier: [
+      ["", "f′(x₀)", "9 (stigningstallet til tangenten)"],
+      ["", "Tangenten", "y = 9x + 16"],
+      ["?fn=kubisk&x0=1", "f i x₀", "vannrett tangent"],
+      ["?fn=eksp&x0=0", "Tangenten", "y = x + 1"],
+      ["?fn=ln&x0=2", "f′(x₀)", "0,5 (stigningstallet til tangenten)"],
+      ["?fn=ln&x0=1", "Tangenten", `y = x ${M} 1`],
+      ["?fn=fjerde&x0=-1", "f′(x₀)", "3 (stigningstallet til tangenten)"],
+      ["?fn=inv&x0=2", "f′(x₀)", `${M}0,25 (stigningstallet til tangenten)`],
+      ["?fn=abs&x0=0", "f′(x₀)", "Finnes ikke"],
+      ["?fn=ln&x0=-1", "P", "Finnes ikke"],
+    ],
+    meldinger: [["?fn=abs&x0=0", "Knekk"], ["?fn=rot&x0=0", "Loddrett tangent"], ["?fn=eksp&x0=1", "like stort"], ["?fn=ln&x0=-1", "definisjonsmengden"], ["?fn=kubisk&x0=1", "Vannrett tangent"]],
   },
 };
 
@@ -1078,6 +1094,24 @@ console.log("\n10. Tilfeldige verdier");
     }
     return feil;
   }, "regresjon: 300 tilfeldige eksakte data, alle fire modellene finner tallene igjen og R² = 1");
+  await sjekkFuzz("stigningstallfunksjonen", () => {
+    const { analyser, FUNKSJONER } = window.mattelabStigningstallfunksjon; const feil = [];
+    for (const fn of Object.keys(FUNKSJONER)) {
+      const F = FUNKSJONER[fn];
+      for (let i = 0; i <= 100; i++) {
+        const x = -5 + i / 10;
+        const r = analyser(fn, x);
+        if (!r.definert || r.d === null) continue;
+        // Den deriverte stemmer med en symmetrisk differansekvotient, og tangenten går gjennom punktet
+        const h = 1e-5, num = (F.f(x + h) - F.f(x - h)) / (2 * h);
+        if (Number.isFinite(num) && Math.abs(num - r.d) > 1e-4 * (1 + Math.abs(r.d))) feil.push(`${fn} x=${x}: ${r.d} mot ${num}`);
+        if (Math.abs(r.a * x + r.b - r.y0) > 1e-9 * (1 + Math.abs(r.y0))) feil.push(`tangent ${fn} x=${x}`);
+      }
+    }
+    // Der den deriverte ikke finnes
+    if (analyser("abs", 0).d !== null || analyser("rot", 0).d !== null || analyser("ln", 0).definert || analyser("inv", 0).definert) feil.push("unntak");
+    return feil;
+  }, "stigningstallfunksjonen: f′ stemmer med differansekvotienten og tangenten går gjennom punktet for alle ni funksjonene");
   await sjekkFuzz("potensfunksjoner", () => {
     const { analyser, EKSPONENTER } = window.mattelabPotensfunksjon; const feil = [];
     for (const bt of Object.keys(EKSPONENTER)) {
@@ -1361,6 +1395,43 @@ console.log("\n14. Øvinger: riktige og gale svar");
     return feil;
   });
   sjekk(baklengs.length === 0, "stigningstall: 2000 tilfeldige oppgaver, punktene og tabellene ligger på linja", baklengs.slice(0, 2).join(" | "));
+  // Likningen til tangenten: riktige svar gjennom alle stegene, og egen tilbakemelding på fortegnsfeil i b
+  for (const niva of [1, 2, 3, 4]) {
+    for (const fro of [5, 11]) {
+      await side.goto(BASE + `varierende/tangentlikning.html?niva=${niva}&frø=${fro * 17 + niva}`, { waitUntil: "networkidle" });
+      const o = await side.evaluate(() => window.mattelabTangentlikning.gjeldende());
+      for (let i = 0; i < o.svar.length; i++) {
+        const felt = side.locator(".fk-steg:last-child input[type=text]");
+        if (fro === 5 && i === o.svar.length - 1 && o.y0 + o.a * o.x0 !== o.b) {
+          await felt.nth(0).fill(String(o.y0 + o.a * o.x0));
+          await side.click(".fk-steg:last-child .fk-sjekk");
+          sjekk((await side.textContent(".fk-steg:last-child .ovelse-tilbake")).includes("fortegnet"), `tangentlikning nivå ${niva}: fortegnsfeil i b gir egen tilbakemelding`);
+        }
+        await felt.nth(0).fill(String(o.svar[i][0]));
+        await side.click(".fk-steg:last-child .fk-sjekk");
+      }
+      const ferdig = await side.textContent("#tl-ferdig");
+      sjekk(ferdig.includes("Ferdig"), `tangentlikning nivå ${niva} (frø ${fro * 17 + niva}): riktige svar gir «Ferdig», y = ${o.a}x + ${o.b}`, ferdig);
+    }
+  }
+  const tangentFeil = await side.evaluate(() => {
+    const { lagOppgave } = window.mattelabTangentlikning; const feil = [];
+    let s = 7;
+    const r = { tall: () => { s = (s * 16807) % 2147483647; return s / 2147483647; } };
+    r.heltall = (a, b) => a + Math.floor(r.tall() * (b - a + 1)); r.velg = (l) => l[Math.floor(r.tall() * l.length)];
+    for (let i = 0; i < 2000; i++) {
+      const o = lagOppgave(1 + (i % 4), r);
+      if (o.a * o.x0 + o.b !== o.y0) feil.push("punktet: " + JSON.stringify(o));
+      if (o.p) {
+        const f = (x) => o.p.reduce((sum, c, k) => sum + c * x ** k, 0), h = 1e-6;
+        if (f(o.x0) !== o.y0 || Math.abs((f(o.x0 + h) - f(o.x0 - h)) / (2 * h) - o.a) > 1e-5) feil.push("f eller f′: " + JSON.stringify(o));
+        if (o.niva === 4 && (o.a !== o.k || o.p[2] === 0)) feil.push("nivå 4: " + JSON.stringify(o));
+      }
+      if (!o.svar.flat().every(Number.isInteger) || o.svar.flat().some((x) => Math.abs(x) > 60)) feil.push("svar: " + JSON.stringify(o.svar));
+    }
+    return feil;
+  });
+  sjekk(tangentFeil.length === 0, "tangentlikning: 2000 tilfeldige oppgaver, tangenten går gjennom punktet og har stigningstall f′(x₀)", tangentFeil.slice(0, 2).join(" | "));
   sjekk(problemer.length === 0, "øvingene: ingen JS-feil", problemer.join(" | "));
   await kontekst.close();
 }
@@ -1371,7 +1442,7 @@ console.log("\n15. Undervisningsopplegg: tidsplan, kompetansemål og elevark");
   const km = JSON.parse(fs.readFileSync(path.join(ROT, "data", "kompetansemaal.json"), "utf8"));
   const alleMaal = Object.values(km.fag).flatMap((f) => f.maal);
   const opplegg = SIDER.filter((s) => s.startsWith("opplegg/") && !s.endsWith("index.html"));
-  sjekk(opplegg.length === 10, "det finnes ti undervisningsopplegg", String(opplegg.length));
+  sjekk(opplegg.length === 13, "det finnes tretten undervisningsopplegg", String(opplegg.length));
   for (const navn of opplegg) {
     const id = navn.split("/").pop().replace(".html", "");
     const { side, kontekst, problemer } = await nySide();
@@ -1412,8 +1483,8 @@ console.log("\n15. Undervisningsopplegg: tidsplan, kompetansemål og elevark");
   const { side, kontekst } = await nySide();
   await side.goto(BASE + "opplegg/index.html", { waitUntil: "networkidle" });
   const titler = await side.$$eval(".sim-kort-tittel", (t) => t.map((x) => x.textContent));
-  sjekk(titler[0] === "Hva er en funksjon?" && titler.at(-1) === "Repetisjon av funksjoner", "oversikten over opplegg står i undervisningsrekkefølge", titler.join(" · "));
-  sjekk((await side.$$eval(".fag-merke.varighet", (m) => m.length)) === 10, "hvert opplegg viser varigheten på kortet");
+  sjekk(titler[0] === "Hva er en funksjon?" && titler[9] === "Repetisjon av funksjoner" && titler[10] === "Fra vekstfart til den deriverte" && titler.at(-1) === "Når finnes den deriverte?", "oversikten over opplegg står i undervisningsrekkefølge, ett fag om gangen", titler.join(" · "));
+  sjekk((await side.$$eval(".fag-merke.varighet", (m) => m.length)) === 13, "hvert opplegg viser varigheten på kortet");
   await kontekst.close();
 }
 
