@@ -159,3 +159,16 @@ print("  oppgave 1: f(x) = x³ + x: f(1) =", 1 + 1, " f′(1) =", 3 + 1, " g′(
 print("  oppgave 2: f(x) = e^(2x), g(x) = ½ ln x: g(f(x)) =", 0.5 * math.log(math.exp(2 * 0.7)), "(x = 0,7)", " g′(1) =", round(numd(lambda x: 0.5 * math.log(x), 1), 6))
 gg = lambda x: 1 + math.sqrt(x)
 print("  oppgave 3: g(x) = 1 + √x: g(4) =", gg(4), " f′(3) = 2(3 − 1) =", 2 * (3 - 1), " g′(4) =", round(numd(gg, 4), 6))
+
+print("\n== R1 Kontinuitet og deriverbarhet, ny oppgave 4")
+# f(x) = x² for x ≤ 1, ax + b for x > 1. Kontinuerlig: a + b = 1. Deriverbar: a = 2 · 1 = 2.
+a, b = 2, 1 - 2
+f = lambda x: x * x if x <= 1 else a * x + b
+eps = 1e-7
+print("  a =", a, " b =", b, " f(1) =", f(1), " f(1 + ε) =", round(f(1 + eps), 6),
+      " stigning venstre", round((f(1) - f(1 - eps)) / eps, 5), " høyre", round((f(1 + eps) - f(1)) / eps, 5))
+print("  med a = 3 og b = −2: kontinuerlig", 3 - 2 == 1, " men stigning 2 og 3")
+
+print("\n== R1 Vekstfart, den deriverte og tangenten (135 min): exit-lapp")
+q = lambda x: 3 * F(x) ** 2
+print("  3x²: f(1) =", q(1), " f′(1) = 6, b =", q(1) - 6, "→ y = 6x − 3")

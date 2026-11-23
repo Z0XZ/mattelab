@@ -71,7 +71,13 @@
       "repetisjon-funksjoner"
     ],
     "10": [
-      "sekant-tangent"
+      "sekant-tangent",
+      "stigningstallfunksjonen",
+      "grafen-til-den-deriverte",
+      "definisjonen-av-den-deriverte",
+      "tangentlikning",
+      "vekstfart-og-den-deriverte",
+      "tangenten-og-definisjonen"
     ],
     "11": [
       "polynomdivisjon",
@@ -93,8 +99,7 @@
       "rasjonale-funksjoner",
       "stigningstallfunksjonen",
       "grafen-til-den-deriverte",
-      "fra-vekstfart-til-den-deriverte",
-      "tangenten-og-definisjonen"
+      "fra-vekstfart-til-den-deriverte"
     ],
     "3": [
       "rasjonale-funksjoner"
@@ -107,7 +112,6 @@
       "kontinuitet-og-deriverbarhet",
       "alltid-noen-ganger-aldri-derivasjon",
       "fra-vekstfart-til-den-deriverte",
-      "tangenten-og-definisjonen",
       "nar-finnes-den-deriverte"
     ],
     "5": [

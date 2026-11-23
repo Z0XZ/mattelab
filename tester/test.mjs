@@ -1511,7 +1511,7 @@ console.log("\n15. Undervisningsopplegg: tidsplan, kompetansemål og elevark");
   const km = JSON.parse(fs.readFileSync(path.join(ROT, "data", "kompetansemaal.json"), "utf8"));
   const alleMaal = Object.values(km.fag).flatMap((f) => f.maal);
   const opplegg = SIDER.filter((s) => s.startsWith("opplegg/") && !s.endsWith("index.html"));
-  sjekk(opplegg.length === 17, "det finnes sytten undervisningsopplegg", String(opplegg.length));
+  sjekk(opplegg.length === 18, "det finnes atten undervisningsopplegg", String(opplegg.length));
   for (const navn of opplegg) {
     const id = navn.split("/").pop().replace(".html", "");
     const { side, kontekst, problemer } = await nySide();
@@ -1552,8 +1552,8 @@ console.log("\n15. Undervisningsopplegg: tidsplan, kompetansemål og elevark");
   const { side, kontekst } = await nySide();
   await side.goto(BASE + "opplegg/index.html", { waitUntil: "networkidle" });
   const titler = await side.$$eval(".sim-kort-tittel", (t) => t.map((x) => x.textContent));
-  sjekk(titler[0] === "Hva er en funksjon?" && titler[9] === "Repetisjon av funksjoner" && titler[10] === "Fra vekstfart til den deriverte" && titler[12] === "Når finnes den deriverte?" && titler.at(-1) === "Omvendte funksjoner og deriverte", "oversikten over opplegg står i undervisningsrekkefølge, ett fag om gangen", titler.join(" · "));
-  sjekk((await side.$$eval(".fag-merke.varighet", (m) => m.length)) === 17, "hvert opplegg viser varigheten på kortet");
+  sjekk(titler[0] === "Hva er en funksjon?" && titler[9] === "Repetisjon av funksjoner" && titler[10] === "Fra vekstfart til den deriverte" && titler[11] === "Tangenten og definisjonen av den deriverte" && titler[12] === "Vekstfart, den deriverte og tangenten" && titler[13] === "Kontinuitet og deriverbarhet" && titler[14] === "Derivasjon av polynomer og kjerneregelen" && titler.at(-1) === "Omvendte funksjoner og deriverte", "oversikten over opplegg står i undervisningsrekkefølge, ett fag om gangen", titler.join(" · "));
+  sjekk((await side.$$eval(".fag-merke.varighet", (m) => m.length)) === 18, "hvert opplegg viser varigheten på kortet");
   await kontekst.close();
 }
 
